@@ -32,13 +32,11 @@ BaselineOfYavu >> glorp: spec [
 { #category : #'as yet unclassified' }
 BaselineOfYavu >> magritte3: spec [
 	spec
-		project: 'Magritte3'
-		with: [ 
-			spec
-				className: 'ConfigurationOfMagritte3';
-				loads: #('Core' 'Magritte-Seaside');
-				versionString: '3.5.1';
-				repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main']
+	project: 'Magritte3'
+	with: [ spec
+		className: #ConfigurationOfMagritte3;
+		versionString: #'release3';
+		repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main/' ]
 ]
 
 { #category : #accessing }
