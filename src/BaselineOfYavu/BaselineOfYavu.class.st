@@ -16,12 +16,12 @@ BaselineOfYavu >> baseline: spec [
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
-			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Magritte3' 'Glorp')].
+			"spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Magritte3' 'Glorp')]".
 			]
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #dependencies }
 BaselineOfYavu >> glorp: spec [
 
 	spec
@@ -29,7 +29,7 @@ BaselineOfYavu >> glorp: spec [
 		with: [ spec repository: 'github://pharo-rdbms/glorp']
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #dependencies }
 BaselineOfYavu >> magritte3: spec [
 	spec
 	project: 'Magritte3'
