@@ -14,7 +14,7 @@ BaselineOfYavu >> baseline: spec [
 			self magritte3: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
-			spec package: 'YavuNutriData' with: [spec requires: 'YavuNutriData'].
+			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Magritte3')].
 			]
 		
