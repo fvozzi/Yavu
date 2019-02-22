@@ -53,17 +53,17 @@ BaseDeDatos >> execute: aSQLQuery [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BaseDeDatos >> initializeConnection [
 
-	connection := DBXConnection platform: DBXPostgresBackend new settings: self connectionSettings
+	connection := (Smalltalk at: #DBXConnection) platform: (Smalltalk at: #DBXPostgresBackend) new settings: self connectionSettings
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 BaseDeDatos >> initializeConnectionSettings [
 	"Initialize the receiver connection settings."
 	
-	connectionSettings := DBXConnectionSettings new
+	connectionSettings := (Smalltalk at: #DBXConnectionSettings) new
 								host: '127.0.0.1';
 								port: '5432';
 								database: 'sic';
