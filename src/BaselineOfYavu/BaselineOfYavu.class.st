@@ -14,12 +14,21 @@ BaselineOfYavu >> baseline: spec [
 			self seaside3: spec.
 			self magritte3: spec.
 			self glorp: spec.
+			self bootstrap: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
-			"spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Magritte3' 'Glorp')]".
+			"spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte3' 'Glorp' 'Bootstrap)]".
 			]
 		
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> bootstrap: spec [
+
+	spec
+		baseline:'Bootstrap';
+ 		with: [ spec repository: 'github://astares/Seaside-Bootstrap:master/src']
 ]
 
 { #category : #dependencies }
