@@ -37,6 +37,7 @@ BaselineOfYavu >> magritte3: spec [
 	with: [ spec
 		className: #ConfigurationOfMagritte3;
 		versionString: #'release3';
+		loads: #('core' 'Magritte-Seaside');
 		repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main/' ]
 ]
 
