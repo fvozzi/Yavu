@@ -18,7 +18,8 @@ BaselineOfYavu >> baseline: spec [
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
-			"spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte3' 'Glorp' 'Bootstrap)]".
+			spec package: 'YavuBeerStack' with: [spec requires: 'YavuCommon'].
+			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte3' 'Glorp' 'Bootstrap')]
 			]
 		
 ]
