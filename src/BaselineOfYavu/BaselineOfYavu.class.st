@@ -11,6 +11,7 @@ BaselineOfYavu >> baseline: spec [
 		for: #common
 		do: [
 			"Dependencies"
+			self seaside3: spec.
 			self magritte3: spec.
 			self glorp: spec.
 			"Packages"
@@ -42,4 +43,12 @@ BaselineOfYavu >> magritte3: spec [
 { #category : #accessing }
 BaselineOfYavu >> projectClass [
 	^ MetacelloCypressBaselineProject
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> seaside3: spec [
+
+	spec
+		baseline: 'Seaside3'
+		with: [ spec repository: 'github://SeasideSt/Seaside:master/repository']
 ]
