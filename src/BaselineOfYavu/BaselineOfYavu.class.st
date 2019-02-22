@@ -27,7 +27,7 @@ BaselineOfYavu >> baseline: spec [
 BaselineOfYavu >> bootstrap: spec [
 
 	spec
-		baseline:'Bootstrap';
+		baseline:'Bootstrap'
  		with: [ spec repository: 'github://astares/Seaside-Bootstrap:master/src']
 ]
 
