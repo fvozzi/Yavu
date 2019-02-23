@@ -20,12 +20,12 @@ BaselineOfYavu >> baseline: spec [
 			self seaside3: spec.
 			self magritte3: spec.
 			self glorp: spec.
-			"self bootstrap: spec."
+			self bootstrap: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuBeerStack' with: [spec requires: 'YavuCommon'].
-			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' )]
+			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap')]
 			]
 		
 ]
