@@ -48,6 +48,16 @@ BaselineOfYavu >> glorp: spec [
 
 { #category : #dependencies }
 BaselineOfYavu >> magritte3: spec [
+
+	spec
+		baseline: 'Magritte'
+		with: [ spec 
+			loads: #('Core' 'Magritte-Seaside');
+			repository: 'github://magritte-metamodel/magritte:master/repository']
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> magritte3Old: spec [
 	spec
 	project: 'Magritte3'
 	with: [ spec
