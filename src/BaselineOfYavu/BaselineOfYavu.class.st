@@ -49,10 +49,10 @@ BaselineOfYavu >> glorp: spec [
 { #category : #dependencies }
 BaselineOfYavu >> magritte3: spec [
 
+	self halt.
 	spec
 		baseline: 'Magritte'
 		with: [ spec 
-			onConflict: [ :ex | ex useLoaded ];
 			loads: #('Core' 'Magritte-Seaside');
 			repository: 'github://magritte-metamodel/magritte:master/repository']
 ]
