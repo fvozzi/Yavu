@@ -1,3 +1,9 @@
+"
+Linea base de todos los proyectos que tenemos dando vuelta.
+
+Administración
+Birra
+"
 Class {
 	#name : #BaselineOfYavu,
 	#superclass : #BaselineOf,
