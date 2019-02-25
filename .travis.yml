@@ -13,7 +13,7 @@ addons:
 before_install:
   - openssl ... -out travis_key.enc -d
   - chmod 0400 travis_key.enc
-  - mv travis_key ~/.ssh/id_rsa
+  - mv travis_key.enc ~/.ssh/id_rsa
   
 deploy:
   provider: script
