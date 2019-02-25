@@ -14,7 +14,7 @@
 
     "files":
         [
-        {"includePattern": "\./"}
+        {"includePattern": "./img/(.*)", , "uploadPattern": "img/$1"}
         ],
     "publish": true
 }
