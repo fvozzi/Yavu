@@ -7,10 +7,15 @@ os:
 smalltalk:
   - Pharo64-7.0 
   
+addons:
+  ssh_known_hosts: 192.142.172.175
+  
+before_install:
+  - openssl ... -out travis_key -d
+  - chmod 0400 travis_key
+  - mv travis_key ~/.ssh/id_rsa
+  
 deploy:
-  provider: bintray 
-  user: fvozzi
-  file: bintrayFileDescriptor.json
-  key: 9ab2169951b3255ff5219673f268c41acde3dd7f
+  provider: script
   skip_cleanup: true
-
+  script: scripts/deploy.sh
