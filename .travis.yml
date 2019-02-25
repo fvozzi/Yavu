@@ -8,7 +8,8 @@ smalltalk:
   - Pharo64-7.0 
   
 deploy:
-  provider: bintray
+  provider: bintray 
   user: fvozzi
   key: 9ab2169951b3255ff5219673f268c41acde3dd7f
   skip_cleanup: true
+
