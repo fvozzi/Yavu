@@ -10,6 +10,7 @@ smalltalk:
 deploy:
   provider: bintray 
   user: fvozzi
+  file: bintrayFileDescriptor.json
   key: 9ab2169951b3255ff5219673f268c41acde3dd7f
   skip_cleanup: true
 

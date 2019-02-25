@@ -1,0 +1,20 @@
+{
+    "package": {
+        "name": "Yavu",
+        "repo": "Yavu",
+        "subject": "fvozzi",
+        "desc": "I was pushed completely automatically",
+        "vcs_url": "https://dl.bintray.com/fvozzi/Yavu",
+        "licenses": ["MIT"]
+    },
+
+    "version": {
+        "name": "10",
+    },
+
+    "files":
+        [
+        {"includePattern": "*"}
+        ],
+    "publish": true
+}
