@@ -136,7 +136,7 @@ NutriInfoXMLUpdater >> parseHtmlFoodCompositionForID: foodId on: htmlString [
 			stream upToAll: htmlKey.
 			stream atEnd
 				ifTrue: [ stream position: position ]
-				ifFalse: [ xmlString := xmlString , xmlTag key , (stream upToAll: '</p>') trimBoth , xmlTag value ] ].
+				ifFalse: [ xmlString := xmlString , xmlTag , (stream upToAll: '</p>') trimBoth , xmlTag ] ].
 	^ xmlString , '</AlimentoyComposicion>'
 ]
 

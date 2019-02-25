@@ -21,9 +21,10 @@ BaselineOfYavu >> baseline: spec [
 			self magritte3: spec.
 			self glorp: spec.
 			self bootstrap: spec.
+			self xmlParser: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
-			spec package: 'YavuNutriData' with: [spec requires: 'YavuCommon'].
+			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].
 			spec package: 'YavuBeerStack' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap')]
 			]
@@ -78,4 +79,10 @@ BaselineOfYavu >> seaside3: spec [
 	spec
 		baseline: 'Seaside3'
 		with: [ spec repository: 'github://SeasideSt/Seaside:master/repository']
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> xmlParser: spec [
+
+	spec baseline: 'XMLParser' with: [ spec repository: 'github://svenvc/XML-Support-Pharo' ]
 ]

@@ -104,44 +104,46 @@ ExternalNutritionalXMLReaderTest >> exampleSARAFile [
 </dataroot>'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 ExternalNutritionalXMLReaderTest >> testSARAXMLFileReader [
-
 	| reader foodComposition |
-	
-	reader := (ExternalNutritionalXMLReader on: self exampleSARAFile).
+	reader := ExternalNutritionalXMLReader on: self exampleSARAFile.
 	foodComposition := reader foodAtCode: 'A001'.
-	self assert: foodComposition code = 'A001'.
-	self assert: foodComposition name = 'Almidón de maíz'.
-	self assert: foodComposition unit = 'gramos'.
-	self assert: foodComposition correctionFactor = '1'.
-	self assert: foodComposition water = '8.32'.
-	self assert: foodComposition energy = '362.97'.
-	self assert: foodComposition protein = '0.26'.
-	self assert: foodComposition lipidos = '0.05'.
-	self assert: foodComposition acidosGrasosSaturados  = '0.009'.
-	self assert: foodComposition acidosGrasosMonoinsaturados = '0.016'.
-	self assert: foodComposition acidosGrasosPoliinsaturados = '0.025'.						
-	self assert: foodComposition colesterol = '0'.								
-	self assert: foodComposition hidratosDeCarbono = '90.37'.	
-	self assert: foodComposition fibra = '0.9'.														
-	self assert: foodComposition cenizas = '0.09'.		
-	self assert: foodComposition sodio = '9'.																				
-	self assert: foodComposition potasio = '3'.																							
-	self assert: foodComposition calcio = '2'.																										
-	self assert: foodComposition fosforo = '13'.	
-	self assert: foodComposition hierro = '0.47'.																												
-	self assert: foodComposition zinc = '0.06'.																													
-	self assert: foodComposition niacina = '0'.		
-	self assert: foodComposition folatos = '0'.																															
-	self assert: foodComposition vitaminaA = '0'.		
-	self assert: foodComposition tiaminaB1  = '0'.	
-	self assert: foodComposition riboflavinaB2 = '0'.																																											
-	self assert: foodComposition vitaminaB12 = '0'.
-	self assert: foodComposition vitaminaC = '0'.	
-	self assert: foodComposition vitaminaD = '0'.																																																							
-	self assert:  (reader foodAtCode: 'A001x1') code isNil.
-	self assert: (reader foodAtCode: 'A002') code = 'A002'.
+	self assert: foodComposition code equals: 'A001'.
+	self assert: foodComposition name equals: 'Almidón de maíz'.
+	self assert: foodComposition unit equals: 'gramos'.
+	self assert: foodComposition correctionFactor equals: '1'.
+	self assert: foodComposition water equals: '8.32'.
+	self assert: foodComposition energy equals: '362.97'.
+	self assert: foodComposition protein equals: '0.26'.
+	self assert: foodComposition lipidos equals: '0.05'.
+	self assert: foodComposition acidosGrasosSaturados equals: '0.009'.
+	self
+		assert: foodComposition acidosGrasosMonoinsaturados
+		equals: '0.016'.
+	self
+		assert: foodComposition acidosGrasosPoliinsaturados
+		equals: '0.025'.
+	self assert: foodComposition colesterol equals: '0'.
+	self assert: foodComposition hidratosDeCarbono equals: '90.37'.
+	self assert: foodComposition fibra equals: '0.9'.
+	self assert: foodComposition cenizas equals: '0.09'.
+	self assert: foodComposition sodio equals: '9'.
+	self assert: foodComposition potasio equals: '3'.
+	self assert: foodComposition calcio equals: '2'.
+	self assert: foodComposition fosforo equals: '13'.
+	self assert: foodComposition hierro equals: '0.47'.
+	self assert: foodComposition zinc equals: '0.06'.
+	self assert: foodComposition niacina equals: '0'.
+	self assert: foodComposition folatos equals: '0'.
+	self assert: foodComposition vitaminaA equals: '0'.
+	self assert: foodComposition tiaminaB1 equals: '0'.
+	self assert: foodComposition riboflavinaB2 equals: '0'.
+	self assert: foodComposition vitaminaB12 equals: '0'.
+	self assert: foodComposition vitaminaC equals: '0'.
+	self assert: foodComposition vitaminaD equals: '0'.
+	self assert: (reader foodAtCode: 'A001x1') code isNil.
+	self assert: (reader foodAtCode: 'A002') code equals: 'A002'
 ]
 
 { #category : #'as yet unclassified' }
