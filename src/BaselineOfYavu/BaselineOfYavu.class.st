@@ -52,7 +52,6 @@ BaselineOfYavu >> magritte3: spec [
 	spec
 		baseline: 'Magritte'
 		with: [ spec 
-			ignoreImage;
 			loads: #('Core' 'Magritte-Seaside');
 			repository: 'github://magritte-metamodel/magritte:master/repository']
 ]
