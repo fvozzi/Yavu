@@ -6,3 +6,15 @@ os:
   
 smalltalk:
   - Pharo64-7.0 
+  
+deploy:
+  provider: releases
+  api_key: 
+    secure: 92:d2:e5:79:c9:a1:c7:11:9a:de:6f:f9:22:8a:19:c2
+  file:
+    - Pharo.image
+    - Pharo.changes
+    - img/*
+  skip_cleanup: true
+  on:
+    tags: true
