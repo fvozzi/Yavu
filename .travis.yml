@@ -16,5 +16,3 @@ deploy:
     - Pharo.changes
     - img/*
   skip_cleanup: true
-  on:
-    tags: true
