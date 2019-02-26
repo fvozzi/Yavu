@@ -8,7 +8,7 @@ smalltalk:
   - Pharo64-7.0 
   
 addons:
-  ssh_known_hosts: 192.142.172.175
+  ssh_known_hosts: 192.241.172.175
   
 before_install:
   - openssl ... -out travis_key.enc -d
