@@ -2,7 +2,7 @@
 # exit on first encountered error
 set -o errexit
 # wherever you'll be ssh-ing into user@machine
-readonly TARGET_MACHINE="root@192.142.172.175"
+readonly TARGET_MACHINE="root@192.241.172.175"
 # customize the name of the Pharo image you will be deploying
 readonly PROJECT_NAME="Yavu"
 # customize the name of the build folder
