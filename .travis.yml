@@ -11,9 +11,9 @@ addons:
   ssh_known_hosts: 192.241.172.175
   
 before_install:
-  - openssl ... -out travis_key.enc -d
-  - chmod 0400 travis_key.enc
-  - mv travis_key.enc ~/.ssh/id_rsa
+  - openssl ... -out travis2_key.enc -d
+  - chmod 0400 travis2_key.enc
+  - mv travis2_key.enc ~/.ssh/id_rsa
   
 deploy:
   provider: script
