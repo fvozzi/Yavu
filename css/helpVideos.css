@@ -1,0 +1,44 @@
+.videoTitle {
+     color: #666666;
+     font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+     font-size: 1.2em;
+     margin-bottom: 5px;
+     text-align: center;
+}
+
+.videoLeft iframe {
+     background-color: red;
+     height: 250px;
+     width: 100%;
+}
+
+.videoMiddle iframe {
+     height: 250px;
+
+     width: 100%;
+}
+
+.videoRight iframe {
+     height: 250px;
+
+     width: 100%;
+}
+
+.videoLeft {
+     display: block;
+     float: left;
+     width: 32%;
+}
+.videoMiddle {
+     display: block;
+     float: left;
+     margin-left: 1%;
+     width: 32%;
+}
+
+.videoRight {
+     display: block;
+     float: left;
+     width: 32%;
+     margin-left: 1%;
+}

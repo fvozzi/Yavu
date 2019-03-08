@@ -1,0 +1,104 @@
+#dolar {
+    
+}
+
+#dolarOficial {
+     background-color: #F9F9F9;
+     position: relative;
+     width: 210px;
+    float: left;
+    
+}
+
+#dolarInformal {
+     background-color: #F9F9F9;
+     display: block;
+     float: left;
+     position: relative;
+     width: 210px;
+    margin-left: 5px;
+}
+
+#soja {
+     background-color: #F9F9F9;
+     display: block;
+     float: left;
+     position: relative;
+     width: 210px;
+    margin-left: 5px;
+}
+#trigo {
+     background-color: #F9F9F9;
+     display: block;
+     float: left;
+     position: relative;
+     width: 210px;
+    margin-left: 5px;
+}
+#maiz {
+     background-color: #F9F9F9;
+     display: block;
+     float: left;
+     position: relative;
+     width: 210px;
+    margin-left: 5px;
+}
+
+.titulo {
+     height: 50px;
+}
+
+.titulo img {
+     position: absolute;
+     right: 0px;
+}
+
+.titulo strong {
+     font-family: Arial;
+     font-size: 20px;
+     padding-left: 5px;
+     padding-top: 5px;
+     position: absolute;
+}
+
+.variacion {
+     border-bottom: 1px solid #E2E2E2;
+     margin-left: 5px;
+     margin-right: 5px;
+}
+
+.variacion big {
+     font-family: Arial;
+     font-size: 38px;
+     font-weight: bold;
+     padding-left: 10px;
+}
+
+.variacion img {
+     padding-left: 5px;
+     padding-top: 5px;
+}
+
+.ultimo {
+     float: left;
+     padding-left: 5px;
+     padding-right: 5px;
+     width: 90px;
+}
+
+.cierreAnterior {
+     float: left;
+     padding-left: 5px;
+     padding-right: 5px;
+     width: 100px;
+}
+
+.ultimo big, .cierreAnterior big {
+     border-bottom: 1px solid #E2E2E2;
+     display: block;
+     font-weight: bold;
+}
+
+.cotizacion {
+     height: 100px;
+}

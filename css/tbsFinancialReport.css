@@ -1,0 +1,39 @@
+.no-gutter [class*="-6"] {
+    padding-left:0;
+}
+.itemTitulos {
+     font-weight: bold;
+}
+.ui-widget-header {
+     font-family: Calibri;
+     font-size: 16px;
+     font-weight: normal;
+     text-align: center;
+}
+.basico {
+     background: none repeat scroll 0% 0% #4B8734;
+}
+.plus {
+     background: none repeat scroll 0% 0% #A56B8D;
+}
+.premium {
+     background: none repeat scroll 0% 0% #F05836;
+}
+.debe, .deuda {
+     color: red;
+     font-weight: bold;
+}
+.desafectado {
+     color: green;
+     font-weight: bold;
+}
+.textColumn {
+     text-align: left;
+}
+.dateColumn, .numericColumn, .deuda {
+     text-align: right;
+}
+#datosInformes .ui-widget-header, #bouncedChecks .ui-widget-header, #lostChecks .ui-widget-header, #reportEmissions .ui-widget-header {
+     background: url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll 50% 50% #003366;
+     color: #FFFFFF;
+}

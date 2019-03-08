@@ -1,0 +1,162 @@
+#firstStep {
+     float: left;
+     width: 100%;
+}
+
+#ingresoDatos {
+     height: 250px;
+     padding: 10px;
+     width: 100%;
+}
+
+#electoralRollCaptcha {
+     float: left;
+     margin-top: 10px;
+     width: 50%;
+}
+
+#seleccionComercio {
+     float: none;
+     height: 50px;
+     width: 67%;
+}
+
+#seleccionComercio select {
+     font-size: 18px;
+     font-weight: bold;
+     width: 100%;
+}
+
+#ingresoDNI {
+     float: left;
+     width: 35%;
+}
+
+#ingresoNombre {
+     float: left;
+     width: 67%;
+}
+
+#seleccionTipo {
+     float: left;
+     margin-left: 2%;
+     width: 30%;
+}
+
+
+#generar {
+     float: left;
+     margin-left: 2%;
+     width: 30%;
+}
+
+#ingresoDNI input, #ingresoNombre input[type="text"] {
+     font-size: 25px;
+     font-weight: bold;
+     width: 100%;
+}
+
+#electoralRollCaptcha {
+     width: 100%;
+	 display: none;
+}
+
+#electoralRollCaptcha input {
+     float: left;
+     font-size: 25px;
+     font-weight: bold;
+     margin: 10px;
+     width: 150px;
+}
+
+#electoralRollCaptcha img {
+     float: left;
+}
+
+#ingresoNombre input[type="text"] {
+     float: left;
+     width: 85%;
+}
+
+#ingresoNombre input.submit {
+     font-size: 14px;
+     font-weight: bold;
+     height: 36px;
+     margin-left: 1%;
+     width: 13%;
+}
+
+#seleccionTipo select {
+     font-size: 25px;
+     font-weight: bold;
+     height: 35px;
+     margin: 0px;
+     width: 100%;
+}
+
+#generar input.submit {
+     color: darkblue;
+     height: 37px;
+     width: 100%;
+}
+
+#generar input.submit {
+	 color: darkblue;
+	 font-size: 25px;
+	 font-weight: bold;
+     height: 37px;
+     margin-top: 20px;
+     width: 100%;
+}
+
+#multipleReportDataSelector {
+     float: left;
+     width: 100%;
+}
+
+.contentDataSelector {
+     overflow: hidden;
+}
+
+.tabsDataSelector {
+     margin: 5px;
+     min-height: 290px;
+}
+
+#captchas {
+     clear: both;
+     height: 65px;
+}
+
+#captchas input {
+     font-size: 16px;
+     font-weight: bold;
+     margin-left: 0px;
+     width: 478px;
+}
+
+#ingresoBCRACaptcha .titulo2, #ingresoAfipCaptcha .titulo2 {
+     font-size: 16px;
+     font-weight: bold;
+
+}
+#ingresoBCRACaptcha, #ingresoAfipCaptcha{
+width: 35%;
+float: left;
+}
+
+#ingresoBCRACaptcha input, #ingresoAfipCaptcha input{
+width: 100%;
+
+}
+
+
+#bcraCaptcha, #afipCaptcha {
+     float: left;
+     height: 58px;
+     margin-top: 5px;
+     margin-left: 20px;
+     overflow: hidden;
+     position: relative;
+     width: 412px;
+}

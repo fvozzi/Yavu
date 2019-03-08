@@ -1,0 +1,236 @@
+.no-gutter [class*="-6"] {
+    padding-left:0;
+}
+
+datosPadron, #datosInformes, #datosPersonales, #datosAFIP, #whitePagesData, #datosOtherTabs, #datosChequesBCRA, #bouncedChecks, #lostChecks, #reportEmissions {
+     float: left;
+     margin-top: 10px;
+     text-align: center;
+     width: 100%;
+}
+
+#datosPadron img, #datosInformes img, #datosPersonales img, #datosAFIP img, #whitePagesData img, #datosOtherTabs img, #datosChequesBCRA img {
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     padding: 10px;
+}
+
+#datosPadron th, #datosInformes th, #datosPersonales th, #datosAFIP th, #whitePagesData th, #datosOtherTabs th, #datosChequesBCRA th {
+     font-family: Calibri;
+     text-align: left;
+}
+
+#datosPersonales .titulo2 {
+     float: left;
+     text-align: left;
+     width: 150px;
+}
+
+#datosPersonales {
+     width: 80%;
+}
+#datosPersonales .column {
+width: 50%;
+float: left;
+}
+#datosPersonales .label {
+text-align: left;
+}
+
+#scoring {
+     display: block;
+     float: left;
+     margin-left: 5px;
+     margin-top: 10px;
+     width: 19.5%;
+}
+
+#scoringValue {
+     font-size: 50px;
+     font-weight: bold;
+     text-align: center;
+}
+
+#datosPadron {
+     width: 49.5%;
+}
+
+#datosOtherTabs {
+     float: left;
+     width: 100%;
+}
+
+#bouncedChecks {
+     width: 100%;
+}
+
+#lostChecks {
+     width: 60%;
+}
+
+#reportEmissions {
+     margin-left: 1%;
+     width: 39%;
+}
+
+#datosOtherTabs td {
+     padding-right: 8px;
+}
+
+.itemTitulos {
+     font-weight: bold;
+}
+
+#datosAFIP {
+     margin-left: 1%;
+     width: 49.5%;
+}
+
+.ui-widget-header {
+     font-family: Calibri;
+     font-size: 16px;
+     font-weight: normal;
+     text-align: center;
+}
+
+#title {
+     color: #FFFFFF;
+     float: left;
+     font-size: 20px;
+     font-weight: bold;
+     height: 27px;
+     margin-bottom: -7px;
+     margin-top: 5px;
+     text-align: center;
+     width: 49.5%;
+}
+
+.basico {
+     background: none repeat scroll 0% 0% #4B8734;
+}
+
+.plus {
+     background: none repeat scroll 0% 0% #A56B8D;
+}
+
+.premium {
+     background: none repeat scroll 0% 0% #F05836;
+}
+
+#toolbar {
+     background: none repeat scroll 0% 0% LightSlateGray;
+     float: left;
+     height: 27px;
+     margin-bottom: -7px;
+     margin-left: 1%;
+     margin-top: 5px;
+     text-align: right;
+     width: 49%;
+}
+
+#toolbar .ui-button {
+     height: 23px;
+     margin-right: 2px;
+     margin-top: 1px;
+     width: 24px;
+}
+
+.debe, .deuda {
+     color: red;
+     font-weight: bold;
+}
+
+.desafectado {
+     color: green;
+     font-weight: bold;
+}
+
+
+#bcraResult {
+     float: left;
+     height: 400px;
+     overflow: hidden;
+     position: relative;
+     width: 100%;
+}
+
+.tabs {
+     clear: both;
+     margin: 25px 0px;
+     min-height: 300px;
+     position: relative;
+}
+
+.tab {
+     float: left;
+}
+
+.tab label {
+     background: none repeat scroll 0% 0% #EEEEEE;
+     border: 1px solid #CCCCCC;
+     left: 1px;
+     margin-left: -1px;
+     padding: 10px;
+     position: relative;
+}
+
+.tab [type="radio"] {
+     display: none;
+}
+
+.content {
+     background: none repeat scroll 0% 0% white;
+     border: 1px solid #CCCCCC;
+     bottom: 0px;
+     left: 0px;
+     overflow: scroll;
+     padding: 20px;
+     position: absolute;
+     right: 0px;
+     top: 28px;
+}
+
+.content > * {
+     opacity: 0;
+     transform: translateX(-100%);
+     transition: all 0.6s ease 0s;
+}
+
+[type="radio"]:checked ~ label {
+     background: none repeat scroll 0% 0% white;
+     border-bottom: 1px solid white;
+     z-index: 2;
+}
+
+[type="radio"]:checked ~ label ~ .content {
+     z-index: 1;
+}
+
+[type="radio"]:checked ~ label ~ .content > * {
+     opacity: 1;
+     transform: translateX(0px);
+}
+
+.textColumn, .dateColumn, .numericColumn {
+     text-align: left;
+}
+
+.dateColumn, .numericColumn, .deuda {
+     text-align: right;
+}
+
+#datosInformes .ui-widget-header, #bouncedChecks .ui-widget-header, #lostChecks .ui-widget-header, #reportEmissions .ui-widget-header {
+     background: url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll 50% 50% #003366;
+     color: #FFFFFF;
+}
+
+#scoring .ui-widget-header {
+     background: url("images/ui-bg_highlight-soft_75_cccccc_1x100.png") repeat-x scroll 50% 50% #006600;
+     color: #FFFFFF;
+}
+
+.totalDeuda {
+     font-size: 25px;
+     font-weight: bold;
+}

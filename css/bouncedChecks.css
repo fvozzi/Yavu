@@ -1,0 +1,127 @@
+#paso1, #paso2, #paso3  {
+width: 100%;
+float: left;
+margin-top: 2px;
+margin-bottom: 5px;
+}
+
+#paso1 h4, #paso2  h4, #paso3 h4 {
+margin-top: 15px;
+float: left;}
+
+#paso1 h3, #paso2 h3, #paso3 h3, #paso3 h1, #buscarArchivo {
+
+margin-left:45px;
+
+}
+#paso1 select {
+margin-top: 5px;
+margin-left: 20px;
+width: 250px;
+}
+#paso2 #incluyeEncabezado {
+margin-top: 5px;}
+#paso2 .checkbox {
+float: left;
+}
+#paso3 input.submit {
+margin-top: 5px;
+margin-left: 45px;
+width: 370px;
+color: darkblue;
+font-family: Calibri;
+font-size: 20px;
+font-weight: Bold;
+}
+#paso3 h1 {margin-top: 5px;}
+
+.labelCheckBox {
+font-family: Calibri;
+font-size: 16px;
+font-weight: normal;
+margin: 0px;}
+
+#vistaPrevia, #vistaPreviaClientes, #vistaPreviaErrores{
+height: 120px;
+margin-left: 45px;
+border-style: groove;
+width: 700px;
+overflow:auto;
+margin-left: 45px;
+color: gray;
+}
+#vistaPreviaClientes{
+color: blue;
+}
+#vistaPreviaErrores{
+color: red;
+}
+
+.itemTitulos {
+text-align: center;
+color: darkblue;
+}
+.itemNumericos {
+width: 75px;
+text-align: right;
+color: red;
+font-weight: bold;
+}
+
+
+#fila1, #fila2, #fila3 {
+height: 50px;
+margin-left: 45px;
+}
+#fila1 .columna, #fila2 .columna, #fila3 .columna {
+float: left;
+margin-left: 2px;
+height: 45px;
+}
+#fila1 input, #fila2 input {
+width: 100px;
+}
+#fila1 input.submit {
+width: 60px;
+font-weight: Bold;
+margin-top: 20px;
+}
+#fila1 select {
+width: 100px;
+height: 22px;
+}
+#fila3 input.submit {
+width: 165px;
+height: 30px;
+margin-top: 14px;
+font-weight: Bold;
+}
+#fila3 input {
+width: 460px;
+}
+#fila1 select {
+width: 100px;
+}
+#fila2 select {
+width: 310px;
+height: 22px;
+}
+#fila1 .label, #fila2 .label {
+text-align: center}
+
+#nombre {
+width: 350px;
+}
+#nombre {
+width: 350px;
+}
+#nombre input.text{
+width: 450px;
+}
+#checkNumber input {width: 200px;}
+
+ht: 40px;
+}
+
+."ui-icon ui-icon-info" {
+float: left;}
