@@ -13,6 +13,7 @@ deploy-simple() {
 	cp "$SMALLTALK_CI_IMAGE" "${ARTIFACT_DIR}/${PROJECT_NAME}.image"
 	cp "$SMALLTALK_CI_CHANGES" "${ARTIFACT_DIR}/${PROJECT_NAME}.changes"
 	cp -r "${TRAVIS_BUILD_DIR}/img" "${ARTIFACT_DIR}/img"
+	cp -r "${TRAVIS_BUILD_DIR}/scripts" "${ARTIFACT_DIR}/scripts"
 	#cp -r "${SMALLTALK_CI_HOME}/pharo/img" "${ARTIFACT_DIR}/img"
 	#cp -r "${SMALLTALK_CI_BUILD}/pharo/img" "${ARTIFACT_DIR}/img"
 	
