@@ -134,20 +134,6 @@ SicUser >> descriptionClave [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionComercio [
-	
-	<magritteDescription>
-	^MAMultipleOptionDescription new
-		accessor: #commerces;
-		label: 'Comercios';
-		priority: 240;
-		componentClass: MAListCompositonComponent;
-		options: self yavuSystem loggedUser company commerces;
-		beSorted; 
-		yourself
-]
-
-{ #category : #'sin categoria' }
 SicUser >> descriptionEMail [
 	"Devuelve un objeto que describe la representación de la variable correo electrónico del receptor."
 

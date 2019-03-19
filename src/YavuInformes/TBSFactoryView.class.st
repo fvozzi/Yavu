@@ -27,7 +27,6 @@ TBSFactoryView class >> claseDeAyuda [
 { #category : #'as yet unclassified' }
 TBSFactoryView class >> on: aModel [
 	
-	self halt.
 	^super new model: aModel
 ]
 
@@ -37,7 +36,7 @@ TBSFactoryView >> buildReport [
 	
 	| instance |
 	instance := self model instances ifEmpty: [ self model objectClass new ] ifNotEmpty: [ :instances | instances first ]. 
-	self halt.
+
 	^(MAReport rows: self model instances description: instance maDescriptionForReport)
 		batchSize: 20;
 		addColumn: (MACommandColumn new
@@ -165,25 +164,13 @@ TBSFactoryView >> renderAcciones: html [
 TBSFactoryView >> renderContentOn: html [
 	"Renderiza el contenido del receptor en html."
 
-	html form: [
-		self renderMenuAyudaOn: html.  
-	html div
-      script: (html jQuery new tabs
-         show: selectedTab;
-         onSelect: (html jQuery ajax 
-            callbackTabs: [ :event | selectedTab:= event at: #index ]));
-      with: [
-         html unorderedList: [
-            self session yavuSystem allowedEntitiesClasses do: [ :each |
-               html listItem: [
-                  html anchor
-                     url: (html jQuery ajax
-                        html: [ :h | 
-					self model objectClass: each.
-					h div id: 'acciones'; with: [self renderAcciones: h].
-					h render: self report ];
-                        fullUrl);
-                     with: each label ] ] ] ]]
+		html tbsPanelBody: [
+			html form: [  
+			self renderMenuAyudaOn: html.
+			html div id: 'acciones'; with: [self renderAcciones: html].
+			html render: self report
+					]
+				]
 
 ]
 

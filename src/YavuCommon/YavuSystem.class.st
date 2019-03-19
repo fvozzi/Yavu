@@ -15,7 +15,7 @@ YavuSystem class >> allMenuElements [
 
 	^OrderedCollection new
 		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSExamplesHome) id: 1);
-		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSFactoryView) id: 2);
+		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView) id: 2);
 		add: ((CompositeMenuElement label: 'Tablero' presenterClass: WAActualizarSituacionesView) id: 3);
 		add: ((CompositeMenuElement label: 'Ayuda' presenterClass: WAHelpVideosView) id: 4);
 		add: ((CompositeMenuElement label: 'Acerca de' presenterClass: WAHelpVideosView) id: 5);
@@ -37,6 +37,7 @@ YavuSystem class >> allSecurityFunctions [
 
 	^OrderedCollection new
 						add: ((SecurityFunction name: 'Users') yavuObjectClass: SicUser) ;
+						add: ((SecurityFunction name: 'Suppliers') yavuObjectClass: Supplier) ;
 						yourself.
 
 ]
@@ -142,6 +143,11 @@ YavuSystem >> loginUserName: anUserName password: aLiteralPassword [
 
 	^(self subsystemAt: 'loginSubsystem') loginUserName: anUserName password: aLiteralPassword
 	
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> purchaseSubsystem [
+	^ self subsystemAt: 'purchaseSubsystem'
 ]
 
 { #category : #'as yet unclassified' }

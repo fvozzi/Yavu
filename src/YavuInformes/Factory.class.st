@@ -20,7 +20,7 @@ Factory class >> on: aObjectClass [
 Factory >> add: anObject [
 	"Add anObject to the current system collection of it."
 	
-	^anObject store
+	^anObject addToSystem
 ]
 
 { #category : #'as yet unclassified' }

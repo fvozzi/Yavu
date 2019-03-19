@@ -6,7 +6,7 @@ Class {
 		'name',
 		'ts'
 	],
-	#category : #YavuCommon
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'sin categoria' }
@@ -146,6 +146,11 @@ Entity >> = otraEntidad [
 	^self name = otraEntidad name
 ]
 
+{ #category : #'as yet unclassified' }
+Entity >> addToSystem [
+	self subclassResponsibility.
+]
+
 { #category : #'sin categoria' }
 Entity >> anunciarNuevaEntidad [
 
@@ -182,7 +187,6 @@ Entity >> descriptionNombre [
 		required: true;
 		requiredErrorMessage: 'We cannot proceed without a name.';
 		comment: 'Please enter your name';
-		componentClass: TBSMagritteTextInputComponent; 
 		yourself
 ]
 

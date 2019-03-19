@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'id'
 	],
-	#category : #YavuCommon
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'as yet unclassified' }
