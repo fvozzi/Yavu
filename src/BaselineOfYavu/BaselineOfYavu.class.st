@@ -17,12 +17,12 @@ BaselineOfYavu >> baseline: spec [
 		for: #common
 		do: [
 			"Dependencies"
+			self voyageMongo: spec.
 			self seaside3: spec.
 			self magritte3: spec.
 			self glorp: spec.
 			self bootstrap: spec.
 			self xmlParser: spec.
-			self voyageMongo: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].
@@ -87,7 +87,9 @@ BaselineOfYavu >> voyageMongo: spec [
 
 	spec
 		baseline:'Voyage'
- 		with: [ spec repository: 'github://pharo-nosql/voyage']
+ 		with: [ spec 
+					repository: 'github://pharo-nosql/voyage';
+					loads: 'mongo tests' ]
 ]
 
 { #category : #dependencies }
