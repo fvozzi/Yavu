@@ -79,5 +79,6 @@ YavuSecuritySubsystem >> userClass [
 
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> users [
-	^ users ifNil: [ self system storedSubsystem instancesOf: self userClass ]
+	 users ifNil: [ users:= self system storedSubsystem instancesOf: self userClass ].
+	^ users 
 ]

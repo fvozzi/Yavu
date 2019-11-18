@@ -19,6 +19,7 @@ BaselineOfYavu >> baseline: spec [
 			"Dependencies"
 			self voyageMongo: spec.
 			self seaside3: spec.
+			self materialDesignLite: spec.
 			self magritte3: spec.
 			self glorp: spec.
 			self bootstrap: spec.
@@ -27,6 +28,7 @@ BaselineOfYavu >> baseline: spec [
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].
 			spec package: 'YavuBeerStack' with: [spec requires: 'YavuCommon'].
+			spec package: 'YavuPurchase' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap')]
 			]
 		
@@ -67,6 +69,14 @@ BaselineOfYavu >> magritte3Old: spec [
 		versionString: #'release3';
 		loads: #('Core' 'Magritte-Seaside');
 		repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main/' ]
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> materialDesignLite: spec [
+
+	spec
+    	baseline: 'MaterialDesignLite'
+    	with: [ spec repository: 'github://DuneSt/MaterialDesignLite:v2.x.x/src' ]
 ]
 
 { #category : #accessing }

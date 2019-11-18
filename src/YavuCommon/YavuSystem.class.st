@@ -11,6 +11,16 @@ Class {
 }
 
 { #category : #transientSystemInitialization }
+YavuSystem class >> administratorUser [
+	^ (SicUser
+		name: 'Administrador'
+		company: (Company name: 'Cámara Comercio'))
+		password: 'yavu09';
+		roles: self allRoles;
+		yourself
+]
+
+{ #category : #transientSystemInitialization }
 YavuSystem class >> allMenuElements [
 
 	^OrderedCollection new
@@ -44,18 +54,12 @@ YavuSystem class >> allSecurityFunctions [
 
 { #category : #transientSystemInitialization }
 YavuSystem class >> allSicUser [
-
-	^OrderedCollection new
-		add: ((SicUser name: 'Administrador' company: (Company name: 'Cámara Comercio'))
-					password: 'yavu09';
-					roles: self allRoles;
-					yourself);
-		yourself 
-
-
+	^ OrderedCollection new
+		add: self administratorUser;
+		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #view }
 YavuSystem class >> demoCompany [
 	self shouldBeImplemented.
 ]
@@ -72,6 +76,12 @@ YavuSystem class >> enabledSubsystemsClasses: aCollectionOfSubsystemsClasses [
 	"Desde el environment definimos que subsistemas van a estar disponibles."
 	
 	EnabledSubsystemsClasses  := aCollectionOfSubsystemsClasses
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem class >> mainView [
+
+	^TBSYavuSystemView 
 ]
 
 { #category : #transientSystemInitialization }
@@ -143,6 +153,12 @@ YavuSystem >> loginUserName: anUserName password: aLiteralPassword [
 
 	^(self subsystemAt: 'loginSubsystem') loginUserName: anUserName password: aLiteralPassword
 	
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> mainView [
+
+	^self class mainView
 ]
 
 { #category : #'as yet unclassified' }

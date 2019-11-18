@@ -1,42 +1,42 @@
 Class {
-	#name : #TBSSicMain,
+	#name : #TBSYavuSystemView,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
 		'menuElements',
 		'content'
 	],
-	#category : #'YavuInformes-BootstrapView'
+	#category : #'YavuCommon-View'
 }
 
 { #category : #accessing }
-TBSSicMain >> content [
+TBSYavuSystemView >> content [
 	
 	^content
 ]
 
 { #category : #accessing }
-TBSSicMain >> content: aWAFactoryView [ 
+TBSYavuSystemView >> content: aWAFactoryView [ 
 	
 	content := aWAFactoryView
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMain >> initialize [ 
+TBSYavuSystemView >> initialize [ 
 	
 	super initialize.
-	menuElements := TBSSicMenuBar main: self.
+	menuElements := TBSYavuSystemMenuBar main: self.
 	content := TBSSicHome new
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMain >> renderContentOn: html [
+TBSYavuSystemView >> renderContentOn: html [
 
 		html render: menuElements.
 		html render: (self content parent: self)
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMain >> renderNavigationbarOn: html [
+TBSYavuSystemView >> renderNavigationbarOn: html [
 	
 	html tbsNavbar beDefault; with: [ 
 		 
@@ -56,7 +56,7 @@ TBSSicMain >> renderNavigationbarOn: html [
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMain >> updateRoot: anHtmlRoot [
+TBSYavuSystemView >> updateRoot: anHtmlRoot [
 
 	super updateRoot: anHtmlRoot.
 	anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'.

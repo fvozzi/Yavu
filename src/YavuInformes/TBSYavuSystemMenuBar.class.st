@@ -1,5 +1,5 @@
 Class {
-	#name : #TBSSicMenuBar,
+	#name : #TBSYavuSystemMenuBar,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
 		'selectedMenuID',
@@ -9,13 +9,13 @@ Class {
 }
 
 { #category : #accessing }
-TBSSicMenuBar class >> main: aTBSSicMain [ 
+TBSYavuSystemMenuBar class >> main: aTBSSicMain [ 
 	
 	^self new initializeMain: aTBSSicMain
 ]
 
 { #category : #evaluating }
-TBSSicMenuBar >> executeMenuActionFor: aMenuElement [
+TBSYavuSystemMenuBar >> executeMenuActionFor: aMenuElement [
 	| component |
 	component := aMenuElement presenterClass new.
 	self openComponent: component.
@@ -23,33 +23,33 @@ TBSSicMenuBar >> executeMenuActionFor: aMenuElement [
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMenuBar >> initialize [ 
+TBSYavuSystemMenuBar >> initialize [ 
 
 	super initialize.
 	selectedMenuID := 1
 ]
 
 { #category : #initialization }
-TBSSicMenuBar >> initializeMain: aTBSSicMain [ 
+TBSYavuSystemMenuBar >> initializeMain: aTBSSicMain [ 
 	
 
 	main := aTBSSicMain 
 ]
 
 { #category : #accessing }
-TBSSicMenuBar >> main [
+TBSYavuSystemMenuBar >> main [
 	
 	
 	^main
 ]
 
 { #category : #evaluating }
-TBSSicMenuBar >> openComponent: component [
+TBSYavuSystemMenuBar >> openComponent: component [
 	self main content: component
 ]
 
 { #category : #'as yet unclassified' }
-TBSSicMenuBar >> renderContentOn: html [
+TBSYavuSystemMenuBar >> renderContentOn: html [
 
 		html tbsNavbar beDefault ; beInverse; attributeAt: 'role' put: 'navigation'; with: [ 
 			html tbsContainer with: [ 

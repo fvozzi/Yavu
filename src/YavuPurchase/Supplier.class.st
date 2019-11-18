@@ -13,6 +13,12 @@ Class {
 	#category : #'YavuPurchase-Entities'
 }
 
+{ #category : #testing }
+Supplier class >> isVoyageRoot [
+
+	 ^true 
+]
+
 { #category : #'as yet unclassified' }
 Supplier >> addToSystem [
 	

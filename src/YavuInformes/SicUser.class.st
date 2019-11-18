@@ -38,6 +38,12 @@ SicUser class >> allForCompany: aCompany searchSelector: aSearchSelector searchV
 		where: [:each | each company  = aCompany AND: [(each perform: aSearchSelector) asUppercase like: aSearchValue, '%']]
 ]
 
+{ #category : #testing }
+SicUser class >> isVoyageRoot [
+
+	 ^true 
+]
+
 { #category : #'sin categoria' }
 SicUser class >> label [
 	"Devuelve una descripción de la clase del receptor."

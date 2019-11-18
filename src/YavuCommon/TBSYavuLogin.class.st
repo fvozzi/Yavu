@@ -6,7 +6,7 @@ Class {
 		'password',
 		'errorDescription'
 	],
-	#category : #'YavuInformes-BootstrapView'
+	#category : #YavuCommon
 }
 
 { #category : #'as yet unclassified' }
@@ -96,7 +96,7 @@ TBSYavuLogin >> succeedLogin: aSystem [
 
 	self resetErrorDescription.
 	self session yavuSystem: aSystem.
-	self call: TBSSicMain new
+	self call: aSystem mainView new
 ]
 
 { #category : #accessing }
