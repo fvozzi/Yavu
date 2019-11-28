@@ -58,7 +58,6 @@ WASICLogin >> renderContentOn: html [
 	"Renderiza el contenido del receptor en html."
 
 	html render: WASICHeader new.
-	
 		html div id: 'servicios'; with: [self renderLoginServicesOn: html].
 		html div id: 'login'; with: [self renderInputLoginOn: html].
 	html render: WASICFooter new
