@@ -24,5 +24,6 @@ YavuMongoSubsystem >> instancesOf: aClass [
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> store: aSicUser [ 
 	
+	
 	aSicUser save
 ]
