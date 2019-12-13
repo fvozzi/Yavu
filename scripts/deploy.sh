@@ -23,7 +23,7 @@ deploy-simple() {
 	zip -qr "$build_zip" "$ARTIFACT_DIR"
 	scp -rp "$build_zip" "$TARGET_MACHINE:~/builds/"
 	# I have a server-side post-processing script that bundles VMs into the build
-	#ssh "$TARGET_MACHINE" "~/post-process.sh ${TRAVIS_BUILD_NUMBER}"
+	ssh "$TARGET_MACHINE" "~/builds/post-process.sh ${TRAVIS_BUILD_NUMBER}"
 }
 main() {
 	deploy-simple
