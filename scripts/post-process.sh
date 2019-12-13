@@ -9,7 +9,7 @@ readonly TRAVIS_BUILD_NUMBER="$1"
 # customize the name of the build folder
 readonly ARTIFACT_DIR="${PROJECT_NAME}-${TRAVIS_BUILD_NUMBER}"
 # Unzip the deploy 
-unzip "$ARTIFACT_DIR"
+unzip ~/builds/"$ARTIFACT_DIR"
 # Copy to the production folder
 service yavu-service stop
 cp -r -v "$ARTIFACT_DIR"/* /opt/yavu/
