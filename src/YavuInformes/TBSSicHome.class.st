@@ -94,7 +94,7 @@ TBSSicHome >> renderReportsMenuOn: html [
 
 	html tbsContainer class: 'theme-showcase'; with: [ 
 	html tbsJumbotron: [ 		
-		html heading: 'WebSic - Informes'.
+		html heading: 'Yavu Compras'.
 		"html image resourceUrl: 'img/logoWebsic.png'."
 		"html break; break."
 		html paragraph: [

@@ -8,6 +8,13 @@ Class {
 	#category : #'YavuCommon-View'
 }
 
+{ #category : #'as yet unclassified' }
+TBSYavuSystemView >> cerrarSession [
+
+	self session unregister.
+	self requestContext redirectTo: self application url
+]
+
 { #category : #accessing }
 TBSYavuSystemView >> content [
 	
@@ -16,7 +23,7 @@ TBSYavuSystemView >> content [
 
 { #category : #accessing }
 TBSYavuSystemView >> content: aWAFactoryView [ 
-	
+
 	content := aWAFactoryView
 ]
 
@@ -39,8 +46,7 @@ TBSYavuSystemView >> renderContentOn: html [
 TBSYavuSystemView >> renderNavigationbarOn: html [
 	
 	html tbsNavbar beDefault; with: [ 
-		 
-		 html tbsContainer: [ 
+		html tbsContainer: [ 
 		html tbsNavbarHeader: [ 
 			html image tbsPullLeft; style: 'padding: 10px;';url: TBSExamplesLibrary / #logosmallPng.
 			html tbsNavbarBrand

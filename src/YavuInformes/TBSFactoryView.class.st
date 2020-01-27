@@ -36,7 +36,7 @@ TBSFactoryView >> buildReport [
 	
 	| instance |
 	instance := self model instances ifEmpty: [ self model objectClass new ] ifNotEmpty: [ :instances | instances first ]. 
-
+	self halt.
 	^(MAReport rows: self model instances description: instance maDescriptionForReport)
 		batchSize: 20;
 		addColumn: (MACommandColumn new
