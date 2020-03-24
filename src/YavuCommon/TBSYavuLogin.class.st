@@ -60,7 +60,7 @@ TBSYavuLogin >> renderContentOn: html [
 
 	html form: [  
 	html tbsContainer: [ 
-		html heading level: 2; with: 'YavuSoft inicio'.
+		html heading level: 2; with: 'YavuSoft inicio II'.
 		html tbsFormGroup: [ 
 			html label for: 'userNameLogin'; with: 'Usuario'.
 			html textInput tbsFormControl; id: 'userNameLogin'; placeholder: 'Ingrese su usuario'; on: #userName of: self].
