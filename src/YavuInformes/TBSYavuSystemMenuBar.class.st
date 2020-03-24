@@ -66,7 +66,7 @@ TBSYavuSystemMenuBar >> renderContentOn: html [
 					html span class: 'icon-bar' ] .
 			html tbsNavbarBrand
 				callback: [self openComponent: TBSSicHome new];
-				with: 'WebSic'.
+				with: 'Yavu Soft'.
 				].
 			html div class: 'navbar-collapse collapse'; with: [
 				html unorderedList class: 'nav navbar-nav'; with: [ 

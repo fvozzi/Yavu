@@ -11,8 +11,9 @@ Class {
 { #category : #'as yet unclassified' }
 TBSYavuSystemView >> cerrarSession [
 
+	self requestContext redirectTo: self application url.
 	self session unregister.
-	self requestContext redirectTo: self application url
+	
 ]
 
 { #category : #accessing }
