@@ -6,7 +6,7 @@ Class {
 		'password',
 		'errorDescription'
 	],
-	#category : #YavuCommon
+	#category : #'YavuCommon-View'
 }
 
 { #category : #'as yet unclassified' }
