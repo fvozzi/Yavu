@@ -19,7 +19,7 @@ TBSYavuLogin class >> initialize [
 	
 	super initialize.
 	(WAAdmin register: self asApplicationAt: 'sic')
-		preferenceAt: #sessionClass put: SICSession;
+		preferenceAt: #sessionClass put: YavuSession;
 		preferenceAt: #resourceBaseUrl put: 'http://localhost';
 		addLibrary: JQDeploymentLibrary;
 		addLibrary: TBSDevelopmentLibrary

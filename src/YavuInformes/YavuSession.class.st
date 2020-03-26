@@ -1,5 +1,5 @@
 Class {
-	#name : #SICSession,
+	#name : #YavuSession,
 	#superclass : #WASession,
 	#instVars : [
 		'usuario',
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #accessing }
-SICSession >> charSet [
+YavuSession >> charSet [
 
 ^'ISO_8859-1'
 ]
 
 { #category : #nil }
-SICSession >> close [
+YavuSession >> close [
 	"Libera la sessín actual de base de datos."
 
 	"self databaseSession release.
@@ -29,79 +29,79 @@ SICSession >> close [
 ]
 
 { #category : #accessing }
-SICSession >> company [
+YavuSession >> company [
 	^ empresa
 ]
 
 { #category : #accessing }
-SICSession >> company: anObject [
+YavuSession >> company: anObject [
 	empresa := anObject
 ]
 
 { #category : #accessing }
-SICSession >> databaseSession [
+YavuSession >> databaseSession [
 
 	databaseSession isNil ifTrue: [self initializeDatabaseSession].
 	^databaseSession
 ]
 
 { #category : #accessing }
-SICSession >> databaseSession: anObject [
+YavuSession >> databaseSession: anObject [
 	databaseSession := anObject
 ]
 
 { #category : #'as yet unclassified' }
-SICSession >> initialize [
+YavuSession >> initialize [
 
 	super initialize
 ]
 
 { #category : #accessing }
-SICSession >> initializeDatabaseSession [
+YavuSession >> initializeDatabaseSession [
 	"Crea una nueva sesión de la base de datos."
 
 	databaseSession := StPersistence current newSession
 ]
 
 { #category : #quering }
-SICSession >> sessionIniciada [
+YavuSession >> sessionIniciada [
 	"Devuelve true si ya hay un usuario logueado al sistema para la sesión representada por el receptor."
 	
 	^self user notNil
 ]
 
 { #category : #'as yet unclassified' }
-SICSession >> sistema [
+YavuSession >> sistema [
 	"Devuelve el root asociado a la database session del receptor."
 	
 	^self databaseSession root
 ]
 
 { #category : #'as yet unclassified' }
-SICSession >> unregister [
+YavuSession >> unregister [
 
 	super unregister.
 	self close
 ]
 
 { #category : #accessing }
-SICSession >> user [
+YavuSession >> user [
 	^ usuario
 ]
 
 { #category : #accessing }
-SICSession >> usuario: anObject [
+YavuSession >> usuario: anObject [
 	usuario := anObject
 ]
 
 { #category : #'as yet unclassified' }
-SICSession >> yavuSystem [
+YavuSession >> yavuSystem [
 
 	^yavuSystem
 ]
 
 { #category : #'as yet unclassified' }
-SICSession >> yavuSystem: aYavuSystem [
+YavuSession >> yavuSystem: aYavuSystem [
 
 	yavuSystem := aYavuSystem
 ]
