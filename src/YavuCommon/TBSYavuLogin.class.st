@@ -18,7 +18,7 @@ TBSYavuLogin class >> canBeRoot [
 TBSYavuLogin class >> initialize [
 	
 	super initialize.
-	(WAAdmin register: self asApplicationAt: 'sic')
+	(WAAdmin register: self asApplicationAt: 'yavu')
 		preferenceAt: #sessionClass put: YavuSession;
 		preferenceAt: #resourceBaseUrl put: 'http://localhost';
 		addLibrary: JQDeploymentLibrary;
