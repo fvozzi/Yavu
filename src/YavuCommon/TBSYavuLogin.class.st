@@ -27,6 +27,7 @@ TBSYavuLogin class >> initialize [
 
 { #category : #accessing }
 TBSYavuLogin >> failedLogin: aByteString [ 
+	"Error de login."
 	
 	errorDescription := aByteString 
 	
