@@ -1,7 +1,7 @@
 Class {
 	#name : #WAYavuBootstrap,
 	#superclass : #WAComponent,
-	#category : #'YavuInformes-BootstrapView'
+	#category : #'YavuCommon-View'
 }
 
 { #category : #accessing }

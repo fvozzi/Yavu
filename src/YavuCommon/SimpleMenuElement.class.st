@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'parent'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-BaseModel'
 }
 
 { #category : #'sin categoria' }

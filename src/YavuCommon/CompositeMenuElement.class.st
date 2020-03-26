@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'subMenues'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-BaseModel'
 }
 
 { #category : #'sin categoria' }

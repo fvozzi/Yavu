@@ -1,7 +1,7 @@
 Class {
 	#name : #WAMonthYearInput,
 	#superclass : #WADateInput,
-	#category : #'YavuInformes-Extensions'
+	#category : #'YavuCommon-0Extensions'
 }
 
 { #category : #'as yet unclassified' }

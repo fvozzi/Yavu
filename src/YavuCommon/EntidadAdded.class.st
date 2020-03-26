@@ -1,5 +1,5 @@
 Class {
 	#name : #EntidadAdded,
 	#superclass : #EntidadAnnouncement,
-	#category : #'YavuInformes-Announcement'
+	#category : #'YavuCommon-Announcement'
 }

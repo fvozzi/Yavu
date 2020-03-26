@@ -1,7 +1,7 @@
 Class {
 	#name : #LegalPerson,
 	#superclass : #Person,
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'sin categoria' }

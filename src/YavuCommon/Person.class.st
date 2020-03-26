@@ -5,7 +5,7 @@ Class {
 		'situacionesComerciales',
 		'cuit'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'as yet unclassified' }

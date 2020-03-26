@@ -1,7 +1,7 @@
 Class {
 	#name : #MAMonthYearSelectorComponent,
 	#superclass : #MADateInputComponent,
-	#category : #'YavuInformes-Extensions'
+	#category : #'YavuCommon-0Extensions'
 }
 
 { #category : #'as yet unclassified' }

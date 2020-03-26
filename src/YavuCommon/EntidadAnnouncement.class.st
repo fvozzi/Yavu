@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'entidad'
 	],
-	#category : #'YavuInformes-Announcement'
+	#category : #'YavuCommon-Announcement'
 }
 
 { #category : #accessing }

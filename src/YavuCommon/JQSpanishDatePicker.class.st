@@ -1,7 +1,7 @@
 Class {
 	#name : #JQSpanishDatePicker,
 	#superclass : #JQDatepicker,
-	#category : #'YavuInformes-Extensions'
+	#category : #'YavuCommon-0Extensions'
 }
 
 { #category : #'as yet unclassified' }

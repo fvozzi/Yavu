@@ -291,9 +291,3 @@ Entity >> ts [
 Entity >> ts: anObject [
 	ts := anObject
 ]
-
-{ #category : #'as yet unclassified' }
-Entity >> updateTS [
-
-	ts := TimeStamp current.
-]

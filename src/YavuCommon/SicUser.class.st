@@ -19,7 +19,7 @@ Class {
 		'fullName',
 		'phoneNumber'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'sin categoria' }

@@ -12,7 +12,7 @@ YavuObject class >> company [
 
 	^[self sicSession company]
 		on: WARequestContextNotFound
-		do: [Company default]
+		do: [(Smalltalk at: #Company) default]
 ]
 
 { #category : #nil }

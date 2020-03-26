@@ -12,7 +12,7 @@ Class {
 		'spouseDocumentNumber',
 		'city'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'as yet unclassified' }
