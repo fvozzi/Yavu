@@ -41,12 +41,12 @@ On a XTerminal evaluate:
 
 Setting up git on Pharo.
 
-** Copy your SSH keys to the machine or generate new ones.
-** Configure Pharo to use yours custom SSH keys.
+- Copy your SSH keys to the machine or generate new ones.
+- Configure Pharo to use yours custom SSH keys.
 
 Installing Project
 
-** Open Iceberg
-** Install project baseline
+- Open Iceberg
+- Install project baseline
 
 
