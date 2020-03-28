@@ -2,7 +2,8 @@ Class {
 	#name : #TBSYavuSystemView,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
-		'menuElements',
+		'navBar',
+		'sideBar',
 		'content'
 	],
 	#category : #'YavuCommon-View'
@@ -32,34 +33,35 @@ TBSYavuSystemView >> content: aWAFactoryView [
 TBSYavuSystemView >> initialize [ 
 	
 	super initialize.
-	menuElements := TBSYavuSystemMenuBar main: self.
+	navBar := TBSYavuSystemNavBar main: self.
+	sideBar := TBSYavuSystemSideBar main: self.
 	content := TBSSicHome new
 ]
 
 { #category : #'as yet unclassified' }
 TBSYavuSystemView >> renderContentOn: html [
 
-		html render: menuElements.
-		html render: (self content parent: self)
-]
-
-{ #category : #'as yet unclassified' }
-TBSYavuSystemView >> renderNavigationbarOn: html [
-	
-	html tbsNavbar beDefault; with: [ 
-		html tbsContainer: [ 
-		html tbsNavbarHeader: [ 
-			html image tbsPullLeft; style: 'padding: 10px;';url: TBSExamplesLibrary / #logosmallPng.
-			html tbsNavbarBrand
-				url: 'http://smalltalkhub.com/#!/~TorstenBergmann/Bootstrap';
-				with: 'Bootstrap for Seaside'.
-		 ].	
-		html form: [ 	
-		html tbsNavbarButton 
-				tbsPullRight;
-				callback: [ self returnToIntro ]; 
-				with: 'Home'  ]] ]
-	
+		html tbsRow 
+			with: [ 
+				html tbsColumn
+					extraSmallSize: 12;
+					mediumSize: 12;
+					largeSize: 12;
+					with: [html render: navBar]].
+		html tbsRow 
+			with: [ 
+				html tbsColumn
+					extraSmallSize: 12;
+					mediumSize: 2;
+					largeSize: 2;
+					with: [ html render: sideBar].
+				html tbsColumn
+					extraSmallSize: 12;
+					mediumSize: 10;
+					largeSize: 10;
+					with: [ html render: (self content parent: self)].
+				
+	]
 ]
 
 { #category : #'as yet unclassified' }

@@ -22,14 +22,15 @@ YavuSystem class >> administratorUser [
 
 { #category : #transientSystemInitialization }
 YavuSystem class >> allMenuElements [
-
-	^OrderedCollection new
-		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSExamplesHome) id: 1);
-		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView) id: 2);
-		add: ((CompositeMenuElement label: 'Tablero' presenterClass: WAActualizarSituacionesView) id: 3);
-		add: ((CompositeMenuElement label: 'Ayuda' presenterClass: WAHelpVideosView) id: 4);
-		add: ((CompositeMenuElement label: 'Acerca de' presenterClass: WAHelpVideosView) id: 5);
-		add: ((CompositeMenuElement label: 'Salir' presenterClass: WAConfirmLogOffView) id: 6);
+	"Answer all the available menues of the composite system."
+	
+	| menues |
+	
+	 menues := OrderedCollection new.
+	^ menues 	
+		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSSicHome) id: 1);
+		addAll: self subsystemsMenuElement;
+		add: ((CompositeMenuElement label: 'Salir' presenterClass: WAConfirmLogOffView) id: menues size +1);
 		yourself
 ]
 
@@ -67,8 +68,8 @@ YavuSystem class >> demoCompany [
 { #category : #initialization }
 YavuSystem class >> enabledSubsystemsClasses [
 	"Desde el environment definimos que subsistemas van a estar disponibles."
-	
-	^EnabledSubsystemsClasses
+
+	^ EnabledSubsystemsClasses
 ]
 
 { #category : #initialization }
@@ -84,7 +85,7 @@ YavuSystem class >> mainView [
 	^TBSYavuSystemView 
 ]
 
-{ #category : #transientSystemInitialization }
+{ #category : #initialization }
 YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 
 	aTransientSubsystem setInstancesOf: SicUser with: self allSicUser.
@@ -92,6 +93,16 @@ YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 	aTransientSubsystem setInstancesOf: SecurityFunction with: self allSecurityFunctions.
 	aTransientSubsystem setInstancesOf: Role with: self allRoles
 
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem class >> subsystemsMenuElement [
+	^ self enabledSubsystemsClasses
+		inject: OrderedCollection new
+		into: [ :menues :subsystemClass | 
+			menues
+				addAll: subsystemClass menuElements;
+				yourself ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -179,10 +190,10 @@ YavuSystem >> roles [
 	^self loginSubsystem roles
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 YavuSystem >> setUpTransientSubsystem: aTransientSubsystem [
 
-	self class setUpTransientSubsystem: aTransientSubsystem
+	^ self class setUpTransientSubsystem: aTransientSubsystem
 ]
 
 { #category : #'as yet unclassified' }

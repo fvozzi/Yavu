@@ -50,7 +50,7 @@ Class {
 		'tipo',
 		'multiplicadores'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'as yet unclassified' }

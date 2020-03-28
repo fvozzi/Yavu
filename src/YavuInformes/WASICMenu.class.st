@@ -61,6 +61,7 @@ WASICMenu >> main: anObject [
 WASICMenu >> renderCompositeMenuElement: aMenuElement on: html [
 	"Render a simple menu element on html."
 	
+	self halt.
 	html anchor 
 		callback: [self main content: aMenuElement presenterClass new];
 		with: aMenuElement label.
@@ -79,6 +80,7 @@ WASICMenu >> renderCompositeMenuElement: aMenuElement on: html [
 WASICMenu >> renderContentOn: html [
 	"Render the menu elements."
 
+	self halt.
 	html div
 		id: 'menu';
 		class: 'ui-corner-all';

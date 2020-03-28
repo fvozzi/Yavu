@@ -1,7 +1,7 @@
 Class {
 	#name : #CUITTest,
 	#superclass : #TestCase,
-	#category : #'YavuInformes-Test'
+	#category : #'YavuCommon-Test'
 }
 
 { #category : #'as yet unclassified' }

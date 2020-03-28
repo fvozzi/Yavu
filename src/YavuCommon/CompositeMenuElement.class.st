@@ -17,7 +17,7 @@ CompositeMenuElement >> addSubMenu: aMenuElement [
 { #category : #'as yet unclassified' }
 CompositeMenuElement >> initializeSubmenues [
 	
-	subMenues := (SimpleMenuElement all select: [:each | each parent = self]) asSortedCollection  
+	subMenues := OrderedCollection new 
 ]
 
 { #category : #'as yet unclassified' }
@@ -31,6 +31,7 @@ CompositeMenuElement >> isRoot [
 CompositeMenuElement >> renderContentOn: html on: aWASICMenu [
 	"Render the receiver on aWASICMenu."
 	
+	self halt.
 	aWASICMenu renderCompositeMenuElement: self on: html
 ]
 

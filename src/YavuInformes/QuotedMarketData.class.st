@@ -15,8 +15,8 @@ QuotedMarketData class >> createAndStoreInstanceFor: aDate [
 	
 	instance := self new date: aDate; yourself.
 	"Solo lo persisto si trajo datos de dolar y cereal. Sino, no, asi lo vuelve a buscar de la web en el proximo acceso."
-	(instance dolarCompraOficial notEmpty and: [ instance ultimoSoja notEmpty ]) ifTrue: [ 
-		instance store ].
+	"(instance dolarCompraOficial notEmpty and: [ instance ultimoSoja notEmpty ]) ifTrue: [ 
+		instance store ]."
 	^instance
 ]
 
@@ -25,7 +25,8 @@ QuotedMarketData class >> instanceOf: aDate [
 	"Busca en la BD la cotizacion del día. Si no existe, la busca en la web y la persiste y la devuelve"
 
 	| instances |
-	instances:= self yavuSystem readManyOf: self where: [:each | each date = aDate].
+"	instances:= self yavuSystem readManyOf: self where: [:each | each date = aDate]."
+	instances := OrderedCollection new.
 	instances isEmpty ifTrue: [ ^self createAndStoreInstanceFor: aDate].
 	^instances first
 ]

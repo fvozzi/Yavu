@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuSecuritySubsystem class >> menuElements [
+
+	^ OrderedCollection new 
+		add: (((CompositeMenuElement label: self name presenterClass: TBSSicHome ) id: 2)
+					addSubMenu: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView) id: 1);
+			yourself);
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 YavuSecuritySubsystem class >> subsystemTag [
 
 	 ^'loginSubsystem'

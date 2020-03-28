@@ -42,7 +42,8 @@ TBSSicHome >> renderChecksInputOn: html [
 { #category : #'as yet unclassified' }
 TBSSicHome >> renderContentOn: html [
 	self renderFirstRowOn: html.
-	self renderSecondRowOn: html
+	self renderSecondRowOn: html.
+
 ]
 
 { #category : #'as yet unclassified' }

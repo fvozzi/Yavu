@@ -7,6 +7,12 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuSubsystem class >> menuElements [
+	
+	^ OrderedCollection new
+]
+
 { #category : #'instance creation' }
 YavuSubsystem class >> on: aYavuSystem [
 

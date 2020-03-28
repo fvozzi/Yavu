@@ -1,21 +1,21 @@
 Class {
-	#name : #TBSYavuSystemMenuBar,
+	#name : #TBSYavuSystemNavBar,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
 		'selectedMenuID',
 		'main'
 	],
-	#category : #'YavuInformes-BootstrapView'
+	#category : #'YavuCommon-View'
 }
 
 { #category : #accessing }
-TBSYavuSystemMenuBar class >> main: aTBSSicMain [ 
+TBSYavuSystemNavBar class >> main: aTBSSicMain [ 
 	
 	^self new initializeMain: aTBSSicMain
 ]
 
 { #category : #evaluating }
-TBSYavuSystemMenuBar >> executeMenuActionFor: aMenuElement [
+TBSYavuSystemNavBar >> executeMenuActionFor: aMenuElement [
 	| component |
 	component := aMenuElement presenterClass new.
 	self openComponent: component.
@@ -23,33 +23,33 @@ TBSYavuSystemMenuBar >> executeMenuActionFor: aMenuElement [
 ]
 
 { #category : #'as yet unclassified' }
-TBSYavuSystemMenuBar >> initialize [ 
+TBSYavuSystemNavBar >> initialize [ 
 
 	super initialize.
 	selectedMenuID := 1
 ]
 
 { #category : #initialization }
-TBSYavuSystemMenuBar >> initializeMain: aTBSSicMain [ 
+TBSYavuSystemNavBar >> initializeMain: aTBSSicMain [ 
 	
 
 	main := aTBSSicMain 
 ]
 
 { #category : #accessing }
-TBSYavuSystemMenuBar >> main [
+TBSYavuSystemNavBar >> main [
 	
 	
 	^main
 ]
 
 { #category : #evaluating }
-TBSYavuSystemMenuBar >> openComponent: component [
+TBSYavuSystemNavBar >> openComponent: component [
 	self main content: component
 ]
 
 { #category : #'as yet unclassified' }
-TBSYavuSystemMenuBar >> renderContentOn: html [
+TBSYavuSystemNavBar >> renderContentOn: html [
 
 		html tbsNavbar beDefault ; beInverse; attributeAt: 'role' put: 'navigation'; with: [ 
 			html tbsContainer with: [ 

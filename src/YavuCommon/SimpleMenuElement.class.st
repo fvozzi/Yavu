@@ -18,8 +18,16 @@ SimpleMenuElement >> parent: anObject [
 ]
 
 { #category : #'sin categoria' }
+SimpleMenuElement >> renderContentOn: html [
+	"Render the receiver on aWASICMenu."
+	
+	self halt
+]
+
+{ #category : #'sin categoria' }
 SimpleMenuElement >> renderContentOn: html on: aWASICMenu [
 	"Render the receiver on aWASICMenu."
 	
+	self halt.
 	aWASICMenu renderSimpleMenuElement: self on: html
 ]
