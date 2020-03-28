@@ -27,4 +27,26 @@ Setting the environment
 
 Set up all that stuff is a lot of time consuming on configuration tasks. So I'll document here as simple as possible in order to easy start fresh on a new machine or operative system is it's necesary.
 
-* Linux: I'm using Kubuntu 16.04 but I'll write this document using Debian 10.
+* Linux
+
+I'm using Kubuntu 16.04 but I'll write this document using Kubuntu 18.04 LTS.
+
+* GIT
+
+I need git in order to install my project and its dependences into Pharo.
+
+On a XTerminal evaluate: 
+
+** apt-get install git
+
+Setting up git on Pharo.
+
+- Copy your SSH keys to the machine or generate new ones.
+- Configure Pharo to use yours custom SSH keys.
+
+Installing Project
+
+- Open Iceberg
+- Install project baseline
+
+
