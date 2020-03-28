@@ -7,7 +7,7 @@ Class {
 		'databaseSession',
 		'yavuSystem'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-BaseModel'
 }
 
 { #category : #accessing }
