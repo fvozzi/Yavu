@@ -28,9 +28,7 @@ YavuSystem class >> allMenuElements [
 	
 	 menues := OrderedCollection new.
 	^ menues 	
-		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSSicHome) id: 1);
 		addAll: self subsystemsMenuElement;
-		add: ((CompositeMenuElement label: 'Salir' presenterClass: WAConfirmLogOffView) id: menues size +1);
 		yourself
 ]
 
@@ -80,6 +78,12 @@ YavuSystem class >> enabledSubsystemsClasses: aCollectionOfSubsystemsClasses [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem class >> homeViewClass [
+	
+	 ^ Smalltalk at: #TBSYavuHomeView
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem class >> mainView [
 
 	^TBSYavuSystemView 
@@ -97,12 +101,19 @@ YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 
 { #category : #'as yet unclassified' }
 YavuSystem class >> subsystemsMenuElement [
+
 	^ self enabledSubsystemsClasses
 		inject: OrderedCollection new
 		into: [ :menues :subsystemClass | 
 			menues
 				addAll: subsystemClass menuElements;
 				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem class >> systemName [
+	
+	^ 'Yavusoft'
 ]
 
 { #category : #'as yet unclassified' }
@@ -126,6 +137,12 @@ YavuSystem >> allowedRootMenuActions [
 YavuSystem >> company [
 	
 	^self loginSubsystem company
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> homeViewClass [ 
+
+	^ self class homeViewClass 
 ]
 
 { #category : #initialization }
@@ -174,6 +191,11 @@ YavuSystem >> mainView [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem >> name [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem >> purchaseSubsystem [
 	^ self subsystemAt: 'purchaseSubsystem'
 ]
@@ -206,4 +228,10 @@ YavuSystem >> storedSubsystem [
 YavuSystem >> subsystemAt: aSubsystemLabel [
 
 	^subsystems at: aSubsystemLabel ifAbsent: [ self error: aSubsystemLabel, 'not installed.' ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> systemName [
+	
+	^ self class systemName 
 ]

@@ -2,16 +2,17 @@ Class {
 	#name : #MenuElement,
 	#superclass : #Entity,
 	#instVars : [
-		'presenterClass'
+		'presenterClass',
+		'subsystem'
 	],
 	#category : #'YavuCommon-BaseModel'
 }
 
 { #category : #'sin categoria' }
-MenuElement class >> label: aMenuLabel presenterClass: aWAPresenterClass [
+MenuElement class >> label: aMenuLabel presenterClass: aWAPresenterClass subsystem: aYavuSubsystem [
 	"Answer a new receiver instance initialized with aMenuLabel and aWAPresenterClass."
 	
-	^(self name: aMenuLabel) initializePresenterClass: aWAPresenterClass
+	^(self name: aMenuLabel) initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsystem 
 ]
 
 { #category : #'sin categoria' }
@@ -22,23 +23,17 @@ MenuElement class >> selectableMenuElements [
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> initializePresenterClass: aWAPresenterClass [
+MenuElement >> initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsystem [ 
 	"Initialize the receiver's instances variables label and presenterClass with aMenuLabel and aWAPresenterClass."
  
-	presenterClass := aWAPresenterClass
+	presenterClass := aWAPresenterClass.
+	subsystem  := aYavuSubsystem
 ]
 
 { #category : #accessing }
 MenuElement >> isHomeMenu [
 	
 	^self name = 'Inicio'
-]
-
-{ #category : #'as yet unclassified' }
-MenuElement >> isRoot [
-	"Responde true si el receptor no tiene parent."
-
-	^false
 ]
 
 { #category : #'sin categoria' }
@@ -85,9 +80,7 @@ MenuElement >> printOn: aStream [
 
 ]
 
-{ #category : #'sin categoria' }
-MenuElement >> renderContentOn: html on: aWASICMenu [
-	"Render the receiver on aWASICMenu."
-	
-	self subclassResponsibility
+{ #category : #'as yet unclassified' }
+MenuElement >> subsystem [
+	^ subsystem
 ]

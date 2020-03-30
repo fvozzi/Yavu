@@ -106,12 +106,6 @@ YavuStoredSubsystem >> allowedEntitiesClasses [
 ]
 
 { #category : #'as yet unclassified' }
-YavuStoredSubsystem >> allowedRootMenuActions [
-	
-	^loggedUser menuElements select: [ :each | each isRoot ]
-]
-
-{ #category : #'as yet unclassified' }
 YavuStoredSubsystem >> company [
 	^company
 ]

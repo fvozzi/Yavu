@@ -13,10 +13,14 @@ Class {
 YavuSecuritySubsystem class >> menuElements [
 
 	^ OrderedCollection new 
-		add: (((CompositeMenuElement label: self name presenterClass: TBSSicHome ) id: 2)
-					addSubMenu: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView) id: 1);
-			yourself);
+		add: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView subsystem: self) id: 1);
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuSecuritySubsystem class >> subsystemName [
+
+	^ 'Seguridad'
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,7 +45,7 @@ YavuSecuritySubsystem >> allowedEntitiesClasses [
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> allowedRootMenuActions [
 	
-	^loggedUser menuElements select: [ :each | each isRoot ]
+	^loggedUser menuElements
 ]
 
 { #category : #accessing }
@@ -62,6 +66,12 @@ YavuSecuritySubsystem >> loginUserName: aName password: aPassword [
 	[self loggedUser: (self searchUserName: aName password: aPassword)]
 		on: Error do: [ :ex | self error: ex description. ^false ].
 	^true
+]
+
+{ #category : #accessing }
+YavuSecuritySubsystem >> name [ 
+
+	 ^ 'Seguridad'
 ]
 
 { #category : #'as yet unclassified' }

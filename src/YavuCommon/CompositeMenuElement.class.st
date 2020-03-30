@@ -30,8 +30,7 @@ CompositeMenuElement >> isRoot [
 { #category : #'sin categoria' }
 CompositeMenuElement >> renderContentOn: html on: aWASICMenu [
 	"Render the receiver on aWASICMenu."
-	
-	self halt.
+
 	aWASICMenu renderCompositeMenuElement: self on: html
 ]
 
@@ -49,4 +48,10 @@ CompositeMenuElement >> subMenues [
 	
 	subMenues ifNil: [self initializeSubmenues].
 	^subMenues
+]
+
+{ #category : #'As yet unclassified' }
+CompositeMenuElement >> subsystem [
+	
+	 ^'Yavu Prueba'
 ]

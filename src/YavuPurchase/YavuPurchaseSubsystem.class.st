@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuPurchaseSubsystem class >> subsystemName [
+
+	^ 'Compras'
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseSubsystem class >> subsystemTag [
 
 	 ^'purchaseSubsystem'
@@ -19,6 +25,12 @@ YavuPurchaseSubsystem >> addSupplier: aSupplier [
 	self suppliers add: aSupplier.
 	self halt.
 	self system storedSubsystem store: aSupplier
+]
+
+{ #category : #accessing }
+YavuPurchaseSubsystem >> name [ 
+
+	 ^ 'Compras'
 ]
 
 { #category : #accessing }

@@ -50,35 +50,70 @@ TBSYavuSystemNavBar >> openComponent: component [
 
 { #category : #'as yet unclassified' }
 TBSYavuSystemNavBar >> renderContentOn: html [
+	html tbsNavbar
+		beDefault;
+		beInverse;
+		with: [ html tbsContainer
+				with: [ self renderNavbarHeaderOn: html.
+					self renderNavbarSubsystemsMenues: html.
+					self renderNavbarSystemMenues: html ] ]
+]
 
-		html tbsNavbar beDefault ; beInverse; attributeAt: 'role' put: 'navigation'; with: [ 
-			html tbsContainer with: [ 
-				html tbsNavbarHeader with: [ 
-					html button 
-						bePush;
-						class: 'navbar-toggle'; 
-						attributeAt: 'data-toggle' put: 'collapse';
-						attributeAt: 'data-target' put: '.navbar-collapse';
-						with: [ 
-					html span class: 'sr-only'; with: [ html text: 'Too	gle navigation'].
-					html span class: 'icon-bar'.
-					html span class: 'icon-bar'.
-					html span class: 'icon-bar' ] .
-			html tbsNavbarBrand
-				callback: [self openComponent: TBSSicHome new];
-				with: 'Yavu Soft'.
-				].
-			html div class: 'navbar-collapse collapse'; with: [
-				html unorderedList class: 'nav navbar-nav'; with: [ 
-					self session yavuSystem allowedRootMenuActions do: [ :each | | menuItem |
-						menuItem := html tbsNavItem.
-						each id = selectedMenuID ifTrue: [ menuItem beActive ].
-						menuItem with: [html anchor callback: [ self executeMenuActionFor: each ]; with: each label ] 
-					]
-					 ]
-				]		
-					
-					
-					 ].
-		]
+{ #category : #'as yet unclassified' }
+TBSYavuSystemNavBar >> renderNavbarHeaderOn: html [
+	html tbsNavbarHeader
+		with: [ html tbsNavbarBrand
+				callback: [ self openComponent: self systemHomeView ];
+				with: self systemName ]
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemNavBar >> renderNavbarSubsystemsMenues: html [
+	html unorderedList
+		class: 'nav navbar-nav';
+		with: [ (self session yavuSystem allowedRootMenuActions
+				groupedBy: [ :each | each subsystem ])
+				keysAndValuesDo: [ :subsystem :submenues | 
+					html tbsNavItem
+						class: 'dropdown';
+						with: [ html anchor
+								class: 'dropdown-toggle';
+								attributeAt: 'data-toggle' put: 'dropdown';
+								attributeAt: 'href' put: '#';
+								with: subsystem subsystemName.
+							html unorderedList
+								class: 'dropdown-menu';
+								with: [ submenues
+										do: [ :each | 
+											| menuItem |
+											menuItem := html tbsNavItem.
+											each id = selectedMenuID
+												ifTrue: [ menuItem beActive ].
+											menuItem
+												with: [ html anchor
+														callback: [ self executeMenuActionFor: each ];
+														with: each label ] ] ] ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemNavBar >> renderNavbarSystemMenues: html [
+	^ html unorderedList
+		class: 'nav navbar-nav navbar-right';
+		with: [ html tbsNavItem
+				with: [ html anchor
+						callback: [ self openComponent: WAConfirmLogOffView new];
+						with: [ html span class: 'glyphicon glyphicon-log-out'.
+							html text: ' Salir' ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemNavBar >> systemHomeView [
+
+	 ^self session yavuSystem homeViewClass new
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemNavBar >> systemName [
+	
+	^ self session yavuSystem systemName
 ]
