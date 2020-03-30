@@ -1,6 +1,6 @@
 Class {
 	#name : #WAYavuBootstrap,
-	#superclass : #WAComponentWithStyle,
+	#superclass : #WAComponent,
 	#category : #'YavuCommon-View'
 }
 
