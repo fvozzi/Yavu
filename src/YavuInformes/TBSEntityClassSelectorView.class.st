@@ -1,8 +1,23 @@
 Class {
 	#name : #TBSEntityClassSelectorView,
 	#superclass : #WAYavuBootstrap,
+	#instVars : [
+		'subsystem'
+	],
 	#category : #'YavuInformes-BootstrapView'
 }
+
+{ #category : #'instance creation' }
+TBSEntityClassSelectorView class >> on: yavuSubsystem [
+
+	 ^ self new initializeSubsystem: yavuSubsystem
+]
+
+{ #category : #initialization }
+TBSEntityClassSelectorView >> initializeSubsystem: yavuSubsystem [
+
+	subsystem := yavuSubsystem 
+]
 
 { #category : #rendering }
 TBSEntityClassSelectorView >> onEntitySelection: anEntityClass [

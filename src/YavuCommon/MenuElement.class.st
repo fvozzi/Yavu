@@ -71,6 +71,12 @@ MenuElement >> presenterClassLiteral: aLiteral [
 	^self presenterClass: (Smalltalk at: aLiteral asSymbol ifAbsent: [])
 ]
 
+{ #category : #'as yet unclassified' }
+MenuElement >> presenterView [
+
+	 ^ presenterClass on: subsystem 
+]
+
 { #category : #'sin categoria' }
 MenuElement >> printOn: aStream [ 
 	"Append to the argument, aStream, a sequence of characters that  

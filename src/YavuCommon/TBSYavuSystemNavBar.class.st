@@ -17,7 +17,7 @@ TBSYavuSystemNavBar class >> main: aTBSSicMain [
 { #category : #evaluating }
 TBSYavuSystemNavBar >> executeMenuActionFor: aMenuElement [
 	| component |
-	component := aMenuElement presenterClass new.
+	component := aMenuElement presenterView.
 	self openComponent: component.
 	selectedMenuID := aMenuElement id
 ]
