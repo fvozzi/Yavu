@@ -7,7 +7,7 @@ Class {
 { #category : #rendering }
 TBSSicHome >> callInputDebt [
 	
-	self parent content: TBSFactoryView new
+	self parent content: TBSEntitiesBrowserView new
 ]
 
 { #category : #rendering }

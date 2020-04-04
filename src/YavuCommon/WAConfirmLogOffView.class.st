@@ -20,11 +20,11 @@ WAConfirmLogOffView >> renderContentOn: html [
 						html tbsButton 
 							beSuccess;
 							text: 'Sí'; 
-							callback: [ self parent cerrarSession ].
+							callback: [ parent cerrarSession ].
 					html tbsButton 
 						bePrimary; 
 						text: 'No'; 
-						callback: [ self parent content: self session yavuSystem homeViewClass new  ]].
+						callback: [ parent content: self session yavuSystem homeViewClass new  ]].
 					html tbsColumn 
 						largeSize: 4;
 						with: [ ].

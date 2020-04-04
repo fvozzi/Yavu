@@ -2,9 +2,10 @@ Class {
 	#name : #TBSEntityClassSelectorView,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
-		'subsystem'
+		'subsystem',
+		'entityClassSelected'
 	],
-	#category : #'YavuInformes-BootstrapView'
+	#category : #'YavuCommon-View'
 }
 
 { #category : #'instance creation' }
@@ -22,7 +23,7 @@ TBSEntityClassSelectorView >> initializeSubsystem: yavuSubsystem [
 { #category : #rendering }
 TBSEntityClassSelectorView >> onEntitySelection: anEntityClass [
 
-	self call: (TBSFactoryView on: (Factory on: anEntityClass))
+	self call: (TBSEntitiesBrowserView on: (Factory on: anEntityClass))
 ]
 
 { #category : #rendering }
@@ -32,7 +33,7 @@ TBSEntityClassSelectorView >> renderContentOn: html [
 		html tbsPanel beDefault with: [ html tbsPanelHeading: [ html tbsPanelTitle level: 3; with: 'Entidades' ].
 		html tbsPanelBody: [
 				html form: [ 
-				  self session yavuSystem allowedEntitiesClasses do: [ :each |
+				  self session subsystem allowedEntitiesClasses do: [ :each |
 					html tbsButton 	
 						bePrimary;		 
 						beBlock;

@@ -166,7 +166,7 @@ YavuTransientSubsystem >> initializeMenuElements [
 	
 	menuElements := OrderedCollection new
 		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSYavuSystemView) id: 1);
-		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSFactoryView) id: 2);
+		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView) id: 2);
 		add: ((CompositeMenuElement label: 'Tablero' presenterClass: WAActualizarSituacionesView) id: 3);
 		add: ((CompositeMenuElement label: 'Ayuda' presenterClass: WAHelpVideosView) id: 4);
 		add: ((CompositeMenuElement label: 'Acerca de' presenterClass: WAHelpVideosView) id: 5);

@@ -36,16 +36,9 @@ TBSYavuSystemNavBar >> initializeMain: aTBSSicMain [
 	main := aTBSSicMain 
 ]
 
-{ #category : #accessing }
-TBSYavuSystemNavBar >> main [
-	
-	
-	^main
-]
-
 { #category : #evaluating }
 TBSYavuSystemNavBar >> openComponent: component [
-	self main content: component
+	parent content: component
 ]
 
 { #category : #'as yet unclassified' }
@@ -101,7 +94,7 @@ TBSYavuSystemNavBar >> renderNavbarSystemMenues: html [
 		class: 'nav navbar-nav navbar-right';
 		with: [ html tbsNavItem
 				with: [ html anchor
-						callback: [ self openComponent: WAConfirmLogOffView new];
+						callback: [ self openComponent: (WAConfirmLogOffView onParent: parent)];
 						with: [ html span class: 'glyphicon glyphicon-log-out'.
 							html text: ' Salir' ] ] ]
 ]

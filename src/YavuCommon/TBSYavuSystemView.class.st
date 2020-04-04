@@ -33,8 +33,8 @@ TBSYavuSystemView >> content: aWAFactoryView [
 TBSYavuSystemView >> initialize [ 
 	
 	super initialize.
-	navBar := TBSYavuSystemNavBar main: self.
-	content := self session yavuSystem homeViewClass new
+	navBar := TBSYavuSystemNavBar onParent: self.
+	content := self session yavuSystem homeViewClass onParent: self
 ]
 
 { #category : #'as yet unclassified' }
@@ -52,7 +52,7 @@ TBSYavuSystemView >> renderContentOn: html [
 					extraSmallSize: 12;
 					mediumSize: 12;
 					largeSize: 12;
-					with: [ html render: (self content parent: self) ]]]
+					with: [ html render: self content  ]]]
 ]
 
 { #category : #'as yet unclassified' }

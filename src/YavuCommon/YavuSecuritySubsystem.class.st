@@ -10,10 +10,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuSecuritySubsystem class >> entitiesClasses [
+	
+	^ OrderedCollection with: SicUser 
+]
+
+{ #category : #'as yet unclassified' }
 YavuSecuritySubsystem class >> menuElements [
 
 	^ OrderedCollection new 
-		add: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntityClassSelectorView subsystem: self) id: 1);
+		add: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
 		yourself
 ]
 

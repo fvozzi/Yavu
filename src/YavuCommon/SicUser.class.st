@@ -64,6 +64,12 @@ SicUser >> addRole: aRole [
 	self roles add: aRole
 ]
 
+{ #category : #'as yet unclassified' }
+SicUser >> addToSystem [
+	
+	self yavuSystem loginSubsystem addUser: self
+]
+
 { #category : #'sin categoria' }
 SicUser >> agregarComercio: unComercio [ 
 	"Agrega unComercio permitido a la lista de comercios del receptor."
@@ -149,20 +155,6 @@ SicUser >> descriptionEMail [
         	label: 'Correo Electrónico';
         	priority: 180;
         	yourself
-]
-
-{ #category : #'sin categoria' }
-SicUser >> descriptionEmpresa [
-	
-	<magritteDescription>
-	^MASingleOptionDescription new
-		accessor: #company;
-		label: 'Empresa';
-		priority: 200;
-		options: Company all;
-		beSorted;
-		beRequired;
-		yourself
 ]
 
 { #category : #'sin categoria' }

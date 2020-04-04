@@ -128,6 +128,12 @@ YavuSystem >> allowedEntitiesClasses [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem >> allowedEntitiesClassesOn: aClass [ 
+	
+	 ^ aClass entitiesClasses 
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem >> allowedRootMenuActions [
 
 	^self loginSubsystem  allowedRootMenuActions

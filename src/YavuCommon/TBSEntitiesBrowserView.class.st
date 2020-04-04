@@ -1,43 +1,45 @@
 Class {
-	#name : #TBSFactoryView,
+	#name : #TBSEntitiesBrowserView,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
 		'model',
-		'reportsByModel',
+		'report',
 		'selectedTab',
 		'orderSelector',
-		'valueToSearch'
+		'valueToSearch',
+		'subsystemClass',
+		'entityClass'
 	],
-	#category : #'YavuInformes-BootstrapView'
+	#category : #'YavuCommon-View'
 }
 
 { #category : #'as yet unclassified' }
-TBSFactoryView class >> canBeRoot [ 
+TBSEntitiesBrowserView class >> canBeRoot [ 
 
 	^true
 ]
 
 { #category : #'as yet unclassified' }
-TBSFactoryView class >> claseDeAyuda [
+TBSEntitiesBrowserView class >> claseDeAyuda [
 	"Devuelve la clase que modela y define la ayuda del repcetor."
 	
 	^WAAyudaABMEntidades
 ]
 
-{ #category : #'as yet unclassified' }
-TBSFactoryView class >> on: aModel [
-	
-	^super new model: aModel
+{ #category : #'instance creation' }
+TBSEntitiesBrowserView class >> on: yavuSubsystemClass [
+
+	 ^ self new initializeSubsystemClass: yavuSubsystemClass
 ]
 
 { #category : #rendering }
-TBSFactoryView >> buildReport [
+TBSEntitiesBrowserView >> buildReport [
 	"Create a MAReport new instance showing the reciver selected model class instances."
 	
 	| instance |
-	instance := self model instances ifEmpty: [ self model objectClass new ] ifNotEmpty: [ :instances | instances first ]. 
-	self halt.
-	^(MAReport rows: self model instances description: instance maDescriptionForReport)
+	instance := entityClass all ifEmpty: [ self model objectClass new ] ifNotEmpty: [ :instances | instances first ].  
+
+	^(MAReport rows: entityClass all description: instance maDescriptionForReport)
 		batchSize: 20;
 		addColumn: (MACommandColumn new
 						addCommandOn: self selector: #ver: text: 'ver';
@@ -49,20 +51,20 @@ TBSFactoryView >> buildReport [
 ]
 
 { #category : #accessing }
-TBSFactoryView >> children [
+TBSEntitiesBrowserView >> children [
 
 	^Array with: self report
 ]
 
 { #category : #rendering }
-TBSFactoryView >> descripcionClaseSeleccionada [
-	^ self model objectClass
+TBSEntitiesBrowserView >> descripcionClaseSeleccionada [
+	^self selectedOrDefacultEntityClass
 		ifNil: [ '' ]
 		ifNotNil: [ :each | each label ]
 ]
 
 { #category : #adding }
-TBSFactoryView >> edit: anObject [
+TBSEntitiesBrowserView >> edit: anObject [
 
 	| anEntity component |
 	component := anObject asComponent.
@@ -76,15 +78,21 @@ TBSFactoryView >> edit: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-TBSFactoryView >> initialize [
+TBSEntitiesBrowserView >> initialize [
 
 	super initialize.
-	reportsByModel := Dictionary new
+	report := OrderedCollection new
 	
 ]
 
+{ #category : #initialization }
+TBSEntitiesBrowserView >> initializeSubsystemClass: yavuSubsystemClass [
+
+	subsystemClass := yavuSubsystemClass 
+]
+
 { #category : #accessing }
-TBSFactoryView >> model [
+TBSEntitiesBrowserView >> model [
 	
 	model isNil ifTrue: [model:= Factory on: OperationCharacter].
 	^model
@@ -93,45 +101,60 @@ TBSFactoryView >> model [
 ]
 
 { #category : #accessing }
-TBSFactoryView >> model: anObject [
+TBSEntitiesBrowserView >> model: anObject [
 	model := anObject
 ]
 
 { #category : #accessing }
-TBSFactoryView >> nuevo [
+TBSEntitiesBrowserView >> nuevo [
 
 	| answer  component |
-	component := self model nuevoElemento asComponent.
+
+	component := entityClass new asComponent.
 	answer := self call:  (component 
 					addValidatedForm: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'};
 					addDecoration: (WAWindowDecoration title: 'Agregar');
 					yourself).
+	self halt.
 	answer notNil ifTrue: [
-		self model add: answer.
+		answer addToSystem.
 		self updateReport].
 ]
 
+{ #category : #'as yet unclassified' }
+TBSEntitiesBrowserView >> onEntitySelection: aClass [ 
+	
+	entityClass := aClass.
+	report := self buildReport 
+]
+
 { #category : #accessing }
-TBSFactoryView >> orderSelector [
+TBSEntitiesBrowserView >> orderSelector [
 	
 	^ orderSelector
 ]
 
 { #category : #accessing }
-TBSFactoryView >> orderSelector: anObject [
+TBSEntitiesBrowserView >> orderSelector: anObject [
 	
 	orderSelector := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+TBSEntitiesBrowserView >> possibleEntitiesClasses [
+
+	^ self session yavuSystem allowedEntitiesClassesOn: self subsystemClass.
+]
+
 { #category : #rendering }
-TBSFactoryView >> possibleSearchSelectors [
+TBSEntitiesBrowserView >> possibleSearchSelectors [
 	^ self model objectClass
 		ifNil: [ #() ]
 		ifNotNil: [ :each | each possibleSearchSelectors ]
 ]
 
 { #category : #adding }
-TBSFactoryView >> remove: anObject [
+TBSEntitiesBrowserView >> remove: anObject [
 
 	| answer mensaje|
 	mensaje := MensajeDeSistema mensaje: 'Se eliminará definitivamente del sistema. ¿Continua?'.
@@ -145,7 +168,7 @@ TBSFactoryView >> remove: anObject [
 ]
 
 { #category : #rendering }
-TBSFactoryView >> renderAcciones: html [
+TBSEntitiesBrowserView >> renderAcciones: html [
 	
 		html select 
 			list: self possibleSearchSelectors keys;
@@ -161,21 +184,43 @@ TBSFactoryView >> renderAcciones: html [
 ]
 
 { #category : #rendering }
-TBSFactoryView >> renderContentOn: html [
+TBSEntitiesBrowserView >> renderContentOn: html [
 	"Renderiza el contenido del receptor en html."
 
+		html tbsPanel beDefault with: [ html tbsPanelHeading: [ html tbsPanelTitle level: 3; with: 'Administración'.	self renderMenuAyudaOn: html. ].
 		html tbsPanelBody: [
 			html form: [  
-			self renderMenuAyudaOn: html.
-			html div id: 'acciones'; with: [self renderAcciones: html].
+			
+			self renderEntityClassSelection: html.
 			html render: self report
 					]
 				]
+	]
+]
+
+{ #category : #rendering }
+TBSEntitiesBrowserView >> renderEntityClassSelection: html [
+
+				html select 
+					list: self possibleEntitiesClasses ;
+					selected: self selectedOrDefacultEntityClass;
+					callback: [:oneEntityClass | self onEntitySelection: oneEntityClass].
+				html tbsButton 
+					beInfo;
+					callback: [ ];
+					with: 'Buscar'.
+				html tbsButton
+					beSuccess;
+					callback: [self nuevo];
+					text: 'Agregar ', self descripcionClaseSeleccionada
+					
+									
+				
 
 ]
 
 { #category : #'as yet unclassified' }
-TBSFactoryView >> renderMenuAyudaOn: html [
+TBSEntitiesBrowserView >> renderMenuAyudaOn: html [
 	"Renderiza el anchor de menu ayuda para el receptor.
 	NOTA: cada clase que implemente la ayuda deberá definir la clase de ayuda."
 	
@@ -192,13 +237,13 @@ TBSFactoryView >> renderMenuAyudaOn: html [
 ]
 
 { #category : #accessing }
-TBSFactoryView >> report [ 
+TBSEntitiesBrowserView >> report [ 
 
-	^reportsByModel at: self model objectClass ifAbsentPut: [self buildReport]
+	^report
 ]
 
 { #category : #accessing }
-TBSFactoryView >> searchInstances [
+TBSEntitiesBrowserView >> searchInstances [
 
 	self model 
 		searchSelector: (self possibleSearchSelectors at: self orderSelector);
@@ -208,32 +253,46 @@ TBSFactoryView >> searchInstances [
 ]
 
 { #category : #rendering }
-TBSFactoryView >> selectedOrDefaultOrderSelector [
+TBSEntitiesBrowserView >> selectedOrDefacultEntityClass [
+
+	entityClass ifNil: [ ^ self possibleEntitiesClasses  first ].
+	^ entityClass 
+
+]
+
+{ #category : #rendering }
+TBSEntitiesBrowserView >> selectedOrDefaultOrderSelector [
 
 	self orderSelector notNil ifTrue: [ ^self orderSelector ].
 	^self model defaultSearchLabel
 ]
 
-{ #category : #'as yet unclassified' }
-TBSFactoryView >> updateReport [  
+{ #category : #accessing }
+TBSEntitiesBrowserView >> subsystemClass [ 
+	
+	 ^ subsystemClass 
+]
 
-	^self report rows: self model instances 
+{ #category : #'as yet unclassified' }
+TBSEntitiesBrowserView >> updateReport [  
+
+	^self report rows: entityClass all
 ]
 
 { #category : #accessing }
-TBSFactoryView >> valueToSearch [
+TBSEntitiesBrowserView >> valueToSearch [
 	
 	^ valueToSearch
 ]
 
 { #category : #accessing }
-TBSFactoryView >> valueToSearch: anObject [
+TBSEntitiesBrowserView >> valueToSearch: anObject [
 	
 	valueToSearch := anObject
 ]
 
 { #category : #adding }
-TBSFactoryView >> ver: anObject [
+TBSEntitiesBrowserView >> ver: anObject [
 
 	| anEntity component |
 	component := anObject asComponent.
