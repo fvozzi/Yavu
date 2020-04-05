@@ -8,6 +8,20 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuPurchaseSubsystem class >> entitiesClasses [
+	
+	^ OrderedCollection with: Supplier  
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem class >> menuElements [
+
+	^ OrderedCollection new 
+		add: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseSubsystem class >> subsystemName [
 
 	^ 'Compras'
@@ -23,7 +37,6 @@ YavuPurchaseSubsystem class >> subsystemTag [
 YavuPurchaseSubsystem >> addSupplier: aSupplier [
 	
 	self suppliers add: aSupplier.
-	self halt.
 	self system storedSubsystem store: aSupplier
 ]
 

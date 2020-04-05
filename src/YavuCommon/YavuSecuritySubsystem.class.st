@@ -12,7 +12,7 @@ Class {
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem class >> entitiesClasses [
 	
-	^ OrderedCollection with: SicUser 
+	^ OrderedCollection with: SicUser with: Role with: SecurityFunction 
 ]
 
 { #category : #'as yet unclassified' }

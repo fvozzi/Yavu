@@ -37,14 +37,14 @@ TBSEntitiesBrowserView >> buildReport [
 	"Create a MAReport new instance showing the reciver selected model class instances."
 	
 	| instance |
-	instance := entityClass all ifEmpty: [ self model objectClass new ] ifNotEmpty: [ :instances | instances first ].  
+	instance := entityClass all ifEmpty: [ entityClass new ] ifNotEmpty: [ :instances | instances first ].  
 
 	^(MAReport rows: entityClass all description: instance maDescriptionForReport)
 		batchSize: 20;
 		addColumn: (MACommandColumn new
 						addCommandOn: self selector: #ver: text: 'ver';
 						addCommandOn: self selector: #edit: text: 'modificar';
-						"addCommandOn: self selector: #remove: text: 'eliminar';"
+						addCommandOn: self selector: #remove: text: 'eliminar';
 						yourself);
 		tableEmpty: 'No hay ', self descripcionClaseSeleccionada, ' para mostrar. Use la opción Buscar.'
 		yourself
@@ -113,9 +113,8 @@ TBSEntitiesBrowserView >> nuevo [
 	component := entityClass new asComponent.
 	answer := self call:  (component 
 					addValidatedForm: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'};
-					addDecoration: (WAWindowDecoration title: 'Agregar');
+					addDecoration: (WAWindowDecoration title: 'Nuevo ', entityClass label);
 					yourself).
-	self halt.
 	answer notNil ifTrue: [
 		answer addToSystem.
 		self updateReport].
@@ -240,16 +239,6 @@ TBSEntitiesBrowserView >> renderMenuAyudaOn: html [
 TBSEntitiesBrowserView >> report [ 
 
 	^report
-]
-
-{ #category : #accessing }
-TBSEntitiesBrowserView >> searchInstances [
-
-	self model 
-		searchSelector: (self possibleSearchSelectors at: self orderSelector);
-		searchValue: self valueToSearch asUppercase;
-		searchInstances.
-	reportsByModel at: self model objectClass put: self buildReport.
 ]
 
 { #category : #rendering }

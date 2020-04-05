@@ -56,7 +56,7 @@ BaselineOfYavu >> magritte3: spec [
 	spec
 		baseline: 'Magritte'
 		with: [ spec 
-			loads: #('Core' 'Magritte-Seaside');
+			loads: #('Core' 'Magritte-Seaside' 'Magritte-Bootstrap');
 			repository: 'github://magritte-metamodel/magritte:master/repository']
 ]
 
