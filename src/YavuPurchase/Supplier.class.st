@@ -19,7 +19,7 @@ Supplier class >> isVoyageRoot [
 	 ^true 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 Supplier >> addToSystem [
 	
 	self yavuSystem purchaseSubsystem addSupplier: self
@@ -55,7 +55,7 @@ Supplier >> cuitNumber: anObject [
 	cuitNumber := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionAddress [
 
 	<magritteDescription>
@@ -67,7 +67,7 @@ Supplier >> descriptionAddress [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionBusinessName [
 	"Devuelve un objeto que describe la representación de la variable correo electrónico del receptor."
 
@@ -79,7 +79,7 @@ Supplier >> descriptionBusinessName [
         	yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionCUITNumber [
 
 	<magritteDescription>
@@ -91,7 +91,7 @@ Supplier >> descriptionCUITNumber [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionIsRetentionAgent [
 	
 	<magritteDescription>
@@ -103,7 +103,7 @@ Supplier >> descriptionIsRetentionAgent [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionOpeningHours [
 
 	<magritteDescription>
@@ -115,7 +115,7 @@ Supplier >> descriptionOpeningHours [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionPhoneNumber [
 
 	<magritteDescription>
@@ -127,7 +127,7 @@ Supplier >> descriptionPhoneNumber [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 Supplier >> descriptionVatCondition [
 	
 	<magritteDescription>
@@ -169,6 +169,18 @@ Supplier >> phoneNumber [
 { #category : #accessing }
 Supplier >> phoneNumber: anObject [
 	phoneNumber := anObject
+]
+
+{ #category : #crud }
+Supplier >> removeFromSystem [
+	
+	self yavuSystem purchaseSubsystem removeSupplier: self
+]
+
+{ #category : #crud }
+Supplier >> updateOnSystem [
+	
+	self yavuSystem purchaseSubsystem update: self
 ]
 
 { #category : #accessing }

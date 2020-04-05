@@ -18,31 +18,6 @@ YavuTransientSubsystem >> addCustomer: aNaturalPerson [
 	self customers add: aNaturalPerson 
 ]
 
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> addNewKed: aKeg [ 
-	
-	kegs add: aKeg
-]
-
-{ #category : #demoObjects }
-YavuTransientSubsystem >> administratorCommerces [
-
-	^OrderedCollection 
-		with: self variosCommerce with: self demoCommerce
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> afipDataOf: aPerson [
-
-	^InscripcionAFIP inexistente
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> bouncedChecksOf: aPerson [
-
-	^OrderedCollection new
-]
-
 { #category : #'initialize-release' }
 YavuTransientSubsystem >> ccOperationType [
 
@@ -55,50 +30,6 @@ YavuTransientSubsystem >> commerceOfName: aName inCompany: aCompany [
 	allowed commerces del usuario logueado."
 
 	^self allowedCommerces detect: [ :one | one name = aName ] ifNone: []"No es necesario usar aCompany porque no estamos recorriendo todos los comercios sino solo los permitidos."
-]
-
-{ #category : #accessing }
-YavuTransientSubsystem >> customers [
-	
-	customers ifNil: [ self initializeCustomers ].
-	^customers
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> customersOfNameBeginsWith: firstsLetterOfName [
-	"Devuelve una coleccion de clientes cuyo nombre comienza con unString."
-
-	^self customers select: [ :each | each name asUppercase beginsWith: firstsLetterOfName asUppercase ]
-]
-
-{ #category : #demoObjects }
-YavuTransientSubsystem >> demoCommerce [
-			
-		^(Commerce name: 'Polirubros')
-			inputStrategy: AffectationStrategy;
-			yourself
-]
-
-{ #category : #demoObjects }
-YavuTransientSubsystem >> demoCompany [
-			
-		^Company name: 'Cámara Comercio'
-			
-]
-
-{ #category : #accessing }
-YavuTransientSubsystem >> electoralRollOf: aCustomer [
-
-	^ElectoralRoll new
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> entityOfClass: anEntityClass atID: aNumber ifAbsent: aBlock [
-
-	| instances |
-	
-	instances := self perform: anEntityClass instancesSelector.
-	^instances detect: [ :one | one id = aNumber ] ifNone: aBlock
 ]
 
 { #category : #'initialize-release' }
@@ -122,13 +53,6 @@ YavuTransientSubsystem >> facundoVozziFinancialSituation1 [
 			amountOfDebt: 100;
 			yourself
 			
-]
-
-{ #category : #accessing }
-YavuTransientSubsystem >> financialSituations [
-	
-	financialSituations ifNil: [ self initializeFinancialSituations ].
-	^financialSituations
 ]
 
 { #category : #accessing }
@@ -181,14 +105,6 @@ YavuTransientSubsystem >> initializeSystem: aSystem [
 	aSystem setUpTransientSubsystem: self
 ]
 
-{ #category : #'initialize-release' }
-YavuTransientSubsystem >> initializeUsers [
-
-	users := OrderedCollection
-				with: self administratorUser
-				
-]
-
 { #category : #accessing }
 YavuTransientSubsystem >> instanceCurrentAt: aDate entity: aCustomer class: aClass [ 
 
@@ -196,42 +112,16 @@ YavuTransientSubsystem >> instanceCurrentAt: aDate entity: aCustomer class: aCla
 	^OrderedCollection  new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuTransientSubsystem >> instancesOf: aClass [ 
 	
 	^instances at: aClass ifAbsentPut: [ OrderedCollection new ]
 ]
 
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> lostChecksOf: aPerson [
+{ #category : #adding }
+YavuTransientSubsystem >> save: anObject [
 
-	^OrderedCollection new
-]
-
-{ #category : #demoObjects }
-YavuTransientSubsystem >> menuElements [
 	
-	menuElements ifNil: [ self initializeMenuElements ].
-	^menuElements
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> read: aClass where: aBlockClosure [ 
-	
-	 ^(self instancesOf: aClass) select: [ :each |  aBlockClosure value: each]
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> reportEmissionsOf: aPerson [
-
-	^OrderedCollection new
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> searchCustomerByCUIT: aCuitLiteral [
-	"Devuelve una instancia del receptor desde la BD cuyo cuit es igual a aCUITLiteral."
-
-	^self customers detect:  [:each | each cuit = aCuitLiteral] ifNone: [  ]
 ]
 
 { #category : #accessing }
@@ -247,22 +137,8 @@ YavuTransientSubsystem >> setInstancesOf: aClass with: aCollectionOfInstances [
 	^instances at: aClass put: aCollectionOfInstances
 ]
 
-{ #category : #'as yet unclassified' }
-YavuTransientSubsystem >> store: anObject [
-
-	
-]
-
 { #category : #'initialize-release' }
 YavuTransientSubsystem >> titOperationCharacter [
 
 	^OperationCharacter name: 'Titular' code: 'TIT'
-]
-
-{ #category : #demoObjects }
-YavuTransientSubsystem >> variosCommerce [
-			
-		^(Commerce name: 'Varios')
-			inputStrategy: AffectationStrategy;
-			yourself
 ]

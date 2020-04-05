@@ -73,7 +73,7 @@ TBSEntitiesBrowserView >> edit: anObject [
 					addDecoration: (WAWindowDecoration title: 'Modificar');
 					yourself).
 	anEntity notNil ifTrue: [
-		anEntity store
+		anEntity updateOnSystem
 		]
 ]
 
@@ -162,7 +162,7 @@ TBSEntitiesBrowserView >> remove: anObject [
 					addDecoration: (WAWindowDecoration title: 'Confirmación requerida');
 					yourself).
 	answer notNil ifTrue: [
-		[self model remove: anObject] on: GlorpDatabaseWriteError  do: [ :ex | self inform: 'No se puede eliminar porque tiene dependencias.'. ex  ].
+		anObject removeFromSystem.
 		self updateReport]
 ]
 

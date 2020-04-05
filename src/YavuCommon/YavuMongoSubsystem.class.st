@@ -21,9 +21,14 @@ YavuMongoSubsystem >> instancesOf: aClass [
 	^repository selectAll: aClass
 ]
 
+{ #category : #'As yet unclassified' }
+YavuMongoSubsystem >> remove: aYavuObject [ 
+	
+	aYavuObject remove
+]
+
 { #category : #'as yet unclassified' }
-YavuMongoSubsystem >> store: aSicUser [ 
+YavuMongoSubsystem >> save: aYavuObject [ 
 	
-	
-	aSicUser save
+	aYavuObject save
 ]

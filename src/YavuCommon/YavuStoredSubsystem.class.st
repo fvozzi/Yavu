@@ -1,10 +1,6 @@
 Class {
 	#name : #YavuStoredSubsystem,
 	#superclass : #YavuSubsystem,
-	#instVars : [
-		'loggedUser',
-		'users'
-	],
 	#category : #'YavuCommon-Environment'
 }
 
@@ -94,76 +90,6 @@ YavuStoredSubsystem class >> yavuSystem [
 ]
 
 { #category : #'as yet unclassified' }
-YavuStoredSubsystem >> allowedCommerces [
-	
-	^loggedUser commerces
-]
-
-{ #category : #accessing }
-YavuStoredSubsystem >> allowedEntitiesClasses [
-	
-	^loggedUser allowedEntitiesClasses
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> company [
-	^company
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> defaultCommerce [
-	
-	^loggedUser defaultCommerce
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> entityOfClass: anEntityClass atID: aNumber [
-
-	^self entityOfClass: anEntityClass atID: aNumber ifAbsent: [ ]
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> entityOfClass: anEntityClass atID: aNumber ifAbsent: aBlock [
-
-	^self subclassResponsibility 
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> existsUser: aSicUser [
-
-	^(self users detect: [ :one | one name asUppercase = aSicUser name asUppercase and: [ one password = aSicUser password ] ] ifNone: [  ]) notNil
-	
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> fechaActual [
-	"Devuelve la fecha actual del sistema."
-	
-	^Date today
-]
-
-{ #category : #'as yet unclassified' }
-YavuStoredSubsystem >> initializeCompany: aCompany [ 
-
-	company:= aCompany
-]
-
-{ #category : #'as yet unclassified' }
 YavuStoredSubsystem >> instancesOf: aClass [ 
 	self subclassResponsibility 
-]
-
-{ #category : #testing }
-YavuStoredSubsystem >> searchCustomerByNumber: aString customerType: aCustomerType [
-
-	| cuitNumberLiteral |
-	cuitNumberLiteral := aString size = 11 ifTrue: [aString] ifFalse: [aCustomerType cuitNumberOf: aString].
-	^self searchCustomerByCUIT: cuitNumberLiteral
-]
-
-{ #category : #accessing }
-YavuStoredSubsystem >> users [
-
-	users ifNil: [ self initializeUsers ].
-	^users
 ]

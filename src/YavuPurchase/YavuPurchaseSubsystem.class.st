@@ -33,11 +33,11 @@ YavuPurchaseSubsystem class >> subsystemTag [
 	 ^'purchaseSubsystem'
 ]
 
-{ #category : #adding }
+{ #category : #crud }
 YavuPurchaseSubsystem >> addSupplier: aSupplier [
 	
 	self suppliers add: aSupplier.
-	self system storedSubsystem store: aSupplier
+	self system storedSubsystem save: aSupplier
 ]
 
 { #category : #accessing }
@@ -46,7 +46,23 @@ YavuPurchaseSubsystem >> name [
 	 ^ 'Compras'
 ]
 
+{ #category : #crud }
+YavuPurchaseSubsystem >> removeSupplier: aSupplier [
+	
+	self halt.
+	self suppliers remove: aSupplier.
+	self system storedSubsystem remove: aSupplier
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> suppliers [
-	^ suppliers ifNil: [ self system storedSubsystem instancesOf: Supplier ]
+
+	self halt.
+	^ suppliers ifNil: [ suppliers := self system storedSubsystem instancesOf: Supplier ]
+]
+
+{ #category : #crud }
+YavuPurchaseSubsystem >> update: aSupplier [
+	
+	self system storedSubsystem save: aSupplier
 ]
