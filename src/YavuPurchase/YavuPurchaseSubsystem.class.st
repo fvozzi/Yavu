@@ -49,7 +49,6 @@ YavuPurchaseSubsystem >> name [
 { #category : #crud }
 YavuPurchaseSubsystem >> removeSupplier: aSupplier [
 	
-	self halt.
 	self suppliers remove: aSupplier.
 	self system storedSubsystem remove: aSupplier
 ]
@@ -57,7 +56,6 @@ YavuPurchaseSubsystem >> removeSupplier: aSupplier [
 { #category : #accessing }
 YavuPurchaseSubsystem >> suppliers [
 
-	self halt.
 	^ suppliers ifNil: [ suppliers := self system storedSubsystem instancesOf: Supplier ]
 ]
 

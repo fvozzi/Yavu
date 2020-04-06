@@ -130,22 +130,6 @@ Entity class >> possibleSearchSelectors [
 		yourself
 ]
 
-{ #category : #'sin categoria' }
-Entity >> <= otraEntidad [
-	"Answer whether the receiver is less than or equal to the argument."
-	
-	^self name <= otraEntidad name
-]
-
-{ #category : #'as yet unclassified' }
-Entity >> = otraEntidad [
-	"Answer whether the receiver is equal to the argument."
-
-	"Uso isKingOf: porque en otraEntidad puede venir un proxy."
-	(otraEntidad isKindOf: self class) ifFalse: [^false].
-	^self name = otraEntidad name
-]
-
 { #category : #'as yet unclassified' }
 Entity >> addToSystem [
 	self subclassResponsibility.
@@ -175,7 +159,7 @@ Entity >> defaultSearchLabel [
 	^self class defaultSearchLabel 
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 Entity >> descriptionNombre [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -205,14 +189,6 @@ Entity >> eliminar [
 	self yavuSystem delete: self.
 	self yavuSystem commitUnitOfWork
 	
-]
-
-{ #category : #'sin categoria' }
-Entity >> hash [
-	"Answer a SmallInteger whose value is related to the receiver's identity."
-	
-	^self name hash
-
 ]
 
 { #category : #'sin categoria' }

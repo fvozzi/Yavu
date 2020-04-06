@@ -180,6 +180,7 @@ Supplier >> removeFromSystem [
 { #category : #crud }
 Supplier >> updateOnSystem [
 	
+		self halt.
 	self yavuSystem purchaseSubsystem update: self
 ]
 

@@ -33,6 +33,24 @@ TBSEntitiesBrowserView class >> on: yavuSubsystemClass [
 ]
 
 { #category : #rendering }
+TBSEntitiesBrowserView >> TBSMagritteReport [
+	"Create a MAReport new instance showing the reciver selected model class instances."
+	
+	| instance |
+	instance := entityClass all ifEmpty: [ entityClass new ] ifNotEmpty: [ :instances | instances first ].  
+
+	^(TBSMagritteReport rows: entityClass all description: instance maDescriptionForReport)
+		batchSize: 20;
+		addColumn: (MACommandColumn new 
+						addCommandOn: self selector: #ver: text: 'ver';
+						addCommandOn: self selector: #edit: text: 'modificar';
+						addCommandOn: self selector: #remove: text: 'eliminar';
+						yourself);
+		tableEmpty: 'No hay ', self descripcionClaseSeleccionada, ' para mostrar. Use la opción Buscar.'
+		yourself
+]
+
+{ #category : #rendering }
 TBSEntitiesBrowserView >> buildReport [
 	"Create a MAReport new instance showing the reciver selected model class instances."
 	
