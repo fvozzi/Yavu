@@ -19,5 +19,7 @@ TBSYavuHomeView >> renderContentOn: html [
 							html
 								text: ' El experimento consiste en evaluar las partes comunes para que'.
 							html
-								text: ' convivan en un mismo espacio de objetos junto con las diferencias .' ] ] ]
+								text: ' convivan en un mismo espacio de objetos junto con las diferencias .' ].
+						
+				 ]]
 ]

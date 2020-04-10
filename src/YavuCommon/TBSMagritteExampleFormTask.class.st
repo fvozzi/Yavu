@@ -45,7 +45,7 @@ TBSMagritteExampleFormTask >> formChooser [
 { #category : #running }
 TBSMagritteExampleFormTask >> go [
 	| chosenForm formChooser chosenFormAnswer |
-	formChooser := self call: self formChooser.
+	"formChooser := self call: self formChooser."
 	chosenForm := (self createFormBasedOn: formChooser).
 	
 	chosenFormAnswer := self call: chosenForm.

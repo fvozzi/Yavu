@@ -63,6 +63,7 @@ Supplier >> descriptionAddress [
       accessor: #address;
       label: 'Dirección';
       	priority: 150;
+		componentClass: TBSMagritteTextInputComponent;
       	yourself
 
 ]
@@ -76,6 +77,7 @@ Supplier >> descriptionBusinessName [
         	accessor: #businessName;
         	label: 'Razón Social';
         	priority: 110;
+			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
 
@@ -87,7 +89,17 @@ Supplier >> descriptionCUITNumber [
       accessor: #cuitNumber;
       label: 'CUIT';
       	priority: 140;
+		componentClass: TBSMagritteTextInputComponent;
       	yourself
+
+]
+
+{ #category : #descriptions }
+Supplier >> descriptionContainer [
+	<magritteContainer>
+	^ super descriptionContainer
+		componentRenderer: TBSMagritteFormRenderer;
+		yourself
 
 ]
 
@@ -99,7 +111,7 @@ Supplier >> descriptionIsRetentionAgent [
 		accessor: #isRetentionAgent;
 		label: 'Es Agente de Retención?';
 		priority: 130;
-		beRequired;
+		componentClass: TBSMagritteCheckboxComponent;
 		yourself
 ]
 
@@ -111,6 +123,7 @@ Supplier >> descriptionOpeningHours [
       accessor: #openingHours;
       label: 'Horario';
       	priority: 170;
+		componentClass: TBSMagritteTextInputComponent;	
       	yourself
 
 ]
@@ -123,6 +136,7 @@ Supplier >> descriptionPhoneNumber [
       accessor: #phoneNumber;
       label: 'Teléfono';
       	priority: 160;
+		componentClass: TBSMagritteTextInputComponent;
       	yourself
 
 ]
@@ -137,7 +151,7 @@ Supplier >> descriptionVatCondition [
 		priority: 120;
 		options: VatCondition allSubclasses;
 		beSorted;
-		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 

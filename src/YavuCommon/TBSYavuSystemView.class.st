@@ -4,10 +4,17 @@ Class {
 	#instVars : [
 		'navBar',
 		'sideBar',
-		'content'
+		'content',
+		'selectedMenuID'
 	],
 	#category : #'YavuCommon-View'
 }
+
+{ #category : #testing }
+TBSYavuSystemView class >> canBeRoot [
+
+	 ^ true
+]
 
 { #category : #'as yet unclassified' }
 TBSYavuSystemView >> cerrarSession [
@@ -15,6 +22,12 @@ TBSYavuSystemView >> cerrarSession [
 	self requestContext redirectTo: self application url.
 	self session unregister.
 	
+]
+
+{ #category : #hooks }
+TBSYavuSystemView >> children [ 
+
+	^ Array with: content
 ]
 
 { #category : #accessing }
@@ -29,6 +42,14 @@ TBSYavuSystemView >> content: aWAFactoryView [
 	content := aWAFactoryView
 ]
 
+{ #category : #evaluating }
+TBSYavuSystemView >> executeMenuActionFor: aMenuElement [
+	| component |
+	component := aMenuElement presenterView.
+	content := component.
+	selectedMenuID := aMenuElement id
+]
+
 { #category : #'as yet unclassified' }
 TBSYavuSystemView >> initialize [ 
 	
@@ -37,22 +58,111 @@ TBSYavuSystemView >> initialize [
 	content := self session yavuSystem homeViewClass onParent: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+TBSYavuSystemView >> nuevo2 [
+
+	| answer  component |
+
+	component := Supplier new asComponent.
+	(component 
+					addDecoration: ((TBSMagritteFormDecoration 
+											buttons: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'}) 
+											formCss: 'form-horizontal';
+											legend: 'Nueva entidad';
+											yourself);
+					yourself).
+	component magritteDescription tbsFormHorizontal: true.
+
+	answer := self call: component.
+	answer notNil ifTrue: [
+		answer addToSystem.
+		self updateReport].
+	
+]
+
+{ #category : #rendering }
 TBSYavuSystemView >> renderContentOn: html [
 
-	html tbsTable with: [ 
-	html tbsRow with: [ 
-		html tbsColumn
-					extraSmallSize: 12;
-					mediumSize: 12;
-					largeSize: 12;
-					with: [html render: navBar ]].
-	html tbsRow with: [ 
-		html tbsColumn
-					extraSmallSize: 12;
-					mediumSize: 12;
-					largeSize: 12;
-					with: [ html render: self content  ]]]
+	self renderNavigationBarOn:  html.
+	html tbsColumn largeSize: 12; with: [self content renderOn: html]
+]
+
+{ #category : #'rendering navbar' }
+TBSYavuSystemView >> renderNavbarHeaderOn: html [
+	html tbsNavbarHeader
+		with: [ html tbsNavbarBrand
+				callback: [ self openComponent: self systemHomeView.
+					];
+				with: self systemName ]
+]
+
+{ #category : #'rendering navbar' }
+TBSYavuSystemView >> renderNavbarSubsystemsMenues: html [
+	html unorderedList
+		class: 'nav navbar-nav';
+		with: [ (self session yavuSystem allowedRootMenuActions
+				groupedBy: [ :each | each subsystem ])
+				keysAndValuesDo: [ :subsystem :submenues | 
+					html tbsNavItem
+						class: 'dropdown';
+						with: [ html anchor
+								class: 'dropdown-toggle';
+								attributeAt: 'data-toggle' put: 'dropdown';
+								attributeAt: 'href' put: '#';
+								with: subsystem subsystemName.
+							html unorderedList
+								class: 'dropdown-menu';
+								with: [ submenues
+										do: [ :each | 
+											| menuItem |
+											menuItem := html tbsNavItem.
+											each id = selectedMenuID
+												ifTrue: [ menuItem beActive ].
+											menuItem
+												with: [ html anchor
+														callback: [ self executeMenuActionFor: each ];
+														with: each label ] ] ] ] ] ]
+]
+
+{ #category : #'rendering navbar' }
+TBSYavuSystemView >> renderNavbarSystemMenues: html [
+	^ html unorderedList
+		class: 'nav navbar-nav navbar-right';
+		with: [ html tbsNavItem
+				with: [ html anchor
+						callback: [ self openComponent: (WAConfirmLogOffView onParent: parent)];
+						with: [ html span class: 'glyphicon glyphicon-log-out'.
+							html text: ' Salir' ] ] ]
+]
+
+{ #category : #'rendering navbar' }
+TBSYavuSystemView >> renderNavigationBarOn: html [
+
+	html tbsNavbar
+		beDefault;
+		beInverse;
+		with: [ html tbsContainer
+				with: [ self renderNavbarHeaderOn: html.
+					self renderNavbarSubsystemsMenues: html.
+					self renderNavbarSystemMenues: html ] ]
+]
+
+{ #category : #hooks }
+TBSYavuSystemView >> states [ 
+
+	^ Array with: content with: navBar 
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemView >> systemHomeView [
+
+	 ^self session yavuSystem homeViewClass new
+]
+
+{ #category : #'as yet unclassified' }
+TBSYavuSystemView >> systemName [
+	
+	^ self session yavuSystem systemName
 ]
 
 { #category : #'as yet unclassified' }

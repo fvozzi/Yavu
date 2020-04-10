@@ -14,6 +14,12 @@ TBSYavuSystemNavBar class >> main: aTBSSicMain [
 	^self new initializeMain: aTBSSicMain
 ]
 
+{ #category : #hooks }
+TBSYavuSystemNavBar >> children [ 
+	
+	 ^ Array with: parent content
+]
+
 { #category : #evaluating }
 TBSYavuSystemNavBar >> executeMenuActionFor: aMenuElement [
 	| component |
@@ -36,8 +42,30 @@ TBSYavuSystemNavBar >> initializeMain: aTBSSicMain [
 	main := aTBSSicMain 
 ]
 
+{ #category : #accessing }
+TBSYavuSystemNavBar >> nuevo2 [
+
+	| answer  component |
+
+	component := Supplier new asComponent.
+	(component 
+					addDecoration: ((TBSMagritteFormDecoration 
+											buttons: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'}) 
+											formCss: 'form-horizontal';
+											legend: 'Nueva entidad';
+											yourself);
+					yourself).
+	component magritteDescription tbsFormHorizontal: true.
+
+	answer := self call: component.
+	answer notNil ifTrue: [
+		answer addToSystem.
+		self updateReport].
+]
+
 { #category : #evaluating }
 TBSYavuSystemNavBar >> openComponent: component [
+	
 	parent content: component
 ]
 
@@ -56,7 +84,8 @@ TBSYavuSystemNavBar >> renderContentOn: html [
 TBSYavuSystemNavBar >> renderNavbarHeaderOn: html [
 	html tbsNavbarHeader
 		with: [ html tbsNavbarBrand
-				callback: [ self openComponent: self systemHomeView ];
+				callback: [ self openComponent: self systemHomeView.
+					];
 				with: self systemName ]
 ]
 

@@ -54,6 +54,7 @@ TBSMagritteFormRenderer >> renderComment:  aDescription [
 
 { #category : #rendering }
 TBSMagritteFormRenderer >> renderContainer: aDescription [
+
 	self validationMessagesInline: aDescription tbsInlineValidationMessages.
 	self formInline: aDescription tbsFormInline.
 	self formHorizontal: aDescription tbsFormHorizontal.

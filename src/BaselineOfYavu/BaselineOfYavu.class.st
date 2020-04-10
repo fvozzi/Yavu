@@ -56,19 +56,8 @@ BaselineOfYavu >> magritte3: spec [
 	spec
 		baseline: 'Magritte'
 		with: [ spec 
-			loads: #('Core' 'Magritte-Seaside' 'Magritte-Bootstrap');
+			loads: #('Core' 'Magritte-Seaside');
 			repository: 'github://magritte-metamodel/magritte:master/repository']
-]
-
-{ #category : #dependencies }
-BaselineOfYavu >> magritte3Old: spec [
-	spec
-	project: 'Magritte3'
-	with: [ spec
-		className: #ConfigurationOfMagritte3;
-		versionString: #'release3';
-		loads: #('Core' 'Magritte-Seaside');
-		repository: 'http://smalltalkhub.com/mc/Magritte/Magritte3/main/' ]
 ]
 
 { #category : #dependencies }

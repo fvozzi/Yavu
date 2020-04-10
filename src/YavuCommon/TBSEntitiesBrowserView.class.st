@@ -2,13 +2,13 @@ Class {
 	#name : #TBSEntitiesBrowserView,
 	#superclass : #WAYavuBootstrap,
 	#instVars : [
-		'model',
 		'report',
 		'selectedTab',
 		'orderSelector',
 		'valueToSearch',
 		'subsystemClass',
-		'entityClass'
+		'entityClass',
+		'entityClassSelector'
 	],
 	#category : #'YavuCommon-View'
 }
@@ -26,28 +26,27 @@ TBSEntitiesBrowserView class >> claseDeAyuda [
 	^WAAyudaABMEntidades
 ]
 
+{ #category : #accessing }
+TBSEntitiesBrowserView class >> exampleName [
+
+	^ 'Entities Browser'
+]
+
 { #category : #'instance creation' }
 TBSEntitiesBrowserView class >> on: yavuSubsystemClass [
 
 	 ^ self new initializeSubsystemClass: yavuSubsystemClass
 ]
 
-{ #category : #rendering }
-TBSEntitiesBrowserView >> TBSMagritteReport [
-	"Create a MAReport new instance showing the reciver selected model class instances."
-	
-	| instance |
-	instance := entityClass all ifEmpty: [ entityClass new ] ifNotEmpty: [ :instances | instances first ].  
+{ #category : #crud }
+TBSEntitiesBrowserView >> addEntity [
 
-	^(TBSMagritteReport rows: entityClass all description: instance maDescriptionForReport)
-		batchSize: 20;
-		addColumn: (MACommandColumn new 
-						addCommandOn: self selector: #ver: text: 'ver';
-						addCommandOn: self selector: #edit: text: 'modificar';
-						addCommandOn: self selector: #remove: text: 'eliminar';
-						yourself);
-		tableEmpty: 'No hay ', self descripcionClaseSeleccionada, ' para mostrar. Use la opción Buscar.'
-		yourself
+	| answer |
+
+	answer := self call: (self renderAddEntityForm: entityClass new).
+	answer notNil ifTrue: [
+		answer addToSystem.
+		self updateReport].
 ]
 
 { #category : #rendering }
@@ -55,16 +54,16 @@ TBSEntitiesBrowserView >> buildReport [
 	"Create a MAReport new instance showing the reciver selected model class instances."
 	
 	| instance |
-	instance := entityClass all ifEmpty: [ entityClass new ] ifNotEmpty: [ :instances | instances first ].  
-
-	^(MAReport rows: entityClass all description: instance maDescriptionForReport)
+	instance := self entities ifEmpty: [ self selectedOrDefaultEntityClass new ] ifNotEmpty: [ :instances | instances first ].  
+	
+	^(TBSMagritteReport rows: self entities description: instance maDescriptionForReport)
 		batchSize: 20;
 		addColumn: (MACommandColumn new
-						addCommandOn: self selector: #ver: text: 'ver';
-						addCommandOn: self selector: #edit: text: 'modificar';
-						addCommandOn: self selector: #remove: text: 'eliminar';
+						addCommandOn: self selector: #viewEntity: text: 'ver';
+						addCommandOn: self selector: #editEntity: text: 'modificar';
+						addCommandOn: self selector: #removeEntity: text: 'eliminar';
 						yourself);
-		tableEmpty: 'No hay ', self descripcionClaseSeleccionada, ' para mostrar. Use la opción Buscar.'
+		tableEmpty: 'No hay ', self selectedOrDefaultEntityClass label, ' para mostrar. Use la opción Buscar.'
 		yourself
 ]
 
@@ -74,32 +73,31 @@ TBSEntitiesBrowserView >> children [
 	^Array with: self report
 ]
 
-{ #category : #rendering }
-TBSEntitiesBrowserView >> descripcionClaseSeleccionada [
-	^self selectedOrDefacultEntityClass
-		ifNil: [ '' ]
-		ifNotNil: [ :each | each label ]
-]
+{ #category : #crud }
+TBSEntitiesBrowserView >> editEntity: anEntity [
 
-{ #category : #adding }
-TBSEntitiesBrowserView >> edit: anObject [
+	| answer |
 
-	| anEntity component |
-	component := anObject asComponent.
-	anEntity := self call:  (component 
-					addValidatedForm: {#save -> 'Guardar'. #cancel -> 'Cancelar'};
-					addDecoration: (WAWindowDecoration title: 'Modificar');
-					yourself).
-	anEntity notNil ifTrue: [
-		anEntity updateOnSystem
+	self call: (self renderAddEntityForm: anEntity).
+	answer notNil ifTrue: [
+		answer updateOnSystem
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
+TBSEntitiesBrowserView >> entities [ 
+
+	^ entityClass isNil
+		ifTrue: [OrderedCollection new]
+		ifFalse: [ entityClass all ]
+]
+
+{ #category : #initialization }
 TBSEntitiesBrowserView >> initialize [
 
 	super initialize.
-	report := OrderedCollection new
+	entityClass := self selectedOrDefaultEntityClass.
+	report := self buildReport
 	
 ]
 
@@ -109,36 +107,7 @@ TBSEntitiesBrowserView >> initializeSubsystemClass: yavuSubsystemClass [
 	subsystemClass := yavuSubsystemClass 
 ]
 
-{ #category : #accessing }
-TBSEntitiesBrowserView >> model [
-	
-	model isNil ifTrue: [model:= Factory on: OperationCharacter].
-	^model
-	
-
-]
-
-{ #category : #accessing }
-TBSEntitiesBrowserView >> model: anObject [
-	model := anObject
-]
-
-{ #category : #accessing }
-TBSEntitiesBrowserView >> nuevo [
-
-	| answer  component |
-
-	component := entityClass new asComponent.
-	answer := self call:  (component 
-					addValidatedForm: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'};
-					addDecoration: (WAWindowDecoration title: 'Nuevo ', entityClass label);
-					yourself).
-	answer notNil ifTrue: [
-		answer addToSystem.
-		self updateReport].
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #eventActions }
 TBSEntitiesBrowserView >> onEntitySelection: aClass [ 
 	
 	entityClass := aClass.
@@ -146,97 +115,85 @@ TBSEntitiesBrowserView >> onEntitySelection: aClass [
 ]
 
 { #category : #accessing }
-TBSEntitiesBrowserView >> orderSelector [
-	
-	^ orderSelector
+TBSEntitiesBrowserView >> possibleEntitiesClasses [
+
+	^ YavuEnvironment newSystem allowedEntitiesClassesOn: "self subsystemClass" YavuPurchaseSubsystem .
 ]
 
 { #category : #accessing }
-TBSEntitiesBrowserView >> orderSelector: anObject [
-	
-	orderSelector := anObject
-]
-
-{ #category : #'as yet unclassified' }
-TBSEntitiesBrowserView >> possibleEntitiesClasses [
-
-	^ self session yavuSystem allowedEntitiesClassesOn: self subsystemClass.
-]
-
-{ #category : #rendering }
 TBSEntitiesBrowserView >> possibleSearchSelectors [
 	^ self model objectClass
 		ifNil: [ #() ]
 		ifNotNil: [ :each | each possibleSearchSelectors ]
 ]
 
-{ #category : #adding }
-TBSEntitiesBrowserView >> remove: anObject [
-
-	| answer mensaje|
-	mensaje := MensajeDeSistema mensaje: 'Se eliminará definitivamente del sistema. ¿Continua?'.
-	answer := self call: (mensaje asComponent 
-					addValidatedForm: {#save -> 'Sí'. #cancel -> 'No'};
-					addDecoration: (WAWindowDecoration title: 'Confirmación requerida');
-					yourself).
-	answer notNil ifTrue: [
-		anObject removeFromSystem.
-		self updateReport]
+{ #category : #crud }
+TBSEntitiesBrowserView >> removeEntity: anEntity [
+	| answer mensaje |
+	mensaje := MensajeDeSistema
+		mensaje: 'Se eliminará definitivamente del sistema. ¿Continua?'.
+	answer := self
+		call:
+			(mensaje asComponent
+				addValidatedForm:
+					{#save -> 'Sí'. #cancel -> 'No'};
+				addDecoration: (WAWindowDecoration title: 'Confirmación requerida');
+				yourself).
+	answer notNil
+		ifTrue: [ anEntity removeFromSystem.
+			self updateReport ]
 ]
 
 { #category : #rendering }
-TBSEntitiesBrowserView >> renderAcciones: html [
+TBSEntitiesBrowserView >> renderAddEntityForm: anEntity [
 	
-		html select 
-			list: self possibleSearchSelectors keys;
-			selected: self selectedOrDefaultOrderSelector;
-			callback: [:selector | self orderSelector: selector].
-		html textInput on: #valueToSearch of: self.			
-		html submitButton
-			callback: [self searchInstances];
-			text: 'Buscar'.
-	html submitButton
-			callback: [self nuevo];
-			text: 'Agregar ', self descripcionClaseSeleccionada.
+	| component |
+
+	component := 	anEntity asComponent.
+	component addDecoration: (
+		TBSMagritteFormDecoration new
+					buttons: { #save -> 'Guardar'. #cancel -> 'Cancelar' }; 
+					formCss: 'form-horizontal';
+					legend: 'Nueva entidad';
+					yourself).
+	component addDecoration: TBSMagritteValidationDecoration new.
+	component magritteDescription tbsFormHorizontal: true.
+	^ component
 ]
 
 { #category : #rendering }
 TBSEntitiesBrowserView >> renderContentOn: html [
 	"Renderiza el contenido del receptor en html."
 
-		html tbsPanel beDefault with: [ html tbsPanelHeading: [ html tbsPanelTitle level: 3; with: 'Administración'.	self renderMenuAyudaOn: html. ].
-		html tbsPanelBody: [
-			html form: [  
+	html tbsPanel beDefault 
+		with: [ html tbsPanelHeading: [ html tbsPanelTitle level: 3; with: 'Administración de entidades' ].
+			    html tbsPanelBody: [ 
+					html paragraph: 'Seleccione la clase de entidad para administrar. Una vez seleccionada podrá agregar una nueva entidad de la clase o ver, editar y borrar alguna de las existentes.'.
+					html form: [self renderEntityClassSelection: html].
+			    html tbsTable: [ html form: [  
 			
-			self renderEntityClassSelection: html.
+			
 			html render: self report
-					]
-				]
-	]
+					]] ] ]
+
+
 ]
 
 { #category : #rendering }
 TBSEntitiesBrowserView >> renderEntityClassSelection: html [
 
-				html select 
-					list: self possibleEntitiesClasses ;
-					selected: self selectedOrDefacultEntityClass;
-					callback: [:oneEntityClass | self onEntitySelection: oneEntityClass].
-				html tbsButton 
-					beInfo;
-					callback: [ ];
-					with: 'Buscar'.
-				html tbsButton
-					beSuccess;
-					callback: [self nuevo];
-					text: 'Agregar ', self descripcionClaseSeleccionada
-					
-									
-				
-
+	html text: 'Tipo de entidad:'.
+	html select
+		list: self possibleEntitiesClasses;
+		selected: self selectedOrDefaultEntityClass;
+		callback: [ :oneEntityClass | self onEntitySelection: oneEntityClass ];
+		onChange: 'submit()'.
+	html anchor
+		callback: [ self addEntity ];
+		with: 'Agregar ' , self selectedOrDefaultEntityClass label
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #eventActions }
 TBSEntitiesBrowserView >> renderMenuAyudaOn: html [
 	"Renderiza el anchor de menu ayuda para el receptor.
 	NOTA: cada clase que implemente la ayuda deberá definir la clase de ayuda."
@@ -253,6 +210,22 @@ TBSEntitiesBrowserView >> renderMenuAyudaOn: html [
 	]. 
 ]
 
+{ #category : #rendering }
+TBSEntitiesBrowserView >> renderViewEntityForm: anEntity [
+	
+	| component |
+
+	component := 	anEntity asComponent.
+	component addDecoration: (
+		TBSMagritteFormDecoration new
+					buttons: {#cancel -> 'Cerrar' }; 
+					formCss: 'form-horizontal';
+					legend: 'Ver entidad';
+					yourself).
+	component magritteDescription tbsFormHorizontal: true.
+	^ component
+]
+
 { #category : #accessing }
 TBSEntitiesBrowserView >> report [ 
 
@@ -260,18 +233,11 @@ TBSEntitiesBrowserView >> report [
 ]
 
 { #category : #rendering }
-TBSEntitiesBrowserView >> selectedOrDefacultEntityClass [
+TBSEntitiesBrowserView >> selectedOrDefaultEntityClass [
 
 	entityClass ifNil: [ ^ self possibleEntitiesClasses  first ].
 	^ entityClass 
 
-]
-
-{ #category : #rendering }
-TBSEntitiesBrowserView >> selectedOrDefaultOrderSelector [
-
-	self orderSelector notNil ifTrue: [ ^self orderSelector ].
-	^self model defaultSearchLabel
 ]
 
 { #category : #accessing }
@@ -280,34 +246,14 @@ TBSEntitiesBrowserView >> subsystemClass [
 	 ^ subsystemClass 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #eventActions }
 TBSEntitiesBrowserView >> updateReport [  
 
 	^self report rows: entityClass all
 ]
 
-{ #category : #accessing }
-TBSEntitiesBrowserView >> valueToSearch [
-	
-	^ valueToSearch
-]
+{ #category : #crud }
+TBSEntitiesBrowserView >> viewEntity: anEntity [
 
-{ #category : #accessing }
-TBSEntitiesBrowserView >> valueToSearch: anObject [
-	
-	valueToSearch := anObject
-]
-
-{ #category : #adding }
-TBSEntitiesBrowserView >> ver: anObject [
-
-	| anEntity component |
-	component := anObject asComponent.
-	anEntity := self call:  (component 
-					addValidatedForm: {#cancel -> 'Cerrar'};
-					addDecoration: (WAWindowDecoration title: 'Visualizar');
-					yourself).
-	anEntity notNil ifTrue: [
-		self session databaseSession commit: [anEntity]
-		]
+	self call: (self renderViewEntityForm: anEntity)
 ]

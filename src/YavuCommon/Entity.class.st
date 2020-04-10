@@ -160,7 +160,7 @@ Entity >> defaultSearchLabel [
 ]
 
 { #category : #descriptions }
-Entity >> descriptionNombre [
+Entity >> descriptionName [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -169,8 +169,9 @@ Entity >> descriptionNombre [
 		label: 'Nombre';
 		priority: 100;
 		required: true;
-		requiredErrorMessage: 'We cannot proceed without a name.';
-		comment: 'Please enter your name';
+		requiredErrorMessage: 'Debe completar el nombre.';
+		comment: 'Complete el nombre';
+		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
 
@@ -196,7 +197,6 @@ Entity >> initialize [
 	"Initialize the receiver instance."
 	
 	super initialize.
-	name:= 'Ingrese un nombre'.
 	self atributos: Dictionary new
 	
 ]

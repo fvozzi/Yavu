@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 TBSExampleMenu >> examples [
-	^ Array with: TBSMagritteExampleFormTask with: TBSMagritteReportExampleTask
+	^ Array with: TBSMagritteExampleFormTask  with: TBSMagritteReportExampleTask
 ]
 
 { #category : #rendering }
