@@ -39,7 +39,7 @@ YavuSecuritySubsystem class >> subsystemTag [
 YavuSecuritySubsystem >> addUser: aSicUser [ 
 	
 	self users add: aSicUser.
-	self system storedSubsystem store: aSicUser
+	self system storedSubsystem save: aSicUser
 ]
 
 { #category : #'as yet unclassified' }
