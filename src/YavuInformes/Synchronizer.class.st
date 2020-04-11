@@ -1,6 +1,6 @@
 Class {
 	#name : #Synchronizer,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'claseASincronizar',
 		'fechaDesde',

@@ -1,6 +1,6 @@
 Class {
-	#name : #SimpleMenuElement,
-	#superclass : #MenuElement,
+	#name : #YavuSimpleMenuElement,
+	#superclass : #YavuMenuElement,
 	#instVars : [
 		'parent'
 	],
@@ -8,24 +8,24 @@ Class {
 }
 
 { #category : #'sin categoria' }
-SimpleMenuElement >> parent [
+YavuSimpleMenuElement >> parent [
 	^ parent
 ]
 
 { #category : #'sin categoria' }
-SimpleMenuElement >> parent: anObject [
+YavuSimpleMenuElement >> parent: anObject [
 	parent := anObject
 ]
 
 { #category : #'sin categoria' }
-SimpleMenuElement >> renderContentOn: html [
+YavuSimpleMenuElement >> renderContentOn: html [
 	"Render the receiver on aWASICMenu."
 	
 	self halt
 ]
 
 { #category : #'sin categoria' }
-SimpleMenuElement >> renderContentOn: html on: aWASICMenu [
+YavuSimpleMenuElement >> renderContentOn: html on: aWASICMenu [
 	"Render the receiver on aWASICMenu."
 	
 	self halt.

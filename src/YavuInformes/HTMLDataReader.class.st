@@ -1,6 +1,6 @@
 Class {
 	#name : #HTMLDataReader,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'znClient',
 		'captchaImagen',

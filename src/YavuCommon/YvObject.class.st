@@ -1,5 +1,5 @@
 Class {
-	#name : #YavuObject,
+	#name : #YvObject,
 	#superclass : #Object,
 	#instVars : [
 		'id'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YavuObject class >> company [
+YvObject class >> company [
 
 	^[self sicSession company]
 		on: WARequestContextNotFound
@@ -16,28 +16,28 @@ YavuObject class >> company [
 ]
 
 { #category : #nil }
-YavuObject class >> empresaActual [
+YvObject class >> empresaActual [
 	"Devuelve la empresa actual si existe una sesión web sino devuelve una empresa default."
 	
 	^YavuPersistentSubsystem empresaActual 
 ]
 
 { #category : #'sin categoria' }
-YavuObject class >> sicSession [
+YvObject class >> sicSession [
 	"Devuelve la sesión web actual."
 	
 	 ^WACurrentRequestContext value session
 ]
 
 { #category : #nil }
-YavuObject class >> sistema [
+YvObject class >> sistema [
 	"Devuelve el root del sistema dependiendo de si aSession es nil o no."
 
 	^YavuPersistentSubsystem singleton
 ]
 
 { #category : #'sin categoria' }
-YavuObject class >> yavuSystem [
+YvObject class >> yavuSystem [
 	"Devuelve la session actual si está en el contexto de una session de Seaside, sino devuelve la shared session local."
 	
 	^[self sicSession yavuSystem]
@@ -47,64 +47,64 @@ YavuObject class >> yavuSystem [
 ]
 
 { #category : #nil }
-YavuObject >> commit [
+YvObject >> commit [
 	"Persiste la instancia del receptor en la BD."
 	
 	YavuPersistentSubsystem commit: [self]
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> company [
+YvObject >> company [
 
 	^self class company
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> dbPersistedInstance [
+YvObject >> dbPersistedInstance [
 
 	^self yavuSystem readOneOf: self class where: [:each | each id = self id]
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> empresaActual [
+YvObject >> empresaActual [
 	"Devuelve la empresa actual si existe una sesión web sino devuelve una empresa default."
 	
 	^self class empresaActual 
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> id [
+YvObject >> id [
 	^ id
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> id: anObject [
+YvObject >> id: anObject [
 	id := anObject
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> maDescriptionForReport [
+YvObject >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
 	^self magritteDescription select: [:each | each isRequired]
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> sicSession [
+YvObject >> sicSession [
 	"Devuelve la sesión web actual."
 	
 	 ^self class sicSession
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> sistema [
+YvObject >> sistema [
 	"Devuelve el root del sistema dependiendo de si aSession es nil o no."
 
 	^self class sistema
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> store [
+YvObject >> store [
 	"Persiste la instancia del receptor en la BD."
 	
 	self id isNil
@@ -113,7 +113,7 @@ YavuObject >> store [
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> storeObject [ 
+YvObject >> storeObject [ 
 
 	self yavuSystem requireUnitOfWork.
 	self yavuSystem register: self.
@@ -121,14 +121,14 @@ YavuObject >> storeObject [
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> updateFrom: anYavuObject [
+YvObject >> updateFrom: anYavuObject [
 
 	self class allInstVarNames do: [:instVarName |
 		self instVarNamed: instVarName put: (anYavuObject instVarNamed: instVarName)]
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> updateObject [ 
+YvObject >> updateObject [ 
 
 	| persistedInstance |
 	
@@ -143,13 +143,13 @@ YavuObject >> updateObject [
 ]
 
 { #category : #'as yet unclassified' }
-YavuObject >> updateTS [
+YvObject >> updateTS [
 
 	"no hace nada."
 ]
 
 { #category : #'sin categoria' }
-YavuObject >> yavuSystem [
+YvObject >> yavuSystem [
 	"Devuelve la session actual si está en el contexto de una session de Seaside, sino devuelve la shared session local."
 	
 	^self class yavuSystem

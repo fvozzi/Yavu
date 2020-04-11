@@ -1,6 +1,6 @@
 Class {
 	#name : #StPersistence,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'root'
 	],

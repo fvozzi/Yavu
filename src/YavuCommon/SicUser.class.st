@@ -9,7 +9,7 @@ Instance Variables:
 "
 Class {
 	#name : #SicUser,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'roles',
 		'email',

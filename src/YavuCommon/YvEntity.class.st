@@ -1,6 +1,6 @@
 Class {
-	#name : #Entity,
-	#superclass : #YavuObject,
+	#name : #YvEntity,
+	#superclass : #YvObject,
 	#instVars : [
 		'atributos',
 		'name',
@@ -10,21 +10,21 @@ Class {
 }
 
 { #category : #'sin categoria' }
-Entity class >> all [
+YvEntity class >> all [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	^self yavuSystem instancesOf: self 
 ]
 
 { #category : #'sin categoria' }
-Entity class >> allForCompany: aCompany [
+YvEntity class >> allForCompany: aCompany [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	^self all
 ]
 
 { #category : #'as yet unclassified' }
-Entity class >> allForCompany: aCompany searchSelector: aSearchSelector searchValue: aSearchValue [
+YvEntity class >> allForCompany: aCompany searchSelector: aSearchSelector searchValue: aSearchValue [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	aSearchValue isEmpty ifTrue: [ ^self allForCompany: aCompany].
@@ -33,64 +33,64 @@ Entity class >> allForCompany: aCompany searchSelector: aSearchSelector searchVa
 ]
 
 { #category : #'sin categoria' }
-Entity class >> atCodigo: unCodigo [
+YvEntity class >> atCodigo: unCodigo [
 		"Answer the receiver instance with code equal to aCode or nil if it doesn't exists."
 
 	^self atCodigo: unCodigo ifAbsent: []
 ]
 
 { #category : #'sin categoria' }
-Entity class >> atCodigo: unCodigo ifAbsent: aBlock [
+YvEntity class >> atCodigo: unCodigo ifAbsent: aBlock [
 	"Answer the receiver instance with code equal to aCode or evaluate aBlock if it doesn't exists."
 
 	^self all detect: [:one | one code = unCodigo] ifNone: aBlock
 ]
 
 { #category : #'as yet unclassified' }
-Entity class >> atID: anInternalID [
+YvEntity class >> atID: anInternalID [
 
 	^self atID: anInternalID ifAbsent: []
 ]
 
 { #category : #'as yet unclassified' }
-Entity class >> atID: anInternalID ifAbsent: aBlock [
+YvEntity class >> atID: anInternalID ifAbsent: aBlock [
 
 	^(self yavuSystem readOneOf: self where: [:each | each id  = anInternalID]) ifNil: [aBlock value]
 ]
 
 { #category : #'sin categoria' }
-Entity class >> atName: unNombre [
+YvEntity class >> atName: unNombre [
 
 	^self atName: unNombre ifAbsent: []
 ]
 
 { #category : #'sin categoria' }
-Entity class >> atName: aName ifAbsent: aBlock [
+YvEntity class >> atName: aName ifAbsent: aBlock [
 
 	^(self yavuSystem readOneOf: self where: [:each | each name  = aName]) ifNil: [aBlock value]
 ]
 
 { #category : #'sin categoria' }
-Entity class >> default [
+YvEntity class >> default [
 	
 	^self all ifEmpty: [self inexistente] ifNotEmpty: [:instances | instances first]
 ]
 
 { #category : #'as yet unclassified' }
-Entity class >> defaultSearchLabel [
+YvEntity class >> defaultSearchLabel [
 
 	^'Nombre'
 ]
 
 { #category : #'sin categoria' }
-Entity class >> inexistente [
+YvEntity class >> inexistente [
 	"Devuelve una nueva instancia del receptor con nombre 'Sin'-Nombre de clase."
 	
 	^self new name: 'Sin ', self name
 ]
 
 { #category : #accessing }
-Entity class >> instancesSelector [
+YvEntity class >> instancesSelector [
 	
 	^self name pluralize asLegalSelector asSymbol
 	
@@ -98,32 +98,32 @@ Entity class >> instancesSelector [
 ]
 
 { #category : #'sin categoria' }
-Entity class >> isAbstract [
+YvEntity class >> isAbstract [
 
 	^self subclasses size ~= 0
 ]
 
 { #category : #'sin categoria' }
-Entity class >> label [
+YvEntity class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^self name
 ]
 
 { #category : #'sin categoria' }
-Entity class >> name: unString [
+YvEntity class >> name: unString [
 
 	^self new initializeName: unString
 ]
 
 { #category : #'sin categoria' }
-Entity class >> named: unString [
+YvEntity class >> named: unString [
 
 	^self atName: unString ifAbsent: [self name: unString]
 ]
 
 { #category : #'as yet unclassified' }
-Entity class >> possibleSearchSelectors [
+YvEntity class >> possibleSearchSelectors [
 
 	^Dictionary new 
 		at: 'Nombre' put: #name;
@@ -131,12 +131,12 @@ Entity class >> possibleSearchSelectors [
 ]
 
 { #category : #'as yet unclassified' }
-Entity >> addToSystem [
+YvEntity >> addToSystem [
 	self subclassResponsibility.
 ]
 
 { #category : #'sin categoria' }
-Entity >> anunciarNuevaEntidad [
+YvEntity >> anunciarNuevaEntidad [
 
 	| announce |
 	announce := EntidadAdded asAnnouncement entity: self.
@@ -144,23 +144,23 @@ Entity >> anunciarNuevaEntidad [
 ]
 
 { #category : #'sin categoria' }
-Entity >> atributos [
+YvEntity >> atributos [
 	^ atributos
 ]
 
 { #category : #'sin categoria' }
-Entity >> atributos: anObject [
+YvEntity >> atributos: anObject [
 	atributos := anObject
 ]
 
 { #category : #'as yet unclassified' }
-Entity >> defaultSearchLabel [
+YvEntity >> defaultSearchLabel [
 
 	^self class defaultSearchLabel 
 ]
 
 { #category : #descriptions }
-Entity >> descriptionName [
+YvEntity >> descriptionName [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -176,14 +176,14 @@ Entity >> descriptionName [
 ]
 
 { #category : #'sin categoria' }
-Entity >> doesNotUnderstand: aMessage [
+YvEntity >> doesNotUnderstand: aMessage [
 	"Busca el selector en los atributos del receptor si no lo encuentra envia DNU a la superclase."
 	
 	^self atributos at: aMessage selector ifAbsent: [super doesNotUnderstand: aMessage]
 ]
 
 { #category : #'as yet unclassified' }
-Entity >> eliminar [
+YvEntity >> eliminar [
 	"Elimina la instancia del receptor a la colección de elementos del owner."
 	
 	self yavuSystem requireUnitOfWork.
@@ -193,7 +193,7 @@ Entity >> eliminar [
 ]
 
 { #category : #'sin categoria' }
-Entity >> initialize [
+YvEntity >> initialize [
 	"Initialize the receiver instance."
 	
 	super initialize.
@@ -202,53 +202,53 @@ Entity >> initialize [
 ]
 
 { #category : #'sin categoria' }
-Entity >> initializeName: unString [
+YvEntity >> initializeName: unString [
 
 	name:= unString
 ]
 
 { #category : #'sin categoria' }
-Entity >> isAbstract [
+YvEntity >> isAbstract [
 
 	^false
 ]
 
 { #category : #'sin categoria' }
-Entity >> javascriptOn: aStream [
+YvEntity >> javascriptOn: aStream [
 
 	JSStream encodeString: self name on: aStream
 ]
 
 { #category : #'sin categoria' }
-Entity >> jsonOn: aStream [
+YvEntity >> jsonOn: aStream [
 	self javascriptOn: aStream
 ]
 
 { #category : #'sin categoria' }
-Entity >> label [
+YvEntity >> label [
 
 	^self name
 ]
 
 { #category : #'sin categoria' }
-Entity >> name [
+YvEntity >> name [
 	
 	^ name
 ]
 
 { #category : #'sin categoria' }
-Entity >> name: anObject [
+YvEntity >> name: anObject [
 	name := anObject
 ]
 
 { #category : #'as yet unclassified' }
-Entity >> possibleSearchSelectors [
+YvEntity >> possibleSearchSelectors [
 
 	^self class possibleSearchSelectors
 ]
 
 { #category : #'sin categoria' }
-Entity >> printOn: aStream [
+YvEntity >> printOn: aStream [
 "Append to the argument, aStream, a sequence of characters that  
 	identifies the receiver."
 	
@@ -258,12 +258,12 @@ Entity >> printOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-Entity >> ts [
+YvEntity >> ts [
 
 	^ts
 ]
 
 { #category : #'sin categoria' }
-Entity >> ts: anObject [
+YvEntity >> ts: anObject [
 	ts := anObject
 ]

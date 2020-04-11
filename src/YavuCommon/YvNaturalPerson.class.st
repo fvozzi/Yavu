@@ -1,6 +1,6 @@
 Class {
-	#name : #NaturalPerson,
-	#superclass : #Person,
+	#name : #YvNaturalPerson,
+	#superclass : #YvPerson,
 	#instVars : [
 		'dni',
 		'customerType',
@@ -16,20 +16,20 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-NaturalPerson class >> defaultSearchLabel [
+YvNaturalPerson class >> defaultSearchLabel [
 
 	^'DNI'
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson class >> label [
+YvNaturalPerson class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^'Persona Física'
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson class >> newFromElectoralRollData: anElectoralRoll [
+YvNaturalPerson class >> newFromElectoralRollData: anElectoralRoll [
 
 	^(self named: anElectoralRoll name)
 		dni: anElectoralRoll dni;
@@ -39,14 +39,14 @@ NaturalPerson class >> newFromElectoralRollData: anElectoralRoll [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson class >> nombre: unNombre dni: unNumeroDeDNI sexo: unSexo [
+YvNaturalPerson class >> nombre: unNombre dni: unNumeroDeDNI sexo: unSexo [
 	"Devuelve una nueva instancia del receptor."
 	
 	^(self named: unNombre) inicializarDNI: unNumeroDeDNI sexo: unSexo
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson class >> possibleSearchSelectors [
+YvNaturalPerson class >> possibleSearchSelectors [
 
 	^super possibleSearchSelectors 
 		at: 'DNI' put: #dni;
@@ -54,26 +54,26 @@ NaturalPerson class >> possibleSearchSelectors [
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson class >> searchCustomerByDNI: aDNILiteral [
+YvNaturalPerson class >> searchCustomerByDNI: aDNILiteral [
 	"Devuelve una instancia del receptor desde la BD cuyo cuit es igual a aCUITLiteral."
 
 	^self yavuSystem readOneOf: self where: [:each | each dni = aDNILiteral]
 ]
 
 { #category : #accessing }
-NaturalPerson >> address [
+YvNaturalPerson >> address [
 	
 	^ address
 ]
 
 { #category : #accessing }
-NaturalPerson >> address: anObject [
+YvNaturalPerson >> address: anObject [
 	
 	address := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> addressDescription [
+YvNaturalPerson >> addressDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -87,19 +87,19 @@ NaturalPerson >> addressDescription [
 ]
 
 { #category : #accessing }
-NaturalPerson >> birthday [
+YvNaturalPerson >> birthday [
 	
 	^ birthday
 ]
 
 { #category : #accessing }
-NaturalPerson >> birthday: anObject [
+YvNaturalPerson >> birthday: anObject [
 	
 	birthday := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> birthdayDescription [
+YvNaturalPerson >> birthdayDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -112,19 +112,19 @@ NaturalPerson >> birthdayDescription [
 ]
 
 { #category : #accessing }
-NaturalPerson >> city [
+YvNaturalPerson >> city [
 	
 	^ city
 ]
 
 { #category : #accessing }
-NaturalPerson >> city: anObject [
+YvNaturalPerson >> city: anObject [
 	
 	city := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> cityDescription [
+YvNaturalPerson >> cityDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -138,7 +138,7 @@ NaturalPerson >> cityDescription [
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> cuitDescription [
+YvNaturalPerson >> cuitDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -151,29 +151,29 @@ NaturalPerson >> cuitDescription [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> customerType [
+YvNaturalPerson >> customerType [
 	^ customerType
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> customerType: aCustomerType [
+YvNaturalPerson >> customerType: aCustomerType [
 	
 	customerType:= aCustomerType
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> dni [
+YvNaturalPerson >> dni [
 	^ dni
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> dni: aDNINumber [
+YvNaturalPerson >> dni: aDNINumber [
 
 	dni := aDNINumber
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> dniDescription [
+YvNaturalPerson >> dniDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -186,14 +186,14 @@ NaturalPerson >> dniDescription [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> documentNumber [
+YvNaturalPerson >> documentNumber [
 	"Devuelve el numero de documento del receptor."
 	
 	^self dni
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> inicializarCUIT [
+YvNaturalPerson >> inicializarCUIT [
 
 	| customerTypeClass |
 	
@@ -202,32 +202,32 @@ NaturalPerson >> inicializarCUIT [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> inicializarDNI: unNumeroDeDNI sexo: unSexo [
+YvNaturalPerson >> inicializarDNI: unNumeroDeDNI sexo: unSexo [
 
 	dni:= unNumeroDeDNI.
 	customerType:= unSexo
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> isNaturalPerson [
+YvNaturalPerson >> isNaturalPerson [
 
 	^true
 ]
 
 { #category : #accessing }
-NaturalPerson >> job [
+YvNaturalPerson >> job [
 	
 	^ job
 ]
 
 { #category : #accessing }
-NaturalPerson >> job: anObject [
+YvNaturalPerson >> job: anObject [
 	
 	job := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> jobDescription [
+YvNaturalPerson >> jobDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -239,19 +239,19 @@ NaturalPerson >> jobDescription [
 ]
 
 { #category : #accessing }
-NaturalPerson >> occupation [
+YvNaturalPerson >> occupation [
 	
 	^ occupation
 ]
 
 { #category : #accessing }
-NaturalPerson >> occupation: anObject [
+YvNaturalPerson >> occupation: anObject [
 	
 	occupation := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> occupationDescription [
+YvNaturalPerson >> occupationDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -263,7 +263,7 @@ NaturalPerson >> occupationDescription [
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> setCustomerType: aCustomerTypeClass [
+YvNaturalPerson >> setCustomerType: aCustomerTypeClass [
 	"Setea el customer type class desde afuera y fuerza el recalculo del numero de CUIT."
 
 	self
@@ -273,18 +273,18 @@ NaturalPerson >> setCustomerType: aCustomerTypeClass [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> sex [
+YvNaturalPerson >> sex [
 	^self  customerType
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> sex: aSexDescription [ 
+YvNaturalPerson >> sex: aSexDescription [ 
 
 	self  customerType: aSexDescription 
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> sexoDescription [
+YvNaturalPerson >> sexoDescription [
 	"Devuelve un objeto que describe la representación de la variable sexo del receptor."
 
 	<magritteDescription>
@@ -299,19 +299,19 @@ NaturalPerson >> sexoDescription [
 ]
 
 { #category : #accessing }
-NaturalPerson >> spouse [
+YvNaturalPerson >> spouse [
 	
 	^ spouse
 ]
 
 { #category : #accessing }
-NaturalPerson >> spouse: anObject [
+YvNaturalPerson >> spouse: anObject [
 	
 	spouse := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> spouseDescription [
+YvNaturalPerson >> spouseDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -323,19 +323,19 @@ NaturalPerson >> spouseDescription [
 ]
 
 { #category : #accessing }
-NaturalPerson >> spouseDocumentNumber [
+YvNaturalPerson >> spouseDocumentNumber [
 	
 	^ spouseDocumentNumber
 ]
 
 { #category : #accessing }
-NaturalPerson >> spouseDocumentNumber: anObject [
+YvNaturalPerson >> spouseDocumentNumber: anObject [
 	
 	spouseDocumentNumber := anObject
 ]
 
 { #category : #'as yet unclassified' }
-NaturalPerson >> spouseDocumentNumberDescription [
+YvNaturalPerson >> spouseDocumentNumberDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -347,7 +347,7 @@ NaturalPerson >> spouseDocumentNumberDescription [
 ]
 
 { #category : #'sin categoria' }
-NaturalPerson >> tipoDocumento [
+YvNaturalPerson >> tipoDocumento [
 
 	^'DNI'
 ]

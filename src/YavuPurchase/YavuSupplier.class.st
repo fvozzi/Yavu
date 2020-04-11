@@ -1,6 +1,6 @@
 Class {
-	#name : #Supplier,
-	#superclass : #Entity,
+	#name : #YavuSupplier,
+	#superclass : #YvEntity,
 	#instVars : [
 		'businessName',
 		'vatCondition',
@@ -14,49 +14,55 @@ Class {
 }
 
 { #category : #testing }
-Supplier class >> isVoyageRoot [
+YavuSupplier class >> isVoyageRoot [
 
 	 ^true 
 ]
 
+{ #category : #'sin categoria' }
+YavuSupplier class >> label [ 
+
+	^ 'Proveedor'
+]
+
 { #category : #crud }
-Supplier >> addToSystem [
+YavuSupplier >> addToSystem [
 	
 	self yavuSystem purchaseSubsystem addSupplier: self
 ]
 
 { #category : #accessing }
-Supplier >> address [
+YavuSupplier >> address [
 	^ address
 ]
 
 { #category : #accessing }
-Supplier >> address: anObject [
+YavuSupplier >> address: anObject [
 	address := anObject
 ]
 
 { #category : #accessing }
-Supplier >> businessName [
+YavuSupplier >> businessName [
 	^ businessName
 ]
 
 { #category : #accessing }
-Supplier >> businessName: anObject [
+YavuSupplier >> businessName: anObject [
 	businessName := anObject
 ]
 
 { #category : #accessing }
-Supplier >> cuitNumber [
+YavuSupplier >> cuitNumber [
 	^ cuitNumber
 ]
 
 { #category : #accessing }
-Supplier >> cuitNumber: anObject [
+YavuSupplier >> cuitNumber: anObject [
 	cuitNumber := anObject
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionAddress [
+YavuSupplier >> descriptionAddress [
 
 	<magritteDescription>
 	^MAStringDescription new 
@@ -69,7 +75,7 @@ Supplier >> descriptionAddress [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionBusinessName [
+YavuSupplier >> descriptionBusinessName [
 	"Devuelve un objeto que describe la representación de la variable correo electrónico del receptor."
 
 	<magritteDescription>
@@ -82,20 +88,21 @@ Supplier >> descriptionBusinessName [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionCUITNumber [
+YavuSupplier >> descriptionCUITNumber [
 
 	<magritteDescription>
 	^MAStringDescription new 
       accessor: #cuitNumber;
       label: 'CUIT';
       	priority: 140;
+		beRequired;
 		componentClass: TBSMagritteTextInputComponent;
       	yourself
 
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionContainer [
+YavuSupplier >> descriptionContainer [
 	<magritteContainer>
 	^ super descriptionContainer
 		componentRenderer: TBSMagritteFormRenderer;
@@ -104,7 +111,7 @@ Supplier >> descriptionContainer [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionIsRetentionAgent [
+YavuSupplier >> descriptionIsRetentionAgent [
 	
 	<magritteDescription>
 	^MABooleanDescription new
@@ -116,7 +123,7 @@ Supplier >> descriptionIsRetentionAgent [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionOpeningHours [
+YavuSupplier >> descriptionOpeningHours [
 
 	<magritteDescription>
 	^MAStringDescription new 
@@ -129,7 +136,7 @@ Supplier >> descriptionOpeningHours [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionPhoneNumber [
+YavuSupplier >> descriptionPhoneNumber [
 
 	<magritteDescription>
 	^MAStringDescription new 
@@ -142,68 +149,69 @@ Supplier >> descriptionPhoneNumber [
 ]
 
 { #category : #descriptions }
-Supplier >> descriptionVatCondition [
+YavuSupplier >> descriptionVatCondition [
 	
 	<magritteDescription>
 	^MASingleOptionDescription new
 		accessor: #vatCondition;
 		label: 'Condición IVA';
 		priority: 120;
-		options: VatCondition allSubclasses;
+		options: YavuVatCondition allSubclasses;
 		beSorted;
+		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 
 { #category : #accessing }
-Supplier >> isRetentionAgent [
+YavuSupplier >> isRetentionAgent [
 	^ isRetentionAgent
 ]
 
 { #category : #accessing }
-Supplier >> isRetentionAgent: anObject [
+YavuSupplier >> isRetentionAgent: anObject [
 	isRetentionAgent := anObject
 ]
 
 { #category : #accessing }
-Supplier >> openingHours [
+YavuSupplier >> openingHours [
 	^ openingHours
 ]
 
 { #category : #accessing }
-Supplier >> openingHours: anObject [
+YavuSupplier >> openingHours: anObject [
 	openingHours := anObject
 ]
 
 { #category : #accessing }
-Supplier >> phoneNumber [
+YavuSupplier >> phoneNumber [
 	^ phoneNumber
 ]
 
 { #category : #accessing }
-Supplier >> phoneNumber: anObject [
+YavuSupplier >> phoneNumber: anObject [
 	phoneNumber := anObject
 ]
 
 { #category : #crud }
-Supplier >> removeFromSystem [
+YavuSupplier >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeSupplier: self
 ]
 
 { #category : #crud }
-Supplier >> updateOnSystem [
+YavuSupplier >> updateOnSystem [
 	
 		self halt.
 	self yavuSystem purchaseSubsystem update: self
 ]
 
 { #category : #accessing }
-Supplier >> vatCondition [
+YavuSupplier >> vatCondition [
 	^ vatCondition
 ]
 
 { #category : #accessing }
-Supplier >> vatCondition: anObject [
+YavuSupplier >> vatCondition: anObject [
 	vatCondition := anObject
 ]

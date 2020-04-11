@@ -33,7 +33,7 @@ SICDescriptorSystem >> classModelForBCRACheckData: aClassModel [
 SICDescriptorSystem >> classModelForBCRAData: aClassModel [
 
 	aClassModel newAttributeNamed: #id.
-	aClassModel newAttributeNamed: #entity type: Person.
+	aClassModel newAttributeNamed: #entity type: YavuPerson.
 	aClassModel newAttributeNamed: #date type: Date.
   	aClassModel newAttributeNamed: #ts type: TimeStamp.
 	aClassModel newAttributeNamed: #bcraDebts collectionOf: BCRADebt.
@@ -72,7 +72,7 @@ SICDescriptorSystem >> classModelForBouncedCheck: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	aClassModel newAttributeNamed: #entity type: Commerce.
 	aClassModel newAttributeNamed: #date type: Date.
-	aClassModel newAttributeNamed: #customer type: Person.
+	aClassModel newAttributeNamed: #customer type: YavuPerson.
 	aClassModel newAttributeNamed: #checkNumber.
 	aClassModel newAttributeNamed: #bouncedDate type: Date.
 	aClassModel newAttributeNamed: #amountOfCheck.
@@ -156,7 +156,7 @@ SICDescriptorSystem >> classModelForFinancialSituation: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	aClassModel newAttributeNamed: #entity type: Commerce.
 	aClassModel newAttributeNamed: #date type: Date.
-	aClassModel newAttributeNamed: #customer type: Person.
+	aClassModel newAttributeNamed: #customer type: YavuPerson.
 	aClassModel newAttributeNamed: #amountOfDebt.
 	aClassModel newAttributeNamed: #dateOfLastPayment type: Date.
 	aClassModel newAttributeNamed: #operationType type: OperationType.
@@ -206,7 +206,7 @@ SICDescriptorSystem >> classModelForLostCheck: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	aClassModel newAttributeNamed: #entity type: Commerce.
 	aClassModel newAttributeNamed: #date type: Date.
-	aClassModel newAttributeNamed: #customer type: Person.
+	aClassModel newAttributeNamed: #customer type: YavuPerson.
 	aClassModel newAttributeNamed: #checkNumber.
 	aClassModel newAttributeNamed: #lostDate type: Date.
 	aClassModel newAttributeNamed: #amountOfCheck.
@@ -283,8 +283,8 @@ SICDescriptorSystem >> classModelForReportEmission: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	aClassModel newAttributeNamed: #entity type: Commerce.
 	aClassModel newAttributeNamed: #date type: TimeStamp.
-	aClassModel newAttributeNamed: #user type: SicUser.
-	aClassModel newAttributeNamed: #customer type: Person.
+	aClassModel newAttributeNamed: #user type: YavuUser.
+	aClassModel newAttributeNamed: #customer type: YavuPerson.
 	aClassModel newAttributeNamed: #reportKind.
   	aClassModel newAttributeNamed: #ts type: TimeStamp
 ]
@@ -322,7 +322,7 @@ SICDescriptorSystem >> classModelForSimpleMenuElement: aClassModel [
 	aClassModel newAttributeNamed: #id.
 	aClassModel newAttributeNamed: #name.
 	(aClassModel newAttributeNamed: #presenterClassLiteral) useDirectAccess: false.
-	aClassModel newAttributeNamed: #parent type: CompositeMenuElement.
+	aClassModel newAttributeNamed: #parent type: YavuCompositeMenuElement.
   	aClassModel newAttributeNamed: #ts type: TimeStamp
   
 ]
@@ -497,13 +497,13 @@ SICDescriptorSystem >> descriptorForCompany: aDescriptor [
 SICDescriptorSystem >> descriptorForCompositeMenuElement: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'MenuElement'.
+	table := self tableNamed: #YavuMenuElement.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
 	(aDescriptor newMapping: DirectMapping) from: #presenterClassLiteral to: (table fieldNamed: 'presenterClass').
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
-	(self typeResolverFor: MenuElement) register: aDescriptor keyedBy: 'CompositeMenuElement' field: (table fieldNamed: 'menuElementClass').
+	(self typeResolverFor: YavuMenuElement) register: aDescriptor keyedBy: 'CompositeMenuElement' field: (table fieldNamed: 'menuElementClass').
 	^aDescriptor
 ]
 
@@ -618,13 +618,13 @@ SICDescriptorSystem >> descriptorForInscripcionAFIP: aDescriptor [
 SICDescriptorSystem >> descriptorForLegalPerson: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'Person'.
+	table := self tableNamed: #YavuPerson.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
 	(aDescriptor newMapping: DirectMapping) from: #cuit to: (table fieldNamed: 'cuit').
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.		
-	(self typeResolverFor: Person) register: aDescriptor keyedBy: 'LegalPerson' field: (table fieldNamed: 'personClass').	
+	(self typeResolverFor: YavuPerson) register: aDescriptor keyedBy: 'LegalPerson' field: (table fieldNamed: 'personClass').	
 	^aDescriptor
 ]
 
@@ -652,13 +652,13 @@ SICDescriptorSystem >> descriptorForLostCheck: aDescriptor [
 SICDescriptorSystem >> descriptorForMenuElement: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'MenuElement'.
+	table := self tableNamed: #YavuMenuElement.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
 	(aDescriptor newMapping: DirectMapping) from: #presenterClassLiteral to: (table fieldNamed: 'presenterClass').	
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
-	(self typeResolverFor: MenuElement) register: aDescriptor abstract: true.
+	(self typeResolverFor: YavuMenuElement) register: aDescriptor abstract: true.
 	^aDescriptor
 ]
 
@@ -680,7 +680,7 @@ SICDescriptorSystem >> descriptorForMonthlyPayment: aDescriptor [
 SICDescriptorSystem >> descriptorForNaturalPerson: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'Person'.
+	table := self tableNamed: #YavuPerson.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
@@ -694,7 +694,7 @@ SICDescriptorSystem >> descriptorForNaturalPerson: aDescriptor [
 	(aDescriptor newMapping: DirectMapping) from: #spouse to: (table fieldNamed: 'spouse').
 	(aDescriptor newMapping: DirectMapping) from: #spouseDocumentNumber to: (table fieldNamed: 'spouseDocumentNumber').				
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
-	(self typeResolverFor: Person) register: aDescriptor keyedBy: 'NaturalPerson' field: (table fieldNamed: 'personClass').	
+	(self typeResolverFor: YavuPerson) register: aDescriptor keyedBy: 'NaturalPerson' field: (table fieldNamed: 'personClass').	
 	^aDescriptor
 ]
 
@@ -740,13 +740,13 @@ SICDescriptorSystem >> descriptorForPackageOfReports: aDescriptor [
 SICDescriptorSystem >> descriptorForPerson: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'Person'.
+	table := self tableNamed: #YavuPerson.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
 	(aDescriptor newMapping: DirectMapping) from: #cuit to: (table fieldNamed: 'cuit').	
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
-	(self typeResolverFor: Person) register: aDescriptor abstract: true.
+	(self typeResolverFor: YavuPerson) register: aDescriptor abstract: true.
 	^aDescriptor
 ]
 
@@ -802,10 +802,10 @@ SICDescriptorSystem >> descriptorForRole: aDescriptor [
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
 	(aDescriptor newMapping: ManyToManyMapping)
 		attributeName: #menuElements;
-		referenceClass: MenuElement.
+		referenceClass: YavuMenuElement.
 	(aDescriptor newMapping: ManyToManyMapping)
 		attributeName: #securityFunctions;
-		referenceClass: SecurityFunction
+		referenceClass: YavuSecurityFunction
 	
 ]
 
@@ -838,7 +838,7 @@ SICDescriptorSystem >> descriptorForSicUser: aDescriptor [
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.										
 	(aDescriptor newMapping: ManyToManyMapping)
 		attributeName: #roles;
-		referenceClass: Role.
+		referenceClass: YavuRole.
 	(aDescriptor newMapping: ManyToManyMapping)
 		attributeName: #commerces;
 		referenceClass: Commerce;
@@ -853,14 +853,14 @@ SICDescriptorSystem >> descriptorForSicUser: aDescriptor [
 SICDescriptorSystem >> descriptorForSimpleMenuElement: aDescriptor [
 
 	| table |
-	table := self tableNamed: 'MenuElement'.
+	table := self tableNamed: #YavuMenuElement.
 	aDescriptor table: table.
 	(aDescriptor newMapping: DirectMapping) from: #id to: (table fieldNamed: 'id').
 	(aDescriptor newMapping: DirectMapping) from: #name to: (table fieldNamed: 'name').
 	(aDescriptor newMapping: DirectMapping) from: #presenterClassLiteral to: (table fieldNamed: 'presenterClass').
 	(aDescriptor newMapping: OneToOneMapping) attributeName: #parent.
 	((aDescriptor newMapping: DirectMapping) from: #ts to: (table fieldNamed: 'ts'))	readOnly: true.
-	(self typeResolverFor: MenuElement) register: aDescriptor keyedBy: 'SimpleMenuElement' field: (table fieldNamed: 'menuElementClass').
+	(self typeResolverFor: YavuMenuElement) register: aDescriptor keyedBy: 'SimpleMenuElement' field: (table fieldNamed: 'menuElementClass').
 	^aDescriptor
 	
 
@@ -1365,11 +1365,11 @@ SICDescriptorSystem >> tableForSYNCHRONIZATIONDATABASE: aTable [
 { #category : #types }
 SICDescriptorSystem >> typeResolverForMenuElement [
 
-	^FilteredTypeResolver forRootClass: MenuElement
+	^FilteredTypeResolver forRootClass: YavuMenuElement
 ]
 
 { #category : #types }
 SICDescriptorSystem >> typeResolverForPerson [
 
-	^FilteredTypeResolver forRootClass: Person
+	^FilteredTypeResolver forRootClass: YavuPerson
 ]

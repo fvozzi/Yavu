@@ -1,6 +1,6 @@
 Class {
 	#name : #OperationCharacter,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'code'
 	],

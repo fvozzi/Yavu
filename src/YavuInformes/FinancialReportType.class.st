@@ -1,6 +1,6 @@
 Class {
 	#name : #FinancialReportType,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#category : #'YavuInformes-DomainModel'
 }
 

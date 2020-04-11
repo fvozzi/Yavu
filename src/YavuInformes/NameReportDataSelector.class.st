@@ -23,7 +23,7 @@ NameReportDataSelector >> buscarCliente [
 { #category : #accessing }
 NameReportDataSelector >> clientesDeNombre: unString [
 
-	self customersFound:  (Person customersOfNameBeginsWith: unString).
+	self customersFound:  (YavuPerson customersOfNameBeginsWith: unString).
 	^self customersFound 
 ]
 

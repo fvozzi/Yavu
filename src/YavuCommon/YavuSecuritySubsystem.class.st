@@ -12,14 +12,14 @@ Class {
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem class >> entitiesClasses [
 	
-	^ OrderedCollection with: SicUser with: Role with: SecurityFunction 
+	^ OrderedCollection with: YavuUser with: YavuRole with: YavuSecurityFunction 
 ]
 
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem class >> menuElements [
 
 	^ OrderedCollection new 
-		add: ((SimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
+		add: ((YavuSimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
 		yourself
 ]
 
@@ -82,7 +82,7 @@ YavuSecuritySubsystem >> name [
 
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> roleClass [
-	^Role 
+	^YavuRole 
 ]
 
 { #category : #accessing }
@@ -100,7 +100,7 @@ YavuSecuritySubsystem >> searchUserName: aName password: aPassword [
 
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> userClass [
-	^SicUser 
+	^YavuUser 
 ]
 
 { #category : #'as yet unclassified' }

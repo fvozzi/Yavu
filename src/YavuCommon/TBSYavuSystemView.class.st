@@ -58,28 +58,6 @@ TBSYavuSystemView >> initialize [
 	content := self session yavuSystem homeViewClass onParent: self
 ]
 
-{ #category : #accessing }
-TBSYavuSystemView >> nuevo2 [
-
-	| answer  component |
-
-	component := Supplier new asComponent.
-	(component 
-					addDecoration: ((TBSMagritteFormDecoration 
-											buttons: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'}) 
-											formCss: 'form-horizontal';
-											legend: 'Nueva entidad';
-											yourself);
-					yourself).
-	component magritteDescription tbsFormHorizontal: true.
-
-	answer := self call: component.
-	answer notNil ifTrue: [
-		answer addToSystem.
-		self updateReport].
-	
-]
-
 { #category : #rendering }
 TBSYavuSystemView >> renderContentOn: html [
 
@@ -130,7 +108,7 @@ TBSYavuSystemView >> renderNavbarSystemMenues: html [
 		class: 'nav navbar-nav navbar-right';
 		with: [ html tbsNavItem
 				with: [ html anchor
-						callback: [ self openComponent: (WAConfirmLogOffView onParent: parent)];
+						callback: [ WAConfirmLogOffView onParent: self];
 						with: [ html span class: 'glyphicon glyphicon-log-out'.
 							html text: ' Salir' ] ] ]
 ]

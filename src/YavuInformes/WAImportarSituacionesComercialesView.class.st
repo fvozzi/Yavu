@@ -201,7 +201,7 @@ WAImportarSituacionesComercialesView >> renderTablaDeClientesOn: html [
 
 	| person |
 
-	person := self importador clientes ifEmpty: [Person new] ifNotEmpty: [self importador clientes first].
+	person := self importador clientes ifEmpty: [YavuPerson new] ifNotEmpty: [self importador clientes first].
 	html render: (MAReport rows: self importador clientes description: person maDescriptionForReport)
 ]
 

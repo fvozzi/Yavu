@@ -26,7 +26,7 @@ SituacionComercialTest >> csvFileForInformesComerciales [
 { #category : #'as yet unclassified' }
 SituacionComercialTest >> fvPerson [
 	
-	^NaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
+	^YavuNaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
 ]
 
 { #category : #'as yet unclassified' }

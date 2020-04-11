@@ -87,24 +87,23 @@ TBSEntitiesBrowserView >> editEntity: anEntity [
 { #category : #accessing }
 TBSEntitiesBrowserView >> entities [ 
 
-	^ entityClass isNil
-		ifTrue: [OrderedCollection new]
-		ifFalse: [ entityClass all ]
+	^ entityClass all
 ]
 
 { #category : #initialization }
 TBSEntitiesBrowserView >> initialize [
 
 	super initialize.
-	entityClass := self selectedOrDefaultEntityClass.
-	report := self buildReport
+	"entityClass := self selectedOrDefaultEntityClass."
+	"report := self buildReport"
 	
 ]
 
 { #category : #initialization }
 TBSEntitiesBrowserView >> initializeSubsystemClass: yavuSubsystemClass [
 
-	subsystemClass := yavuSubsystemClass 
+	subsystemClass := yavuSubsystemClass.
+	self onYavuSubsystemChanged
 ]
 
 { #category : #eventActions }
@@ -114,10 +113,16 @@ TBSEntitiesBrowserView >> onEntitySelection: aClass [
 	report := self buildReport 
 ]
 
+{ #category : #initialization }
+TBSEntitiesBrowserView >> onYavuSubsystemChanged [
+
+	self onEntitySelection: self selectedOrDefaultEntityClass
+]
+
 { #category : #accessing }
 TBSEntitiesBrowserView >> possibleEntitiesClasses [
 
-	^ YavuEnvironment newSystem allowedEntitiesClassesOn: "self subsystemClass" YavuPurchaseSubsystem .
+	^ (self session yavuSystem allowedEntitiesClassesOn: self subsystemClass)
 ]
 
 { #category : #accessing }
@@ -185,8 +190,9 @@ TBSEntitiesBrowserView >> renderEntityClassSelection: html [
 	html text: 'Tipo de entidad:'.
 	html select
 		list: self possibleEntitiesClasses;
-		selected: self selectedOrDefaultEntityClass;
+		selected: self selectedOrDefaultEntityClass ;
 		callback: [ :oneEntityClass | self onEntitySelection: oneEntityClass ];
+		labels: [ :each | each label];
 		onChange: 'submit()'.
 	html anchor
 		callback: [ self addEntity ];

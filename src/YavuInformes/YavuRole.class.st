@@ -1,6 +1,6 @@
 Class {
-	#name : #Role,
-	#superclass : #Entity,
+	#name : #YavuRole,
+	#superclass : #YvEntity,
 	#instVars : [
 		'menuElements',
 		'securityFunctions'
@@ -9,27 +9,27 @@ Class {
 }
 
 { #category : #'sin categoria' }
-Role class >> label [
+YavuRole class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^'Rol'
 ]
 
 { #category : #'sin categoria' }
-Role >> addMenuElement: aMenuElementName view: aWAComponent [
+YavuRole >> addMenuElement: aMenuElementName view: aWAComponent [
 
-	self menuElements add: (MenuElement label: aMenuElementName view: aWAComponent)
+	self menuElements add: (YavuMenuElement label: aMenuElementName view: aWAComponent)
 
 ]
 
 { #category : #'sin categoria' }
-Role >> allowedEntitiesClasses [
+YavuRole >> allowedEntitiesClasses [
 
 	^self securityFunctions collect: [:each | each yavuObjectClass]  
 ]
 
 { #category : #'sin categoria' }
-Role >> descriptionMenuElements [
+YavuRole >> descriptionMenuElements [
 	
 	<magritteDescription>
 	^MAMultipleOptionDescription new
@@ -37,13 +37,13 @@ Role >> descriptionMenuElements [
 		label: 'Acceso';
 		priority: 130;
 		componentClass: MAListCompositonComponent;
-		options: MenuElement selectableMenuElements;
+		options: YavuMenuElement selectableMenuElements;
 		beSorted; 
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
-Role >> initialize [ 
+YavuRole >> initialize [ 
 
 	super initialize.
 	menuElements := OrderedCollection new.
@@ -51,28 +51,28 @@ Role >> initialize [
 ]
 
 { #category : #'sin categoria' }
-Role >> menuElements [
+YavuRole >> menuElements [
 
 	^menuElements
 ]
 
 { #category : #'sin categoria' }
-Role >> menuElements: anObject [
+YavuRole >> menuElements: anObject [
 	menuElements := anObject
 ]
 
 { #category : #'sin categoria' }
-Role >> securityFunctions [
+YavuRole >> securityFunctions [
 	^ securityFunctions
 ]
 
 { #category : #'sin categoria' }
-Role >> securityFunctions: anObject [
+YavuRole >> securityFunctions: anObject [
 	securityFunctions := anObject
 ]
 
 { #category : #'sin categoria' }
-Role >> securityFunctionsDescription [
+YavuRole >> securityFunctionsDescription [
 	
 	<magritteDescription>
 	^MAMultipleOptionDescription new
@@ -80,7 +80,7 @@ Role >> securityFunctionsDescription [
 		label: 'Entidades permitidas';
 		priority: 140;
 		componentClass: MAListCompositonComponent;
-		options: SecurityFunction all;
+		options: YavuSecurityFunction all;
 		beSorted; 
 		yourself
 ]

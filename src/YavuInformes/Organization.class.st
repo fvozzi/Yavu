@@ -22,7 +22,7 @@ Organization class >> correspondeA: xy [
 Organization class >> cuitNumberOf: unNumeroDeDocumento [
 	"Devuelve el numero de cuit correspondiente a unNumeroDeDocumento y a la clase del receptor."
 	
-	^(CUIT cuit: unNumeroDeDocumento) cuit
+	^(YvCUIT cuit: unNumeroDeDocumento) cuit
 ]
 
 { #category : #accessing }
@@ -48,7 +48,7 @@ Organization class >> label [
 Organization class >> newCustomerOfNumber: unNumeroDeDocumento name: unNombre [
 	"Devuelve un nuevo cliente según el tipo del receptor."
 	
-	^LegalPerson nombre: unNombre cuit: unNumeroDeDocumento
+	^YavuLegalPerson nombre: unNombre cuit: unNumeroDeDocumento
 ]
 
 { #category : #accessing }

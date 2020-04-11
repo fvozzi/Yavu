@@ -12,7 +12,7 @@ Class {
 { #category : #'as yet unclassified' }
 BCRAData class >> entityClass [
 	
-	^Person
+	^YavuPerson
 ]
 
 { #category : #'as yet unclassified' }

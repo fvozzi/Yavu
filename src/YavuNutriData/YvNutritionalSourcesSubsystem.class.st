@@ -1,5 +1,5 @@
 Class {
-	#name : #YavuNutritionalSourcesSubsystem,
+	#name : #YvNutritionalSourcesSubsystem,
 	#superclass : #YavuSubsystem,
 	#instVars : [
 		'sources'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YavuNutritionalSourcesSubsystem class >> subsystemTag [
+YvNutritionalSourcesSubsystem class >> subsystemTag [
 	
 	 ^'nutritionalSourcesSubsystem'
 ]

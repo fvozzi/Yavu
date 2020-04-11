@@ -546,7 +546,7 @@ ElectoralRollDataReaderTest >> fvElectoralRollCompleteDataStream [
 { #category : #'as yet unclassified' }
 ElectoralRollDataReaderTest >> fvPerson [
 	
-	^NaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
+	^YavuNaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
 ]
 
 { #category : #'as yet unclassified' }

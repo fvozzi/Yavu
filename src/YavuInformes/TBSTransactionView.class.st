@@ -37,7 +37,7 @@ TBSTransactionView >> clienteActualONuevo [
 	"Devuelve el cliente seleccionado o uno nuevo en caso de que no exista."
 	
 	self customer isNil ifTrue: [
-		self customer: (Person numeroDeDocumento: self documentNumber nombre: self customerName sexo: self customerType code).
+		self customer: (YavuPerson numeroDeDocumento: self documentNumber nombre: self customerName sexo: self customerType code).
 		customers add: customer].
 	^self customer
 					
@@ -302,7 +302,7 @@ TBSTransactionView >> resetear [
 TBSTransactionView >> searchCustomer [
 
 	[self documentNumber asNumber] on: Error do: [ :ex | ^self descriptionError: 'El número de documento debe ser un número valido.' ].
-	self customer: (Person searchCustomerByNumber: self documentNumber customerType: self customerType).
+	self customer: (YavuPerson searchCustomerByNumber: self documentNumber customerType: self customerType).
 	self searchedCustomer:  true
 ]
 

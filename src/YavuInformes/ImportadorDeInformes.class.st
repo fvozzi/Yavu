@@ -69,7 +69,7 @@ ImportadorDeInformes >> crearClienteDesde: unArray [
 			customerType := CustomerType atCodigo: (unArray at: 3).
 			documentNumber := (unArray at: 1).
 			cuit := customerType cuitNumberOf: (unArray at: 1)].
-	cliente := Person searchCustomerByCUIT: cuit.
+	cliente := YavuPerson searchCustomerByCUIT: cuit.
 	cliente isNil ifTrue: [
 		cliente := customerType newCustomerOfNumber: documentNumber name: (unArray at: 2).
 		clientes add: cliente].
@@ -187,7 +187,7 @@ ImportadorDeInformes >> initialize [
 { #category : #'sin categoria' }
 ImportadorDeInformes >> initializeCurrentCustomers [
 
-	currentCustomers:= Person all classifiedBy: [:each | each cuit]
+	currentCustomers:= YavuPerson all classifiedBy: [:each | each cuit]
 ]
 
 { #category : #'sin categoria' }

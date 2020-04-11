@@ -1,6 +1,6 @@
 Class {
-	#name : #MenuElement,
-	#superclass : #Entity,
+	#name : #YavuMenuElement,
+	#superclass : #YvEntity,
 	#instVars : [
 		'presenterClass',
 		'subsystem'
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #'sin categoria' }
-MenuElement class >> label: aMenuLabel presenterClass: aWAPresenterClass subsystem: aYavuSubsystem [
+YavuMenuElement class >> label: aMenuLabel presenterClass: aWAPresenterClass subsystem: aYavuSubsystem [
 	"Answer a new receiver instance initialized with aMenuLabel and aWAPresenterClass."
 	
 	^(self name: aMenuLabel) initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsystem 
 ]
 
 { #category : #'sin categoria' }
-MenuElement class >> selectableMenuElements [
+YavuMenuElement class >> selectableMenuElements [
 	"Answer all the receiver instances that could be used to asign to a role."
 
-	^CompositeMenuElement all, (SimpleMenuElement all select: [:each | each parent getValue isNil])
+	^YavuCompositeMenuElement all, (YavuSimpleMenuElement all select: [:each | each parent getValue isNil])
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsystem [ 
+YavuMenuElement >> initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsystem [ 
 	"Initialize the receiver's instances variables label and presenterClass with aMenuLabel and aWAPresenterClass."
  
 	presenterClass := aWAPresenterClass.
@@ -31,54 +31,54 @@ MenuElement >> initializePresenterClass: aWAPresenterClass subsystem: aYavuSubsy
 ]
 
 { #category : #accessing }
-MenuElement >> isHomeMenu [
+YavuMenuElement >> isHomeMenu [
 	
 	^self name = 'Inicio'
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> label [
+YavuMenuElement >> label [
 	"Answer the receiver instance variable contents."
 	
 	^self name
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> presenterClass [
+YavuMenuElement >> presenterClass [
 	"Answer the receiver presenterClass instance variable contents." 
 
 	^presenterClass
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> presenterClass: aClass [
+YavuMenuElement >> presenterClass: aClass [
 	"Set the receiver presenterClass instance variable contents with aClass." 
 
 	presenterClass:= aClass 
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> presenterClassLiteral [
+YavuMenuElement >> presenterClassLiteral [
 	"Answer the presenterClass instance variable contents in a BD compatible format."
 	
 	^self presenterClass asSQLLiteral
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> presenterClassLiteral: aLiteral [
+YavuMenuElement >> presenterClassLiteral: aLiteral [
 	"Set the presenterClass instance variable from aLiteral."
 	
 	^self presenterClass: (Smalltalk at: aLiteral asSymbol ifAbsent: [])
 ]
 
 { #category : #'as yet unclassified' }
-MenuElement >> presenterView [
+YavuMenuElement >> presenterView [
 
 	 ^ presenterClass on: subsystem 
 ]
 
 { #category : #'sin categoria' }
-MenuElement >> printOn: aStream [ 
+YavuMenuElement >> printOn: aStream [ 
 	"Append to the argument, aStream, a sequence of characters that  
 	identifies the receiver."
 	
@@ -87,6 +87,6 @@ MenuElement >> printOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-MenuElement >> subsystem [
+YavuMenuElement >> subsystem [
 	^ subsystem
 ]

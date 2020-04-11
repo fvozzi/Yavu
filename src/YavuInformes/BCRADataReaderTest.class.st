@@ -431,7 +431,7 @@ La información referida en el vínculo al que se accede a continuación corresp
 { #category : #'as yet unclassified' }
 BCRADataReaderTest >> fvPerson [
 	
-	^NaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
+	^YavuNaturalPerson nombre: 'Facundo Vozzi' dni: '27634975' sexo: 'M'
 ]
 
 { #category : #'as yet unclassified' }

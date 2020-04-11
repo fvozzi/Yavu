@@ -1,6 +1,6 @@
 Class {
-	#name : #CompositeMenuElement,
-	#superclass : #MenuElement,
+	#name : #YavuCompositeMenuElement,
+	#superclass : #YavuMenuElement,
 	#instVars : [
 		'subMenues'
 	],
@@ -8,34 +8,34 @@ Class {
 }
 
 { #category : #'sin categoria' }
-CompositeMenuElement >> addSubMenu: aMenuElement [
+YavuCompositeMenuElement >> addSubMenu: aMenuElement [
 	"Add aMenuElement to the receiver subMenues elements."
 	
 	^self subMenues add: (aMenuElement parent: self)
 ]
 
 { #category : #'as yet unclassified' }
-CompositeMenuElement >> initializeSubmenues [
+YavuCompositeMenuElement >> initializeSubmenues [
 	
 	subMenues := OrderedCollection new 
 ]
 
 { #category : #'as yet unclassified' }
-CompositeMenuElement >> isRoot [
+YavuCompositeMenuElement >> isRoot [
 	"Responde true si el receptor no tiene parent."
 
 	^true
 ]
 
 { #category : #'sin categoria' }
-CompositeMenuElement >> renderContentOn: html on: aWASICMenu [
+YavuCompositeMenuElement >> renderContentOn: html on: aWASICMenu [
 	"Render the receiver on aWASICMenu."
 
 	aWASICMenu renderCompositeMenuElement: self on: html
 ]
 
 { #category : #'sin categoria' }
-CompositeMenuElement >> store [
+YavuCompositeMenuElement >> store [
 	"Persiste la instancia del receptor en la BD."
 	
 	super store.
@@ -43,7 +43,7 @@ CompositeMenuElement >> store [
 ]
 
 { #category : #'sin categoria' }
-CompositeMenuElement >> subMenues [
+YavuCompositeMenuElement >> subMenues [
 	"Answer the receiver subMenues instance variable content."
 	
 	subMenues ifNil: [self initializeSubmenues].
@@ -51,7 +51,7 @@ CompositeMenuElement >> subMenues [
 ]
 
 { #category : #'As yet unclassified' }
-CompositeMenuElement >> subsystem [
+YavuCompositeMenuElement >> subsystem [
 	
 	 ^'Yavu Prueba'
 ]

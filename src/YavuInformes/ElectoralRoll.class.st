@@ -1,6 +1,6 @@
 Class {
 	#name : #ElectoralRoll,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'sex',
 		'birthday',

@@ -1,6 +1,6 @@
 Class {
 	#name : #OperationType,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'code'
 	],

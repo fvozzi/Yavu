@@ -26,9 +26,9 @@ YavuSubsystem class >> subsystemName [
 ]
 
 { #category : #initialization }
-YavuSubsystem >> initializeSystem: aYavuSystem [
+YavuSubsystem >> initializeSystem: aSystem [
 
-	system := aYavuSystem 
+	system := aSystem 
 ]
 
 { #category : #accessing }

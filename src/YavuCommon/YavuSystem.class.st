@@ -12,7 +12,7 @@ Class {
 
 { #category : #transientSystemInitialization }
 YavuSystem class >> administratorUser [
-	^ (SicUser
+	^ (YavuUser
 		name: 'Administrador'
 		company: (Company name: 'Cámara Comercio'))
 		password: 'yavu09';
@@ -36,7 +36,7 @@ YavuSystem class >> allMenuElements [
 YavuSystem class >> allRoles [
 
 	^OrderedCollection new 
-		add: ((Role name: 'Administrador') menuElements: self allMenuElements; securityFunctions: self allSecurityFunctions);
+		add: ((YavuRole name: 'Administrador') menuElements: self allMenuElements; securityFunctions: self allSecurityFunctions);
 		yourself
 
 ]
@@ -45,8 +45,8 @@ YavuSystem class >> allRoles [
 YavuSystem class >> allSecurityFunctions [
 
 	^OrderedCollection new
-						add: ((SecurityFunction name: 'Users') yavuObjectClass: SicUser) ;
-						add: ((SecurityFunction name: 'Suppliers') yavuObjectClass: Supplier) ;
+						add: ((YavuSecurityFunction name: 'Users') yavuObjectClass: YavuUser) ;
+						add: ((YavuSecurityFunction name: 'Suppliers') yavuObjectClass: YavuSupplier) ;
 						yourself.
 
 ]
@@ -92,10 +92,10 @@ YavuSystem class >> mainView [
 { #category : #initialization }
 YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 
-	aTransientSubsystem setInstancesOf: SicUser with: self allSicUser.
-	aTransientSubsystem setInstancesOf: MenuElement with: self allMenuElements.
-	aTransientSubsystem setInstancesOf: SecurityFunction with: self allSecurityFunctions.
-	aTransientSubsystem setInstancesOf: Role with: self allRoles
+	aTransientSubsystem setInstancesOf: YavuUser with: self allSicUser.
+	aTransientSubsystem setInstancesOf: YavuMenuElement with: self allMenuElements.
+	aTransientSubsystem setInstancesOf: YavuSecurityFunction with: self allSecurityFunctions.
+	aTransientSubsystem setInstancesOf: YavuRole with: self allRoles
 
 ]
 

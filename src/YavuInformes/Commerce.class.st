@@ -1,6 +1,6 @@
 Class {
 	#name : #Commerce,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'cuit',
 		'address',

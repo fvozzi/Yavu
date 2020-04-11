@@ -1,6 +1,6 @@
 Class {
-	#name : #SecurityFunction,
-	#superclass : #Entity,
+	#name : #YavuSecurityFunction,
+	#superclass : #YvEntity,
 	#instVars : [
 		'yavuObjectClass'
 	],
@@ -8,31 +8,31 @@ Class {
 }
 
 { #category : #'sin categoria' }
-SecurityFunction class >> label [
+YavuSecurityFunction class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^'Función de Seguridad'
 ]
 
 { #category : #'sin categoria' }
-SecurityFunction >> yavuObjectClass [
+YavuSecurityFunction >> yavuObjectClass [
 	^ yavuObjectClass
 ]
 
 { #category : #'sin categoria' }
-SecurityFunction >> yavuObjectClass: anObject [
+YavuSecurityFunction >> yavuObjectClass: anObject [
 	yavuObjectClass := anObject
 ]
 
 { #category : #'sin categoria' }
-SecurityFunction >> yavuObjectClassLiteral [
+YavuSecurityFunction >> yavuObjectClassLiteral [
 	"Answer the presenterClass instance variable contents in a BD compatible format."
 	
 	^self yavuObjectClass asSQLLiteral
 ]
 
 { #category : #'sin categoria' }
-SecurityFunction >> yavuObjectClassLiteral: aLiteral [
+YavuSecurityFunction >> yavuObjectClassLiteral: aLiteral [
 	"Set the presenterClass instance variable from aLiteral."
 	
 	^self yavuObjectClass: (Smalltalk at: aLiteral asSymbol ifAbsent: [])

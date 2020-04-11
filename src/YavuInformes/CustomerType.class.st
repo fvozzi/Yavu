@@ -1,6 +1,6 @@
 Class {
 	#name : #CustomerType,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#category : #'YavuInformes-DomainModel'
 }
 
@@ -48,7 +48,7 @@ CustomerType class >> correspondeA: xy [
 CustomerType class >> cuitNumberOf: unNumeroDeDocumento [
 	"Devuelve el numero de cuit correspondiente a unNumeroDeDocumento y a la clase del receptor."
 	
-	^(CUIT dni: unNumeroDeDocumento tipo: self ) cuit
+	^(YvCUIT dni: unNumeroDeDocumento tipo: self ) cuit
 ]
 
 { #category : #accessing }
@@ -81,7 +81,7 @@ CustomerType class >> newCustomerOfNumber: unNumeroDeDocumento [
 CustomerType class >> newCustomerOfNumber: unNumeroDeDocumento name: unNombre [
 	"Devuelve un nuevo cliente según el tipo del receptor."
 	
-	^NaturalPerson nombre: unNombre dni: unNumeroDeDocumento sexo: self code
+	^YavuNaturalPerson nombre: unNombre dni: unNumeroDeDocumento sexo: self code
 ]
 
 { #category : #accessing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #BCRACheckData,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'owner',
 		'checkNumber',

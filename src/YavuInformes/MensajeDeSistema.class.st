@@ -1,6 +1,6 @@
 Class {
 	#name : #MensajeDeSistema,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'mensaje'
 	],

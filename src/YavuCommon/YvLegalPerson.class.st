@@ -1,38 +1,38 @@
 Class {
-	#name : #LegalPerson,
-	#superclass : #Person,
+	#name : #YvLegalPerson,
+	#superclass : #YvPerson,
 	#category : #'YavuCommon-Entities'
 }
 
 { #category : #'sin categoria' }
-LegalPerson class >> cuitNumberOf: unNumeroDeDocumento [
+YvLegalPerson class >> cuitNumberOf: unNumeroDeDocumento [
 	"Devuelve el numero de cuit correspondiente a unNumeroDeDocumento y a la clase del receptor."
 	
 	^unNumeroDeDocumento
 ]
 
 { #category : #'sin categoria' }
-LegalPerson class >> descripcionNombre [
+YvLegalPerson class >> descripcionNombre [
 	
 	^'Descripción'
 ]
 
 { #category : #'sin categoria' }
-LegalPerson class >> label [
+YvLegalPerson class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^'Persona Jurídica'
 ]
 
 { #category : #'sin categoria' }
-LegalPerson class >> nombre: unNombre cuit: unNumeroCUIT [
+YvLegalPerson class >> nombre: unNombre cuit: unNumeroCUIT [
 	"Devuelve una nueva instancia del receptor."
 	
 	^(self named: unNombre) inicializarCUIT: unNumeroCUIT
 ]
 
 { #category : #'as yet unclassified' }
-LegalPerson class >> possibleSearchSelectors [
+YvLegalPerson class >> possibleSearchSelectors [
 
 	^super possibleSearchSelectors 
 		at: 'CUIT' put: #cuit;
@@ -40,7 +40,7 @@ LegalPerson class >> possibleSearchSelectors [
 ]
 
 { #category : #'as yet unclassified' }
-LegalPerson >> cuitDescription [
+YvLegalPerson >> cuitDescription [
 	"Devuelve un objeto que describe la representación de la variable dni del receptor."
 
 	<magritteDescription>
@@ -53,42 +53,42 @@ LegalPerson >> cuitDescription [
 ]
 
 { #category : #'sin categoria' }
-LegalPerson >> customerType [
+YvLegalPerson >> customerType [
 
 	^'O'
 ]
 
 { #category : #'as yet unclassified' }
-LegalPerson >> dni [
+YvLegalPerson >> dni [
 	
 ^''
 ]
 
 { #category : #'sin categoria' }
-LegalPerson >> documentNumber [
+YvLegalPerson >> documentNumber [
 	"Devuelve el numero de documento del receptor."
 	
 	^self cuit
 ]
 
 { #category : #'as yet unclassified' }
-LegalPerson >> inicializarCUIT [
+YvLegalPerson >> inicializarCUIT [
 ]
 
 { #category : #'sin categoria' }
-LegalPerson >> inicializarCUIT: unNumeroDeCUIT [
+YvLegalPerson >> inicializarCUIT: unNumeroDeCUIT [
 
 	cuit:= unNumeroDeCUIT 
 ]
 
 { #category : #'sin categoria' }
-LegalPerson >> sex [
+YvLegalPerson >> sex [
 
 	^self customerType
 ]
 
 { #category : #'sin categoria' }
-LegalPerson >> tipoDocumento [
+YvLegalPerson >> tipoDocumento [
 
 	^'CUIT'
 ]

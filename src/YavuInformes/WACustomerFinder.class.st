@@ -15,7 +15,7 @@ WACustomerFinder >> aceptar [
 	| tipo numeroDeDocumento denominacion customer |
 	
 	self selectedCustomer isNil ifTrue: [^self cancelar].
-	customer := Person searchCustomerByCUIT: self selectedCustomer cuit.
+	customer := YavuPerson searchCustomerByCUIT: self selectedCustomer cuit.
 	customer notNil ifTrue: [^self answer:  customer].
 	tipo := CustomerType tipoSegunCUIT: self selectedCustomer cuit.
 	numeroDeDocumento := tipo documentoSegunCUIT: self selectedCustomer cuit.

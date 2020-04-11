@@ -115,7 +115,7 @@ FinancialReport class >> searchNaturalPersonbyNumber: numeroDocumento [
 		do: [ :each | 
 			clienteBuscado isNil
 				ifTrue: [ 
-					clienteBuscado := Person searchCustomerByNumber: numeroDocumento customerType: each.
+					clienteBuscado := YavuPerson searchCustomerByNumber: numeroDocumento customerType: each.
 					"Si no tiene tipo, tratamos de buscar el numero de cuit."
 					(clienteBuscado notNil and: [clienteBuscado customerTypeClass isNotDeclared]) ifTrue: [ 
 						self updateCuitTo: clienteBuscado.
@@ -127,7 +127,7 @@ FinancialReport class >> searchNaturalPersonbyNumber: numeroDocumento [
 { #category : #queries }
 FinancialReport class >> searchOrganizationByNumber: numeroDocumento [
 	
-	^Person searchCustomerByNumber: numeroDocumento customerType: Organization
+	^YavuPerson searchCustomerByNumber: numeroDocumento customerType: Organization
 ]
 
 { #category : #'instance-creation' }
@@ -483,7 +483,7 @@ FinancialReport >> validateAndCreateNewUserUsing: aYavuSystem [
 
 	| newCustomer |
 	((self customer isNil or: [ self customer name isEmpty ]) and: [self electoralRoll name notEmpty]) ifTrue: [ 
-		newCustomer := NaturalPerson newFromElectoralRollData: self electoralRoll.
+		newCustomer := YavuNaturalPerson newFromElectoralRollData: self electoralRoll.
 		aYavuSystem store: newCustomer.
 		self customer: newCustomer
 		 ]

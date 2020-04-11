@@ -28,11 +28,11 @@ FixedWidthFileImporter >> crearClienteDesde: anStream [
 	
 		anStream skip: 3. "Salteo el tipo de DNI." 
 		documentNumber := self removeLeftZerosFrom: (anStream next: 8).
-		customer := NaturalPerson 	searchCustomerByNumber: documentNumber customerType: CustomerTypeNotDeclared.
+		customer := YavuNaturalPerson 	searchCustomerByNumber: documentNumber customerType: CustomerTypeNotDeclared.
 		"NOTA: Debido a que en Junín, cuando se importo la historia, se hizo un trabajo para incluir el sexo cada vez que busquemos una persona por dni que ya tiene el cuil calculado no la vamos a encontrar. Entonces, nos fijamos si dió nil y buscamos directamente por dni."
-		customer isNil ifTrue: [ customer := NaturalPerson searchCustomerByDNI: documentNumber].
+		customer isNil ifTrue: [ customer := YavuNaturalPerson searchCustomerByDNI: documentNumber].
 	customer isNil ifTrue: [
-		customer := NaturalPerson nombre: (anStream next: 35) trimBoth dni: documentNumber sexo: CustomerTypeNotDeclared code.
+		customer := YavuNaturalPerson nombre: (anStream next: 35) trimBoth dni: documentNumber sexo: CustomerTypeNotDeclared code.
 		self completeCustomer: customer from: anStream.
 		clientes add: customer].
 	^customer

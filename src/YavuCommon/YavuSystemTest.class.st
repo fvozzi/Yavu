@@ -10,13 +10,13 @@ Class {
 { #category : #'as yet unclassified' }
 YavuSystemTest >> fvPerson [
 	
-	^NaturalPerson nombre: 'Pedro Vozzi' dni: '28824324' sexo: 'M'
+	^YavuNaturalPerson nombre: 'Pedro Vozzi' dni: '28824324' sexo: 'M'
 ]
 
 { #category : #'as yet unclassified' }
 YavuSystemTest >> fvozziUser [
 	
-	^SicUser new
+	^YavuUser new
 		name: 'fvozzi';
 		password: '123456';
 		roles: system roles;

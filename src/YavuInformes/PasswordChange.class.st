@@ -12,7 +12,7 @@ Class {
 { #category : #'sin categoria' }
 PasswordChange class >> entityClass [
 	
-	^SicUser
+	^YavuUser
 ]
 
 { #category : #'sin categoria' }

@@ -44,27 +44,6 @@ TBSYavuLogin >> login [
 	self succeedLogin: system
 ]
 
-{ #category : #rendering }
-TBSYavuLogin >> nuevo2 [
-
-	| answer  component |
-
-	component := Supplier new asComponent.
-	(component 
-					addDecoration: ((TBSMagritteFormDecoration 
-											buttons: {#save -> 'Guardar nuevo'. #cancel -> 'Cancelar'}) 
-											formCss: 'form-horizontal';
-											legend: 'Nueva entidad';
-											yourself);
-					yourself).
-	component magritteDescription tbsFormHorizontal: true.
-	self halt.
-	answer := self call: component.
-	answer notNil ifTrue: [
-		answer addToSystem.
-		self updateReport].
-]
-
 { #category : #accessing }
 TBSYavuLogin >> password [
 

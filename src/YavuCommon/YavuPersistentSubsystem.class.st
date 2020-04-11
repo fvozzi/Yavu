@@ -18,7 +18,7 @@ YavuPersistentSubsystem class >> rolesPredeterminados [
 	"Crea y devuelve los roles predeterminados del sistema."
 	
 	^OrderedCollection new
-		add: ((Role named: 'Administrador') menuElements: self current menuElements);
+		add: ((YavuRole named: 'Administrador') menuElements: self current menuElements);
 		yourself
 ]
 
@@ -231,7 +231,7 @@ YavuPersistentSubsystem >> store: anObject [
 { #category : #'as yet unclassified' }
 YavuPersistentSubsystem >> users [
 
-	^self yavuSystem readManyOf: SicUser 
+	^self yavuSystem readManyOf: YavuUser 
 ]
 
 { #category : #'as yet unclassified' }

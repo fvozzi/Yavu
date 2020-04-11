@@ -35,7 +35,7 @@ YavuTransientSubsystem >> commerceOfName: aName inCompany: aCompany [
 { #category : #'initialize-release' }
 YavuTransientSubsystem >> facundoVozziCustomer [
 
-	^NaturalPerson 
+	^YavuNaturalPerson 
 		nombre: 'Facundo Vozzi' dni: '27634975'  sexo: 'M' 
 ]
 
@@ -89,12 +89,12 @@ YavuTransientSubsystem >> initializeFinancialSituations [
 YavuTransientSubsystem >> initializeMenuElements [ 
 	
 	menuElements := OrderedCollection new
-		add: ((CompositeMenuElement label: 'Inicio' presenterClass: TBSYavuSystemView) id: 1);
-		add: ((CompositeMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView) id: 2);
-		add: ((CompositeMenuElement label: 'Tablero' presenterClass: WAActualizarSituacionesView) id: 3);
-		add: ((CompositeMenuElement label: 'Ayuda' presenterClass: WAHelpVideosView) id: 4);
-		add: ((CompositeMenuElement label: 'Acerca de' presenterClass: WAHelpVideosView) id: 5);
-		add: ((CompositeMenuElement label: 'Salir' presenterClass: WAConfirmLogOffView) id: 6);
+		add: ((YavuCompositeMenuElement label: 'Inicio' presenterClass: TBSYavuSystemView) id: 1);
+		add: ((YavuCompositeMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView) id: 2);
+		add: ((YavuCompositeMenuElement label: 'Tablero' presenterClass: WAActualizarSituacionesView) id: 3);
+		add: ((YavuCompositeMenuElement label: 'Ayuda' presenterClass: WAHelpVideosView) id: 4);
+		add: ((YavuCompositeMenuElement label: 'Acerca de' presenterClass: WAHelpVideosView) id: 5);
+		add: ((YavuCompositeMenuElement label: 'Salir' presenterClass: WAConfirmLogOffView) id: 6);
 		yourself
 ]
 

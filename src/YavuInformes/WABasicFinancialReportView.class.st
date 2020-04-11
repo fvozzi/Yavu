@@ -793,7 +793,7 @@ WABasicFinancialReportView >> setElectoralRollData [
 	| newCustomer |
 	self financialReport electoralRoll: (self padronDataReader valueForCustomer: self financialReport customer) basicData.
 	((self financialReport customer isNil or: [ self financialReport customer name isEmpty ]) and: [self financialReport electoralRoll name notEmpty]) ifTrue: [ 
-		newCustomer := NaturalPerson newFromElectoralRollData: self financialReport electoralRoll.
+		newCustomer := YavuNaturalPerson newFromElectoralRollData: self financialReport electoralRoll.
 		newCustomer store.
 		self financialReport customer: newCustomer
 		 ]

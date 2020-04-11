@@ -1,6 +1,6 @@
 Class {
 	#name : #Company,
-	#superclass : #Entity,
+	#superclass : #YvEntity,
 	#instVars : [
 		'commerces',
 		'packagesOfReports'
@@ -90,5 +90,5 @@ Company >> userOfName: aName password: aPassword [
 { #category : #'sin categoria' }
 Company >> users [
 
-	^(self yavuSystem readManyOf: SicUser where: [:each | each company  = self]) asOrderedCollection
+	^(self yavuSystem readManyOf: YavuUser where: [:each | each company  = self]) asOrderedCollection
 ]

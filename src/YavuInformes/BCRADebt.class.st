@@ -1,6 +1,6 @@
 Class {
 	#name : #BCRADebt,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'owner',
 		'denomination',

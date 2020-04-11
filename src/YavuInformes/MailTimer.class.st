@@ -1,6 +1,6 @@
 Class {
 	#name : #MailTimer,
-	#superclass : #YavuObject,
+	#superclass : #YvObject,
 	#instVars : [
 		'timer'
 	],
@@ -65,7 +65,7 @@ MailTimer >> timer: aTimer [
 { #category : #'sin categoria' }
 MailTimer >> usersToBeNotified [
 
-	^SicUser all reject: [:each | each email isNil or: [each email isEmpty]]
+	^YavuUser all reject: [:each | each email isNil or: [each email isEmpty]]
 	
 
 ]
