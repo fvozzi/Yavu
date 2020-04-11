@@ -38,7 +38,6 @@ TBSYavuLogin >> login [
 
 	| system |
 
-
 	system := YavuEnvironment newSystem.
 	[system loginUserName: self userName password: self password] on: Error do: [ :ex | ^self failedLogin: ex description ].
 	self succeedLogin: system
@@ -95,6 +94,7 @@ TBSYavuLogin >> resetErrorDescription [
 { #category : #accessing }
 TBSYavuLogin >> succeedLogin: aSystem [ 
 
+	self halt.
 	self resetErrorDescription.
 	self session yavuSystem: aSystem.
 	self call: aSystem mainView new
