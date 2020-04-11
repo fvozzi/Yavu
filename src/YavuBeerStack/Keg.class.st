@@ -1,6 +1,6 @@
 Class {
 	#name : #Keg,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'number',
 		'size'

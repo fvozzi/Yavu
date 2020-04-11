@@ -8,8 +8,8 @@ Instance Variables:
 	comercios	comercios permitidos para interacturar con el sistema.
 "
 Class {
-	#name : #SicUser,
-	#superclass : #YvEntity,
+	#name : #YavuUser,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'roles',
 		'email',
@@ -23,14 +23,14 @@ Class {
 }
 
 { #category : #'sin categoria' }
-SicUser class >> allForCompany: aCompany [
+YavuUser class >> allForCompany: aCompany [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	^self yavuSystem read: self where: [:each | each company  = aCompany]
 ]
 
 { #category : #'as yet unclassified' }
-SicUser class >> allForCompany: aCompany searchSelector: aSearchSelector searchValue: aSearchValue [
+YavuUser class >> allForCompany: aCompany searchSelector: aSearchSelector searchValue: aSearchValue [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	aSearchValue isEmpty ifTrue: [ ^self allForCompany: aCompany].
@@ -39,46 +39,46 @@ SicUser class >> allForCompany: aCompany searchSelector: aSearchSelector searchV
 ]
 
 { #category : #testing }
-SicUser class >> isVoyageRoot [
+YavuUser class >> isVoyageRoot [
 
 	 ^true 
 ]
 
 { #category : #'sin categoria' }
-SicUser class >> label [
+YavuUser class >> label [
 	"Devuelve una descripción de la clase del receptor."
 
 	^'Usuario'
 ]
 
 { #category : #'sin categoria' }
-SicUser class >> name: aString company: aCompany [
+YavuUser class >> name: aString company: aCompany [
 	"Crea una nueva instancia del receptor inicializada con nombre = unString y empresa = unaEmpresa."
 	 
 	^(self name: aString) initializeCompany: aCompany
 ]
 
 { #category : #'sin categoria' }
-SicUser >> addRole: aRole [
+YavuUser >> addRole: aRole [
 	
 	self roles add: aRole
 ]
 
 { #category : #'as yet unclassified' }
-SicUser >> addToSystem [
+YavuUser >> addToSystem [
 	
 	self yavuSystem loginSubsystem addUser: self
 ]
 
 { #category : #'sin categoria' }
-SicUser >> agregarComercio: unComercio [ 
+YavuUser >> agregarComercio: unComercio [ 
 	"Agrega unComercio permitido a la lista de comercios del receptor."
 	
 	^self commerces add: unComercio
 ]
 
 { #category : #'sin categoria' }
-SicUser >> allowedEntitiesClasses [
+YavuUser >> allowedEntitiesClasses [
 	"Devuelve las clases de entidades del receptor."
 
 	^self roles 
@@ -87,40 +87,40 @@ SicUser >> allowedEntitiesClasses [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> comerciosAsignados [
+YavuUser >> comerciosAsignados [
 	"Devuelve la cantidad de comercios asginados al receptor."
 	
 	^self commerces size
 ]
 
 { #category : #'sin categoria' }
-SicUser >> commerces [
+YavuUser >> commerces [
 	"Devuelve la colección de comercios permitidos del receptor."
 	
 	^commerces
 ]
 
 { #category : #'sin categoria' }
-SicUser >> commerces: unColeccionDeComercios [
+YavuUser >> commerces: unColeccionDeComercios [
 	"Setea la colección de comercios permitidos del receptor."
 	
 	commerces:= unColeccionDeComercios
 ]
 
 { #category : #'sin categoria' }
-SicUser >> company [ 
+YavuUser >> company [ 
 
 	^company
 ]
 
 { #category : #'sin categoria' }
-SicUser >> company: unaEmpresa [
+YavuUser >> company: unaEmpresa [
 
 	company:= unaEmpresa
 ]
 
 { #category : #'as yet unclassified' }
-SicUser >> defaultCommerce [
+YavuUser >> defaultCommerce [
 	"Devuelve el comercio predeterminado del receptor. 
 	NOTA: por ahora es el primero pero si van a aparecer muchos usuarios con más de un comercio
 	tendriamos que setearlo a una variable de instancia."
@@ -133,7 +133,7 @@ SicUser >> defaultCommerce [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionClave [
+YavuUser >> descriptionClave [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -146,7 +146,7 @@ SicUser >> descriptionClave [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionEMail [
+YavuUser >> descriptionEMail [
 	"Devuelve un objeto que describe la representación de la variable correo electrónico del receptor."
 
 	<magritteDescription>
@@ -158,7 +158,7 @@ SicUser >> descriptionEMail [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionNombreCompleto [
+YavuUser >> descriptionNombreCompleto [
 	"Devuelve un objeto que describe la representación de la variable nombre completo del receptor."
 
 	<magritteDescription>
@@ -170,7 +170,7 @@ SicUser >> descriptionNombreCompleto [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionRol [
+YavuUser >> descriptionRol [
 	
 	<magritteDescription>
 	^MAMultipleOptionDescription new
@@ -184,7 +184,7 @@ SicUser >> descriptionRol [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> descriptionTelefono [
+YavuUser >> descriptionTelefono [
 	"Devuelve un objeto que describe la representación de la variable nombre completo del receptor."
 
 	<magritteDescription>
@@ -196,21 +196,21 @@ SicUser >> descriptionTelefono [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> email [
+YavuUser >> email [
 	"Devuelve el contenido de la variable de instancia email del receptor."
 	
 	^email
 ]
 
 { #category : #'sin categoria' }
-SicUser >> email: unEmail [
+YavuUser >> email: unEmail [
 	"Establece el contenido de la variable de instancia email del receptor con unEmail."
 	
 	email:= unEmail
 ]
 
 { #category : #'as yet unclassified' }
-SicUser >> financialSituationsOfCommerceFileReference [
+YavuUser >> financialSituationsOfCommerceFileReference [
 
 	"hay usuarios que pueden tener habilitado más de un comercio pero no parece tener sentido que recien el mail esos usuarios."
 	self commerces first createFileOfFinancialSituations.
@@ -218,7 +218,7 @@ SicUser >> financialSituationsOfCommerceFileReference [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> fullName [
+YavuUser >> fullName [
 	"Devuelve el nombre completo del usuario.
 	NOTA: a diferencia del nombre que refiere al nombre de usuario en el sistema es el nombre y apellido del usuario."
 	
@@ -226,14 +226,14 @@ SicUser >> fullName [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> fullName: unNombre [
+YavuUser >> fullName: unNombre [
 	"Establece el nombre completo del usuario con unNombre."
 	
 	fullName:= unNombre
 ]
 
 { #category : #'sin categoria' }
-SicUser >> initialize [
+YavuUser >> initialize [
 	"Initialize the receiver instances variable."
 	
 	super initialize.
@@ -243,62 +243,62 @@ SicUser >> initialize [
 ]
 
 { #category : #'sin categoria' }
-SicUser >> initializeCompany: unaEmpresa [ 
+YavuUser >> initializeCompany: unaEmpresa [ 
 
 	company := unaEmpresa
 ]
 
 { #category : #'sin categoria' }
-SicUser >> maDescriptionForReport [
+YavuUser >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
 	^super maDescriptionForReport reject: [:each | each class = MAPasswordDescription]
 ]
 
 { #category : #'as yet unclassified' }
-SicUser >> menuElements [
+YavuUser >> menuElements [
 	"needs refactoring."
 	
 	^self roles inject: OrderedCollection new into: [:accum :each | accum addAll: each menuElements; yourself]
 ]
 
 { #category : #'sin categoria' }
-SicUser >> password [
+YavuUser >> password [
 	^ password
 ]
 
 { #category : #'sin categoria' }
-SicUser >> password: anObject [
+YavuUser >> password: anObject [
 	password := anObject
 ]
 
 { #category : #'sin categoria' }
-SicUser >> phoneNumber [
+YavuUser >> phoneNumber [
 	"Devuelve el contenido de la variable de instancia telefono del receptor."
 	
 	^phoneNumber
 ]
 
 { #category : #'sin categoria' }
-SicUser >> phoneNumber: unTelefono [
+YavuUser >> phoneNumber: unTelefono [
 	"Establece unTelefono como el numero de telefono del receptor."
 	
 	phoneNumber := unTelefono
 ]
 
 { #category : #'sin categoria' }
-SicUser >> roles [
+YavuUser >> roles [
 	^ roles
 ]
 
 { #category : #'sin categoria' }
-SicUser >> roles: anObject [
+YavuUser >> roles: anObject [
 
 	roles := anObject
 ]
 
 { #category : #'as yet unclassified' }
-SicUser >> sortedCommerces [
+YavuUser >> sortedCommerces [
 	"Devuelve la colección ordenada de comercios permitidos del receptor."
 	
 	^self commerces asSortedCollection

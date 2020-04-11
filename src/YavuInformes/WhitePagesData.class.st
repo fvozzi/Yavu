@@ -1,6 +1,6 @@
 Class {
 	#name : #WhitePagesData,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'name',
 		'phone',

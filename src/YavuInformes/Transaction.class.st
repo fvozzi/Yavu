@@ -1,6 +1,6 @@
 Class {
 	#name : #Transaction,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'entity',
 		'date',

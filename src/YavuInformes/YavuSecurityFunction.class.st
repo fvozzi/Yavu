@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuSecurityFunction,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'yavuObjectClass'
 	],

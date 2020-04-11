@@ -1,6 +1,6 @@
 Class {
 	#name : #ObjectQueryStrategy,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'objectQueriedClass',
 		'date'

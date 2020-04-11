@@ -4,7 +4,7 @@ Esta clase modela la abstracción para agrupar cada fuente nutricional que agreg
 "
 Class {
 	#name : #NutritionalSource,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'reader'
 	],

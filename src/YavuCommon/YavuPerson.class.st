@@ -1,6 +1,6 @@
 Class {
-	#name : #YvPerson,
-	#superclass : #YvEntity,
+	#name : #YavuPerson,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'situacionesComerciales',
 		'cuit'
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YvPerson class >> all [
+YavuPerson class >> all [
 	"Devuelve todas las intancias del receptor en el sistema."
 
 	"Por performance no devolvemos todas las filas."
@@ -18,7 +18,7 @@ YvPerson class >> all [
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBlock [
+YavuPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBlock [
 	"Devuelve un invividuo o una organizacion dependiendo de si unString corresponde a un número de documento o a un número de cuit.
 	NOTA: se debe tener en cuenta el sexo por existir números de dni repetidos entre varones y mujeres."
 
@@ -29,7 +29,7 @@ YvPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBloc
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBlock session: aSession [
+YavuPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBlock session: aSession [
 	"Devuelve un invividuo o una organizacion dependiendo de si unString corresponde a un número de documento o a un número de cuit.
 	NOTA: se debe tener en cuenta el sexo por existir números de dni repetidos entre varones y mujeres."
 
@@ -42,7 +42,7 @@ YvPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBloc
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> customersOfNameBeginsWith: firstsLetterOfName [
+YavuPerson class >> customersOfNameBeginsWith: firstsLetterOfName [
 	"Devuelve una coleccion de clientes cuyo nombre comienza con unString."
 
 	| likeExpression |
@@ -51,82 +51,82 @@ YvPerson class >> customersOfNameBeginsWith: firstsLetterOfName [
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> descripcionNombre [
+YavuPerson class >> descripcionNombre [
 	
 	^'Nombre'
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> named: unString [
+YavuPerson class >> named: unString [
 
 	^self new initializeName: unString
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> numeroDeDocumento: unString nombre: unNombre sexo: otroString [
+YavuPerson class >> numeroDeDocumento: unString nombre: unNombre sexo: otroString [
 	"Crea una nueva instancia de alguna de las subclases del receptor dependiendo de otroString. Si es 'O'
 	crea unaOraganizacion y si es 'F' o 'M' crea unIndividuo."
 	
 	^otroString = 'O'
-		ifTrue: [YvLegalPerson nombre: unNombre cuit: unString]
-		ifFalse: [YvNaturalPerson nombre: unNombre dni: unString sexo: otroString]
+		ifTrue: [YavuLegalPerson nombre: unNombre cuit: unString]
+		ifFalse: [YavuNaturalPerson nombre: unNombre dni: unString sexo: otroString]
 ]
 
 { #category : #'sin categoria' }
-YvPerson class >> searchCustomerByCUIT: aCuitLiteral [
+YavuPerson class >> searchCustomerByCUIT: aCuitLiteral [
 	"Devuelve una instancia del receptor desde la BD cuyo cuit es igual a aCUITLiteral."
 
 	^self yavuSystem readOneOf: self where: [:each | each cuit = aCuitLiteral]
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> = otroCliente [
+YavuPerson >> = otroCliente [
 	"Answer whether the receiver is equal to the argument."
 	
 	^super = otroCliente and: [self cuit = otroCliente cuit]
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> bouncedChecks [
+YavuPerson >> bouncedChecks [
 	"consulta en la BD los cheques rechazados del receptor y los devuelve."
 	
 	^self yavuSystem readManyOf:  BouncedCheck where:  [ :each | each customer = self ]
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> cuit [
+YavuPerson >> cuit [
 
 	cuit isNil ifTrue: [self inicializarCUIT].
 	^cuit
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> cuit: unCUIT [
+YavuPerson >> cuit: unCUIT [
 	
 	cuit:= unCUIT
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> customerTypeClass [
+YavuPerson >> customerTypeClass [
 
 	^CustomerType atCodigo: self customerType 
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> descripcionNombre [
+YavuPerson >> descripcionNombre [
 	
 	^self class descripcionNombre
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> documentNumber [
+YavuPerson >> documentNumber [
 	"Devuelve el numero de documento del receptor."
 	
 	self subclassResponsibility
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> documentNumberDescription [
+YavuPerson >> documentNumberDescription [
 	"Devuelve un objeto que describe la representaciÃ³n de la variable numero de documento del receptor."
 
 	<magritteDescription>
@@ -139,40 +139,40 @@ YvPerson >> documentNumberDescription [
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> eliminar [
+YavuPerson >> eliminar [
 	"Elimina la instancia del receptor a la colección de elementos del owner."
 	
 	^self sistema removerCliente: self
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> financialSituations [
+YavuPerson >> financialSituations [
 
 	^(self yavuSystem readManyOf: FinancialSituation where: [:each | each customer = self]) asOrderedCollection
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> hash [
+YavuPerson >> hash [
 	"Answer a SmallInteger whose value is related to the receiver's identity."
 	
 	^super hash bitXor: self cuit hash
 ]
 
 { #category : #'sin categoria' }
-YvPerson >> initialize [
+YavuPerson >> initialize [
 
 	super initialize.
 	situacionesComerciales := OrderedCollection new
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> isNaturalPerson [
+YavuPerson >> isNaturalPerson [
 
 	^false
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> javascriptOn: aStream [
+YavuPerson >> javascriptOn: aStream [
 
 	| dn |
 	
@@ -181,14 +181,14 @@ YvPerson >> javascriptOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> lostChecks [
+YavuPerson >> lostChecks [
 	"consulta en la BD los cheques perdidos del receptor y los devuelve."
 	
 	^self yavuSystem readManyOf:  LostCheck where:  [ :each | each customer = self ]
 ]
 
 { #category : #'as yet unclassified' }
-YvPerson >> reportEmissions [
+YavuPerson >> reportEmissions [
 	"consulta en la BD los cheques rechazados del receptor y los devuelve."
 	
 	^self yavuSystem readManyOf:  ReportEmission where:  [ :each | each customer = self ]

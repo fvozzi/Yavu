@@ -1,6 +1,6 @@
 Class {
 	#name : #Timer,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'interval',
 		'enabled'

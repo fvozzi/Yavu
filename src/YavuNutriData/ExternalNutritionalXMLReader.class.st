@@ -5,7 +5,7 @@ Deberiamos usar una instancia de esta clase para cada acceso y ese acceso al ser
 "
 Class {
 	#name : #ExternalNutritionalXMLReader,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'xmlDocument'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #MailTimer,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'timer'
 	],

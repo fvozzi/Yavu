@@ -1,6 +1,6 @@
 Class {
 	#name : #FinancialSituationInputStrategy,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#category : #'YavuInformes-DomainModel'
 }
 

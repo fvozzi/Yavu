@@ -1,6 +1,6 @@
 Class {
 	#name : #PackageOfReports,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'numberOfReports',
 		'packagePrice',

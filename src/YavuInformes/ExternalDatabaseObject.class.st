@@ -1,6 +1,6 @@
 Class {
 	#name : #ExternalDatabaseObject,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'atributos'
 	],

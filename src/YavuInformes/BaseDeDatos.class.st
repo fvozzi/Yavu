@@ -1,6 +1,6 @@
 Class {
 	#name : #BaseDeDatos,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'connection',
 		'connectionSettings'

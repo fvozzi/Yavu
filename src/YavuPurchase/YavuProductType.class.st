@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuProductType,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'category'
 	],

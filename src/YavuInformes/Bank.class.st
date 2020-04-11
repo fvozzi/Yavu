@@ -1,6 +1,6 @@
 Class {
 	#name : #Bank,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#category : #'YavuInformes-DomainModel'
 }
 

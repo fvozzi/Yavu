@@ -41,7 +41,7 @@ Caso contrario XY pasa a ser (11- Resto).
 "
 Class {
 	#name : #YvCUIT,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'xy',
 		'dni',

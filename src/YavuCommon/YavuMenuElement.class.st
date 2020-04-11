@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuMenuElement,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'presenterClass',
 		'subsystem'

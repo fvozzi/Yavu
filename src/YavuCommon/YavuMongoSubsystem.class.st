@@ -10,6 +10,7 @@ Class {
 { #category : #initialization }
 YavuMongoSubsystem >> initialize [ 
 
+	self halt.
 	super initialize.
 	repository := VOMongoRepository host: 'localhost' 	database: 'yavuSystem'.
 	repository enableSingleton

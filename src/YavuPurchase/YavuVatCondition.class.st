@@ -1,5 +1,5 @@
 Class {
 	#name : #YavuVatCondition,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#category : #'YavuPurchase-Entities'
 }

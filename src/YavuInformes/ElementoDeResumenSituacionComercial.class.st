@@ -1,6 +1,6 @@
 Class {
 	#name : #ElementoDeResumenSituacionComercial,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'situacionComercial',
 		'situacionesAnteriores'

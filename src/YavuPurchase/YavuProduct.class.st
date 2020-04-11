@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuProduct,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'brand',
 		'productType'

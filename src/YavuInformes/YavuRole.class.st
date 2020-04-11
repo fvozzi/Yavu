@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuRole,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'menuElements',
 		'securityFunctions'

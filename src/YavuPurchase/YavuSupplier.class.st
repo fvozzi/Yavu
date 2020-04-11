@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuSupplier,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'businessName',
 		'vatCondition',

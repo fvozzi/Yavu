@@ -3,7 +3,7 @@ Modela la composición nutricional de cada alimento.
 "
 Class {
 	#name : #FoodComposition,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#instVars : [
 		'code',
 		'unit',

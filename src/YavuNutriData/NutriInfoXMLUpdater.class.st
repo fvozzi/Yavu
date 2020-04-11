@@ -4,7 +4,7 @@ Este clase mapea la información disponible en www.nutriinfo.com.ar y la persist
 "
 Class {
 	#name : #NutriInfoXMLUpdater,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'znClient',
 		'xmlDocument'

@@ -1,6 +1,6 @@
 Class {
 	#name : #Factory,
-	#superclass : #YvObject,
+	#superclass : #YavuObject,
 	#instVars : [
 		'objectClass',
 		'instances',

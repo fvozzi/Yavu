@@ -1,6 +1,6 @@
 Class {
 	#name : #YavuBrand,
-	#superclass : #YvEntity,
+	#superclass : #YavuEntity,
 	#category : #'YavuPurchase-Entities'
 }
 
