@@ -1,5 +1,5 @@
 Class {
 	#name : #ReportData,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#category : #'YavuInformes-DomainModel'
 }

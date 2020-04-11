@@ -1,6 +1,6 @@
 Class {
 	#name : #CheckOperation,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'customer',
 		'checkNumber',

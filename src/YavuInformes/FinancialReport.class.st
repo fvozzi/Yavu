@@ -1,6 +1,6 @@
 Class {
 	#name : #FinancialReport,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'datosPadronElectoral',
 		'datosAFIP',

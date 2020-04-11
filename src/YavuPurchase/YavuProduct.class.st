@@ -8,6 +8,36 @@ Class {
 	#category : #'YavuPurchase-Entities'
 }
 
+{ #category : #testing }
+YavuProduct class >> isVoyageRoot [
+
+	 ^true 
+]
+
+{ #category : #'sin categoria' }
+YavuProduct class >> label [ 
+
+	 ^ 'Producto'
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> addToSystem [
+	
+	self yavuSystem purchaseSubsystem addProduct: self
+]
+
+{ #category : #accessing }
+YavuProduct >> brand [
+
+	 ^ brand
+]
+
+{ #category : #accessing }
+YavuProduct >> brand: aBrand [
+
+	 brand := aBrand
+]
+
 { #category : #accessing }
 YavuProduct >> category [
 
@@ -22,7 +52,7 @@ YavuProduct >> descriptionBrand [
 		accessor: #brand;
 		label: 'Marca';
 		priority: 120;
-		options: YvBrand allInstances;
+		options: YavuBrand all;
 		beSorted;
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
@@ -51,7 +81,7 @@ YavuProduct >> descriptionProductType [
 		accessor: #productType;
 		label: 'Tipo';
 		priority: 130;
-		options: YavuProductType allInstances;
+		options: YavuProductType all;
 		beSorted;
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
@@ -70,4 +100,16 @@ YavuProduct >> name [
 YavuProduct >> productType [
 
 	 ^ productType
+]
+
+{ #category : #accessing }
+YavuProduct >> productType: aProductType [
+
+	 productType := aProductType
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> removeFromSystem [
+	
+	self yavuSystem purchaseSubsystem removeProduct: self
 ]

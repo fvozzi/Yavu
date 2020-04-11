@@ -1,6 +1,6 @@
 Class {
 	#name : #SynchronizationDatabase,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'synchronizationDate'
 	],

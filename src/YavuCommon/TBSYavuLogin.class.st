@@ -94,7 +94,6 @@ TBSYavuLogin >> resetErrorDescription [
 { #category : #accessing }
 TBSYavuLogin >> succeedLogin: aSystem [ 
 
-	self halt.
 	self resetErrorDescription.
 	self session yavuSystem: aSystem.
 	self call: aSystem mainView new

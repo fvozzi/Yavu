@@ -159,7 +159,7 @@ TBSEntitiesBrowserView >> renderAddEntityForm: anEntity [
 		TBSMagritteFormDecoration new
 					buttons: { #save -> 'Guardar'. #cancel -> 'Cancelar' }; 
 					formCss: 'form-horizontal';
-					legend: 'Nueva entidad';
+					legend: 'Agregar ', anEntity class label;
 					yourself).
 	component addDecoration: TBSMagritteValidationDecoration new.
 	component magritteDescription tbsFormHorizontal: true.

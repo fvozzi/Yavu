@@ -1,6 +1,6 @@
 Class {
 	#name : #ImportadorDeInformes,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'informes',
 		'clientes',

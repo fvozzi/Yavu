@@ -1,6 +1,6 @@
 Class {
 	#name : #BCRAData,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'bcraDebts',
 		'bcraPersonalChecks',

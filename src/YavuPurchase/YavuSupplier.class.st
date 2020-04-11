@@ -25,12 +25,6 @@ YavuSupplier class >> label [
 	^ 'Proveedor'
 ]
 
-{ #category : #crud }
-YavuSupplier >> addToSystem [
-	
-	self yavuSystem purchaseSubsystem addSupplier: self
-]
-
 { #category : #accessing }
 YavuSupplier >> address [
 	^ address
@@ -83,6 +77,7 @@ YavuSupplier >> descriptionBusinessName [
         	accessor: #businessName;
         	label: 'Razón Social';
         	priority: 110;
+			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
@@ -98,15 +93,6 @@ YavuSupplier >> descriptionCUITNumber [
 		beRequired;
 		componentClass: TBSMagritteTextInputComponent;
       	yourself
-
-]
-
-{ #category : #descriptions }
-YavuSupplier >> descriptionContainer [
-	<magritteContainer>
-	^ super descriptionContainer
-		componentRenderer: TBSMagritteFormRenderer;
-		yourself
 
 ]
 

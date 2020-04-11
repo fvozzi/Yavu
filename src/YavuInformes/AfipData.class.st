@@ -1,6 +1,6 @@
 Class {
 	#name : #AfipData,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'contributions'
 	],

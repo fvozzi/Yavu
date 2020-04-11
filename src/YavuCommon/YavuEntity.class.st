@@ -132,7 +132,8 @@ YavuEntity class >> possibleSearchSelectors [
 
 { #category : #'as yet unclassified' }
 YavuEntity >> addToSystem [
-	self subclassResponsibility.
+	
+	self yavuSystem storedSubsystem save: self
 ]
 
 { #category : #'sin categoria' }
@@ -157,6 +158,15 @@ YavuEntity >> atributos: anObject [
 YavuEntity >> defaultSearchLabel [
 
 	^self class defaultSearchLabel 
+]
+
+{ #category : #'magritte descriptions' }
+YavuEntity >> descriptionContainer [
+	<magritteContainer>
+	^ super descriptionContainer
+		componentRenderer: TBSMagritteFormRenderer;
+		yourself
+
 ]
 
 { #category : #descriptions }

@@ -1,6 +1,6 @@
 Class {
 	#name : #PasswordChange,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'currentPassword',
 		'newPassword',

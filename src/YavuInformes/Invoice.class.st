@@ -1,6 +1,6 @@
 Class {
 	#name : #Invoice,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'elements'
 	],

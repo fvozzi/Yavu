@@ -13,6 +13,12 @@ YavuProductType class >> isVoyageRoot [
 	 ^true 
 ]
 
+{ #category : #'sin categoria' }
+YavuProductType class >> label [ 
+
+	^ 'Tipo de producto'
+]
+
 { #category : #'as yet unclassified' }
 YavuProductType >> addToSystem [
 
@@ -39,9 +45,15 @@ YavuProductType >> descriptionSubcategory [
 		accessor: #category;
 		label: 'Categoría';
 		priority: 140;
-		options: YvCategory allInstances;
+		options: YavuCategory all;
 		beSorted;
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
+]
+
+{ #category : #removing }
+YavuProductType >> removeFromSystem [
+	
+	self yavuSystem purchaseSubsystem removeProductType: self
 ]

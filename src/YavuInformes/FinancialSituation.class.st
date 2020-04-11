@@ -25,7 +25,7 @@ type
 "
 Class {
 	#name : #FinancialSituation,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'amountOfDebt',
 		'customer',

@@ -1,6 +1,6 @@
 Class {
 	#name : #ReportEmission,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'customer',
 		'user',

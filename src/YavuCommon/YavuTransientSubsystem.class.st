@@ -118,10 +118,16 @@ YavuTransientSubsystem >> instancesOf: aClass [
 	^instances at: aClass ifAbsentPut: [ OrderedCollection new ]
 ]
 
+{ #category : #'as yet unclassified' }
+YavuTransientSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [ 
+	
+	^ (self instancesOf: aClass ) select: [ :each | each entity = aYavuSupplier ]
+]
+
 { #category : #adding }
 YavuTransientSubsystem >> save: anObject [
 
-	
+	(self instancesOf: anObject class) add: anObject 
 ]
 
 { #category : #accessing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #QuotedMarketData,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'dolar',
 		'cereal'

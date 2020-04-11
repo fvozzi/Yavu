@@ -71,11 +71,12 @@ YavuPurchaseSubsystem >> addProductType: aProductType [
 	self system storedSubsystem save: aProductType
 ]
 
-{ #category : #crud }
-YavuPurchaseSubsystem >> addSupplier: aSupplier [
-	
-	self suppliers add: aSupplier.
-	self system storedSubsystem save: aSupplier
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
+
+	self halt.
+	self system storedSubsystem save: aPurchaseInvoice
+
 ]
 
 { #category : #accessing }
@@ -106,6 +107,17 @@ YavuPurchaseSubsystem >> productTypes [
 YavuPurchaseSubsystem >> products [
 
 	^ products ifNil: [ products := self system storedSubsystem instancesOf: YavuProduct ]
+]
+
+{ #category : #'As yet unclassified' }
+YavuPurchaseSubsystem >> purchaseInvoices [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [ 
+	
+	 ^ self system storedSubsystem instancesOfClass: PurchaseInvoice withEntity: aYavuSupplier
 ]
 
 { #category : #crud }
@@ -139,7 +151,7 @@ YavuPurchaseSubsystem >> removeSupplier: aSupplier [
 { #category : #accessing }
 YavuPurchaseSubsystem >> suppliers [
 
-	^ suppliers ifNil: [ suppliers := self system storedSubsystem instancesOf: YavuSupplier ]
+	^ self system storedSubsystem instancesOf: YavuSupplier
 ]
 
 { #category : #crud }

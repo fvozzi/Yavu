@@ -1,61 +1,61 @@
 Class {
-	#name : #Transaction,
+	#name : #YavuTransaction,
 	#superclass : #YavuObject,
 	#instVars : [
 		'entity',
 		'date',
 		'ts'
 	],
-	#category : #'YavuInformes-DomainModel'
+	#category : #'YavuCommon-Transactions'
 }
 
 { #category : #'sin categoria' }
-Transaction class >> allowMultipleEntitiesForQuery [
+YavuTransaction class >> allowMultipleEntitiesForQuery [
 
 	^true
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> defaultObjectQueryStrategy [
+YavuTransaction class >> defaultObjectQueryStrategy [
 
 	^FromToQueryStrategy forClass: self
 	
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> defaultSearchLabel [
+YavuTransaction class >> defaultSearchLabel [
 
 	^self entityLabel 
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> descripcion [
+YavuTransaction class >> descripcion [
 	"Answer the receiver description string."
 	
 	^'Transacción'
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> entity: unaEntidad date: unaFecha [
+YavuTransaction class >> entity: unaEntidad date: unaFecha [
 	"Crea una nueva instancia del receptor y la inicializa con unaEntidad y unaFecha."
 	
 	^super new initializeEntity: unaEntidad date: unaFecha
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> entityClass [
+YavuTransaction class >> entityClass [
 	
 	^self subclassResponsibility
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> entityLabel [
+YavuTransaction class >> entityLabel [
 
 	^'Entidad'
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instanceCurrentAt: aDate entity: aCustomer [ 
+YavuTransaction class >> instanceCurrentAt: aDate entity: aCustomer [ 
 
 	| instances |
 	
@@ -65,46 +65,46 @@ Transaction class >> instanceCurrentAt: aDate entity: aCustomer [
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instanceOf: startDate entity: anEntity [
+YavuTransaction class >> instanceOf: startDate entity: anEntity [
 
 	^self yavuSystem readOneOf: self 
 		where: [:each | (each entity in: (Array with: anEntity)) AND: [each date between: startDate and: startDate]]
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
+YavuTransaction class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
 
 	^self yavuSystem readManyOf: self 
 		where: [:each | (each entity in: (aCollectionOfEntities)) AND: [each date between: startDate and: endDate]]
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instancesFrom: startDate to: endDate entity: anEntity [
+YavuTransaction class >> instancesFrom: startDate to: endDate entity: anEntity [
 
 	^self instancesFrom: startDate to: endDate  entities: (Array with: anEntity)
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> instancesFrom: startDate to: endDate for: anEntity [
+YavuTransaction class >> instancesFrom: startDate to: endDate for: anEntity [
 
 	^self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instancesFrom: startDate to: endDate forCompany: aCompany [
+YavuTransaction class >> instancesFrom: startDate to: endDate forCompany: aCompany [
 
 	^self yavuSystem readManyOf: self 
 		where: [:each | each entity company = aCompany AND: [each date between: startDate and: endDate]]
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> instancesOf: startDate entity: anEntity [
+YavuTransaction class >> instancesOf: startDate entity: anEntity [
 
 	^self instancesFrom: startDate to: startDate entity: anEntity
 ]
 
 { #category : #'as yet unclassified' }
-Transaction class >> possibleSearchSelectors [
+YavuTransaction class >> possibleSearchSelectors [
 
 	^Dictionary new 
 		at: self entityLabel put: #entity;
@@ -112,7 +112,7 @@ Transaction class >> possibleSearchSelectors [
 ]
 
 { #category : #'sin categoria' }
-Transaction class >> waTableReportColumns [
+YavuTransaction class >> waTableReportColumns [
 
 	^OrderedCollection new
 			add: (WAReportColumn	selector: #entity title: self entityLabel);
@@ -121,14 +121,14 @@ Transaction class >> waTableReportColumns [
 ]
 
 { #category : #'sin categoria' }
-Transaction >> <= otherTransaction [
+YavuTransaction >> <= otherTransaction [
 	"Answer whether the receiver is less than or equal to the argument."
 	
 	^self entity <= otherTransaction entity and: [self date <= otherTransaction date]
 ]
 
 { #category : #'sin categoria' }
-Transaction >> = otraTransaccion [
+YavuTransaction >> = otraTransaccion [
 	"Devuelve true si el receptor es igual a otraTransaccion."
 
 	self class = otraTransaccion class ifFalse: [^false].
@@ -136,19 +136,25 @@ Transaction >> = otraTransaccion [
 		self date = otraTransaccion date]
 ]
 
+{ #category : #'as yet unclassified' }
+YavuTransaction >> addToSystem [
+	
+	self yavuSystem storedSubsystem save: self
+]
+
 { #category : #'sin categoria' }
-Transaction >> date [
+YavuTransaction >> date [
 	^ date
 ]
 
 { #category : #'sin categoria' }
-Transaction >> date: unaFecha [	
+YavuTransaction >> date: unaFecha [	
 	
 	date:= unaFecha
 ]
 
 { #category : #'as yet unclassified' }
-Transaction >> dateDescription [
+YavuTransaction >> dateDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -162,18 +168,18 @@ Transaction >> dateDescription [
 ]
 
 { #category : #'sin categoria' }
-Transaction >> entity [
+YavuTransaction >> entity [
 	^ entity
 ]
 
 { #category : #'sin categoria' }
-Transaction >> entity: unaEntidad [
+YavuTransaction >> entity: unaEntidad [
 	
 	entity:= unaEntidad
 ]
 
 { #category : #'as yet unclassified' }
-Transaction >> entityDescription [
+YavuTransaction >> entityDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -188,14 +194,14 @@ Transaction >> entityDescription [
 ]
 
 { #category : #'sin categoria' }
-Transaction >> hash [
+YavuTransaction >> hash [
 	"Answer a SmallInteger whose value is related to the receiver's identity."
 
 	^self entity hash bitXor: self date hash
 ]
 
 { #category : #'sin categoria' }
-Transaction >> initializeEntity: unaEntidad date: unaFecha [
+YavuTransaction >> initializeEntity: unaEntidad date: unaFecha [
 	"Inicializa la entidad del receptor con unaEntidad y la fecha con unaFecha."
 	
 	entity:= unaEntidad.
@@ -203,19 +209,19 @@ Transaction >> initializeEntity: unaEntidad date: unaFecha [
 ]
 
 { #category : #'as yet unclassified' }
-Transaction >> maDescriptionForReport [
+YavuTransaction >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
 	^self magritteDescription
 ]
 
 { #category : #'as yet unclassified' }
-Transaction >> ts [
+YavuTransaction >> ts [
 	 ts isNil ifTrue: [ ts:= TimeStamp now ].
 	^ts
 ]
 
 { #category : #'sin categoria' }
-Transaction >> ts: anObject [
+YavuTransaction >> ts: anObject [
 	ts := anObject
 ]

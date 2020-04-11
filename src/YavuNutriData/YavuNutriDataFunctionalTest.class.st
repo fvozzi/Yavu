@@ -12,7 +12,7 @@ YavuNutriDataFunctionalTest >> setUp [
 
 	YavuEnvironment 
 		systemClass: (YavuNutriDataSystem 
-			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YvNutritionalSourcesSubsystem ))
+			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuNutritionalSourcesSubsystem ))
 	
 ]
 

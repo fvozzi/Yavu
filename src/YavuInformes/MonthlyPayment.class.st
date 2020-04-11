@@ -1,6 +1,6 @@
 Class {
 	#name : #MonthlyPayment,
-	#superclass : #Transaction,
+	#superclass : #YavuTransaction,
 	#instVars : [
 		'packageOfReports'
 	],
