@@ -3,7 +3,8 @@ Class {
 	#superclass : #YavuEntity,
 	#instVars : [
 		'brand',
-		'productType'
+		'productType',
+		'vatPercentage'
 	],
 	#category : #'YavuPurchase-Entities'
 }
@@ -112,4 +113,19 @@ YavuProduct >> productType: aProductType [
 YavuProduct >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeProduct: self
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> vatCondition: anInteger [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> vatPercentage [
+	^ vatPercentage
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> vatPercentage: anInteger [ 
+	vatPercentage := anInteger
 ]

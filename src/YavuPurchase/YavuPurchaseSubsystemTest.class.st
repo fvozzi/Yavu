@@ -7,7 +7,41 @@ Class {
 	#category : #'YavuPurchase-Test'
 }
 
-{ #category : #running }
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> barraDamboLaPaulinaProduct [
+	
+	^ YavuProduct new 
+		brand: self laPaulinaBrand;
+		productType: self damboProductType;
+		vatPercentage: 21;
+		yourself
+]
+
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> damboProductType [
+	
+	^ (YavuProductType name: 'Dambo')
+			category: self quesoCategory;
+			yourself 
+]
+
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> itemOnBarraDamboLaPaulina [
+	
+	^ InvoiceItem new 
+		product: self barraDamboLaPaulinaProduct;
+		quantity: 1;
+		unitPrice: 10;
+		yourself
+]
+
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> laPaulinaBrand [
+	
+	^ YavuBrand name: 'La Paulina'
+]
+
+{ #category : #resources }
 YavuPurchaseSubsystemTest >> newQuesosDelAbastoSupplier [
 
 	^ (YavuSupplier name: 'Bulacio Cesar Oscar')
@@ -17,7 +51,7 @@ YavuPurchaseSubsystemTest >> newQuesosDelAbastoSupplier [
 			yourself
 ]
 
-{ #category : #running }
+{ #category : #resources }
 YavuPurchaseSubsystemTest >> newSubsystem [
 
 	YavuEnvironment 
@@ -26,7 +60,13 @@ YavuPurchaseSubsystemTest >> newSubsystem [
 	^ YavuEnvironment currentSystem
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> quesoCategory [
+
+	^ YavuCategory name: 'Quesos'
+]
+
+{ #category : #resources }
 YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseInvoice [
 	
 	^ PurchaseInvoice new
@@ -35,7 +75,7 @@ YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseInvoice [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : #resources }
 YavuPurchaseSubsystemTest >> quesosDelAbastoSupplier [
 
 	^system purchaseSubsystem suppliers detect: [ :each | each businessName = 'Quesos del Abasto' ]
@@ -50,8 +90,35 @@ YavuPurchaseSubsystemTest >> setUp [
 ]
 
 { #category : #tests }
+YavuPurchaseSubsystemTest >> testAddProductsToInvoice [
+
+	| invoice itemProduct1 |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	itemProduct1 := self itemOnBarraDamboLaPaulina.
+	invoice addInvoiceItem: itemProduct1 .
+	self assert: invoice invoiceItems size = 1.
+	self assert: (invoice invoiceItems first product = itemProduct1 product). 
+	self assert: invoice total = itemProduct1 total.
+	self assert: invoice netPrice = itemProduct1 netPrice
+]
+
+{ #category : #tests }
 YavuPurchaseSubsystemTest >> testAddPurchaseInvoice [
 
-	self quesosDelAbastoPurchaseInvoice addToSystem.
+	| invoice |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice addToSystem.
 	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) size = 1.
+	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) first date = invoice date
+]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
+
+	| invoice |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	self assert: invoice invoiceType = InvoiceTypeA
 ]

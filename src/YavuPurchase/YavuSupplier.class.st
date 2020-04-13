@@ -149,6 +149,12 @@ YavuSupplier >> descriptionVatCondition [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSupplier >> invoiceType [
+	
+	^ self vatCondition invoiceType
+]
+
 { #category : #accessing }
 YavuSupplier >> isRetentionAgent [
 	^ isRetentionAgent
