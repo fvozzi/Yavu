@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #subclassResponsability }
+TBSTransactionsBrowserView >> instances [
+	
+	^ objectClass  instancesWithEntity: self entity from: self startDate to: self endDate
+]
+
+{ #category : #subclassResponsability }
 TBSTransactionsBrowserView >> possibleInstancesClasses [
 
 	^ (self session yavuSystem allowedTransactionsClassesOn: self subsystemClass)

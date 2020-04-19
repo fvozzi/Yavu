@@ -54,10 +54,11 @@ YavuPurchaseSubsystemTest >> newQuesosDelAbastoSupplier [
 { #category : #resources }
 YavuPurchaseSubsystemTest >> newSubsystem [
 
-	YavuEnvironment 
+	YavuTestEnvironment beCurrent.
+	YavuTestEnvironment 
 		systemClass: (YavuResturantSystem
 			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuPurchaseSubsystem )).
-	^ YavuEnvironment currentSystem
+	^ YavuTestEnvironment currentSystem
 ]
 
 { #category : #resources }
@@ -69,7 +70,7 @@ YavuPurchaseSubsystemTest >> quesoCategory [
 { #category : #resources }
 YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseInvoice [
 	
-	^ PurchaseInvoice new
+	^ YavuPurchaseInvoice new
 		entity: self quesosDelAbastoSupplier;
 		date: '04/11/2020' asDate;
 		yourself
@@ -87,6 +88,14 @@ YavuPurchaseSubsystemTest >> setUp [
 
 	system := self newSubsystem.
 	self newQuesosDelAbastoSupplier addToSystem
+]
+
+{ #category : #running }
+YavuPurchaseSubsystemTest >> tearDown [
+	"Hooks that subclasses may override to define the fixture of test."
+
+	YavuSupplier removeAll.
+	YavuPurchaseInvoice removeAll
 ]
 
 { #category : #tests }
@@ -121,4 +130,16 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 	
 	invoice := self quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = InvoiceTypeA
+]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testQueryPurchaseInvoices [
+
+	| invoice query |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice addToSystem.
+	query := invoice class instancesFrom: invoice date to: invoice date entity: invoice entity.
+	self assert: query size = 1.
+	self assert: query first date = invoice date
 ]

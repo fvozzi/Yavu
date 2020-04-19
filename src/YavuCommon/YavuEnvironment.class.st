@@ -2,11 +2,18 @@ Class {
 	#name : #YavuEnvironment,
 	#superclass : #Object,
 	#classVars : [
+		'Current',
 		'CurrentSystem',
 		'CurrentSystemClass'
 	],
 	#category : #'YavuCommon-Environment'
 }
+
+{ #category : #adding }
+YavuEnvironment class >> beCurrent [
+
+	Current := self
+]
 
 { #category : #actions }
 YavuEnvironment class >> bePersistent [
@@ -21,6 +28,14 @@ YavuEnvironment class >> beTransient [
 ]
 
 { #category : #adding }
+YavuEnvironment class >> current [
+
+	Current ifNil: [ Current := self ].
+	^Current
+	
+]
+
+{ #category : #adding }
 YavuEnvironment class >> currentSystem [
 
 	CurrentSystem ifNil: [ CurrentSystem := self newSystem ].
@@ -32,6 +47,12 @@ YavuEnvironment class >> currentSystem [
 YavuEnvironment class >> initialize [
 	super initialize.
 	self beTransient 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment class >> mongoDatabaseName [
+
+ ^ 'yavuSystem'
 ]
 
 { #category : #'as yet unclassified' }

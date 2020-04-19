@@ -4,12 +4,6 @@ Class {
 	#category : #'YavuCommon-View'
 }
 
-{ #category : #'instance creation' }
-TBSEntitiesBrowserView class >> on: yavuSubsystemClass [
-
-	 ^ self new initializeSubsystemClass: yavuSubsystemClass
-]
-
 { #category : #accessing }
 TBSEntitiesBrowserView >> instances [ 
 

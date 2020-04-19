@@ -74,8 +74,7 @@ YavuTransaction class >> instanceOf: startDate entity: anEntity [
 { #category : #'as yet unclassified' }
 YavuTransaction class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
 
-	^self yavuSystem readManyOf: self 
-		where: [:each | (each entity in: (aCollectionOfEntities)) AND: [each date between: startDate and: endDate]]
+	^ self subclassResponsibility 
 ]
 
 { #category : #'as yet unclassified' }

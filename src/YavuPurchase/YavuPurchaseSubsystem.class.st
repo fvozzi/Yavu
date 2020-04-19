@@ -28,6 +28,7 @@ YavuPurchaseSubsystem class >> menuElements [
 
 	^ OrderedCollection new 
 		add: ((YavuSimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
+		add: ((YavuSimpleMenuElement label: 'Compras' presenterClass: TBSTransactionsBrowserView subsystem: self) id: 2);
 		yourself
 ]
 
@@ -41,6 +42,14 @@ YavuPurchaseSubsystem class >> subsystemName [
 YavuPurchaseSubsystem class >> subsystemTag [
 
 	 ^'purchaseSubsystem'
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem class >> transactionsClasses [
+	
+	^ OrderedCollection new
+		add: YavuPurchaseInvoice;
+		yourself
 ]
 
 { #category : #crud }
@@ -117,7 +126,17 @@ YavuPurchaseSubsystem >> purchaseInvoices [
 { #category : #'as yet unclassified' }
 YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [ 
 	
-	 ^ self system storedSubsystem instancesOfClass: PurchaseInvoice withEntity: aYavuSupplier
+	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseInvoice withEntity: aYavuSupplier
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers from: startDate to: endDate [ 
+
+	^ self system storedSubsystem 
+		instancesOfClass: YavuPurchaseInvoice
+		from: startDate 
+		to: endDate
+		entities: aCollectionOfSuppliers
 ]
 
 { #category : #crud }

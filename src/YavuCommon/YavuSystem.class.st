@@ -139,6 +139,12 @@ YavuSystem >> allowedRootMenuActions [
 	^self loginSubsystem  allowedRootMenuActions
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSystem >> allowedTransactionsClassesOn: aClass [ 
+	
+	^ aClass transactionsClasses 
+]
+
 { #category : #accessing }
 YavuSystem >> company [
 	

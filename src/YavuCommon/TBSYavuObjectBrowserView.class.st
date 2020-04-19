@@ -9,6 +9,12 @@ Class {
 	#category : #'YavuCommon-View'
 }
 
+{ #category : #'instance creation' }
+TBSYavuObjectBrowserView class >> on: yavuSubsystemClass [
+
+	 ^ self new initializeSubsystemClass: yavuSubsystemClass
+]
+
 { #category : #accessing }
 TBSYavuObjectBrowserView >> children [
 

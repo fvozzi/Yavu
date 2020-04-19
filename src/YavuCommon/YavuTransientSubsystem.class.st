@@ -119,6 +119,17 @@ YavuTransientSubsystem >> instancesOf: aClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuTransientSubsystem >> instancesOfClass: aClass from: startDate to: endDate entities: aCollectionOfEntities [ 
+	
+	| setOfEntities |
+	
+	setOfEntities := aCollectionOfEntities asSet.
+	^ (self instancesOf: aClass ) select: [ :each | (setOfEntities includes: each entity) and: [ 
+			each date between: startDate and: endDate
+			] ]
+]
+
+{ #category : #'as yet unclassified' }
 YavuTransientSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [ 
 	
 	^ (self instancesOf: aClass ) select: [ :each | each entity = aYavuSupplier ]
