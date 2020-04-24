@@ -14,6 +14,7 @@ TBSMagritteOneToManyComponent >> buildReport [
 
 { #category : #'rendering-buttons' }
 TBSMagritteOneToManyComponent >> renderSelectButtonOn: html [
+
 	html button 
 		beSubmit;
 		class: 'btn';

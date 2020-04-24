@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuCommon-View'
 }
 
+{ #category : #'as yet unclassified' }
+TBSEntitiesBrowserView >> browserCaption [
+
+	^ super browserCaption, ' -> Entidades'
+]
+
 { #category : #accessing }
 TBSEntitiesBrowserView >> instances [ 
 

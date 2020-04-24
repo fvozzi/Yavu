@@ -15,6 +15,12 @@ TBSYavuObjectBrowserView class >> on: yavuSubsystemClass [
 	 ^ self new initializeSubsystemClass: yavuSubsystemClass
 ]
 
+{ #category : #'as yet unclassified' }
+TBSYavuObjectBrowserView >> browserCaption [
+
+	^ self subsystemClass label
+]
+
 { #category : #accessing }
 TBSYavuObjectBrowserView >> children [
 
@@ -67,11 +73,9 @@ TBSYavuObjectBrowserView >> renderContentOn: html [
 		with: [ html
 				tbsPanelHeading: [ html tbsPanelTitle
 						level: 3;
-						with: 'Administración de entidades' ].
+						with: self browserCaption ].
 			html
-				tbsPanelBody: [ html
-						paragraph:
-							'Seleccione la clase de entidad para administrar. Una vez seleccionada podrá agregar una nueva entidad de la clase o ver, editar y borrar alguna de las existentes.'.
+				tbsPanelBody: [ 
 					html form: [ self renderObjectClassSelection: html ].
 					html tbsTable: [ self renderReportOn: html ] ] ]
 ]

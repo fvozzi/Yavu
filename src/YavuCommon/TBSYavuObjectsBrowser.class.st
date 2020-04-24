@@ -55,7 +55,7 @@ TBSYavuObjectsBrowser >> editInstance: anEntity [
 	self class.
 	answer := parent call: (self renderAddInstanceForm: anEntity).
 	answer notNil
-		ifTrue: [ answer updateOnSystem ]
+		ifTrue: [ answer updateToSystem ]
 ]
 
 { #category : #initialization }

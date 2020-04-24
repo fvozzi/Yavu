@@ -89,11 +89,24 @@ YavuProduct >> descriptionProductType [
 		yourself
 ]
 
+{ #category : #descriptions }
+YavuProduct >> descriptionVatPercentage [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MANumberDescription new 
+		accessor: #vatPercentage ;
+		label: 'IVA';
+		priority: 140;
+		componentClass: TBSMagritteTextInputComponent;
+		yourself
+]
+
 { #category : #'sin categoria' }
 YavuProduct >> name [ 
 
 	^ (self productType notNil & self brand notNil) 
-		ifTrue: [ self productType name, self brand name ]
+		ifTrue: [ self productType name, ' ', self brand name ]
 		ifFalse: [ '' ]
 ]
 
@@ -113,6 +126,12 @@ YavuProduct >> productType: aProductType [
 YavuProduct >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeProduct: self
+]
+
+{ #category : #'as yet unclassified' }
+YavuProduct >> updateToSystem [
+	
+	self yavuSystem purchaseSubsystem update: self
 ]
 
 { #category : #'as yet unclassified' }

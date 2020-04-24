@@ -10,6 +10,12 @@ Class {
 	#category : #'YavuPurchase-DomainObjects'
 }
 
+{ #category : #'sin categoria' }
+YavuPurchaseInvoice class >> entityClass [
+	
+	^ YavuSupplier 
+]
+
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
 
@@ -23,6 +29,12 @@ YavuPurchaseInvoice class >> instancesFrom: startDate to: endDate entities: aCol
 YavuPurchaseInvoice class >> isVoyageRoot [ 
 
 	^ true
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice class >> label [ 
+
+	^ 'Factura de Compra'
 ]
 
 { #category : #'as yet unclassified' }
@@ -53,7 +65,28 @@ YavuPurchaseInvoice >> invoice: aClass [
 
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> invoiceItems [
-	^ invoiceItems
+	^invoiceItems
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> invoiceItems: aCollection [ 
+
+	invoiceItems := aCollection
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> invoiceItemsDescription [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MAToManyRelationDescription new
+		accessor: #invoiceItems;
+		classes: (OrderedCollection with: InvoiceItem);
+		default: nil;
+		label: 'Items';
+		priority: 120;
+		componentClass: TBSMagritteOneToManyComponent;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }

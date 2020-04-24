@@ -211,7 +211,7 @@ YavuTransaction >> initializeEntity: unaEntidad date: unaFecha [
 YavuTransaction >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
-	^self magritteDescription
+	^self magritteDescription reject: [:each | each label = 'Agregar']
 ]
 
 { #category : #'as yet unclassified' }

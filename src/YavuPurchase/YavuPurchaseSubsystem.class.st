@@ -23,6 +23,12 @@ YavuPurchaseSubsystem class >> entitiesClasses [
 		yourself
 ]
 
+{ #category : #accessing }
+YavuPurchaseSubsystem class >> label [ 
+
+	^ 'Subsistema Compras'
+]
+
 { #category : #'as yet unclassified' }
 YavuPurchaseSubsystem class >> menuElements [
 
@@ -176,5 +182,11 @@ YavuPurchaseSubsystem >> suppliers [
 { #category : #crud }
 YavuPurchaseSubsystem >> update: aSupplier [
 	
-	self system storedSubsystem save: aSupplier
+	self system storedSubsystem update: aSupplier
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> vatPercentageDefault [
+	
+	^ 21
 ]
