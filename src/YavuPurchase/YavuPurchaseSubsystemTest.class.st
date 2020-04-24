@@ -94,8 +94,8 @@ YavuPurchaseSubsystemTest >> setUp [
 YavuPurchaseSubsystemTest >> tearDown [
 	"Hooks that subclasses may override to define the fixture of test."
 
-	YavuSupplier removeAll.
-	YavuPurchaseInvoice removeAll
+	"YavuSupplier removeAll.
+	YavuPurchaseInvoice removeAll"
 ]
 
 { #category : #tests }
