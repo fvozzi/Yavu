@@ -65,6 +65,14 @@ YavuObject >> dbPersistedInstance [
 	^self yavuSystem readOneOf: self class where: [:each | each id = self id]
 ]
 
+{ #category : #'magritte descriptions' }
+YavuObject >> descriptionContainer [
+	<magritteContainer>
+	^ super descriptionContainer
+		componentRenderer: TBSMagritteFormRenderer;
+		yourself
+]
+
 { #category : #'sin categoria' }
 YavuObject >> empresaActual [
 	"Devuelve la empresa actual si existe una sesión web sino devuelve una empresa default."

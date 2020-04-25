@@ -28,7 +28,7 @@ YavuPurchaseSubsystemTest >> damboProductType [
 { #category : #resources }
 YavuPurchaseSubsystemTest >> itemOnBarraDamboLaPaulina [
 	
-	^ InvoiceItem new 
+	^ YavuInvoiceItem new 
 		product: self barraDamboLaPaulinaProduct;
 		quantity: 1;
 		unitPrice: 10;
@@ -56,7 +56,7 @@ YavuPurchaseSubsystemTest >> newSubsystem [
 
 	YavuTestEnvironment beCurrent.
 	YavuTestEnvironment 
-		systemClass: (YavuResturantSystem
+		systemClass: (YavuRestaurantSystem
 			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuPurchaseSubsystem )).
 	^ YavuTestEnvironment currentSystem
 ]
@@ -99,6 +99,22 @@ YavuPurchaseSubsystemTest >> tearDown [
 ]
 
 { #category : #tests }
+YavuPurchaseSubsystemTest >> testAddPrefixAndInvoiceNumberToInvoice [
+
+	| invoice |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice prefix: 1.
+	invoice invoiceNumber: 100.
+	self assert: invoice prefix equals: 1.
+	self assert: invoice invoiceNumber equals: 100.
+	self assert: invoice formattedPrefix equals: '0001'.
+	self assert: invoice formattedInvoiceNumber equals: '00000100'.
+	invoice prefix: 103.
+	self assert: invoice formattedPrefix equals: '0103'
+]
+
+{ #category : #tests }
 YavuPurchaseSubsystemTest >> testAddProductsToInvoice [
 
 	| invoice itemProduct1 |
@@ -129,7 +145,7 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 	| invoice |
 	
 	invoice := self quesosDelAbastoPurchaseInvoice.
-	self assert: invoice invoiceType = InvoiceTypeA
+	self assert: invoice invoiceType = YavuInvoiceTypeA
 ]
 
 { #category : #tests }

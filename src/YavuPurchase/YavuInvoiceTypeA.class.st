@@ -1,5 +1,5 @@
 Class {
-	#name : #InvoiceTypeA,
+	#name : #YavuInvoiceTypeA,
 	#superclass : #YavuObject,
 	#category : #'YavuPurchase-DomainObjects'
 }

@@ -1,5 +1,5 @@
 Class {
-	#name : #YavuResturantSystem,
+	#name : #YavuRestaurantSystem,
 	#superclass : #YavuSystem,
 	#category : #'YavuRestaurant-Environment'
 }

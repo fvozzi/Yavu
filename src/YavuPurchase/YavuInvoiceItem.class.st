@@ -1,5 +1,5 @@
 Class {
-	#name : #InvoiceItem,
+	#name : #YavuInvoiceItem,
 	#superclass : #YavuObject,
 	#instVars : [
 		'quantity',
@@ -10,14 +10,20 @@ Class {
 	#category : #'YavuPurchase-DomainObjects'
 }
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> description: aDescription [ 
+{ #category : #accessing }
+YavuInvoiceItem >> description [  
+	
+	^ description
+]
+
+{ #category : #accessing }
+YavuInvoiceItem >> description: aDescription [ 
 	
 	description := aDescription 
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> descriptionDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> descriptionDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -28,32 +34,32 @@ InvoiceItem >> descriptionDescription [
 ]
 
 { #category : #initialization }
-InvoiceItem >> initialize [ 
+YavuInvoiceItem >> initialize [ 
 
 	quantity := 0.
 	unitPrice := 0
 ]
 
 { #category : #accessing }
-InvoiceItem >> name [ 
+YavuInvoiceItem >> name [ 
 
 	^ 'item'
 ]
 
 { #category : #accessing }
-InvoiceItem >> name: aName [
+YavuInvoiceItem >> name: aName [
 
 	^ 'item'
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> netPrice [
+{ #category : #calculated }
+YavuInvoiceItem >> netPrice [
 	
 	^ self quantity * self unitPrice
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> netPriceDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> netPriceDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
@@ -65,14 +71,20 @@ InvoiceItem >> netPriceDescription [
         	yourself
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> product: aYavuProduct [ 
+{ #category : #accessing }
+YavuInvoiceItem >> product [ 
+	
+	^ product
+]
+
+{ #category : #accessing }
+YavuInvoiceItem >> product: aYavuProduct [ 
 	
 	product := aYavuProduct 
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> productDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> productDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -86,18 +98,18 @@ InvoiceItem >> productDescription [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> quantity [
+{ #category : #accessing }
+YavuInvoiceItem >> quantity [
 	^ quantity
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> quantity: anInteger [ 
+{ #category : #accessing }
+YavuInvoiceItem >> quantity: anInteger [ 
 	quantity := anInteger
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> quantityDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> quantityDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
@@ -110,14 +122,14 @@ InvoiceItem >> quantityDescription [
         	yourself
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> total [
+{ #category : #calculated }
+YavuInvoiceItem >> total [
 	
 	^ self quantity * self unitPriceAfterTaxs 
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> totalDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> totalDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
@@ -129,23 +141,23 @@ InvoiceItem >> totalDescription [
         	yourself
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> unitPrice [
+{ #category : #accessing }
+YavuInvoiceItem >> unitPrice [
 	^ unitPrice
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> unitPrice: anInteger [ 
+{ #category : #accessing }
+YavuInvoiceItem >> unitPrice: anInteger [ 
 	unitPrice := anInteger
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> unitPriceAfterTaxs [
+{ #category : #calculated }
+YavuInvoiceItem >> unitPriceAfterTaxs [
 	^ unitPrice + (unitPrice * self vatPercentage / 100)
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> unitPriceDescription [
+{ #category : #'magritte-descriptions' }
+YavuInvoiceItem >> unitPriceDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
@@ -157,8 +169,8 @@ InvoiceItem >> unitPriceDescription [
         	yourself
 ]
 
-{ #category : #'as yet unclassified' }
-InvoiceItem >> vatPercentage [
+{ #category : #calculated }
+YavuInvoiceItem >> vatPercentage [
 
 	product ifNil: [ ^ self yavuSystem purchaseSubsystem vatPercentageDefault ].
 	^ product vatPercentage

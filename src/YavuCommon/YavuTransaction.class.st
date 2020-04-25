@@ -161,7 +161,7 @@ YavuTransaction >> dateDescription [
 		componentClass: MAMonthYearSelectorComponent;
         	accessor: #date;
         	label: 'Fecha';
-        	priority: 110;
+        	priority: 20;
 		beRequired;
         	yourself
 ]
@@ -187,7 +187,7 @@ YavuTransaction >> entityDescription [
 		default: nil;
 		options: self class entityClass all;
 		label: self class entityLabel;
-		priority: 100;
+		priority: 10;
 		beRequired;
 		yourself
 ]

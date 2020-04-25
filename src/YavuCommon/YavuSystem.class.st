@@ -178,6 +178,11 @@ YavuSystem >> instancesOf: aClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem >> label [
+	^ self class label
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem >> loggedUser [
 	
 	^ self loginSubsystem loggedUser

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'userName',
 		'password',
-		'errorDescription'
+		'errorDescription',
+		'system'
 	],
 	#category : #'YavuCommon-View'
 }
@@ -33,12 +34,16 @@ TBSYavuLogin >> failedLogin: aByteString [
 	
 ]
 
+{ #category : #initialization }
+TBSYavuLogin >> initialize [
+
+	super initialize.
+	system := YavuEnvironment newSystem
+]
+
 { #category : #'private protocol' }
 TBSYavuLogin >> login [
 
-	| system |
-
-	system := YavuEnvironment newSystem.
 	[system loginUserName: self userName password: self password] on: Error do: [ :ex | ^self failedLogin: ex description ].
 	self succeedLogin: system
 ]
@@ -60,7 +65,7 @@ TBSYavuLogin >> renderContentOn: html [
 
 	html form: [  
 	html tbsContainer: [ 
-		html heading level: 2; with: 'YavuSoft inicio II'.
+		html heading level: 2; with: system label.
 		html tbsFormGroup: [ 
 			html label for: 'userNameLogin'; with: 'Usuario'.
 			html textInput tbsFormControl; id: 'userNameLogin'; placeholder: 'Ingrese su usuario'; on: #userName of: self].
