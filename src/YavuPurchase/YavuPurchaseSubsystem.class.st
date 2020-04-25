@@ -89,7 +89,6 @@ YavuPurchaseSubsystem >> addProductType: aProductType [
 { #category : #'as yet unclassified' }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
-	self halt.
 	self system storedSubsystem save: aPurchaseInvoice
 
 ]
