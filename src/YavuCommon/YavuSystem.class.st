@@ -121,6 +121,12 @@ YavuSystem >> addUser: aSicUser [
 	^ self loginSubsystem addUser: aSicUser
 ]
 
+{ #category : #transientSystemInitialization }
+YavuSystem >> administratorUser [ 
+
+	^ self class administratorUser 
+]
+
 { #category : #'sin categoria' }
 YavuSystem >> allowedEntitiesClasses [
 	

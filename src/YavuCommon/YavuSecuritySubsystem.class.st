@@ -43,6 +43,12 @@ YavuSecuritySubsystem >> addUser: aSicUser [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSecuritySubsystem >> administratorUser [
+
+	^ self system administratorUser
+]
+
+{ #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> allowedEntitiesClasses [
 	
 	^loggedUser allowedEntitiesClasses
@@ -106,5 +112,6 @@ YavuSecuritySubsystem >> userClass [
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> users [
 	 users ifNil: [ users:= self system storedSubsystem instancesOf: self userClass ].
+	 users add: self administratorUser.
 	^ users 
 ]
