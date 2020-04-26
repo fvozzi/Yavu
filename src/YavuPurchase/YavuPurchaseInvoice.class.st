@@ -199,3 +199,16 @@ YavuPurchaseInvoice >> prefixDescription [
 YavuPurchaseInvoice >> total [
 	^ total
 ]
+
+{ #category : #descriptions }
+YavuPurchaseInvoice >> totalDescription [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #total;
+        	label: 'Total';
+        	priority: 160;
+			bePositive;
+			beRequired;
+        	yourself
+]
