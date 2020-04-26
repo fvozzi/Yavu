@@ -76,6 +76,8 @@ TBSYavuSystemView >> renderNavbarHeaderOn: html [
 
 { #category : #'rendering navbar' }
 TBSYavuSystemView >> renderNavbarSubsystemsMenues: html [
+
+	self halt.
 	html unorderedList
 		class: 'nav navbar-nav';
 		with: [ (self session yavuSystem allowedRootMenuActions
