@@ -79,7 +79,7 @@ BaselineOfYavu >> seaside3: spec [
 
 	spec
 		baseline: 'Seaside3'
-		with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.0/repository']
+		with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.4/repository']
 		
 	
 ]
