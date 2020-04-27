@@ -42,7 +42,6 @@ YavuPurchaseInvoice class >> label [
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> addInvoiceItem: anInvoiceItem [ 
 	
-	self halt.
 	invoiceItems add: anInvoiceItem.
 	self onInvoiceItemsChange
 ]
