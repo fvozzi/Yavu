@@ -178,7 +178,7 @@ YavuUser >> descriptionRol [
 		label: 'Roles';
 		priority: 220;
 		componentClass: MAListCompositonComponent;
-		options: Role all;
+		options: YavuRole all;
 		beSorted; 
 		yourself
 ]

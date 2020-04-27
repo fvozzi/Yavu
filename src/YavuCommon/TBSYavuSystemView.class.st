@@ -69,7 +69,7 @@ TBSYavuSystemView >> renderContentOn: html [
 TBSYavuSystemView >> renderNavbarHeaderOn: html [
 	html tbsNavbarHeader
 		with: [ html tbsNavbarBrand
-				callback: [ self openComponent: self systemHomeView.
+				callback: [ self content: self systemHomeView.
 					];
 				with: self systemName ]
 ]
@@ -110,7 +110,7 @@ TBSYavuSystemView >> renderNavbarSystemMenues: html [
 		class: 'nav navbar-nav navbar-right';
 		with: [ html tbsNavItem
 				with: [ html anchor
-						callback: [ WAConfirmLogOffView onParent: self];
+						callback: [ self content: (WAConfirmLogOffView onParent: self)];
 						with: [ html span class: 'glyphicon glyphicon-log-out'.
 							html text: ' Salir' ] ] ]
 ]

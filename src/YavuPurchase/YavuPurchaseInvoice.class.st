@@ -42,6 +42,7 @@ YavuPurchaseInvoice class >> label [
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> addInvoiceItem: anInvoiceItem [ 
 	
+	self halt.
 	invoiceItems add: anInvoiceItem.
 	self onInvoiceItemsChange
 ]
@@ -91,13 +92,15 @@ YavuPurchaseInvoice >> invoice: aClass [
 
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> invoiceItems [
+
 	^invoiceItems
 ]
 
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> invoiceItems: aCollection [ 
 
-	invoiceItems := aCollection
+	invoiceItems := aCollection.
+	self onInvoiceItemsChange
 ]
 
 { #category : #descriptions }
@@ -152,6 +155,12 @@ YavuPurchaseInvoice >> invoiceType: aClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> mementoClass [
+
+	^ MAStraightMemento
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> netPrice [
 	
 	^ netPrice
@@ -197,6 +206,7 @@ YavuPurchaseInvoice >> prefixDescription [
 
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> total [
+
 	^ total
 ]
 
@@ -206,9 +216,8 @@ YavuPurchaseInvoice >> totalDescription [
 	<magritteDescription>
 	^ MANumberDescription new 
         	accessor: #total;
+			beReadonly;
         	label: 'Total';
         	priority: 160;
-			bePositive;
-			beRequired;
         	yourself
 ]

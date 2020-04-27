@@ -98,8 +98,17 @@ YavuProduct >> descriptionVatPercentage [
 		accessor: #vatPercentage ;
 		label: 'IVA';
 		priority: 140;
+		beRequired;
+		bePositive;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
+]
+
+{ #category : #'sin categoria' }
+YavuProduct >> initialize [ 
+
+	super initialize.
+	vatPercentage := self yavuSystem purchaseSubsystem vatPercentageDefault
 ]
 
 { #category : #'sin categoria' }

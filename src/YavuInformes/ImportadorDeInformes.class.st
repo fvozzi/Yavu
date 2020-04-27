@@ -227,15 +227,6 @@ ImportadorDeInformes >> sistemaActual [
 	^sistemaActual
 ]
 
-{ #category : #nil }
-ImportadorDeInformes >> subscribirAnuncioEntidadAgregada [
-	"Privado - Subscribe al announcer para ser notificado cuando se crea un cliente nuevo."
-
-	YavuPersistentSubsystem singleton announcer 
-		when: EntidadAdded 
-		do: [:anuncio | self clientes add: anuncio entity]
-]
-
 { #category : #'sin categoria' }
 ImportadorDeInformes >> tiposDeOperacion [
 

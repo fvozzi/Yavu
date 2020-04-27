@@ -2,7 +2,8 @@ Class {
 	#name : #YavuSystem,
 	#superclass : #Object,
 	#instVars : [
-		'subsystems'
+		'subsystems',
+		'announcer'
 	],
 	#classVars : [
 		'EnabledSubsystemsClasses'
@@ -149,6 +150,11 @@ YavuSystem >> allowedRootMenuActions [
 YavuSystem >> allowedTransactionsClassesOn: aClass [ 
 	
 	^ aClass transactionsClasses 
+]
+
+{ #category : #accessing }
+YavuSystem >> announcer [
+	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
 { #category : #accessing }

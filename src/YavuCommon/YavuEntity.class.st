@@ -137,14 +137,6 @@ YavuEntity >> addToSystem [
 ]
 
 { #category : #'sin categoria' }
-YavuEntity >> anunciarNuevaEntidad [
-
-	| announce |
-	announce := EntidadAdded asAnnouncement entity: self.
-	self sistema announcer announce: announce
-]
-
-{ #category : #'sin categoria' }
 YavuEntity >> atributos [
 	^ atributos
 ]

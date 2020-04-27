@@ -77,7 +77,8 @@ TBSYavuObjectBrowserView >> renderContentOn: html [
 			html
 				tbsPanelBody: [ 
 					html form: [ self renderObjectClassSelection: html ].
-					html tbsTable: [ self renderReportOn: html ] ] ]
+					 ].
+			self renderReportOn: html ]
 ]
 
 { #category : #subclassResponsability }

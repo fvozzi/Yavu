@@ -12,7 +12,7 @@ Class {
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> browserCaption [
 
-	^ super browserCaption, ' -> Transacciones'
+	^ super browserCaption, ' | Transacciones'
 ]
 
 { #category : #'as yet unclassified' }
@@ -73,23 +73,31 @@ TBSTransactionsBrowserView >> possibleInstancesClasses [
 { #category : #subclassResponsability }
 TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 
-	html text: 'Transacción:'.
-	html select
-		list: self possibleInstancesClasses;
-		selected: self selectedOrDefaultObjectClass ;
-		callback: [ :oneObjectClass | self onObjectSelection: oneObjectClass ];
-		labels: [ :each | each label].
-	html text: 'Entidad'.
-	html select
+	html tbsColumn: [ 
+		html tbsRow: 'Transacción:'.
+		html tbsRow: [html select
+						list: self possibleInstancesClasses;
+						selected: self selectedOrDefaultObjectClass ;
+						callback: [ :oneObjectClass | self onObjectSelection: oneObjectClass ];
+						labels: [ :each | each label]] ] mediumSize: 3.
+	html tbsColumn: [ 
+		html tbsRow: 'Entidad:'.
+		html tbsRow: [ html select
 		list: self possibleEntities;
-		callback: [ :oneEntity | self onEntitySelection: oneEntity ].
-	html dateInput5
-		on: #startDateLiteral of: self.
-	html dateInput5
-		on: #endDateLiteral of: self.
-	html tbsButton 
+		callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 3.
+	html tbsColumn: [ 
+		html tbsRow: 'Desde:'.
+		html tbsRow: [ html dateInput5
+						on: #startDateLiteral of: self] ] mediumSize: 2.
+	html tbsColumn: [ 
+		html tbsRow: 'Hasta:'.
+		html tbsRow: [ html dateInput5
+						on: #endDateLiteral of: self] ] mediumSize: 2.
+	html tbsColumn: [ 
+			html tbsRow: [ html tbsSubmitButton 
+				bePrimary;
 				callback: [ ];
-				with: 'Buscar'
+				with: 'Buscar' ] ] mediumSize: 2
 ]
 
 { #category : #'as yet unclassified' }

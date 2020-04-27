@@ -109,12 +109,15 @@ TBSYavuObjectsBrowser >> renderAddInstanceForm: anInstance [
 { #category : #rendering }
 TBSYavuObjectsBrowser >> renderContentOn: html [
 
-	html break.
-	html form: [ 
-		html anchor
-		callback: [ self addInstance ];
-		with: 'Agregar ' , instanceClass label.
-		html render: report ]
+	
+	html tbsPanelBody: [ 
+		html form: [ 
+		html tbsColumn: [ 
+			html tbsSubmitButton 
+			beSuccess;
+			callback: [ self addInstance ];
+			with: 'Agregar ' , instanceClass label]].
+	html render: report ]
 ]
 
 { #category : #rendering }
@@ -142,7 +145,7 @@ TBSYavuObjectsBrowser >> updateInstances: aCollection class: aYavuObjectClass [
 { #category : #eventActions }
 TBSYavuObjectsBrowser >> updateReport [  
 
-	^self report rows: instances
+	^ report rows: instances
 ]
 
 { #category : #crud }

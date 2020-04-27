@@ -7,7 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 TBSEntitiesBrowserView >> browserCaption [
 
-	^ super browserCaption, ' -> Entidades'
+	^ super browserCaption, ' | Entidades'
 ]
 
 { #category : #accessing }
