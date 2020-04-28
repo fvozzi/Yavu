@@ -130,10 +130,10 @@ YavuEntity class >> possibleSearchSelectors [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuEntity >> addToSystem [
 	
-	self yavuSystem storedSubsystem save: self
+	self subclassResponsibility 
 ]
 
 { #category : #'sin categoria' }
@@ -146,19 +146,10 @@ YavuEntity >> atributos: anObject [
 	atributos := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #deprecated }
 YavuEntity >> defaultSearchLabel [
 
 	^self class defaultSearchLabel 
-]
-
-{ #category : #'magritte descriptions' }
-YavuEntity >> descriptionContainer [
-	<magritteContainer>
-	^ super descriptionContainer
-		componentRenderer: TBSMagritteFormRenderer;
-		yourself
-
 ]
 
 { #category : #descriptions }
@@ -184,7 +175,7 @@ YavuEntity >> doesNotUnderstand: aMessage [
 	^self atributos at: aMessage selector ifAbsent: [super doesNotUnderstand: aMessage]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuEntity >> eliminar [
 	"Elimina la instancia del receptor a la colección de elementos del owner."
 	
@@ -259,7 +250,19 @@ YavuEntity >> printOn: aStream [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
+YavuEntity >> removeFromSystem [
+	
+	self subclassResponsibility 
+]
+
+{ #category : #environment }
+YavuEntity >> subsystem [
+
+	self subclassResponsibility 
+]
+
+{ #category : #deprecated }
 YavuEntity >> ts [
 
 	^ts
@@ -268,4 +271,10 @@ YavuEntity >> ts [
 { #category : #'sin categoria' }
 YavuEntity >> ts: anObject [
 	ts := anObject
+]
+
+{ #category : #crud }
+YavuEntity >> updateToSystem [ 
+
+	self subsystem update: self
 ]

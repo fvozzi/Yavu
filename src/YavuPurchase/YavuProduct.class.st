@@ -21,10 +21,9 @@ YavuProduct class >> label [
 	 ^ 'Producto'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuProduct >> addToSystem [
-	
-	self yavuSystem purchaseSubsystem addProduct: self
+	self subsystem addProduct: self
 ]
 
 { #category : #accessing }
@@ -131,29 +130,28 @@ YavuProduct >> productType: aProductType [
 	 productType := aProductType
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuProduct >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeProduct: self
 ]
 
-{ #category : #'as yet unclassified' }
-YavuProduct >> updateToSystem [
-	
-	self yavuSystem purchaseSubsystem update: self
+{ #category : #environment }
+YavuProduct >> subsystem [
+	^ self yavuSystem purchaseSubsystem
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuProduct >> vatCondition: anInteger [ 
 	self shouldBeImplemented.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuProduct >> vatPercentage [
 	^ vatPercentage
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuProduct >> vatPercentage: anInteger [ 
 	vatPercentage := anInteger
 ]

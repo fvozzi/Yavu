@@ -48,3 +48,9 @@ YavuMongoSubsystem >> save: aYavuObject [
 	
 	aYavuObject save
 ]
+
+{ #category : #'as yet unclassified' }
+YavuMongoSubsystem >> update: aYavuObject [ 
+	
+	aYavuObject save
+]

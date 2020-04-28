@@ -159,3 +159,9 @@ YavuTransientSubsystem >> titOperationCharacter [
 
 	^OperationCharacter name: 'Titular' code: 'TIT'
 ]
+
+{ #category : #adding }
+YavuTransientSubsystem >> update: anObject [
+
+	
+]

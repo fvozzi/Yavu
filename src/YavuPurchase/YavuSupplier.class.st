@@ -25,6 +25,11 @@ YavuSupplier class >> label [
 	^ 'Proveedor'
 ]
 
+{ #category : #crud }
+YavuSupplier >> addToSystem [
+	self subsystem addSupplier: self
+]
+
 { #category : #accessing }
 YavuSupplier >> address [
 	^ address
@@ -90,8 +95,17 @@ YavuSupplier >> descriptionCUITNumber [
       accessor: #cuitNumber;
       label: 'CUIT';
       	priority: 140;
-		beRequired;
 		componentClass: TBSMagritteTextInputComponent;
+      	yourself
+
+]
+
+{ #category : #descriptions }
+YavuSupplier >> descriptionContainer [
+
+	^super descriptionContainer
+		addCondition: [ :obj | (obj readUsing: self descriptionVatCondition) cuitNumberIsRequired ifTrue: [ (obj readUsing: self descriptionCUITNumber) notNil ] ifFalse: [true]]
+		labelled: 'La condición de IVA del cliente requiere ingresar el CUIT';
       	yourself
 
 ]
@@ -142,14 +156,14 @@ YavuSupplier >> descriptionVatCondition [
 		accessor: #vatCondition;
 		label: 'Condición IVA';
 		priority: 120;
-		options: YavuVatCondition allSubclasses;
+		optionsAndLabels: (YavuVatCondition allSubclasses collect: [:each | each -> each label]);
 		beSorted;
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuSupplier >> invoiceType [
 	
 	^ self vatCondition invoiceType
@@ -187,15 +201,12 @@ YavuSupplier >> phoneNumber: anObject [
 
 { #category : #crud }
 YavuSupplier >> removeFromSystem [
-	
-	self yavuSystem purchaseSubsystem removeSupplier: self
+	self subsystem removeSupplier: self
 ]
 
-{ #category : #crud }
-YavuSupplier >> updateOnSystem [
-	
-		self halt.
-	self yavuSystem purchaseSubsystem update: self
+{ #category : #environment }
+YavuSupplier >> subsystem [
+	^ self yavuSystem purchaseSubsystem
 ]
 
 { #category : #accessing }

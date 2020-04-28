@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuPurchase-Entities'
 }
 
+{ #category : #testing }
+YavuResponsableInscripto class >> cuitNumberIsRequired [
+
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 YavuResponsableInscripto class >> invoiceType [
 	
@@ -13,5 +19,5 @@ YavuResponsableInscripto class >> invoiceType [
 { #category : #'sin categoria' }
 YavuResponsableInscripto class >> label [ 
 
-	 'Resp. Inscripto'
+	^ 'Resp. Inscripto'
 ]

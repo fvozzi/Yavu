@@ -1,11 +1,11 @@
 Class {
-	#name : #YavuMonotributo,
+	#name : #YavuNoInscripto,
 	#superclass : #YavuVatCondition,
 	#category : #'YavuPurchase-Entities'
 }
 
 { #category : #'sin categoria' }
-YavuMonotributo class >> label [ 
+YavuNoInscripto class >> label [ 
 
-	 ^ 'Monotributo'
+	^ 'No Inscripto'
 ]

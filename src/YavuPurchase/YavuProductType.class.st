@@ -19,10 +19,9 @@ YavuProductType class >> label [
 	^ 'Tipo de producto'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuProductType >> addToSystem [
-
-	self yavuSystem purchaseSubsystem addProductType: self
+	self subsytem addProductType: self
 ]
 
 { #category : #accessing }
@@ -37,7 +36,7 @@ YavuProductType >> category: aCategory [
 	category := aCategory
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 YavuProductType >> descriptionSubcategory [
 	
 	<magritteDescription>
@@ -52,8 +51,13 @@ YavuProductType >> descriptionSubcategory [
 		yourself
 ]
 
-{ #category : #removing }
+{ #category : #crud }
 YavuProductType >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeProductType: self
+]
+
+{ #category : #environment }
+YavuProductType >> subsytem [
+	^ self yavuSystem purchaseSubsystem
 ]

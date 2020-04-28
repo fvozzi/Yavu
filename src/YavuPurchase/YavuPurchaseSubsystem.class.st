@@ -86,11 +86,18 @@ YavuPurchaseSubsystem >> addProductType: aProductType [
 	self system storedSubsystem save: aProductType
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
 	self system storedSubsystem save: aPurchaseInvoice
 
+]
+
+{ #category : #crud }
+YavuPurchaseSubsystem >> addSupplier: aProduct [
+	
+	self suppliers add: aProduct.
+	self system storedSubsystem save: aProduct
 ]
 
 { #category : #accessing }
@@ -123,18 +130,18 @@ YavuPurchaseSubsystem >> products [
 	^ products ifNil: [ products := self system storedSubsystem instancesOf: YavuProduct ]
 ]
 
-{ #category : #'As yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> purchaseInvoices [
 	self shouldBeImplemented.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [ 
 	
 	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseInvoice withEntity: aYavuSupplier
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers from: startDate to: endDate [ 
 
 	^ self system storedSubsystem 
@@ -179,12 +186,12 @@ YavuPurchaseSubsystem >> suppliers [
 ]
 
 { #category : #crud }
-YavuPurchaseSubsystem >> update: aSupplier [
+YavuPurchaseSubsystem >> update: aYavuObject [
 	
-	self system storedSubsystem update: aSupplier
+	self system storedSubsystem update: aYavuObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseSubsystem >> vatPercentageDefault [
 	
 	^ 21

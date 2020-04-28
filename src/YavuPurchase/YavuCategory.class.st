@@ -16,14 +16,18 @@ YavuCategory class >> label [
 	^ 'Categoria'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuCategory >> addToSystem [
-	
-	self yavuSystem purchaseSubsystem addCategory: self
+	self subsystem addCategory: self
 ]
 
-{ #category : #removing }
+{ #category : #crud }
 YavuCategory >> removeFromSystem [
 	
 	self yavuSystem purchaseSubsystem removeCategory: self
+]
+
+{ #category : #environment }
+YavuCategory >> subsystem [
+	^ self yavuSystem purchaseSubsystem
 ]
