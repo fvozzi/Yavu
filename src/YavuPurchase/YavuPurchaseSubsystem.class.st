@@ -103,13 +103,13 @@ YavuPurchaseSubsystem >> addSupplier: aProduct [
 { #category : #accessing }
 YavuPurchaseSubsystem >> brands [
 
-	^ brands ifNil: [ brands := self system storedSubsystem instancesOf: YavuBrand ]
+	^ brands ifNil: [ brands := (self system storedSubsystem instancesOf: YavuBrand) copy ]
 ]
 
 { #category : #accessing }
 YavuPurchaseSubsystem >> categories [
 
-	^ categories ifNil: [ categories := self system storedSubsystem instancesOf: YavuCategory ]
+	^ categories ifNil: [ categories := (self system storedSubsystem instancesOf: YavuCategory) copy ]
 ]
 
 { #category : #accessing }
@@ -121,13 +121,13 @@ YavuPurchaseSubsystem >> name [
 { #category : #accessing }
 YavuPurchaseSubsystem >> productTypes [
 
-	^ productTypes ifNil: [ productTypes := self system storedSubsystem instancesOf: YavuProductType ]
+	^ productTypes ifNil: [ productTypes := (self system storedSubsystem instancesOf: YavuProductType) copy ]
 ]
 
 { #category : #accessing }
 YavuPurchaseSubsystem >> products [
 
-	^ products ifNil: [ products := self system storedSubsystem instancesOf: YavuProduct ]
+	^ products ifNil: [ products := (self system storedSubsystem instancesOf: YavuProduct) copy ]
 ]
 
 { #category : #'api/queries' }
