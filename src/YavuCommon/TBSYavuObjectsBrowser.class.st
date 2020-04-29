@@ -74,16 +74,9 @@ TBSYavuObjectsBrowser >> onInstancesCollectionChanged [
 
 { #category : #crud }
 TBSYavuObjectsBrowser >> removeInstance: anInstance [
-	| answer mensaje |
-	mensaje := MensajeDeSistema
-		mensaje: 'Se eliminará definitivamente del sistema. ¿Continua?'.
-	answer := self
-		call:
-			(mensaje asComponent
-				addValidatedForm:
-					{#save -> 'Sí'. #cancel -> 'No'};
-				addDecoration: (WAWindowDecoration title: 'Confirmación requerida');
-				yourself).
+	
+	| answer |
+	answer := parent call: (self renderRemoveInstanceForm: instanceClass new).
 	answer notNil
 		ifTrue: [ anInstance removeFromSystem.
 			self updateReport ]
@@ -109,7 +102,6 @@ TBSYavuObjectsBrowser >> renderAddInstanceForm: anInstance [
 { #category : #rendering }
 TBSYavuObjectsBrowser >> renderContentOn: html [
 
-	
 	html tbsPanelBody: [ 
 		html form: [ 
 		html tbsColumn: [ 
@@ -117,7 +109,25 @@ TBSYavuObjectsBrowser >> renderContentOn: html [
 			beSuccess;
 			callback: [ self addInstance ];
 			with: 'Agregar ' , instanceClass label]].
-	html render: report ]
+	html div class: 'table-responsive'; with: [  html render: report ]]
+]
+
+{ #category : #rendering }
+TBSYavuObjectsBrowser >> renderRemoveInstanceForm: anInstance [
+	
+	| 	component |
+
+	component := (TBSYavuConfirmMessage
+		messsage: 'Se eliminará definitivamente del sistema. ¿Continua?') asComponent.
+
+	component addDecoration: (
+		TBSMagritteFormDecoration new
+					buttons: { #save -> 'Sí, eliminar'. #cancel -> 'No' }; 
+					legend: 'Eliminar del sistema ', anInstance class label;
+					yourself).
+	component addDecoration: TBSMagritteValidationDecoration new.
+	component magritteDescription tbsFormHorizontal: true.
+	^ component
 ]
 
 { #category : #rendering }
