@@ -24,13 +24,14 @@ BaselineOfYavu >> baseline: spec [
 			self glorp: spec.
 			self bootstrap: spec.
 			self xmlParser: spec.
+			self telePharoServer: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].
 			spec package: 'YavuBeerStack' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuPurchase' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuRestaurant' with: [spec requires: 'YavuCommon'].
-			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap')]
+			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap' 'TelePharo')]
 			]
 		
 ]
@@ -80,6 +81,19 @@ BaselineOfYavu >> seaside3: spec [
 	spec
 		baseline: 'Seaside3'
 		with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.4/repository']
+		
+	
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> telePharoServer: spec [
+
+	spec
+		baseline: 'TelePharo'
+		with: [ spec 
+					repository: 'github://pharo-ide/TelePharo';
+					loads: 'Server'
+			]
 		
 	
 ]

@@ -11,7 +11,7 @@ Class {
 YavuMongoSubsystem >> initialize [ 
 
 	super initialize.
-	repository := VOMongoRepository host: 'localhost' database: YavuEnvironment current mongoDatabaseName.
+	repository := VOMongoRepository host: '127.0.0.1' database: YavuEnvironment current mongoDatabaseName.
 	repository enableSingleton
 ]
 
