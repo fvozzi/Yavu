@@ -154,6 +154,38 @@ YavuPurchaseInvoice >> invoiceType: aClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> invoiceTypeAndNumber [
+
+	^ self invoiceType formattedInvoiceType, ' ', self formattedPrefix, ' ', self formattedInvoiceNumber 
+]
+
+{ #category : #descriptions }
+YavuPurchaseInvoice >> invoiceTypeAndNumberDescription [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #invoiceTypeAndNumber;
+        	label: 'Tipo';
+        	priority: 120;
+			beReadOnly;
+        	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> invoiceTypeDescription [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #invoiceType;
+		default: nil;
+		optionsAndLabels: (self subsystem invoiceTypes collect: [:each | each -> each formattedInvoiceType]);
+		label: self class entityLabel;
+		priority: 100;
+		beRequired;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> mementoClass [
 
 	^ MAStraightMemento

@@ -52,7 +52,7 @@ YavuEnvironment class >> initialize [
 { #category : #'as yet unclassified' }
 YavuEnvironment class >> mongoDatabaseName [
 
- ^ 'yavuSystem'
+ ^ CurrentSystemClass mongoDatabaseName
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,4 +67,22 @@ YavuEnvironment class >> systemClass: aYavuSystem [
 	CurrentSystem := nil.
 	^CurrentSystemClass := aYavuSystem
 	
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment >> jqLibrary [
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment >> seasideApplicationName [
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment >> tbsLibrary [
+	
+	^ self subclassResponsibility 
 ]

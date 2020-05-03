@@ -1,11 +1,11 @@
 Class {
-	#name : #YavuInvoiceTypeA,
+	#name : #YavuInvoiceTypeX,
 	#superclass : #YavuInvoiceType,
 	#category : #'YavuPurchase-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }
-YavuInvoiceTypeA class >> formattedInvoiceType [
+YavuInvoiceTypeX class >> formattedInvoiceType [
 
-	^ 'FACT A'
+	^ 'FACT X'
 ]

@@ -38,7 +38,9 @@ TBSYavuLogin >> failedLogin: aByteString [
 TBSYavuLogin >> initialize [
 
 	super initialize.
-	system := YavuEnvironment newSystem
+	system := YavuEnvironment newSystem.
+	self registerSeasideApplication
+	
 ]
 
 { #category : #'private protocol' }

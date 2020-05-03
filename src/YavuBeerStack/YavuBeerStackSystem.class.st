@@ -7,6 +7,18 @@ Class {
 	#category : #'YavuBeerStack-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuBeerStackSystem class >> mongoDatabaseName [ 
+	
+	^ 'yavuBeerStack'
+]
+
+{ #category : #'as yet unclassified' }
+YavuBeerStackSystem class >> systemName [
+	
+	^ 'YavuBeerStack'
+]
+
 { #category : #adding }
 YavuBeerStackSystem >> addNewKeg: aKeg [ 
 

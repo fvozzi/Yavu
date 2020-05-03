@@ -5,6 +5,18 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuNutriDataSystem class >> mongoDatabaseName [ 
+	
+	^ 'yavuNutriData'
+]
+
+{ #category : #'as yet unclassified' }
+YavuNutriDataSystem class >> systemName [
+	
+	^ 'YavuNutriData'
+]
+
+{ #category : #'as yet unclassified' }
 YavuNutriDataSystem >> searchFoodCompositionByID: anInteger in: aNutriInfoSource [ 
 
 	^aNutriInfoSource searchFoodCompositionByID: anInteger 

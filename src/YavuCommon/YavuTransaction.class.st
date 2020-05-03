@@ -158,7 +158,7 @@ YavuTransaction >> dateDescription [
 
 	<magritteDescription>
 	^MADateDescription new 
-		componentClass: MAMonthYearSelectorComponent;
+		componentClass: TBSMagritteDateInputComponent;
         	accessor: #date;
         	label: 'Fecha';
         	priority: 20;

@@ -8,6 +8,9 @@ Class {
 	#classVars : [
 		'EnabledSubsystemsClasses'
 	],
+	#classInstVars : [
+		'companyName'
+	],
 	#category : #'YavuCommon-Environment'
 }
 
@@ -59,6 +62,26 @@ YavuSystem class >> allSicUser [
 		yourself
 ]
 
+{ #category : #accessing }
+YavuSystem class >> companyName [
+
+	^ companyName 
+]
+
+{ #category : #accessing }
+YavuSystem class >> companyName: aString [ 
+
+	companyName := aString
+]
+
+{ #category : #initialization }
+YavuSystem class >> companyName: aString enabledSubsystemsClasses: aCollectionOfSubsystemsClasses [
+	"Desde el environment definimos que subsistemas van a estar disponibles."
+	
+	self companyName: aString.
+	self enabledSubsystemsClasses: aCollectionOfSubsystemsClasses 
+]
+
 { #category : #view }
 YavuSystem class >> demoCompany [
 	self shouldBeImplemented.
@@ -90,6 +113,13 @@ YavuSystem class >> mainView [
 	^TBSYavuSystemView 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSystem class >> mongoDatabaseName [
+	^ companyName
+		ifNil: [ self systemName ]
+		ifNotNil: [ self systemName , '-' , companyName ]
+]
+
 { #category : #initialization }
 YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 
@@ -114,7 +144,7 @@ YavuSystem class >> subsystemsMenuElement [
 { #category : #'as yet unclassified' }
 YavuSystem class >> systemName [
 	
-	^ 'Yavusoft'
+	^ 'YavuSystem'
 ]
 
 { #category : #'as yet unclassified' }
@@ -161,6 +191,12 @@ YavuSystem >> announcer [
 YavuSystem >> company [
 	
 	^self loginSubsystem company
+]
+
+{ #category : #accessing }
+YavuSystem >> companyName [
+	
+	^self class companyName
 ]
 
 { #category : #'as yet unclassified' }

@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuPurchase-Entities'
 }
 
+{ #category : #'as yet unclassified' }
+YavuNoInscripto class >> invoiceType [
+	
+	^ YavuInvoiceTypeX 
+]
+
 { #category : #'sin categoria' }
 YavuNoInscripto class >> label [ 
 

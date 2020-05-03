@@ -19,8 +19,6 @@ YavuBrand class >> label [
 { #category : #crud }
 YavuBrand >> addToSystem [
 
-
-	self halt.
 	self subsystem addBrand: self
 ]
 
