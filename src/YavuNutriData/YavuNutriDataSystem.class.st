@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YavuNutriDataSystem class >> mongoDatabaseName [ 
-	
-	^ 'yavuNutriData'
-]
-
-{ #category : #'as yet unclassified' }
 YavuNutriDataSystem class >> systemName [
 	
 	^ 'YavuNutriData'

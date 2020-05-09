@@ -8,12 +8,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YavuBeerStackSystem class >> mongoDatabaseName [ 
-	
-	^ 'yavuBeerStack'
-]
-
-{ #category : #'as yet unclassified' }
 YavuBeerStackSystem class >> systemName [
 	
 	^ 'YavuBeerStack'

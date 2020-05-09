@@ -117,7 +117,14 @@ YavuSystem class >> mainView [
 YavuSystem class >> mongoDatabaseName [
 	^ companyName
 		ifNil: [ self systemName ]
-		ifNotNil: [ self systemName , '-' , companyName ]
+		ifNotNil: [ companyName ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem class >> seasideApplicationName [
+	^ companyName
+		ifNil: [ YavuEnvironment seasideApplicationName ]
+		ifNotNil: [ companyName asLowercase]
 ]
 
 { #category : #initialization }

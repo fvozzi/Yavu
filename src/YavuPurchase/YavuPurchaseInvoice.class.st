@@ -163,11 +163,11 @@ YavuPurchaseInvoice >> invoiceTypeAndNumber [
 YavuPurchaseInvoice >> invoiceTypeAndNumberDescription [
 
 	<magritteDescription>
-	^MANumberDescription new 
+	^MAStringDescription new 
         	accessor: #invoiceTypeAndNumber;
         	label: 'Tipo';
         	priority: 120;
-			beReadOnly;
+			beReadonly;
         	yourself
 ]
 
@@ -233,6 +233,11 @@ YavuPurchaseInvoice >> prefixDescription [
 			max: 9999;
 			beRequired;
         	yourself
+]
+
+{ #category : #environment }
+YavuPurchaseInvoice >> subsystem [
+	^ self yavuSystem purchaseSubsystem
 ]
 
 { #category : #'as yet unclassified' }

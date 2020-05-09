@@ -4,20 +4,20 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
-{ #category : #'as yet unclassified' }
-YavuDevelopmentEnvironment >> jqLibrary [
+{ #category : #seaside }
+YavuDevelopmentEnvironment class >> jqLibrary [
 	
 	^ JQDevelopmentLibrary
 ]
 
-{ #category : #'as yet unclassified' }
-YavuDevelopmentEnvironment >> seasideApplicationName [
-	
-	^ 'yavu'
+{ #category : #mongo }
+YavuDevelopmentEnvironment class >> mongoDatabaseName [
+
+ ^ 'yavuSystem'
 ]
 
-{ #category : #'as yet unclassified' }
-YavuDevelopmentEnvironment >> tbsLibrary [
+{ #category : #seaside }
+YavuDevelopmentEnvironment class >> tbsLibrary [
 	
 	^ TBSDevelopmentLibrary
 ]

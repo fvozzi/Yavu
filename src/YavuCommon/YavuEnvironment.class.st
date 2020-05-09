@@ -9,25 +9,13 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
-{ #category : #adding }
+{ #category : #system }
 YavuEnvironment class >> beCurrent [
 
 	Current := self
 ]
 
-{ #category : #actions }
-YavuEnvironment class >> bePersistent [
-
-	self systemClass: YavuPersistentSubsystem 
-]
-
-{ #category : #'as yet unclassified' }
-YavuEnvironment class >> beTransient [
-
-	self systemClass: YavuTransientSubsystem
-]
-
-{ #category : #adding }
+{ #category : #system }
 YavuEnvironment class >> current [
 
 	Current ifNil: [ Current := self ].
@@ -35,7 +23,7 @@ YavuEnvironment class >> current [
 	
 ]
 
-{ #category : #adding }
+{ #category : #system }
 YavuEnvironment class >> currentSystem [
 
 	CurrentSystem ifNil: [ CurrentSystem := self newSystem ].
@@ -43,25 +31,53 @@ YavuEnvironment class >> currentSystem [
 	
 ]
 
-{ #category : #'as yet unclassified' }
-YavuEnvironment class >> initialize [
-	super initialize.
-	self beTransient 
+{ #category : #seaside }
+YavuEnvironment class >> jqLibrary [
+	
+	^ self subclassResponsibility 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #mongo }
 YavuEnvironment class >> mongoDatabaseName [
 
- ^ CurrentSystemClass mongoDatabaseName
+ ^ self subclassResponsibility 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #system }
 YavuEnvironment class >> newSystem [
 
 	^CurrentSystemClass new
 ]
 
+{ #category : #seaside }
+YavuEnvironment class >> registerSeasideApplication [
+	^ (WAAdmin
+		register: self seasideApplicationRoot
+		asApplicationAt: self seasideApplicationName)
+		preferenceAt: #sessionClass put: YavuSession;
+		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
+		addLibrary: self jqLibrary;
+		addLibrary: self tbsLibrary
+]
+
+{ #category : #seaside }
+YavuEnvironment class >> resourceBaseUrl [
+	^ 'http://localhost:8081'
+]
+
+{ #category : #seaside }
+YavuEnvironment class >> seasideApplicationName [
+	
+	^ 'yavu' 
+]
+
 { #category : #'as yet unclassified' }
+YavuEnvironment class >> seasideApplicationRoot [
+
+	^ TBSYavuLogin 
+]
+
+{ #category : #system }
 YavuEnvironment class >> systemClass: aYavuSystem [
 
 	CurrentSystem := nil.
@@ -69,20 +85,8 @@ YavuEnvironment class >> systemClass: aYavuSystem [
 	
 ]
 
-{ #category : #'as yet unclassified' }
-YavuEnvironment >> jqLibrary [
-	
-	^ self subclassResponsibility 
-]
-
-{ #category : #'as yet unclassified' }
-YavuEnvironment >> seasideApplicationName [
-	
-	^ self subclassResponsibility 
-]
-
-{ #category : #'as yet unclassified' }
-YavuEnvironment >> tbsLibrary [
+{ #category : #seaside }
+YavuEnvironment class >> tbsLibrary [
 	
 	^ self subclassResponsibility 
 ]

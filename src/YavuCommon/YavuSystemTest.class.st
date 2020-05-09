@@ -26,8 +26,8 @@ YavuSystemTest >> fvozziUser [
 { #category : #initialization }
 YavuSystemTest >> newSystem [
 
-   YavuEnvironment systemClass: (YavuSystem enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuSecuritySubsystem )).
-   ^ YavuEnvironment newSystem
+   YavuEnvironment current systemClass: (YavuSystem enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuSecuritySubsystem )).
+   ^ YavuEnvironment current newSystem
 ]
 
 { #category : #initialization }

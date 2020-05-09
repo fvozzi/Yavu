@@ -4,12 +4,6 @@ Class {
 	#category : #'YavuInformes-Environment'
 }
 
-{ #category : #'as yet unclassified' }
-YavuWebsicSystem class >> mongoDatabaseName [ 
-	
-	^ 'yavuWebsic'
-]
-
 { #category : #testing }
 YavuWebsicSystem >> searchCustomerByNumber: aString customerType: aCustomerType [
 

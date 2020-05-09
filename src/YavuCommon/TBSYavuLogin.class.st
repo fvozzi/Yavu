@@ -15,17 +15,6 @@ TBSYavuLogin class >> canBeRoot [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
-TBSYavuLogin class >> initialize [
-	
-	super initialize.
-	(WAAdmin register: self asApplicationAt: 'yavu')
-		preferenceAt: #sessionClass put: YavuSession;
-		preferenceAt: #resourceBaseUrl put: 'http://localhost:8081';
-		addLibrary: JQDeploymentLibrary;
-		addLibrary: TBSDevelopmentLibrary
-]
-
 { #category : #accessing }
 TBSYavuLogin >> failedLogin: aByteString [ 
 	"Error de login."
@@ -38,8 +27,7 @@ TBSYavuLogin >> failedLogin: aByteString [
 TBSYavuLogin >> initialize [
 
 	super initialize.
-	system := YavuEnvironment newSystem.
-	self registerSeasideApplication
+	system := YavuEnvironment current newSystem
 	
 ]
 

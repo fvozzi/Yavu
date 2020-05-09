@@ -113,6 +113,12 @@ YavuPurchaseSubsystem >> categories [
 ]
 
 { #category : #accessing }
+YavuPurchaseSubsystem >> invoiceTypes [
+
+	^ YavuInvoiceType allSubclasses 
+]
+
+{ #category : #accessing }
 YavuPurchaseSubsystem >> name [ 
 
 	 ^ 'Compras'
