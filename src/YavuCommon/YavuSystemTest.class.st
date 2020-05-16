@@ -38,15 +38,6 @@ YavuSystemTest >> setUp [
 ]
 
 { #category : #tests }
-YavuSystemTest >> testCustomersOfNameBeginsWith [
-
-	"| clientes |
-	clientes := system customersOfNameBeginsWith: 'Pedro Vozzi'.
-	self assert: clientes size = 1.
-	self assert: clientes asOrderedCollection first name asUppercase trimBoth = 'PEDRO VOZZI'"
-]
-
-{ #category : #tests }
 YavuSystemTest >> testLoginUserNameAndPassword [
 
 	system addUser: self fvozziUser.

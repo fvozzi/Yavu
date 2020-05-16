@@ -14,8 +14,6 @@ Class {
 		'roles',
 		'email',
 		'password',
-		'commerces',
-		'company',
 		'fullName',
 		'phoneNumber'
 	],
@@ -51,33 +49,28 @@ YavuUser class >> label [
 	^'Usuario'
 ]
 
-{ #category : #'sin categoria' }
-YavuUser class >> name: aString company: aCompany [
-	"Crea una nueva instancia del receptor inicializada con nombre = unString y empresa = unaEmpresa."
-	 
-	^(self name: aString) initializeCompany: aCompany
+{ #category : #'instance creation' }
+YavuUser class >> new [ 
+	"Hack para el autocompletar del navegador."
+	
+	^ super new 
+		name: 'Usuario';
+		yourSelf 
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #configuration }
 YavuUser >> addRole: aRole [
 	
 	self roles add: aRole
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuUser >> addToSystem [
 	
-	self yavuSystem loginSubsystem addUser: self
+	self subsystem addUser: self
 ]
 
-{ #category : #'sin categoria' }
-YavuUser >> agregarComercio: unComercio [ 
-	"Agrega unComercio permitido a la lista de comercios del receptor."
-	
-	^self commerces add: unComercio
-]
-
-{ #category : #'sin categoria' }
+{ #category : #configuration }
 YavuUser >> allowedEntitiesClasses [
 	"Devuelve las clases de entidades del receptor."
 
@@ -86,53 +79,7 @@ YavuUser >> allowedEntitiesClasses [
 		into:  [:accum :each | accum addAll: each allowedEntitiesClasses; yourself]
 ]
 
-{ #category : #'sin categoria' }
-YavuUser >> comerciosAsignados [
-	"Devuelve la cantidad de comercios asginados al receptor."
-	
-	^self commerces size
-]
-
-{ #category : #'sin categoria' }
-YavuUser >> commerces [
-	"Devuelve la colección de comercios permitidos del receptor."
-	
-	^commerces
-]
-
-{ #category : #'sin categoria' }
-YavuUser >> commerces: unColeccionDeComercios [
-	"Setea la colección de comercios permitidos del receptor."
-	
-	commerces:= unColeccionDeComercios
-]
-
-{ #category : #'sin categoria' }
-YavuUser >> company [ 
-
-	^company
-]
-
-{ #category : #'sin categoria' }
-YavuUser >> company: unaEmpresa [
-
-	company:= unaEmpresa
-]
-
-{ #category : #'as yet unclassified' }
-YavuUser >> defaultCommerce [
-	"Devuelve el comercio predeterminado del receptor. 
-	NOTA: por ahora es el primero pero si van a aparecer muchos usuarios con más de un comercio
-	tendriamos que setearlo a una variable de instancia."
-	
-	| varios |
-
-	varios :=  self sicSession yavuSystem commerceOfName: 'Varios'  inCompany: self company.
-	(self commerces detect: [:one | one = varios] ifNone: []) ifNotNil: [:object | ^object].
-	^self sortedCommerces ifEmpty: [Commerce inexistente] ifNotEmpty: [:object | object first]
-]
-
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> descriptionClave [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -141,11 +88,11 @@ YavuUser >> descriptionClave [
         	accessor: #password;
         	label: 'Clave';
         	priority: 120;
-		 required: true;
+		 	required: true;
        	 yourself
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> descriptionEMail [
 	"Devuelve un objeto que describe la representación de la variable correo electrónico del receptor."
 
@@ -157,7 +104,7 @@ YavuUser >> descriptionEMail [
         	yourself
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> descriptionNombreCompleto [
 	"Devuelve un objeto que describe la representación de la variable nombre completo del receptor."
 
@@ -169,7 +116,7 @@ YavuUser >> descriptionNombreCompleto [
         	yourself
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> descriptionRol [
 	
 	<magritteDescription>
@@ -178,12 +125,12 @@ YavuUser >> descriptionRol [
 		label: 'Roles';
 		priority: 220;
 		componentClass: MAListCompositonComponent;
-		options: YavuRole all;
+		options: (self subsystem roles);
 		beSorted; 
 		yourself
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> descriptionTelefono [
 	"Devuelve un objeto que describe la representación de la variable nombre completo del receptor."
 
@@ -195,29 +142,21 @@ YavuUser >> descriptionTelefono [
         	yourself
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> email [
 	"Devuelve el contenido de la variable de instancia email del receptor."
 	
 	^email
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> email: unEmail [
 	"Establece el contenido de la variable de instancia email del receptor con unEmail."
 	
 	email:= unEmail
 ]
 
-{ #category : #'as yet unclassified' }
-YavuUser >> financialSituationsOfCommerceFileReference [
-
-	"hay usuarios que pueden tener habilitado más de un comercio pero no parece tener sentido que recien el mail esos usuarios."
-	self commerces first createFileOfFinancialSituations.
-	^self commerces first nameOfFileOfFinancialSituations 
-]
-
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> fullName [
 	"Devuelve el nombre completo del usuario.
 	NOTA: a diferencia del nombre que refiere al nombre de usuario en el sistema es el nombre y apellido del usuario."
@@ -225,81 +164,84 @@ YavuUser >> fullName [
 	^fullName
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> fullName: unNombre [
 	"Establece el nombre completo del usuario con unNombre."
 	
 	fullName:= unNombre
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #initialization }
 YavuUser >> initialize [
 	"Initialize the receiver instances variable."
 	
 	super initialize.
 	password := String new.
-	roles := OrderedCollection new.
-	commerces := OrderedCollection new
+	roles := OrderedCollection new
 ]
 
-{ #category : #'sin categoria' }
-YavuUser >> initializeCompany: unaEmpresa [ 
-
-	company := unaEmpresa
-]
-
-{ #category : #'sin categoria' }
+{ #category : #descriptions }
 YavuUser >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
 	^super maDescriptionForReport reject: [:each | each class = MAPasswordDescription]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuUser >> menuElements [
 	"needs refactoring."
 	
 	^self roles inject: OrderedCollection new into: [:accum :each | accum addAll: each menuElements; yourself]
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> password [
 	^ password
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> password: anObject [
 	password := anObject
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> phoneNumber [
 	"Devuelve el contenido de la variable de instancia telefono del receptor."
 	
 	^phoneNumber
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> phoneNumber: unTelefono [
 	"Establece unTelefono como el numero de telefono del receptor."
 	
 	phoneNumber := unTelefono
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #crud }
+YavuUser >> removeFromSystem [
+	
+	self subsystem removeUser: self
+]
+
+{ #category : #accessing }
 YavuUser >> roles [
 	^ roles
 ]
 
-{ #category : #'sin categoria' }
+{ #category : #accessing }
 YavuUser >> roles: anObject [
 
 	roles := anObject
 ]
 
-{ #category : #'as yet unclassified' }
-YavuUser >> sortedCommerces [
-	"Devuelve la colección ordenada de comercios permitidos del receptor."
+{ #category : #configuration }
+YavuUser >> subsystem [ 
+
+	^ self yavuSystem loginSubsystem
 	
-	^self commerces asSortedCollection
+
+	
+
+
 ]

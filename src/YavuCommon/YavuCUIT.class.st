@@ -40,7 +40,7 @@ Si el resto es 1= Entonces se aplica la siguiente regla:
 Caso contrario XY pasa a ser (11- Resto). 
 "
 Class {
-	#name : #YvCUIT,
+	#name : #YavuCUIT,
 	#superclass : #YavuObject,
 	#instVars : [
 		'xy',
@@ -54,21 +54,21 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YvCUIT class >> cuit: aLiteral [
+YavuCUIT class >> cuit: aLiteral [
 	"Crea un nuevo número de cuit."
 	
 	^super new inicializarCUIT: aLiteral
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT class >> dni: unDni tipo: unTipo [
+YavuCUIT class >> dni: unDni tipo: unTipo [
 	"Crea un nuevo número de cuit a partir del numero de dni y el tipo."
 	
 	^super new inicializarDNI: unDni tipo: unTipo
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> calcularDigitoVerificadorUsando: unResto [
+YavuCUIT >> calcularDigitoVerificadorUsando: unResto [
 	"Si el resto es 0= Entoces Z=0 
 	Si el resto es 1= Entonces se aplica la siguiente regla: 
 	*Si es hombre: Z=9 y XY pasa a ser 23 
@@ -83,7 +83,7 @@ YvCUIT >> calcularDigitoVerificadorUsando: unResto [
 ]
 
 { #category : #calculation }
-YvCUIT >> calcularNumeroDeCUIT [
+YavuCUIT >> calcularNumeroDeCUIT [
 	"Calcula el número de cuit según el dni y el tipo del receptor."
 	
 	| digitos sumaDigitos resto |
@@ -98,7 +98,7 @@ YvCUIT >> calcularNumeroDeCUIT [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> cuit [
+YavuCUIT >> cuit [
 	"Devuelve el numero de CUIT/CUIL asociado al receptor."
 	
 	cuit isNil ifTrue: [self calcularNumeroDeCUIT].
@@ -106,20 +106,20 @@ YvCUIT >> cuit [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> dni [
+YavuCUIT >> dni [
 
 	^dni
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> inicializarCUIT: aCuitLiteral [
+YavuCUIT >> inicializarCUIT: aCuitLiteral [
 	"Privado - Inicializa el literal del cuit."
 	
 	cuit := aCuitLiteral
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> inicializarDNI: unDni tipo: unTipo [
+YavuCUIT >> inicializarDNI: unDni tipo: unTipo [
 	"Privado - Inicializa el numero de dni y el tipo.
 	NOTA: el tipo puede ser Masculino(M), Femenino(F) u Organizacion(O)."
 	
@@ -128,7 +128,7 @@ YvCUIT >> inicializarDNI: unDni tipo: unTipo [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> inicializarMultiplicadores [
+YavuCUIT >> inicializarMultiplicadores [
 	"Privado - Inicializa el mapa de número usados para el calculo del número de cuit."
 
 	multiplicadores := Dictionary new
@@ -147,14 +147,14 @@ YvCUIT >> inicializarMultiplicadores [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> inicializarXY [
+YavuCUIT >> inicializarXY [
 	"Masculino:20, Femenio:27, Empresa:30."
 	
 	xy:= self tipo xy
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> multiplicadores [
+YavuCUIT >> multiplicadores [
 	"Devuelve el mapa de números a usar para el calculo del número de CUIT."
 	
 	multiplicadores isNil ifTrue: [self inicializarMultiplicadores].
@@ -162,7 +162,7 @@ YvCUIT >> multiplicadores [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> normalizarDNI: unDni [
+YavuCUIT >> normalizarDNI: unDni [
 	"Completa con 0 a la izquierda si unDni tiene menos de 9 caracteres."
 	
 	| dniNormalizado |
@@ -172,33 +172,33 @@ YvCUIT >> normalizarDNI: unDni [
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> restoCero [
+YavuCUIT >> restoCero [
 
 	z:= '0'
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> restoUno [
+YavuCUIT >> restoUno [
 
 	xy := '23'.
 	z := self tipo zParaRestoUno
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> tipo [
+YavuCUIT >> tipo [
 
 	^tipo
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> xy [
+YavuCUIT >> xy [
 
 	xy isNil ifTrue: [self inicializarXY].
 	^xy
 ]
 
 { #category : #'as yet unclassified' }
-YvCUIT >> z [
+YavuCUIT >> z [
 
 	^z
 ]

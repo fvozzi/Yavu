@@ -7,6 +7,24 @@ Class {
 	#category : #'YavuCommon-BaseModel'
 }
 
+{ #category : #comparing }
+YavuSimpleMenuElement >> = anotherMenu [
+
+	self class = anotherMenu class	ifFalse: [ ^ false ].
+	^ self name = anotherMenu name & (self subsystem = anotherMenu subsystem)
+
+	
+]
+
+{ #category : #comparing }
+YavuSimpleMenuElement >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ self name hash bitXor: self subsystem hash
+
+	
+]
+
 { #category : #'sin categoria' }
 YavuSimpleMenuElement >> parent [
 	^ parent
@@ -15,19 +33,4 @@ YavuSimpleMenuElement >> parent [
 { #category : #'sin categoria' }
 YavuSimpleMenuElement >> parent: anObject [
 	parent := anObject
-]
-
-{ #category : #'sin categoria' }
-YavuSimpleMenuElement >> renderContentOn: html [
-	"Render the receiver on aWASICMenu."
-	
-	self halt
-]
-
-{ #category : #'sin categoria' }
-YavuSimpleMenuElement >> renderContentOn: html on: aWASICMenu [
-	"Render the receiver on aWASICMenu."
-	
-	self halt.
-	aWASICMenu renderSimpleMenuElement: self on: html
 ]

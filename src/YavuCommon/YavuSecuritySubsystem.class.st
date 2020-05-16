@@ -9,13 +9,13 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSecuritySubsystem class >> entitiesClasses [
 	
-	^ OrderedCollection with: YavuUser with: YavuRole with: YavuSecurityFunction 
+	^ OrderedCollection with: YavuUser with: YavuRole
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSecuritySubsystem class >> menuElements [
 
 	^ OrderedCollection new 
@@ -23,38 +23,57 @@ YavuSecuritySubsystem class >> menuElements [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSecuritySubsystem class >> subsystemName [
 
 	^ 'Seguridad'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSecuritySubsystem class >> subsystemTag [
 
 	 ^'loginSubsystem'
 ]
 
-{ #category : #'as yet unclassified' }
-YavuSecuritySubsystem >> addUser: aSicUser [ 
+{ #category : #configuration }
+YavuSecuritySubsystem class >> transactionsClasses [
 	
-	self users add: aSicUser.
-	self system storedSubsystem save: aSicUser
+	^ OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
+YavuSecuritySubsystem >> addRole: aRole [ 
+	
+	self roles add: aRole.
+	self system storedSubsystem save: aRole
+]
+
+{ #category : #crud }
+YavuSecuritySubsystem >> addUser: aYavuUser [ 
+	
+	self users add: aYavuUser.
+	self system storedSubsystem save: aYavuUser
+]
+
+{ #category : #accessing }
 YavuSecuritySubsystem >> administratorUser [
 
 	^ self system administratorUser
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuSecuritySubsystem >> allowedEntitiesClasses [
 	
 	^loggedUser allowedEntitiesClasses
 ]
 
 { #category : #'as yet unclassified' }
+YavuSecuritySubsystem >> allowedEntitiesClassesOn: aClass [ 
+	
+	^ aClass entitiesClasses intersection: self loggedUser allowedEntitiesClasses 
+]
+
+{ #category : #accessing }
 YavuSecuritySubsystem >> allowedRootMenuActions [
 	
 	^loggedUser menuElements
@@ -72,7 +91,7 @@ YavuSecuritySubsystem >> loggedUser: aSicUser [
 	loggedUser := aSicUser
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuSecuritySubsystem >> loginUserName: aName password: aPassword [ 
 	
 	[self loggedUser: (self searchUserName: aName password: aPassword)]
@@ -86,7 +105,21 @@ YavuSecuritySubsystem >> name [
 	 ^ 'Seguridad'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
+YavuSecuritySubsystem >> removeRole: aRole [ 
+	
+	self roles remove: aRole.
+	self system storedSubsystem remove: aRole
+]
+
+{ #category : #crud }
+YavuSecuritySubsystem >> removeUser: aYavuUser [ 
+	
+	self users remove: aYavuUser.
+	self system storedSubsystem remove: aYavuUser
+]
+
+{ #category : #configuration }
 YavuSecuritySubsystem >> roleClass [
 	^YavuRole 
 ]
@@ -96,7 +129,7 @@ YavuSecuritySubsystem >> roles [
 	^ roles ifNil: [ self system storedSubsystem instancesOf: self roleClass ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuSecuritySubsystem >> searchUserName: aName password: aPassword [
 
 	^self users 
@@ -104,12 +137,18 @@ YavuSecuritySubsystem >> searchUserName: aName password: aPassword [
 		ifNone: [ Error signal: 'Usuario o contraseña incorrecta.' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
+YavuSecuritySubsystem >> update: aYavuObject [
+	
+	self system storedSubsystem update: aYavuObject
+]
+
+{ #category : #configuration }
 YavuSecuritySubsystem >> userClass [
 	^YavuUser 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuSecuritySubsystem >> users [
 	 users ifNil: [ users:= self system storedSubsystem instancesOf: self userClass ].
 	 users add: self administratorUser.

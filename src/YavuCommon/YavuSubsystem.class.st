@@ -7,7 +7,13 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
+YavuSubsystem class >> entitiesClasses [
+
+	^ self subclassResponsibility 
+]
+
+{ #category : #configuration }
 YavuSubsystem class >> menuElements [
 	
 	^ OrderedCollection new
@@ -19,10 +25,16 @@ YavuSubsystem class >> on: aYavuSystem [
 	^self new initializeSystem: aYavuSystem 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSubsystem class >> subsystemName [
 
 	^ 'Subsistema'
+]
+
+{ #category : #configuration }
+YavuSubsystem class >> transactionsClasses [
+
+	^ self subclassResponsibility 
 ]
 
 { #category : #initialization }
@@ -40,4 +52,10 @@ YavuSubsystem >> name [
 { #category : #'as yet unclassified' }
 YavuSubsystem >> system [
 	^ system
+]
+
+{ #category : #updating }
+YavuSubsystem >> update: aYavuObject [
+
+	self subclassResponsibility 
 ]

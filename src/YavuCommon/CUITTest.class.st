@@ -8,5 +8,5 @@ Class {
 CUITTest >> testCalculoCUITSegunDNI [
 	"Testea el calculo del número de CUIT/CUIL según el dni y el sexo."
 	
-	self assert: '23276349759' = (YvCUIT dni: '27634975' tipo: (CustomerType atCodigo: 'M')) cuit
+	self assert: '23276349759' = (YavuCUIT dni: '27634975' tipo: (CustomerType atCodigo: 'M')) cuit
 ]

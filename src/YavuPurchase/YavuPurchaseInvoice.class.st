@@ -7,7 +7,9 @@ Class {
 		'total',
 		'netPrice',
 		'prefix',
-		'invoiceNumber'
+		'invoiceNumber',
+		'vatPerception',
+		'iibbPerception'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -75,6 +77,29 @@ YavuPurchaseInvoice >> formattedInvoiceNumber [
 YavuPurchaseInvoice >> formattedPrefix [
 	
 	^ self completeString: self prefix asString withZeros: 4
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> iibbPerception [
+	
+	^ iibbPerception
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> iibbPerception: aNumber [
+	
+	iibbPerception := aNumber
+]
+
+{ #category : #descriptions }
+YavuPurchaseInvoice >> iibbPerceptionDescription [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #iibbPerception;
+        	label: 'Percepción IIBB';
+        	priority: 155;
+        	yourself
 ]
 
 { #category : #initialization }
@@ -156,7 +181,9 @@ YavuPurchaseInvoice >> invoiceType: aClass [
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> invoiceTypeAndNumber [
 
-	^ self invoiceType formattedInvoiceType, ' ', self formattedPrefix, ' ', self formattedInvoiceNumber 
+	^ self invoiceType 
+		ifNil: [ '' ]
+		ifNotNil: [ self invoiceType formattedInvoiceType, ' ', self formattedPrefix, ' ', self formattedInvoiceNumber ]
 ]
 
 { #category : #descriptions }
@@ -255,5 +282,28 @@ YavuPurchaseInvoice >> totalDescription [
 			beReadonly;
         	label: 'Total';
         	priority: 160;
+        	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> vatPerception [
+	
+	^ vatPerception
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> vatPerception: aNumber [
+	
+	vatPerception := aNumber
+]
+
+{ #category : #descriptions }
+YavuPurchaseInvoice >> vatPerceptionDescription [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #vatPerception;
+        	label: 'Percepción IVA';
+        	priority: 150;
         	yourself
 ]

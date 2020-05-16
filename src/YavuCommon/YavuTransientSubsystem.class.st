@@ -141,13 +141,6 @@ YavuTransientSubsystem >> save: anObject [
 	(self instancesOf: anObject class) add: anObject 
 ]
 
-{ #category : #accessing }
-YavuTransientSubsystem >> securityFunctions [
-	
-	securityFunctions ifNil: [ self initializeSecurityFunctions ].
-	^securityFunctions
-]
-
 { #category : #initialization }
 YavuTransientSubsystem >> setInstancesOf: aClass with: aCollectionOfInstances [
 	

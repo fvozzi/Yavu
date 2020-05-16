@@ -48,7 +48,7 @@ CustomerType class >> correspondeA: xy [
 CustomerType class >> cuitNumberOf: unNumeroDeDocumento [
 	"Devuelve el numero de cuit correspondiente a unNumeroDeDocumento y a la clase del receptor."
 	
-	^(YvCUIT dni: unNumeroDeDocumento tipo: self ) cuit
+	^(YavuCUIT dni: unNumeroDeDocumento tipo: self ) cuit
 ]
 
 { #category : #accessing }

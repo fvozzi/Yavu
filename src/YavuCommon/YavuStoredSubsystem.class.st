@@ -34,6 +34,12 @@ YavuStoredSubsystem class >> empresaActual [
 		do: [Company default]
 ]
 
+{ #category : #configuration }
+YavuStoredSubsystem class >> entitiesClasses [ 
+
+	^ OrderedCollection new
+]
+
 { #category : #'as yet unclassified' }
 YavuStoredSubsystem class >> for: aCompany [ 
 	
@@ -74,13 +80,19 @@ YavuStoredSubsystem class >> singleton [
 	^self sicSession root
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuStoredSubsystem class >> subsystemTag [
 
 	 ^'storedSubsystem'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
+YavuStoredSubsystem class >> transactionsClasses [ 
+
+	^ OrderedCollection new
+]
+
+{ #category : #configuration }
 YavuStoredSubsystem class >> yavuSystem [
 	"Devuelve la session actual si está en el contexto de una session de Seaside, sino devuelve la shared session local."
 	

@@ -62,6 +62,24 @@ YavuPurchaseSubsystemTest >> newSubsystem [
 ]
 
 { #category : #resources }
+YavuPurchaseSubsystemTest >> panaderiaGalliPurchaseInvoice [
+	
+	^ YavuPurchaseInvoice new
+		entity: self panaderiaGalliSupplier;
+		date: '04/11/2020' asDate;
+		yourself
+]
+
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> panaderiaGalliSupplier [
+
+	^ (YavuSupplier name: 'Panaderia Galli')
+			businessName: 'Carlitos Pan';
+			vatCondition: YavuNoInscripto;
+			yourself
+]
+
+{ #category : #resources }
 YavuPurchaseSubsystemTest >> quesoCategory [
 
 	^ YavuCategory name: 'Quesos'
@@ -145,7 +163,9 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 	| invoice |
 	
 	invoice := self quesosDelAbastoPurchaseInvoice.
-	self assert: invoice invoiceType = YavuInvoiceTypeA
+	self assert: invoice invoiceType = YavuInvoiceTypeA.
+	invoice := self panaderiaGalliPurchaseInvoice.
+	self assert: invoice invoiceType = YavuInvoiceTypeX 
 ]
 
 { #category : #tests }

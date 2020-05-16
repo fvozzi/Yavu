@@ -135,7 +135,7 @@ YavuTransaction >> = otraTransaccion [
 		self date = otraTransaccion date]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #crud }
 YavuTransaction >> addToSystem [
 	
 	self yavuSystem storedSubsystem save: self
@@ -214,6 +214,12 @@ YavuTransaction >> maDescriptionForReport [
 	^self magritteDescription reject: [:each | each label = 'Agregar']
 ]
 
+{ #category : #crud }
+YavuTransaction >> removeFromSystem [
+	
+	self yavuSystem storedSubsystem remove: self
+]
+
 { #category : #'as yet unclassified' }
 YavuTransaction >> ts [
 	 ts isNil ifTrue: [ ts:= TimeStamp now ].
@@ -223,4 +229,10 @@ YavuTransaction >> ts [
 { #category : #'sin categoria' }
 YavuTransaction >> ts: anObject [
 	ts := anObject
+]
+
+{ #category : #crud }
+YavuTransaction >> updateToSystem [ 
+
+	self subsystem update: self
 ]

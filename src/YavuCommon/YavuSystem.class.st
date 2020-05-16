@@ -14,61 +14,23 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
-{ #category : #transientSystemInitialization }
+{ #category : #configuration }
 YavuSystem class >> administratorUser [
+
 	^ (YavuUser
-		name: 'Administrador'
-		company: (Company name: 'Cámara Comercio'))
-		password: 'yavu09';
-		roles: self allRoles;
-		yourself
+		name: 'Administrador')
+			password: 'yavu09';
+			addRole: self superAdministratorRole;
+			yourself
 ]
 
-{ #category : #transientSystemInitialization }
-YavuSystem class >> allMenuElements [
-	"Answer all the available menues of the composite system."
-	
-	| menues |
-	
-	 menues := OrderedCollection new.
-	^ menues 	
-		addAll: self subsystemsMenuElement;
-		yourself
-]
-
-{ #category : #transientSystemInitialization }
-YavuSystem class >> allRoles [
-
-	^OrderedCollection new 
-		add: ((YavuRole name: 'Administrador') menuElements: self allMenuElements; securityFunctions: self allSecurityFunctions);
-		yourself
-
-]
-
-{ #category : #transientSystemInitialization }
-YavuSystem class >> allSecurityFunctions [
-
-	^OrderedCollection new
-						add: ((YavuSecurityFunction name: 'Users') yavuObjectClass: YavuUser) ;
-						add: ((YavuSecurityFunction name: 'Suppliers') yavuObjectClass: YavuSupplier) ;
-						yourself.
-
-]
-
-{ #category : #transientSystemInitialization }
-YavuSystem class >> allSicUser [
-	^ OrderedCollection new
-		add: self administratorUser;
-		yourself
-]
-
-{ #category : #accessing }
+{ #category : #configuration }
 YavuSystem class >> companyName [
 
 	^ companyName 
 ]
 
-{ #category : #accessing }
+{ #category : #configuration }
 YavuSystem class >> companyName: aString [ 
 
 	companyName := aString
@@ -82,7 +44,7 @@ YavuSystem class >> companyName: aString enabledSubsystemsClasses: aCollectionOf
 	self enabledSubsystemsClasses: aCollectionOfSubsystemsClasses 
 ]
 
-{ #category : #view }
+{ #category : #configuration }
 YavuSystem class >> demoCompany [
 	self shouldBeImplemented.
 ]
@@ -101,44 +63,20 @@ YavuSystem class >> enabledSubsystemsClasses: aCollectionOfSubsystemsClasses [
 	EnabledSubsystemsClasses  := aCollectionOfSubsystemsClasses
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSystem class >> homeViewClass [
 	
 	 ^ Smalltalk at: #TBSYavuHomeView
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuSystem class >> mainView [
 
 	^TBSYavuSystemView 
 ]
 
-{ #category : #'as yet unclassified' }
-YavuSystem class >> mongoDatabaseName [
-	^ companyName
-		ifNil: [ self systemName ]
-		ifNotNil: [ companyName ]
-]
-
-{ #category : #'as yet unclassified' }
-YavuSystem class >> seasideApplicationName [
-	^ companyName
-		ifNil: [ YavuEnvironment seasideApplicationName ]
-		ifNotNil: [ companyName asLowercase]
-]
-
-{ #category : #initialization }
-YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
-
-	aTransientSubsystem setInstancesOf: YavuUser with: self allSicUser.
-	aTransientSubsystem setInstancesOf: YavuMenuElement with: self allMenuElements.
-	aTransientSubsystem setInstancesOf: YavuSecurityFunction with: self allSecurityFunctions.
-	aTransientSubsystem setInstancesOf: YavuRole with: self allRoles
-
-]
-
-{ #category : #'as yet unclassified' }
-YavuSystem class >> subsystemsMenuElement [
+{ #category : #subsystemsProtocol }
+YavuSystem class >> menuElements [
 
 	^ self enabledSubsystemsClasses
 		inject: OrderedCollection new
@@ -148,10 +86,54 @@ YavuSystem class >> subsystemsMenuElement [
 				yourself ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
+YavuSystem class >> mongoDatabaseName [
+	^ companyName
+		ifNil: [ self systemName ]
+		ifNotNil: [ companyName ]
+]
+
+{ #category : #configuration }
+YavuSystem class >> seasideApplicationName [
+	^ companyName
+		ifNil: [ YavuEnvironment seasideApplicationName ]
+		ifNotNil: [ companyName asLowercase]
+]
+
+{ #category : #initialization }
+YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
+
+	aTransientSubsystem setInstancesOf: YavuUser with: (OrderedCollection with: self administratorUser).
+	aTransientSubsystem setInstancesOf: YavuMenuElement with: self menuElements.
+
+]
+
+{ #category : #configuration }
+YavuSystem class >> superAdministratorRole [
+
+	^ (YavuRole name: 'Super Administrador') 
+		menuElements: self menuElements; 
+		yavuObjects: self yavuObjects;
+		yourself
+
+]
+
+{ #category : #configuration }
 YavuSystem class >> systemName [
 	
 	^ 'YavuSystem'
+]
+
+{ #category : #subsystemsProtocol }
+YavuSystem class >> yavuObjects [
+
+	^ self enabledSubsystemsClasses
+		inject: OrderedCollection new
+		into: [ :objects :subsystemClass | 
+			objects
+				addAll: subsystemClass entitiesClasses;
+				addAll: subsystemClass transactionsClasses;
+				yourself ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -172,9 +154,9 @@ YavuSystem >> allowedEntitiesClasses [
 ]
 
 { #category : #'as yet unclassified' }
-YavuSystem >> allowedEntitiesClassesOn: aClass [ 
+YavuSystem >> allowedEntitiesClassesOn: aSubsystem [ 
 	
-	 ^ aClass entitiesClasses 
+	 ^ self loginSubsystem allowedEntitiesClassesOn: aSubsystem 
 ]
 
 { #category : #'as yet unclassified' }
@@ -262,6 +244,12 @@ YavuSystem >> mainView [
 	^self class mainView
 ]
 
+{ #category : #subsystemsProtocol }
+YavuSystem >> menuElements [
+	
+	^ self class menuElements 
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> name [
 	self shouldBeImplemented.
@@ -306,4 +294,10 @@ YavuSystem >> subsystemAt: aSubsystemLabel [
 YavuSystem >> systemName [
 	
 	^ self class systemName 
+]
+
+{ #category : #subsystemsProtocol }
+YavuSystem >> yavuObjects [
+	
+	^ self class yavuObjects 
 ]

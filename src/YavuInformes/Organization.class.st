@@ -22,7 +22,7 @@ Organization class >> correspondeA: xy [
 Organization class >> cuitNumberOf: unNumeroDeDocumento [
 	"Devuelve el numero de cuit correspondiente a unNumeroDeDocumento y a la clase del receptor."
 	
-	^(YvCUIT cuit: unNumeroDeDocumento) cuit
+	^(YavuCUIT cuit: unNumeroDeDocumento) cuit
 ]
 
 { #category : #accessing }

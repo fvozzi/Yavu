@@ -804,7 +804,7 @@ SICDescriptorSystem >> descriptorForRole: aDescriptor [
 		attributeName: #menuElements;
 		referenceClass: YavuMenuElement.
 	(aDescriptor newMapping: ManyToManyMapping)
-		attributeName: #securityFunctions;
+		attributeName: #yavuObjects;
 		referenceClass: YavuSecurityFunction
 	
 ]

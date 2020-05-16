@@ -20,7 +20,8 @@ TBSYavuObjectsBrowser class >> on: aCollectionOfInstances class: aYavuObjectClas
 { #category : #crud }
 TBSYavuObjectsBrowser >> addInstance [
 	| answer |
-	answer := parent call: (self renderAddInstanceForm: instanceClass new).
+	
+	answer := parent call: (self renderAddInstanceForm: instanceClass new ).
 	answer notNil
 		ifFalse: [ ^ self ].
 	answer addToSystem.
@@ -52,7 +53,7 @@ TBSYavuObjectsBrowser >> children [
 TBSYavuObjectsBrowser >> editInstance: anEntity [
 	| answer |
 	
-	self class.
+	
 	answer := parent call: (self renderAddInstanceForm: anEntity).
 	answer notNil
 		ifTrue: [ answer updateToSystem ]

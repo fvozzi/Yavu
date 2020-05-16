@@ -30,6 +30,7 @@ YavuInvoiceItem >> descriptionDescription [
 	^MAStringDescription new
 		accessor: #description;
 		priority: 105;
+		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
 
@@ -68,6 +69,7 @@ YavuInvoiceItem >> netPriceDescription [
         	label: 'Precio Neto';
         	priority: 130;
 			beRequired;
+			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
 
@@ -95,6 +97,7 @@ YavuInvoiceItem >> productDescription [
 		label: YavuProduct label;
 		priority: 100;
 		beRequired;
+		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
 
@@ -119,6 +122,7 @@ YavuInvoiceItem >> quantityDescription [
 			beRequired;
 			bePositive;
 			min: 0.1;
+			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
 
@@ -138,6 +142,7 @@ YavuInvoiceItem >> totalDescription [
         	label: 'Total';
         	priority: 140;
 			beRequired;
+			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
 
