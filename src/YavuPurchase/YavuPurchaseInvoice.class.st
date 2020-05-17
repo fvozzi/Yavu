@@ -228,7 +228,7 @@ YavuPurchaseInvoice >> netPrice [
 YavuPurchaseInvoice >> onInvoiceItemsChange [
 
 	netPrice  := self invoiceItems inject: 0 into: [ :accum :each | accum + each netPrice ].
-	total := self invoiceItems inject: 0 into: [ :accum :each | accum + each total ]
+	total := self invoiceItems inject: 0 into: [ :accum :each | accum + (self totalPriceOf: each) ]
 ]
 
 { #category : #'sin categoria' }
@@ -283,6 +283,12 @@ YavuPurchaseInvoice >> totalDescription [
         	label: 'Total';
         	priority: 160;
         	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> totalPriceOf: aYavuInvoiceItem [ 
+	
+	^ self invoiceType totalPriceOf: aYavuInvoiceItem netPrice vatPercentage: aYavuInvoiceItem vatPercentage 
 ]
 
 { #category : #'as yet unclassified' }

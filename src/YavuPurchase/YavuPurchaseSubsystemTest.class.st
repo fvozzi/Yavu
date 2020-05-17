@@ -79,6 +79,15 @@ YavuPurchaseSubsystemTest >> panaderiaGalliSupplier [
 			yourself
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystemTest >> purchaseInvoiceItem1 [
+	
+	^ YavuInvoiceItem new
+		quantity: 1;
+		unitPrice: 10;
+		yourself
+]
+
 { #category : #resources }
 YavuPurchaseSubsystemTest >> quesoCategory [
 
@@ -155,6 +164,30 @@ YavuPurchaseSubsystemTest >> testAddPurchaseInvoice [
 	invoice addToSystem.
 	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) size = 1.
 	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) first date = invoice date
+]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactAVATCalculation [
+
+	| invoice |
+	
+	invoice := self quesosDelAbastoPurchaseInvoice.
+	self assert: invoice invoiceType = YavuInvoiceTypeA.
+	invoice addInvoiceItem: self purchaseInvoiceItem1.
+	self assert: invoice netPrice equals: invoice invoiceItems first netPrice.
+	self assert: invoice total equals: invoice netPrice + (invoice netPrice * invoice invoiceItems first vatPercentage / 100)
+]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactXVATCalculation [
+
+	| invoice |
+	
+	invoice := self panaderiaGalliPurchaseInvoice.
+	self assert: invoice invoiceType = YavuInvoiceTypeX.
+	invoice addInvoiceItem: self purchaseInvoiceItem1.
+	self assert: invoice netPrice equals: invoice invoiceItems first netPrice.
+	self assert: invoice total equals: invoice netPrice.
 ]
 
 { #category : #tests }

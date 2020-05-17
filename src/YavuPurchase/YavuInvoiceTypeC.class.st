@@ -9,3 +9,9 @@ YavuInvoiceTypeC class >> formattedInvoiceType [
 
 	^ 'FACT C'
 ]
+
+{ #category : #accessing }
+YavuInvoiceTypeC class >> totalPriceOf: aPrice vatPercentage: aPercentage [
+
+	^ aPrice
+]

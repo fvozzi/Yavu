@@ -5,7 +5,8 @@ Class {
 		'quantity',
 		'unitPrice',
 		'product',
-		'description'
+		'description',
+		'vatPercentage'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -39,6 +40,16 @@ YavuInvoiceItem >> initialize [
 
 	quantity := 0.
 	unitPrice := 0
+]
+
+{ #category : #calculated }
+YavuInvoiceItem >> initializeVatPercentage [
+
+	vatPercentage :=
+		product 
+			ifNil: [  self yavuSystem purchaseSubsystem vatPercentageDefault ]
+			ifNotNil: [ :selectedProduct | selectedProduct vatPercentage ]
+
 ]
 
 { #category : #accessing }
@@ -82,7 +93,8 @@ YavuInvoiceItem >> product [
 { #category : #accessing }
 YavuInvoiceItem >> product: aYavuProduct [ 
 	
-	product := aYavuProduct 
+	product := aYavuProduct.
+	self initializeVatPercentage 
 ]
 
 { #category : #'magritte-descriptions' }
@@ -97,7 +109,7 @@ YavuInvoiceItem >> productDescription [
 		label: YavuProduct label;
 		priority: 100;
 		beRequired;
-		componentClass: TBSMagritteTextInputComponent;
+		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 
@@ -122,26 +134,6 @@ YavuInvoiceItem >> quantityDescription [
 			beRequired;
 			bePositive;
 			min: 0.1;
-			componentClass: TBSMagritteTextInputComponent;
-        	yourself
-]
-
-{ #category : #calculated }
-YavuInvoiceItem >> total [
-	
-	^ self quantity * self unitPriceAfterTaxs 
-]
-
-{ #category : #'magritte-descriptions' }
-YavuInvoiceItem >> totalDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #total;
-			beReadonly;
-        	label: 'Total';
-        	priority: 140;
-			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
@@ -177,6 +169,6 @@ YavuInvoiceItem >> unitPriceDescription [
 { #category : #calculated }
 YavuInvoiceItem >> vatPercentage [
 
-	product ifNil: [ ^ self yavuSystem purchaseSubsystem vatPercentageDefault ].
-	^ product vatPercentage
+	vatPercentage ifNil: [ self initializeVatPercentage].
+	^ vatPercentage 
 ]
