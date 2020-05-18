@@ -151,7 +151,6 @@ YavuPurchaseSubsystemTest >> testAddProductsToInvoice [
 	invoice addInvoiceItem: itemProduct1 .
 	self assert: invoice invoiceItems size = 1.
 	self assert: (invoice invoiceItems first product = itemProduct1 product). 
-	self assert: invoice total = itemProduct1 total.
 	self assert: invoice netPrice = itemProduct1 netPrice
 ]
 
