@@ -4,53 +4,80 @@ Class {
 	#instVars : [
 		'repository'
 	],
+	#classInstVars : [
+		'repository'
+	],
 	#category : #'YavuCommon-Environment'
 }
+
+{ #category : #accessing }
+YavuMongoSubsystem class >> repository [ 
+
+	repository ifNil: [ 
+		repository := VOMongoRepository host: '127.0.0.1' database: YavuEnvironment current mongoDatabaseName.		
+	   repository enableSingleton.
+		 ].
+	^ repository
+
+	
+]
 
 { #category : #initialization }
 YavuMongoSubsystem >> initialize [ 
 
 	super initialize.
-	repository := VOMongoRepository host: '127.0.0.1' database: YavuEnvironment current mongoDatabaseName.
-	repository enableSingleton
+"	repository := VOMongoRepository host: '127.0.0.1' database: YavuEnvironment current mongoDatabaseName"
 ]
 
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> instancesOf: aClass [ 
 	
-	^repository selectAll: aClass
+	^self repository selectAll: aClass
 ]
 
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> instancesOfClass: aClass from: startDate to: anotherDate entities: aCollection [ 
 	
-	^ (repository selectAll: aClass) 
-		select: [:each | 
+	^ "repository selectMany: aClass where: [ :each | 
+		(each at: 'entity.__id') = (repository idOf: aCollection first )
+		]
+		"
+
+		"repository selectMany: aClass where: [:each | 
 			(aCollection includes: each entity)
-				and: [each date between: startDate and: anotherDate ] ]
+				and: [each date between: startDate and: anotherDate ] ]"
+			
+		(self repository selectAll: aClass) select: [:each | 
+			(aCollection includes: each entity) and: [each date between: startDate and: anotherDate ] ]
 ]
 
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [ 
 	
-	^ (repository 
+	^ (self repository 
 		selectAll: aClass) select: [ :each | each entity = aYavuSupplier ]
 ]
 
 { #category : #'As yet unclassified' }
 YavuMongoSubsystem >> remove: aYavuObject [ 
 	
-	aYavuObject remove
+	self repository remove: aYavuObject
+]
+
+{ #category : #'as yet unclassified' }
+YavuMongoSubsystem >> repository [
+
+	^ self class repository
 ]
 
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> save: aYavuObject [ 
 	
-	aYavuObject save
+	self repository save: aYavuObject
 ]
 
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> update: aYavuObject [ 
 	
-	aYavuObject save
+	self repository save: aYavuObject 
 ]

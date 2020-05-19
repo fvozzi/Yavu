@@ -90,7 +90,6 @@ TBSYavuObjectBrowserView >> renderObjectClassSelection: html [
 { #category : #rendering }
 TBSYavuObjectBrowserView >> renderReportOn: html [
 
-	
 	objectsBrowser updateInstances: self instances class: self selectedOrDefaultObjectClass.
 	objectsBrowser renderOn: html
 ]

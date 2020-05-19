@@ -58,6 +58,11 @@ YavuProductType >> removeFromSystem [
 ]
 
 { #category : #environment }
+YavuProductType >> subsystem [
+	^ self yavuSystem purchaseSubsystem
+]
+
+{ #category : #environment }
 YavuProductType >> subsytem [
 	^ self yavuSystem purchaseSubsystem
 ]

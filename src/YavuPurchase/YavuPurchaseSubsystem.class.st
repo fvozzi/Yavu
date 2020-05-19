@@ -89,6 +89,7 @@ YavuPurchaseSubsystem >> addProductType: aProductType [
 { #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
+	self halt.
 	self system storedSubsystem save: aPurchaseInvoice
 
 ]
@@ -169,6 +170,13 @@ YavuPurchaseSubsystem >> removeCategory: aCategory [
 	
 	self categories remove: aCategory.
 	self system storedSubsystem remove: aCategory
+]
+
+{ #category : #crud }
+YavuPurchaseSubsystem >> removeProduct: aProduct [
+	
+	self products remove: aProduct.
+	self system storedSubsystem remove: aProduct
 ]
 
 { #category : #crud }

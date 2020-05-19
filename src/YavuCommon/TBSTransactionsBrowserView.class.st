@@ -48,7 +48,7 @@ TBSTransactionsBrowserView >> initialize [
 
 { #category : #subclassResponsability }
 TBSTransactionsBrowserView >> instances [
-	
+
 	^ objectClass instancesFrom: self startDate to: self endDate entity: self entity
 ]
 
@@ -60,7 +60,7 @@ TBSTransactionsBrowserView >> onEntitySelection: aYavuSupplier [
 
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> possibleEntities [
-	
+
 	^ self selectedOrDefaultObjectClass entityClass all
 ]
 
