@@ -3,52 +3,25 @@ Class {
 	#superclass : #YavuTransaction,
 	#instVars : [
 		'invoiceType',
-		'invoiceItems',
 		'total',
 		'netPrice',
 		'prefix',
 		'invoiceNumber',
 		'vatPerception',
-		'iibbPerception'
+		'iibbPerception',
+		'purchaseTransactions'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
 
-{ #category : #'sin categoria' }
-YavuPurchaseInvoice class >> entityClass [
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [ 
 	
-	^ YavuSupplier 
+	purchaseTransactions add: aYavuPurchaseTransaction.
+	self onPurchaseTransactionsAdded
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
-
-	^ self yavuSystem purchaseSubsystem 
-		purchaseInvoicesOfSuppliers: aCollectionOfEntities 
-		from: startDate
-		to: endDate
-]
-
-{ #category : #testing }
-YavuPurchaseInvoice class >> isVoyageRoot [ 
-
-	^ true
-]
-
-{ #category : #accessing }
-YavuPurchaseInvoice class >> label [ 
-
-	^ 'Factura de Compra'
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> addInvoiceItem: anInvoiceItem [ 
-	
-	invoiceItems add: anInvoiceItem.
-	self onInvoiceItemsChange
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuPurchaseInvoice >> completeString: aString withZeros: anInteger [ 
 	
 	| formattedString |
@@ -64,121 +37,59 @@ YavuPurchaseInvoice >> completeString: aString withZeros: anInteger [
 YavuPurchaseInvoice >> entity: aSupplier [
 
 	super entity: aSupplier.
-	self onSupplierChanged: aSupplier
+	self onEntityChanded
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuPurchaseInvoice >> formattedInvoiceNumber [
 	
 	^ self completeString: self invoiceNumber asString withZeros: 8
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuPurchaseInvoice >> formattedPrefix [
 	
 	^ self completeString: self prefix asString withZeros: 4
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseInvoice >> iibbPerception [
-	
 	^ iibbPerception
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> iibbPerception: aNumber [
-	
-	iibbPerception := aNumber
+{ #category : #accessing }
+YavuPurchaseInvoice >> iibbPerception: anObject [
+	iibbPerception := anObject
 ]
 
-{ #category : #descriptions }
-YavuPurchaseInvoice >> iibbPerceptionDescription [
-
-	<magritteDescription>
-	^ MANumberDescription new 
-        	accessor: #iibbPerception;
-        	label: 'Percepción IIBB';
-        	priority: 155;
-        	yourself
-]
-
-{ #category : #initialization }
+{ #category : #'sin categoria' }
 YavuPurchaseInvoice >> initialize [ 
 
 	super initialize.
-	invoiceItems := OrderedCollection new
+	purchaseTransactions := OrderedCollection new
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> invoice: aClass [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> invoiceItems [
-
-	^invoiceItems
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> invoiceItems: aCollection [ 
-
-	invoiceItems := aCollection.
-	self onInvoiceItemsChange
-]
-
-{ #category : #descriptions }
-YavuPurchaseInvoice >> invoiceItemsDescription [
-	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
-
-	<magritteDescription>
-	^MAToManyRelationDescription new
-		accessor: #invoiceItems;
-		classes: (OrderedCollection with: YavuInvoiceItem);
-		default: nil;
-		label: 'Items';
-		priority: 120;
-		componentClass: TBSMagritteOneToManyComponent;
-		yourself
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseInvoice >> invoiceNumber [
 	^ invoiceNumber
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> invoiceNumber: anInteger [ 
-	
-	invoiceNumber := anInteger 
+{ #category : #accessing }
+YavuPurchaseInvoice >> invoiceNumber: anObject [
+	invoiceNumber := anObject
 ]
 
-{ #category : #descriptions }
-YavuPurchaseInvoice >> invoiceNumberDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #invoiceNumber;
-        	label: 'Número';
-        	priority: 115;
-			min: 1;
-			max: 99999999;
-			beRequired;
-        	yourself
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseInvoice >> invoiceType [
-	
 	^ invoiceType
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> invoiceType: aClass [ 
-	invoiceType := aClass
+{ #category : #accessing }
+YavuPurchaseInvoice >> invoiceType: anObject [
+	invoiceType := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuPurchaseInvoice >> invoiceTypeAndNumber [
 
 	^ self invoiceType 
@@ -187,18 +98,6 @@ YavuPurchaseInvoice >> invoiceTypeAndNumber [
 ]
 
 { #category : #descriptions }
-YavuPurchaseInvoice >> invoiceTypeAndNumberDescription [
-
-	<magritteDescription>
-	^MAStringDescription new 
-        	accessor: #invoiceTypeAndNumber;
-        	label: 'Tipo';
-        	priority: 120;
-			beReadonly;
-        	yourself
-]
-
-{ #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> invoiceTypeDescription [
 
 	<magritteDescription>
@@ -212,104 +111,74 @@ YavuPurchaseInvoice >> invoiceTypeDescription [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> mementoClass [
-
-	^ MAStraightMemento
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseInvoice >> netPrice [
-	
 	^ netPrice
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> onInvoiceItemsChange [
-
-	netPrice  := self invoiceItems inject: 0 into: [ :accum :each | accum + each netPrice ].
-	total := self invoiceItems inject: 0 into: [ :accum :each | accum + (self totalPriceOf: each) ]
+{ #category : #accessing }
+YavuPurchaseInvoice >> netPrice: anObject [
+	netPrice := anObject
 ]
 
 { #category : #'sin categoria' }
-YavuPurchaseInvoice >> onSupplierChanged: aSupplier [
+YavuPurchaseInvoice >> onEntityChanded [
 
-	self invoiceType: aSupplier invoiceType
+	self invoiceType: self entity invoiceType
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
+	
+	netPrice := self purchaseTransactionItems sum: [ :each | self subtotalPriceOf: each ].
+	total := self purchaseTransactionItems sum: [ :each | self totalPriceOf: each ]
+]
+
+{ #category : #accessing }
 YavuPurchaseInvoice >> prefix [
 	^ prefix
 ]
 
+{ #category : #accessing }
+YavuPurchaseInvoice >> prefix: anObject [
+	prefix := anObject
+]
+
 { #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> prefix: anInteger [ 
+YavuPurchaseInvoice >> purchaseTransactionItems [
 	
-	prefix := anInteger
-]
-
-{ #category : #descriptions }
-YavuPurchaseInvoice >> prefixDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #prefix;
-        	label: 'Prefijo';
-        	priority: 110;
-			min: 1;
-			max: 9999;
-			beRequired;
-        	yourself
-]
-
-{ #category : #environment }
-YavuPurchaseInvoice >> subsystem [
-	^ self yavuSystem purchaseSubsystem
+	^ self purchaseTransactions inject: OrderedCollection new into: [ :accum :each |
+		accum addAll: each purchaseTransactionItems  ]
 ]
 
 { #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> total [
+YavuPurchaseInvoice >> subtotalPriceOf: aPurchaseTransactionItem [ 
+	
+	^ self invoiceType subtotalPriceOf: aPurchaseTransactionItem
+]
 
+{ #category : #accessing }
+YavuPurchaseInvoice >> total [
 	^ total
 ]
 
-{ #category : #descriptions }
-YavuPurchaseInvoice >> totalDescription [
-
-	<magritteDescription>
-	^ MANumberDescription new 
-        	accessor: #total;
-			beReadonly;
-        	label: 'Total';
-        	priority: 160;
-        	yourself
+{ #category : #accessing }
+YavuPurchaseInvoice >> total: anObject [
+	total := anObject
 ]
 
 { #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> totalPriceOf: aYavuInvoiceItem [ 
+YavuPurchaseInvoice >> totalPriceOf: aPurchaseTransactionItem [ 
 	
-	^ self invoiceType totalPriceOf: aYavuInvoiceItem netPrice vatPercentage: aYavuInvoiceItem vatPercentage 
+	^ self invoiceType totalPriceOf: aPurchaseTransactionItem 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuPurchaseInvoice >> vatPerception [
-	
 	^ vatPerception
 ]
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseInvoice >> vatPerception: aNumber [
-	
-	vatPerception := aNumber
-]
-
-{ #category : #descriptions }
-YavuPurchaseInvoice >> vatPerceptionDescription [
-
-	<magritteDescription>
-	^ MANumberDescription new 
-        	accessor: #vatPerception;
-        	label: 'Percepción IVA';
-        	priority: 150;
-        	yourself
+{ #category : #accessing }
+YavuPurchaseInvoice >> vatPerception: anObject [
+	vatPerception := anObject
 ]

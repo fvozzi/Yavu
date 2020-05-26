@@ -11,7 +11,12 @@ YavuInvoiceTypeC class >> formattedInvoiceType [
 ]
 
 { #category : #accessing }
-YavuInvoiceTypeC class >> totalPriceOf: aPrice vatPercentage: aPercentage [
+YavuInvoiceTypeC class >> subtotalPriceOf: aPurchaseTransactionItem [ 
+	^ aPurchaseTransactionItem subtotalAfterTaxs 
+]
 
-	^ aPrice
+{ #category : #accessing }
+YavuInvoiceTypeC class >> totalPriceOf: aPurchaseTransactionItem [
+
+	^ aPurchaseTransactionItem subtotalAfterTaxs 
 ]

@@ -7,7 +7,7 @@ Class {
 { #category : #'as yet unclassified' }
 YavuNoInscripto class >> invoiceType [
 	
-	^ YavuInvoiceTypeX 
+	^ YavuInvoiceTypeC 
 ]
 
 { #category : #'sin categoria' }

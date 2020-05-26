@@ -74,7 +74,7 @@ YavuTransaction class >> instanceOf: startDate entity: anEntity [
 { #category : #'as yet unclassified' }
 YavuTransaction class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
 
-	^ self subclassResponsibility 
+	^ self yavuSystem storedSubsystem instancesOfClass: self from: startDate to: endDate entities: aCollectionOfEntities  
 ]
 
 { #category : #'as yet unclassified' }

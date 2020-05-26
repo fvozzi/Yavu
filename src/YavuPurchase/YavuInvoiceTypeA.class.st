@@ -11,7 +11,12 @@ YavuInvoiceTypeA class >> formattedInvoiceType [
 ]
 
 { #category : #'as yet unclassified' }
-YavuInvoiceTypeA class >> totalPriceOf: aPrice vatPercentage: aVatPercentage [ 
-	
-	^  aPrice + (aPrice * aVatPercentage / 100)
+YavuInvoiceTypeA class >> subtotalPriceOf: aPurchaseTransactionItem [ 
+	^ aPurchaseTransactionItem subtotal 
+]
+
+{ #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> totalPriceOf: aPurchaseTransactionItem [
+
+	^ aPurchaseTransactionItem subtotalAfterTaxs 
 ]

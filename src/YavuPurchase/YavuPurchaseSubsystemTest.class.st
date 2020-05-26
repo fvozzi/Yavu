@@ -28,7 +28,7 @@ YavuPurchaseSubsystemTest >> damboProductType [
 { #category : #resources }
 YavuPurchaseSubsystemTest >> itemOnBarraDamboLaPaulina [
 	
-	^ YavuInvoiceItem new 
+	^ YavuPurchaseTransactionItem new 
 		product: self barraDamboLaPaulinaProduct;
 		quantity: 1;
 		unitPrice: 10;
@@ -75,14 +75,24 @@ YavuPurchaseSubsystemTest >> panaderiaGalliSupplier [
 
 	^ (YavuSupplier name: 'Panaderia Galli')
 			businessName: 'Carlitos Pan';
-			vatCondition: YavuNoInscripto;
+			vatCondition: YavuMonotributo;
 			yourself
 ]
 
 { #category : #'as yet unclassified' }
-YavuPurchaseSubsystemTest >> purchaseInvoiceItem1 [
+YavuPurchaseSubsystemTest >> purchaseTransaction1 [
 	
-	^ YavuInvoiceItem new
+	^ YavuPurchaseTransaction  new
+		entity: self quesosDelAbastoSupplier;
+		date: '04/11/2020' asDate;
+		addPurchaseTransactionItem: self purchaseTransactionItem1;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystemTest >> purchaseTransactionItem1 [
+	
+	^ YavuPurchaseTransactionItem new
 		quantity: 1;
 		unitPrice: 10;
 		yourself
@@ -98,6 +108,15 @@ YavuPurchaseSubsystemTest >> quesoCategory [
 YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseInvoice [
 	
 	^ YavuPurchaseInvoice new
+		entity: self quesosDelAbastoSupplier;
+		date: '04/11/2020' asDate;
+		yourself
+]
+
+{ #category : #resources }
+YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseTransaction [
+	
+	^ YavuPurchaseTransaction  new
 		entity: self quesosDelAbastoSupplier;
 		date: '04/11/2020' asDate;
 		yourself
@@ -142,16 +161,18 @@ YavuPurchaseSubsystemTest >> testAddPrefixAndInvoiceNumberToInvoice [
 ]
 
 { #category : #tests }
-YavuPurchaseSubsystemTest >> testAddProductsToInvoice [
+YavuPurchaseSubsystemTest >> testAddProductsToPurchaseTransaction [
 
-	| invoice itemProduct1 |
+	| purchaseTransaction itemProduct1 |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	purchaseTransaction := self quesosDelAbastoPurchaseTransaction.
 	itemProduct1 := self itemOnBarraDamboLaPaulina.
-	invoice addInvoiceItem: itemProduct1 .
-	self assert: invoice invoiceItems size = 1.
-	self assert: (invoice invoiceItems first product = itemProduct1 product). 
-	self assert: invoice netPrice = itemProduct1 netPrice
+	purchaseTransaction addPurchaseTransactionItem: itemProduct1 .
+	self assert: purchaseTransaction purchaseTransactionItems size = 1.
+	self assert: (purchaseTransaction purchaseTransactionItems first product = itemProduct1 product). 
+	self assert: itemProduct1 unitPrice equals: 10.
+	self assert: itemProduct1 unitPriceAfterTaxs asFloat equals: 12.1.
+	self assert: purchaseTransaction total equals: itemProduct1 subtotalAfterTaxs
 ]
 
 { #category : #tests }
@@ -172,9 +193,10 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactAVATCalculation [
 	
 	invoice := self quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
-	invoice addInvoiceItem: self purchaseInvoiceItem1.
-	self assert: invoice netPrice equals: invoice invoiceItems first netPrice.
-	self assert: invoice total equals: invoice netPrice + (invoice netPrice * invoice invoiceItems first vatPercentage / 100)
+	invoice addPurchaseTransaction: self purchaseTransaction1.
+	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotal.
+	self assert: invoice total equals: invoice netPrice + (invoice netPrice * invoice purchaseTransactionItems first vatPercentage / 100).
+	self assert: invoice total equals: invoice purchaseTransactionItems first subtotalAfterTaxs 
 ]
 
 { #category : #tests }
@@ -183,9 +205,9 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactXVATCalculation [
 	| invoice |
 	
 	invoice := self panaderiaGalliPurchaseInvoice.
-	self assert: invoice invoiceType = YavuInvoiceTypeX.
-	invoice addInvoiceItem: self purchaseInvoiceItem1.
-	self assert: invoice netPrice equals: invoice invoiceItems first netPrice.
+	self assert: invoice invoiceType = YavuInvoiceTypeC.
+	invoice addPurchaseTransaction: self purchaseTransaction1.
+	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotalAfterTaxs.
 	self assert: invoice total equals: invoice netPrice.
 ]
 
@@ -197,7 +219,7 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 	invoice := self quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
 	invoice := self panaderiaGalliPurchaseInvoice.
-	self assert: invoice invoiceType = YavuInvoiceTypeX 
+	self assert: invoice invoiceType = YavuInvoiceTypeC
 ]
 
 { #category : #tests }

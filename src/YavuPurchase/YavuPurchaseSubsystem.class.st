@@ -54,7 +54,7 @@ YavuPurchaseSubsystem class >> subsystemTag [
 YavuPurchaseSubsystem class >> transactionsClasses [
 	
 	^ OrderedCollection new
-		add: YavuPurchaseInvoice;
+		add: YavuPurchaseTransaction;
 		yourself
 ]
 
@@ -152,7 +152,7 @@ YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [
 YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers from: startDate to: endDate [ 
 
 	^ self system storedSubsystem 
-		instancesOfClass: YavuPurchaseInvoice
+		instancesOfClass: YavuPurchaseTransaction
 		from: startDate 
 		to: endDate
 		entities: aCollectionOfSuppliers
