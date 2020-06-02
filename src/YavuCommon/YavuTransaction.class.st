@@ -103,6 +103,19 @@ YavuTransaction class >> instancesOf: startDate entity: anEntity [
 ]
 
 { #category : #'as yet unclassified' }
+YavuTransaction class >> mongoDate [
+<mongoDescription>
+
+	^  VOToOneDescription new
+			attributeName: 'date';
+			accessor: (MAPluggableAccessor
+				read: [ :transaction | transaction date ]
+				write: [ :transaction :value  | transaction date: value asDate]);
+			yourself
+
+]
+
+{ #category : #'as yet unclassified' }
 YavuTransaction class >> possibleSearchSelectors [
 
 	^Dictionary new 
@@ -143,7 +156,7 @@ YavuTransaction >> addToSystem [
 
 { #category : #'sin categoria' }
 YavuTransaction >> date [
-	^ date
+	^ date 
 ]
 
 { #category : #'sin categoria' }
@@ -197,6 +210,13 @@ YavuTransaction >> hash [
 	"Answer a SmallInteger whose value is related to the receiver's identity."
 
 	^self entity hash bitXor: self date hash
+]
+
+{ #category : #initialization }
+YavuTransaction >> initialize [ 
+
+	super initialize.
+	date := Date today
 ]
 
 { #category : #'sin categoria' }

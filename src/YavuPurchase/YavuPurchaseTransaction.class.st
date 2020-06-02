@@ -33,7 +33,7 @@ YavuPurchaseTransaction class >> isVoyageRoot [
 { #category : #accessing }
 YavuPurchaseTransaction class >> label [ 
 
-	^ 'Factura de Compra'
+	^ 'Remito de Compra'
 ]
 
 { #category : #configuration }

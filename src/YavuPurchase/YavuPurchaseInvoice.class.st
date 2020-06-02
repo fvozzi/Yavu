@@ -14,6 +14,12 @@ Class {
 	#category : #'YavuPurchase-DomainObjects'
 }
 
+{ #category : #accessing }
+YavuPurchaseInvoice class >> label [ 
+
+	^ 'Remito de Compra'
+]
+
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [ 
 	
