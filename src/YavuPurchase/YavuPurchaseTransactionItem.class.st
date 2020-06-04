@@ -24,7 +24,7 @@ YavuPurchaseTransactionItem >> description: aDescription [
 	description := aDescription 
 ]
 
-{ #category : #'magritte-descriptions' }
+{ #category : #descriptions }
 YavuPurchaseTransactionItem >> descriptionDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -39,8 +39,8 @@ YavuPurchaseTransactionItem >> descriptionDescription [
 { #category : #initialization }
 YavuPurchaseTransactionItem >> initialize [ 
 
-	quantity := 0.
-	unitPrice := 0
+	quantity := unitPrice := unitPriceAfterTaxs := 0
+	
 ]
 
 { #category : #calculated }
@@ -90,7 +90,7 @@ YavuPurchaseTransactionItem >> product: aYavuProduct [
 	self initializeVatPercentage 
 ]
 
-{ #category : #'magritte-descriptions' }
+{ #category : #descriptions }
 YavuPurchaseTransactionItem >> productDescription [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -116,7 +116,7 @@ YavuPurchaseTransactionItem >> quantity: anInteger [
 	quantity := anInteger
 ]
 
-{ #category : #'magritte-descriptions' }
+{ #category : #descriptions }
 YavuPurchaseTransactionItem >> quantityDescription [
 
 	<magritteDescription>
@@ -143,7 +143,7 @@ YavuPurchaseTransactionItem >> subtotalAfterTaxs [
 	^ self quantity * self unitPriceAfterTaxs
 ]
 
-{ #category : #'magritte-descriptions' }
+{ #category : #descriptions }
 YavuPurchaseTransactionItem >> subtotalAfterTaxsDescription [
 
 	<magritteDescription>
@@ -156,14 +156,14 @@ YavuPurchaseTransactionItem >> subtotalAfterTaxsDescription [
         	yourself
 ]
 
-{ #category : #'magritte-descriptions' }
+{ #category : #descriptions }
 YavuPurchaseTransactionItem >> subtotalDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
         	accessor: #subtotal;
 			beReadonly;
-        	label: 'Precio Neto';
+        	label: 'Subtotal';
         	priority: 130;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
@@ -192,14 +192,27 @@ YavuPurchaseTransactionItem >> unitPriceAfterTaxs: aValue [
 	self onUnitPriceAfterTaxsChanged 
 ]
 
-{ #category : #'magritte-descriptions' }
-YavuPurchaseTransactionItem >> unitPriceDescription [
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> unitPriceAfterTaxsDescription [
 
 	<magritteDescription>
 	^MANumberDescription new 
         	accessor: #unitPriceAfterTaxs;
-        	label: 'Precio U. + Iva';
+        	label: 'P. Uunitario + Iva';
         	priority: 125;
+			beRequired;
+			bePositive;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> unitPriceDescription [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #unitPrice;
+        	label: 'P. Unitario';
+        	priority: 120;
 			beRequired;
 			bePositive;
         	yourself

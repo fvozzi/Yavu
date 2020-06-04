@@ -55,6 +55,7 @@ YavuPurchaseSubsystem class >> transactionsClasses [
 	
 	^ OrderedCollection new
 		add: YavuPurchaseTransaction;
+		add: YavuPurchaseInvoice;
 		yourself
 ]
 
