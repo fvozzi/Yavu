@@ -20,8 +20,7 @@ TBSYavuObjectsBrowser class >> on: aCollectionOfInstances class: aYavuObjectClas
 { #category : #crud }
 TBSYavuObjectsBrowser >> addInstance [
 	| answer |
-	
-	answer := parent call: (self renderAddInstanceForm: instanceClass new ).
+	answer := parent call: (self renderAddInstanceForm: self newInstance).
 	answer notNil
 		ifFalse: [ ^ self ].
 	answer addToSystem.
@@ -65,6 +64,11 @@ TBSYavuObjectsBrowser >> initializeInstances: aCollection class: aYavuObjectClas
 	instances := aCollection.
 	instanceClass := aYavuObjectClass.
 	self onInstancesCollectionChanged
+]
+
+{ #category : #crud }
+TBSYavuObjectsBrowser >> newInstance [
+	^ instanceClass new
 ]
 
 { #category : #eventActions }

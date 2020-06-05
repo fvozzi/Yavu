@@ -102,6 +102,12 @@ YavuPurchaseSubsystem >> addSupplier: aProduct [
 	self system storedSubsystem save: aProduct
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> availablePurchaseTransactionsFor: aYavuSupplier [ 
+	
+	^ (self purchaseTransactionsOfSupplier: aYavuSupplier) select: [ :each | each available ]
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> brands [
 
@@ -112,6 +118,12 @@ YavuPurchaseSubsystem >> brands [
 YavuPurchaseSubsystem >> categories [
 
 	^ categories ifNil: [ categories := (self system storedSubsystem instancesOf: YavuCategory) copy ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> decimalAccuracy [
+
+	^ 2
 ]
 
 { #category : #accessing }
@@ -157,6 +169,12 @@ YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers fro
 		from: startDate 
 		to: endDate
 		entities: aCollectionOfSuppliers
+]
+
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> purchaseTransactionsOfSupplier: aYavuSupplier [ 
+	
+	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseTransaction withEntity: aYavuSupplier
 ]
 
 { #category : #crud }

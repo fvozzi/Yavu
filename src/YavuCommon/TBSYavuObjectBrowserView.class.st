@@ -28,10 +28,9 @@ TBSYavuObjectBrowserView >> children [
 ]
 
 { #category : #initialization }
-TBSYavuObjectBrowserView >> initialize [ 
-
+TBSYavuObjectBrowserView >> initialize [
 	super initialize.
-	objectsBrowser := TBSYavuObjectsBrowser onParent: self.
+	objectsBrowser := self yavuObjectsBrowserClass onParent: self
 ]
 
 { #category : #initialization }
@@ -106,4 +105,9 @@ TBSYavuObjectBrowserView >> selectedOrDefaultObjectClass [
 TBSYavuObjectBrowserView >> subsystemClass [ 
 	
 	 ^ subsystemClass 
+]
+
+{ #category : #initialization }
+TBSYavuObjectBrowserView >> yavuObjectsBrowserClass [
+	^ TBSYavuObjectsBrowser
 ]

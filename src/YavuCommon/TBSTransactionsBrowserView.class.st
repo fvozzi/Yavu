@@ -84,6 +84,7 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 		html tbsRow: 'Entidad:'.
 		html tbsRow: [ html select
 		list: self possibleEntities;
+		selected: self entity ;
 		callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 3.
 	html tbsColumn: [ 
 		html tbsRow: 'Desde:'.
@@ -123,4 +124,9 @@ TBSTransactionsBrowserView >> startDateLiteral [
 TBSTransactionsBrowserView >> startDateLiteral: yyyymmddString [
 
 	startDateLiteral := yyyymmddString 
+]
+
+{ #category : #initialization }
+TBSTransactionsBrowserView >> yavuObjectsBrowserClass [
+	^ TBSYavuTransactionsBrowser
 ]

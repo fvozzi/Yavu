@@ -36,6 +36,89 @@ YavuPurchaseTransactionItem >> descriptionDescription [
 		yourself
 ]
 
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionProduct [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #product;
+		default: nil;
+		options: YavuProduct all;
+		label: YavuProduct label;
+		priority: 100;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionQuantity [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #quantity;
+        	label: 'Cantidad';
+        	priority: 110;
+			beRequired;
+			bePositive;
+			min: 0.1;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionSubtotal [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #subtotal;
+			beReadonly;
+        	label: 'Subtotal';
+        	priority: 130;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionSubtotalAfterTaxs [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #subtotalAfterTaxs;
+			beReadonly;
+        	label: 'Subotal + Iva';
+        	priority: 140;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionUnitPrice [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #unitPrice;
+        	label: 'P. Unitario';
+        	priority: 120;
+			beRequired;
+			bePositive;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionUnitPriceAfterTaxs [
+
+	<magritteDescription>
+	^MANumberDescription new 
+        	accessor: #unitPriceAfterTaxs;
+        	label: 'P. Uunitario + Iva';
+        	priority: 125;
+			beRequired;
+			bePositive;
+        	yourself
+]
+
 { #category : #initialization }
 YavuPurchaseTransactionItem >> initialize [ 
 
@@ -65,16 +148,22 @@ YavuPurchaseTransactionItem >> name: aName [
 	^ 'item'
 ]
 
-{ #category : #accessing }
+{ #category : #calculated }
 YavuPurchaseTransactionItem >> onUnitPriceAfterTaxsChanged [
 	
-	unitPrice := unitPriceAfterTaxs / (1 + (self vatPercentage / 100))
+	| unitPriceFromUnitPriceAfterTaxs |
+	
+	unitPriceFromUnitPriceAfterTaxs := unitPriceAfterTaxs / (1 + (self vatPercentage / 100)).
+	unitPrice := unitPrice asFloat round: self subsystem decimalAccuracy
 ]
 
-{ #category : #accessing }
+{ #category : #calculated }
 YavuPurchaseTransactionItem >> onUnitPriceChanged [
 	
-	unitPriceAfterTaxs := unitPrice + (unitPrice * self vatPercentage / 100)
+	| unitPriceAfterTaxsFromUnitPrice |
+	
+	unitPriceAfterTaxsFromUnitPrice := unitPrice + (unitPrice * self vatPercentage / 100).
+	unitPriceAfterTaxs := unitPriceAfterTaxsFromUnitPrice asFloat round: self subsystem decimalAccuracy
 ]
 
 { #category : #accessing }
@@ -90,22 +179,6 @@ YavuPurchaseTransactionItem >> product: aYavuProduct [
 	self initializeVatPercentage 
 ]
 
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> productDescription [
-	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
-
-	<magritteDescription>
-	^MASingleOptionDescription new
-		accessor: #product;
-		default: nil;
-		options: YavuProduct all;
-		label: YavuProduct label;
-		priority: 100;
-		beRequired;
-		componentClass: TBSMagritteSelectListComponent;
-		yourself
-]
-
 { #category : #accessing }
 YavuPurchaseTransactionItem >> quantity [
 	^ quantity
@@ -116,19 +189,9 @@ YavuPurchaseTransactionItem >> quantity: anInteger [
 	quantity := anInteger
 ]
 
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> quantityDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #quantity;
-        	label: 'Cantidad';
-        	priority: 110;
-			beRequired;
-			bePositive;
-			min: 0.1;
-			componentClass: TBSMagritteTextInputComponent;
-        	yourself
+{ #category : #accessing }
+YavuPurchaseTransactionItem >> subsystem [
+	^ self yavuSystem purchaseSubsystem
 ]
 
 { #category : #calculated }
@@ -143,30 +206,10 @@ YavuPurchaseTransactionItem >> subtotalAfterTaxs [
 	^ self quantity * self unitPriceAfterTaxs
 ]
 
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> subtotalAfterTaxsDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #subtotalAfterTaxs;
-			beReadonly;
-        	label: 'Subotal + Iva';
-        	priority: 140;
-			componentClass: TBSMagritteTextInputComponent;
-        	yourself
-]
-
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> subtotalDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #subtotal;
-			beReadonly;
-        	label: 'Subtotal';
-        	priority: 130;
-			componentClass: TBSMagritteTextInputComponent;
-        	yourself
+{ #category : #calculated }
+YavuPurchaseTransactionItem >> subtotalTaxs [
+	
+	^ self subtotalAfterTaxs - self subtotal
 ]
 
 { #category : #accessing }
@@ -180,42 +223,16 @@ YavuPurchaseTransactionItem >> unitPrice: anInteger [
 	self onUnitPriceChanged
 ]
 
-{ #category : #calculated }
+{ #category : #accessing }
 YavuPurchaseTransactionItem >> unitPriceAfterTaxs [
 	^ unitPriceAfterTaxs 
 ]
 
-{ #category : #calculated }
+{ #category : #accessing }
 YavuPurchaseTransactionItem >> unitPriceAfterTaxs: aValue [
 	
 	unitPriceAfterTaxs := aValue.
 	self onUnitPriceAfterTaxsChanged 
-]
-
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> unitPriceAfterTaxsDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #unitPriceAfterTaxs;
-        	label: 'P. Uunitario + Iva';
-        	priority: 125;
-			beRequired;
-			bePositive;
-        	yourself
-]
-
-{ #category : #descriptions }
-YavuPurchaseTransactionItem >> unitPriceDescription [
-
-	<magritteDescription>
-	^MANumberDescription new 
-        	accessor: #unitPrice;
-        	label: 'P. Unitario';
-        	priority: 120;
-			beRequired;
-			bePositive;
-        	yourself
 ]
 
 { #category : #calculated }

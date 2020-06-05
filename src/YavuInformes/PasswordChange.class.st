@@ -91,7 +91,7 @@ PasswordChange >> dateDescription [
 ]
 
 { #category : #'sin categoria' }
-PasswordChange >> entityDescription [
+PasswordChange >> descriptionEntity [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteContainer>

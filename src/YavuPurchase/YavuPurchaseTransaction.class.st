@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'purchaseTransactionItems',
 		'total',
-		'voucherNumber'
+		'voucherNumber',
+		'invoice'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -13,15 +14,6 @@ Class {
 YavuPurchaseTransaction class >> entityClass [
 	
 	^ YavuSupplier 
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseTransaction class >> instancesFrom: startDate to: endDate entities: aCollectionOfEntities [
-
-	^ self yavuSystem purchaseSubsystem 
-		purchaseInvoicesOfSuppliers: aCollectionOfEntities 
-		from: startDate
-		to: endDate
 ]
 
 { #category : #testing }
@@ -43,6 +35,38 @@ YavuPurchaseTransaction >> addPurchaseTransactionItem: anInvoiceItem [
 	self onInvoiceItemsChange
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseTransaction >> available [
+	^ self invoice isNil
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransaction >> descriptionPurchaseTransactionItems [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MAToManyRelationDescription new
+		accessor: #purchaseTransactionItems;
+		classes: (OrderedCollection with: YavuPurchaseTransactionItem);
+		default: nil;
+		label: 'Items';
+		priority: 120;
+		componentClass: TBSMagritteOneToManyComponent;
+		yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransaction >> descriptionTotal [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #total;
+			beReadonly;
+        	label: 'Total';
+        	priority: 160;
+        	yourself
+]
+
 { #category : #initialization }
 YavuPurchaseTransaction >> initialize [ 
 
@@ -51,8 +75,15 @@ YavuPurchaseTransaction >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseTransaction >> invoice [
+	
+	^ invoice
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseTransaction >> invoice: aClass [ 
-	self shouldBeImplemented.
+	
+	invoice := aClass
 ]
 
 { #category : #descriptions }
@@ -63,8 +94,20 @@ YavuPurchaseTransaction >> mementoClass [
 
 { #category : #acccessing }
 YavuPurchaseTransaction >> onInvoiceItemsChange [
+	
+	| totalNumber |
+	
+	totalNumber := self purchaseTransactionItems inject: 0 into: [ :accum :each | accum + each subtotalAfterTaxs].
+	total := totalNumber asFloat round: self subsystem decimalAccuracy
+]
 
-	total := self purchaseTransactionItems inject: 0 into: [ :accum :each | accum + each unitPriceAfterTaxs]
+{ #category : #printing }
+YavuPurchaseTransaction >> printOn: aStream [
+
+	aStream 
+		nextPutAll: self date ddmmyyyy; 
+		nextPutAll: ' - ';
+		nextPutAll: self total asString
 ]
 
 { #category : #acccessing }
@@ -80,21 +123,6 @@ YavuPurchaseTransaction >> purchaseTransactionItems: aCollection [
 	self onInvoiceItemsChange
 ]
 
-{ #category : #descriptions }
-YavuPurchaseTransaction >> purchaseTransactionItemsDescription [
-	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
-
-	<magritteDescription>
-	^MAToManyRelationDescription new
-		accessor: #purchaseTransactionItems;
-		classes: (OrderedCollection with: YavuPurchaseTransactionItem);
-		default: nil;
-		label: 'Items';
-		priority: 120;
-		componentClass: TBSMagritteOneToManyComponent;
-		yourself
-]
-
 { #category : #environment }
 YavuPurchaseTransaction >> subsystem [
 	^ self yavuSystem purchaseSubsystem
@@ -104,18 +132,6 @@ YavuPurchaseTransaction >> subsystem [
 YavuPurchaseTransaction >> total [
 
 	^ total
-]
-
-{ #category : #descriptions }
-YavuPurchaseTransaction >> totalDescription [
-
-	<magritteDescription>
-	^ MANumberDescription new 
-        	accessor: #total;
-			beReadonly;
-        	label: 'Total';
-        	priority: 160;
-        	yourself
 ]
 
 { #category : #acccessing }

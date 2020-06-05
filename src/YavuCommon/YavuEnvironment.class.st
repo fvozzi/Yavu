@@ -56,6 +56,7 @@ YavuEnvironment class >> registerSeasideApplication [
 		asApplicationAt: self seasideApplicationName)
 		preferenceAt: #sessionClass put: YavuSession;
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
+		preferenceAt: #maximumRelativeAge put: 28800;
 		addLibrary: self jqLibrary;
 		addLibrary: self tbsLibrary
 ]

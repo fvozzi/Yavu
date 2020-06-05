@@ -124,7 +124,7 @@ YavuUser >> descriptionRol [
 		accessor: #roles;
 		label: 'Roles';
 		priority: 220;
-		componentClass: MAListCompositonComponent;
+		componentClass: TBSListCompositionComponent;
 		options: (self subsystem roles);
 		beSorted; 
 		yourself

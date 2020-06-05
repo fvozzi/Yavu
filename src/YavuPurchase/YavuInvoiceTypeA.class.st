@@ -20,3 +20,12 @@ YavuInvoiceTypeA class >> totalPriceOf: aPurchaseTransactionItem [
 
 	^ aPurchaseTransactionItem subtotalAfterTaxs 
 ]
+
+{ #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> vatValueOf: aPurchaseTransactionItem vatPercentaje: aPercentaje [
+	^ aPurchaseTransactionItem product vatPercentage = aPercentaje 
+		ifTrue: [ aPurchaseTransactionItem subtotalTaxs ] 
+		ifFalse: [ 0 ]
+	
+
+]

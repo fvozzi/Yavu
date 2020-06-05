@@ -165,8 +165,8 @@ YavuTransaction >> date: unaFecha [
 	date:= unaFecha
 ]
 
-{ #category : #'as yet unclassified' }
-YavuTransaction >> dateDescription [
+{ #category : #descriptions }
+YavuTransaction >> descriptionDate [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -179,19 +179,8 @@ YavuTransaction >> dateDescription [
         	yourself
 ]
 
-{ #category : #'sin categoria' }
-YavuTransaction >> entity [
-	^ entity
-]
-
-{ #category : #'sin categoria' }
-YavuTransaction >> entity: unaEntidad [
-	
-	entity:= unaEntidad
-]
-
-{ #category : #'as yet unclassified' }
-YavuTransaction >> entityDescription [
+{ #category : #descriptions }
+YavuTransaction >> descriptionEntity [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -202,7 +191,20 @@ YavuTransaction >> entityDescription [
 		label: self class entityLabel;
 		priority: 10;
 		beRequired;
+		beReadonly;
+		componentClass: TBSMagritteSelectListComponent;
 		yourself
+]
+
+{ #category : #'sin categoria' }
+YavuTransaction >> entity [
+	^ entity
+]
+
+{ #category : #'sin categoria' }
+YavuTransaction >> entity: unaEntidad [
+	
+	entity:= unaEntidad
 ]
 
 { #category : #'sin categoria' }
@@ -227,7 +229,7 @@ YavuTransaction >> initializeEntity: unaEntidad date: unaFecha [
 	date:= unaFecha
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #descriptions }
 YavuTransaction >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
