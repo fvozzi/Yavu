@@ -93,6 +93,7 @@ YavuPurchaseSubsystemTest >> purchaseTransaction1 [
 YavuPurchaseSubsystemTest >> purchaseTransactionItem1 [
 	
 	^ YavuPurchaseTransactionItem new
+		product: self barraDamboLaPaulinaProduct;
 		quantity: 1;
 		unitPrice: 10;
 		yourself
@@ -195,7 +196,7 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactAVATCalculation [
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
 	invoice addPurchaseTransaction: self purchaseTransaction1.
 	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotal.
-	self assert: invoice total equals: invoice netPrice + (invoice netPrice * invoice purchaseTransactionItems first vatPercentage / 100).
+	self assert: invoice total equals: (invoice netPrice + (invoice netPrice * invoice purchaseTransactionItems first vatPercentage / 100) asFloat round: 2).
 	self assert: invoice total equals: invoice purchaseTransactionItems first subtotalAfterTaxs 
 ]
 

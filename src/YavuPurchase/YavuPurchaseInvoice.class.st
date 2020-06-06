@@ -42,8 +42,7 @@ YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [
 
 { #category : #adding }
 YavuPurchaseInvoice >> addToSystem [
-	
-	self halt.
+
 	self yavuSystem storedSubsystem save: self.
 	self purchaseTransactions do: [ :each | 
 		each invoice: self.
