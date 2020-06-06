@@ -25,6 +25,7 @@ YavuMongoSubsystem class >> repository [
 { #category : #initialization }
 YavuMongoSubsystem >> initialize [ 
 
+	self halt.
 	super initialize.
 	repository := VOMongoRepository host: '127.0.0.1' database: YavuEnvironment current mongoDatabaseName
 ]
@@ -62,6 +63,7 @@ YavuMongoSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [
 { #category : #'As yet unclassified' }
 YavuMongoSubsystem >> remove: aYavuObject [ 
 	
+	self halt.
 	self repository remove: aYavuObject
 ]
 

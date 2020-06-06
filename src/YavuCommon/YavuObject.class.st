@@ -46,6 +46,12 @@ YavuObject class >> yavuSystem [
 		
 ]
 
+{ #category : #adding }
+YavuObject >> addToSystem [
+	
+	self yavuSystem storedSubsystem save: self
+]
+
 { #category : #nil }
 YavuObject >> commit [
 	"Persiste la instancia del receptor en la BD."
@@ -154,6 +160,12 @@ YavuObject >> updateObject [
 YavuObject >> updateTS [
 
 	"no hace nada."
+]
+
+{ #category : #adding }
+YavuObject >> updateToSystem [ 
+
+	self yavuSystem storedSubsystem save: self
 ]
 
 { #category : #'sin categoria' }

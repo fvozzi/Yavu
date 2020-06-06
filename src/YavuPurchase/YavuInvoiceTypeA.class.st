@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> discriminateVat [
+	
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeA class >> formattedInvoiceType [
 
 	^ 'FACT A'

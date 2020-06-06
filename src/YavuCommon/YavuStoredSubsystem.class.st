@@ -92,15 +92,6 @@ YavuStoredSubsystem class >> transactionsClasses [
 	^ OrderedCollection new
 ]
 
-{ #category : #configuration }
-YavuStoredSubsystem class >> yavuSystem [
-	"Devuelve la session actual si está en el contexto de una session de Seaside, sino devuelve la shared session local."
-	
-	^[self sicSession databaseSession]
-		on: WARequestContextNotFound
-		do: [StPersistence current sharedSession]
-]
-
 { #category : #'as yet unclassified' }
 YavuStoredSubsystem >> instancesOf: aClass [ 
 	self subclassResponsibility 

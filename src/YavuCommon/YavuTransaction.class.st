@@ -148,12 +148,6 @@ YavuTransaction >> = otraTransaccion [
 		self date = otraTransaccion date]
 ]
 
-{ #category : #crud }
-YavuTransaction >> addToSystem [
-	
-	self yavuSystem storedSubsystem save: self
-]
-
 { #category : #'sin categoria' }
 YavuTransaction >> date [
 	^ date 
@@ -251,10 +245,4 @@ YavuTransaction >> ts [
 { #category : #'sin categoria' }
 YavuTransaction >> ts: anObject [
 	ts := anObject
-]
-
-{ #category : #crud }
-YavuTransaction >> updateToSystem [ 
-
-	self subsystem update: self
 ]

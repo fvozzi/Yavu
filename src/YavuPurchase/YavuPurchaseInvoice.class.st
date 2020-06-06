@@ -40,6 +40,16 @@ YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [
 	self onPurchaseTransactionsAdded
 ]
 
+{ #category : #adding }
+YavuPurchaseInvoice >> addToSystem [
+	
+	self halt.
+	self yavuSystem storedSubsystem save: self.
+	self purchaseTransactions do: [ :each | 
+		each invoice: self.
+		self yavuSystem storedSubsystem save: each ]
+]
+
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> availablePurchaseTransactions [
 
@@ -63,8 +73,10 @@ YavuPurchaseInvoice >> descriptionContainer [
 
 	^ super descriptionContainer
 		addCondition: [ :obj | 
-			(obj readUsing: self descriptionVat105) = 0
-				ifTrue: [ ((obj readUsing: self descriptionVat210) = 0) not]
+			(obj readUsing: self descriptionInvoiceType) discriminateVat
+				ifTrue: [ (obj readUsing: self descriptionVat105) = 0
+						ifTrue: [ ((obj readUsing: self descriptionVat210) = 0) not ]
+						ifFalse: [ true ] ]
 				ifFalse: [ true ] ]
 			labelled: 'El IVA total de la factura debe ser mayor a 0.';
 		yourself
@@ -308,10 +320,11 @@ YavuPurchaseInvoice >> onEntityChanded [
 { #category : #events }
 YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
 	
-	netPrice := self purchaseTransactionItems sum: [ :each | self subtotalPriceOf: each ].
-	vat105 := self purchaseTransactionItems sum: [ :each | self vat105ValueOf: each ].
-	vat210 := self purchaseTransactionItems sum: [ :each | self vat210ValueOf: each ].
-	self purchaseTransactions do: [ :each | each invoice: self ]
+	netPrice := vat105 := vat210 := 0.
+	self purchaseTransactionItems do: [ :each | 
+		netPrice := self subtotalPriceOf: each.
+		vat105 := self vat105ValueOf: each.
+		vat210 := self vat210ValueOf: each ]
 ]
 
 { #category : #accessing }
