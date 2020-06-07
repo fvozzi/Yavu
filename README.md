@@ -73,3 +73,11 @@ On a Konsole evaluate:
 >Restart the service (service nginx restart)
 
 * ** Mongo DB **
+Install mongodb using this manual:
+
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+
+Then enable mongodb security using this:
+
+https://docs.mongodb.com/manual/tutorial/enable-authentication/
+
