@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #rendering }
+TBSMagritteTextInputComponent >> renderEditorOn: canvas [
+	super renderEditorOn: canvas.
+]
+
+{ #category : #rendering }
 TBSMagritteTextInputComponent >> renderInputOn: html [
 	| textInput |
 	textInput := html textInput tbsFormControl.
