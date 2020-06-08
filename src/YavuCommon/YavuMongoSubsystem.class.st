@@ -26,6 +26,7 @@ YavuMongoSubsystem class >> repository [
 YavuMongoSubsystem >> initialize [ 
 
 	super initialize.
+	SCRAMSHA1AuthMechanism beDefault.
 	repository := VOMongoRepository 
 							host: '127.0.0.1' 
 							database: YavuEnvironment current mongoDatabaseName

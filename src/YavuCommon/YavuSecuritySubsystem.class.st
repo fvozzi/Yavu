@@ -51,7 +51,7 @@ YavuSecuritySubsystem >> addRole: aRole [
 { #category : #crud }
 YavuSecuritySubsystem >> addUser: aYavuUser [ 
 	
-	self users add: aYavuUser.
+	"self users add: aYavuUser."
 	self system storedSubsystem save: aYavuUser
 ]
 
