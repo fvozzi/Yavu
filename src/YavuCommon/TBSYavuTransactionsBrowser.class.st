@@ -6,5 +6,5 @@ Class {
 
 { #category : #crud }
 TBSYavuTransactionsBrowser >> newInstance [
-	^ instanceClass entity: parent entity date: Date today
+	^ instanceClass entity: parent selectedOrDefaultEntity date: Date today
 ]

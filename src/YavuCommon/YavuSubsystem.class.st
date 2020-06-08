@@ -10,7 +10,7 @@ Class {
 { #category : #configuration }
 YavuSubsystem class >> entitiesClasses [
 
-	^ self subclassResponsibility 
+	^ YavuEntity allSubclasses select: [ :each | each subsystemClass = self ]
 ]
 
 { #category : #configuration }
@@ -34,7 +34,29 @@ YavuSubsystem class >> subsystemName [
 { #category : #configuration }
 YavuSubsystem class >> transactionsClasses [
 
-	^ self subclassResponsibility 
+	^ YavuTransaction allSubclasses select: [ :each | each subsystemClass = self ]
+	
+
+]
+
+{ #category : #removing }
+YavuSubsystem >> canRemoveFromSystem: aYavuPaymentType [ 
+	
+	^ ((self dependentsOf: aYavuPaymentType) 
+			detect: [ :each |	each existsReferencesTo: aYavuPaymentType ]
+			ifNone: [  ] ) isNil 
+]
+
+{ #category : #removing }
+YavuSubsystem >> dependencies [
+	
+	^ Dictionary new
+]
+
+{ #category : #removing }
+YavuSubsystem >> dependentsOf: aYavuObject [
+	
+	^ self dependencies at: aYavuObject class ifAbsent: [ OrderedCollection new ]
 ]
 
 { #category : #initialization }
@@ -47,6 +69,14 @@ YavuSubsystem >> initializeSystem: aSystem [
 YavuSubsystem >> name [ 
 
 	 ^ 'Subsistema'
+]
+
+{ #category : #removing }
+YavuSubsystem >> removeFromSystem: aYavuObject [ 
+
+	 ^ (self canRemoveFromSystem: aYavuObject)
+			ifTrue: [ self system storedSubsystem remove: aYavuObject  ]
+			ifFalse: [ Error signal: 'No puedo borrar el objeto porque esta siendo usado por el sistema.' ]
 ]
 
 { #category : #'as yet unclassified' }

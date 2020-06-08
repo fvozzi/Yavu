@@ -33,6 +33,11 @@ YavuPurchaseInvoice class >> label [
 	^ 'Factura de Compra'
 ]
 
+{ #category : #accessing }
+YavuPurchaseInvoice class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
+]
+
 { #category : #events }
 YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [ 
 	
@@ -43,7 +48,8 @@ YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [
 { #category : #adding }
 YavuPurchaseInvoice >> addToSystem [
 
-	self yavuSystem storedSubsystem save: self.
+	super addToSystem.
+	self halt.
 	self purchaseTransactions do: [ :each | 
 		each invoice: self.
 		self yavuSystem storedSubsystem save: each ]

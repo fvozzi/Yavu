@@ -78,13 +78,15 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 		html tbsRow: [html select
 						list: self possibleInstancesClasses;
 						selected: self selectedOrDefaultObjectClass ;
+						onChange: 'submit()';
 						callback: [ :oneObjectClass | self onObjectSelection: oneObjectClass ];
 						labels: [ :each | each label]] ] mediumSize: 3.
 	html tbsColumn: [ 
 		html tbsRow: 'Entidad:'.
 		html tbsRow: [ html select
 		list: self possibleEntities;
-		selected: self entity ;
+		selected: self selectedOrDefaultEntity ;
+		onChange: 'submit()';
 		callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 3.
 	html tbsColumn: [ 
 		html tbsRow: 'Desde:'.

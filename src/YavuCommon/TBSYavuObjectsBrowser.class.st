@@ -79,11 +79,13 @@ TBSYavuObjectsBrowser >> onInstancesCollectionChanged [
 
 { #category : #crud }
 TBSYavuObjectsBrowser >> removeInstance: anInstance [
-	
 	| answer |
-	answer := parent call: (self renderRemoveInstanceForm: instanceClass new).
+	answer := parent
+		call: (self renderRemoveInstanceForm: instanceClass new).
 	answer notNil
-		ifTrue: [ anInstance removeFromSystem.
+		ifTrue: [ [ anInstance removeFromSystem ]
+				on: Error
+				do: [ :ex | self inform: ex description ].
 			self updateReport ]
 ]
 

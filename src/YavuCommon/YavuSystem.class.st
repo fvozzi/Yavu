@@ -291,6 +291,11 @@ YavuSystem >> subsystemAt: aSubsystemLabel [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem >> subsystemOfClass: aSubsystemClass [
+	^ self subsystemAt: aSubsystemClass subsystemTag
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem >> systemName [
 	
 	^ self class systemName 

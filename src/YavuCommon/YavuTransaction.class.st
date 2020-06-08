@@ -123,6 +123,11 @@ YavuTransaction class >> possibleSearchSelectors [
 		yourself
 ]
 
+{ #category : #accessing }
+YavuTransaction class >> subsystemClass [
+	^ Smalltalk at: #YavuSubsystem
+]
+
 { #category : #'sin categoria' }
 YavuTransaction class >> waTableReportColumns [
 
@@ -228,12 +233,6 @@ YavuTransaction >> maDescriptionForReport [
 	"Devuelve un magritte description para ver en una tabla."
 
 	^self magritteDescription reject: [:each | each label = 'Agregar']
-]
-
-{ #category : #crud }
-YavuTransaction >> removeFromSystem [
-	
-	self yavuSystem storedSubsystem remove: self
 ]
 
 { #category : #'as yet unclassified' }

@@ -25,9 +25,9 @@ YavuSupplier class >> label [
 	^ 'Proveedor'
 ]
 
-{ #category : #crud }
-YavuSupplier >> addToSystem [
-	self subsystem addSupplier: self
+{ #category : #accessing }
+YavuSupplier class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
 { #category : #accessing }
@@ -197,16 +197,6 @@ YavuSupplier >> phoneNumber [
 { #category : #accessing }
 YavuSupplier >> phoneNumber: anObject [
 	phoneNumber := anObject
-]
-
-{ #category : #crud }
-YavuSupplier >> removeFromSystem [
-	self subsystem removeSupplier: self
-]
-
-{ #category : #environment }
-YavuSupplier >> subsystem [
-	^ self yavuSystem purchaseSubsystem
 ]
 
 { #category : #accessing }

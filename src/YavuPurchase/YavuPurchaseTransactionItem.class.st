@@ -13,6 +13,11 @@ Class {
 }
 
 { #category : #accessing }
+YavuPurchaseTransactionItem class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
+]
+
+{ #category : #accessing }
 YavuPurchaseTransactionItem >> description [  
 	
 	^ description
@@ -154,7 +159,7 @@ YavuPurchaseTransactionItem >> onUnitPriceAfterTaxsChanged [
 	| unitPriceFromUnitPriceAfterTaxs |
 	
 	unitPriceFromUnitPriceAfterTaxs := unitPriceAfterTaxs / (1 + (self vatPercentage / 100)).
-	unitPrice := unitPrice asFloat round: self subsystem decimalAccuracy
+	unitPrice := unitPriceFromUnitPriceAfterTaxs asFloat round: self subsystem decimalAccuracy
 ]
 
 { #category : #calculated }
@@ -162,8 +167,9 @@ YavuPurchaseTransactionItem >> onUnitPriceChanged [
 	
 	| unitPriceAfterTaxsFromUnitPrice |
 	
+	unitPrice = 0 ifFalse: [ 
 	unitPriceAfterTaxsFromUnitPrice := unitPrice + (unitPrice * self vatPercentage / 100).
-	unitPriceAfterTaxs := unitPriceAfterTaxsFromUnitPrice asFloat round: self subsystem decimalAccuracy
+	unitPriceAfterTaxs := unitPriceAfterTaxsFromUnitPrice asFloat round: self subsystem decimalAccuracy]
 ]
 
 { #category : #accessing }
@@ -219,8 +225,10 @@ YavuPurchaseTransactionItem >> unitPrice [
 
 { #category : #accessing }
 YavuPurchaseTransactionItem >> unitPrice: anInteger [ 
-	unitPrice := anInteger.
-	self onUnitPriceChanged
+	
+	anInteger > 0 ifTrue: [
+		unitPrice := anInteger.
+		self onUnitPriceChanged]
 ]
 
 { #category : #accessing }
@@ -230,9 +238,10 @@ YavuPurchaseTransactionItem >> unitPriceAfterTaxs [
 
 { #category : #accessing }
 YavuPurchaseTransactionItem >> unitPriceAfterTaxs: aValue [
-	
-	unitPriceAfterTaxs := aValue.
-	self onUnitPriceAfterTaxsChanged 
+
+	aValue > 0 ifTrue: [
+		unitPriceAfterTaxs := aValue.
+		self onUnitPriceAfterTaxsChanged]
 ]
 
 { #category : #calculated }

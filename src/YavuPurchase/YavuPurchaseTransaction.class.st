@@ -5,7 +5,8 @@ Class {
 		'purchaseTransactionItems',
 		'total',
 		'voucherNumber',
-		'invoice'
+		'invoice',
+		'paymentType'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -28,6 +29,11 @@ YavuPurchaseTransaction class >> label [
 	^ 'Remito de Compra'
 ]
 
+{ #category : #accessing }
+YavuPurchaseTransaction class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
+]
+
 { #category : #configuration }
 YavuPurchaseTransaction >> addPurchaseTransactionItem: anInvoiceItem [ 
 	
@@ -35,9 +41,24 @@ YavuPurchaseTransaction >> addPurchaseTransactionItem: anInvoiceItem [
 	self onInvoiceItemsChange
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #configuration }
 YavuPurchaseTransaction >> available [
 	^ self invoice isNil
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransaction >> descriptionPaymentType [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #paymentType;
+		default: self subsystem cashPaymentType;
+		options: self subsystem paymentTypes;
+		label: 'Tipo de Pago';
+		priority: 150;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
 ]
 
 { #category : #descriptions }
@@ -51,6 +72,7 @@ YavuPurchaseTransaction >> descriptionPurchaseTransactionItems [
 		default: nil;
 		label: 'Items';
 		priority: 120;
+		beRequired;
 		componentClass: TBSMagritteOneToManyComponent;
 		yourself
 ]
@@ -74,13 +96,13 @@ YavuPurchaseTransaction >> initialize [
 	purchaseTransactionItems := OrderedCollection new 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #acccessing }
 YavuPurchaseTransaction >> invoice [
 	
 	^ invoice
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #acccessing }
 YavuPurchaseTransaction >> invoice: aClass [ 
 	
 	invoice := aClass
@@ -96,9 +118,19 @@ YavuPurchaseTransaction >> mementoClass [
 YavuPurchaseTransaction >> onInvoiceItemsChange [
 	
 	| totalNumber |
-	
+
 	totalNumber := self purchaseTransactionItems inject: 0 into: [ :accum :each | accum + each subtotalAfterTaxs].
 	total := totalNumber asFloat round: self subsystem decimalAccuracy
+]
+
+{ #category : #acccessing }
+YavuPurchaseTransaction >> paymentType [
+	^ paymentType
+]
+
+{ #category : #acccessing }
+YavuPurchaseTransaction >> paymentType: aPaymentType [
+	paymentType := aPaymentType 
 ]
 
 { #category : #printing }

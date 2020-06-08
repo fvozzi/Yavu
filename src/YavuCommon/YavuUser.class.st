@@ -58,16 +58,16 @@ YavuUser class >> new [
 		yourSelf 
 ]
 
+{ #category : #accessing }
+YavuUser class >> subsystemClass [
+
+	^Smalltalk at: #YavuSecuritySubsystem 
+]
+
 { #category : #configuration }
 YavuUser >> addRole: aRole [
 	
 	self roles add: aRole
-]
-
-{ #category : #crud }
-YavuUser >> addToSystem [
-	
-	self subsystem addUser: self
 ]
 
 { #category : #configuration }
@@ -216,12 +216,6 @@ YavuUser >> phoneNumber: unTelefono [
 	"Establece unTelefono como el numero de telefono del receptor."
 	
 	phoneNumber := unTelefono
-]
-
-{ #category : #crud }
-YavuUser >> removeFromSystem [
-	
-	self subsystem removeUser: self
 ]
 
 { #category : #accessing }

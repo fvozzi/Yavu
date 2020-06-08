@@ -21,9 +21,9 @@ YavuProduct class >> label [
 	 ^ 'Producto'
 ]
 
-{ #category : #crud }
-YavuProduct >> addToSystem [
-	self subsystem addProduct: self
+{ #category : #accessing }
+YavuProduct class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
 { #category : #accessing }
@@ -128,12 +128,6 @@ YavuProduct >> productType [
 YavuProduct >> productType: aProductType [
 
 	 productType := aProductType
-]
-
-{ #category : #crud }
-YavuProduct >> removeFromSystem [
-	
-	self yavuSystem purchaseSubsystem removeProduct: self
 ]
 
 { #category : #environment }

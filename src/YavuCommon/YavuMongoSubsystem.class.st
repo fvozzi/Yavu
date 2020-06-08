@@ -22,6 +22,26 @@ YavuMongoSubsystem class >> repository [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+YavuMongoSubsystem >> existsInstancesOf: aClass dependentOf: aYavuObject referencesMethod: aSymbol [ 
+	
+	^ (repository selectMany: aClass where: [ :each | 
+		(each at: aSymbol asString, '.__id') = (repository idOf: aYavuObject )
+		]) notEmpty
+]
+
+{ #category : #'as yet unclassified' }
+YavuMongoSubsystem >> existsInstancesOf: dependentClass	dependentOfSubcollectionElement: aYavuObject referencesMethod: aSymbol collectionMethod: otherSymbol [
+	
+	| mongoQuery |
+
+	mongoQuery :=  
+   { otherSymbol asString -> { '$elemMatch' -> { aSymbol asString, '.__id' -> (repository idOf: aYavuObject)  } asDictionary } asDictionary}.
+
+	^ (self repository selectMany: dependentClass where: mongoQuery) notEmpty
+
+]
+
 { #category : #initialization }
 YavuMongoSubsystem >> initialize [ 
 

@@ -130,10 +130,13 @@ YavuEntity class >> possibleSearchSelectors [
 		yourself
 ]
 
-{ #category : #crud }
-YavuEntity >> addToSystem [
+{ #category : #accessing }
+YavuEntity class >> subsystemClass [
+
+	"self subclassResponsibility "
+	"Needs to be subclassResponsability but I do this beacause I need refactor YavuEntity subclasses."
 	
-	self subclassResponsibility 
+	^ YavuSubsystem 
 ]
 
 { #category : #'sin categoria' }
@@ -250,16 +253,19 @@ YavuEntity >> printOn: aStream [
 	
 ]
 
-{ #category : #crud }
-YavuEntity >> removeFromSystem [
-	
-	self subclassResponsibility 
-]
-
 { #category : #environment }
 YavuEntity >> subsystem [
 
-	self subclassResponsibility 
+	"self subclassResponsibility "
+	"Needs to be subclassResponsability but I do this beacause I need refactor YavuEntity subclasses."
+	
+	^ self yavuSystem subsystemOfClass: self subsystemClass 
+]
+
+{ #category : #environment }
+YavuEntity >> subsystemClass [ 
+
+	^ self class subsystemClass
 ]
 
 { #category : #deprecated }

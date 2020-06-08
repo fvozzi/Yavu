@@ -21,10 +21,10 @@ YavuRole class >> label [
 	^'Rol'
 ]
 
-{ #category : #crud }
-YavuRole >> addToSystem [
+{ #category : #accessing }
+YavuRole class >> subsystemClass [
 
-	^ self subsystem addRole: self
+	^Smalltalk at: #YavuSecuritySubsystem 
 ]
 
 { #category : #accessing }
@@ -66,12 +66,6 @@ YavuRole >> menuElements [
 { #category : #accessing }
 YavuRole >> menuElements: anObject [
 	menuElements := anObject
-]
-
-{ #category : #crud }
-YavuRole >> removeFromSystem [
-
-	^ self subsystem removeRole: self
 ]
 
 { #category : #configuration }

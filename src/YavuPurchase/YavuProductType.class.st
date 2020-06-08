@@ -19,9 +19,9 @@ YavuProductType class >> label [
 	^ 'Tipo de producto'
 ]
 
-{ #category : #crud }
-YavuProductType >> addToSystem [
-	self subsytem addProductType: self
+{ #category : #accessing }
+YavuProductType class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
 { #category : #accessing }
@@ -49,12 +49,6 @@ YavuProductType >> descriptionSubcategory [
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
-]
-
-{ #category : #crud }
-YavuProductType >> removeFromSystem [
-	
-	self yavuSystem purchaseSubsystem removeProductType: self
 ]
 
 { #category : #environment }

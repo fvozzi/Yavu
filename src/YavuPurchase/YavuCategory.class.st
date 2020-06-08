@@ -16,15 +16,9 @@ YavuCategory class >> label [
 	^ 'Categoria'
 ]
 
-{ #category : #crud }
-YavuCategory >> addToSystem [
-	self subsystem addCategory: self
-]
-
-{ #category : #crud }
-YavuCategory >> removeFromSystem [
-	
-	self yavuSystem purchaseSubsystem removeCategory: self
+{ #category : #accessing }
+YavuCategory class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
 { #category : #environment }

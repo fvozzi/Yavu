@@ -103,6 +103,12 @@ YavuObject >> maDescriptionForReport [
 	^self magritteDescription select: [:each | each isRequired]
 ]
 
+{ #category : #adding }
+YavuObject >> removeFromSystem [
+
+	^ self subsystem removeFromSystem: self
+]
+
 { #category : #'sin categoria' }
 YavuObject >> sicSession [
 	"Devuelve la sesión web actual."

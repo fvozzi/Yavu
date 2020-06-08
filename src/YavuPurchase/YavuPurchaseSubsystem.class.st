@@ -11,18 +11,6 @@ Class {
 	#category : #'YavuPurchase-Environment'
 }
 
-{ #category : #'as yet unclassified' }
-YavuPurchaseSubsystem class >> entitiesClasses [
-	
-	^ OrderedCollection new
-		add: YavuSupplier;
-		add: YavuProduct;
-		add: YavuBrand;
-		add: YavuCategory;
-		add: YavuProductType;
-		yourself
-]
-
 { #category : #accessing }
 YavuPurchaseSubsystem class >> label [ 
 
@@ -48,15 +36,6 @@ YavuPurchaseSubsystem class >> subsystemName [
 YavuPurchaseSubsystem class >> subsystemTag [
 
 	 ^'purchaseSubsystem'
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseSubsystem class >> transactionsClasses [
-	
-	^ OrderedCollection new
-		add: YavuPurchaseTransaction;
-		add: YavuPurchaseInvoice;
-		yourself
 ]
 
 { #category : #crud }
@@ -90,7 +69,6 @@ YavuPurchaseSubsystem >> addProductType: aProductType [
 { #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
-	self halt.
 	self system storedSubsystem save: aPurchaseInvoice
 
 ]
@@ -114,6 +92,11 @@ YavuPurchaseSubsystem >> brands [
 	^ brands ifNil: [ brands := (self system storedSubsystem instancesOf: YavuBrand) copy ]
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> cashPaymentType [
+	self paymentTypes select: [ :each | each name = 'Efectivo' ]
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> categories [
 
@@ -126,6 +109,53 @@ YavuPurchaseSubsystem >> decimalAccuracy [
 	^ 2
 ]
 
+{ #category : #removing }
+YavuPurchaseSubsystem >> dependencies [
+	^ super dependencies
+		at: YavuPaymentType
+			put:
+			(OrderedCollection
+				with:
+					(YavuObjectDependecyChecker
+						on: YavuPurchaseTransaction
+						referencesMethod: #paymentType));
+		at: YavuPurchaseTransaction
+			put:
+			(OrderedCollection
+				with:
+					(YavuNotNullDependecyChecker
+						on: YavuPurchaseTransaction
+						referencesMethod: #invoice));
+		at: YavuPurchaseInvoice
+			put:
+			(OrderedCollection
+				with:
+					(YavuObjectDependecyChecker
+						on: YavuPurchaseTransaction
+						referencesMethod: #invoice));
+		at: YavuBrand
+			put:
+			(OrderedCollection
+				with:
+					(YavuObjectDependecyChecker on: YavuProduct referencesMethod: #brand));
+		at: YavuProduct
+			put:
+			(OrderedCollection
+				with:
+					(YavuSubcollectionElementDependecyChecker
+						on: YavuPurchaseTransaction
+						referencesMethod: #product
+						collectionMethod: #purchaseTransactionItems));
+		at: YavuSupplier 
+			put:
+			(OrderedCollection
+				with:
+					(YavuObjectDependecyChecker on: YavuPurchaseTransaction referencesMethod: #entity)
+				with:
+					(YavuObjectDependecyChecker on: YavuPurchaseInvoice referencesMethod: #entity));
+		yourself
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> invoiceTypes [
 
@@ -136,6 +166,12 @@ YavuPurchaseSubsystem >> invoiceTypes [
 YavuPurchaseSubsystem >> name [ 
 
 	 ^ 'Compras'
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> paymentTypes [
+
+	^ self system storedSubsystem instancesOf: YavuPaymentType 
 ]
 
 { #category : #accessing }

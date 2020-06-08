@@ -16,16 +16,9 @@ YavuBrand class >> label [
 	 ^ 'Marca'
 ]
 
-{ #category : #crud }
-YavuBrand >> addToSystem [
-
-	self subsystem addBrand: self
-]
-
-{ #category : #crud }
-YavuBrand >> removeFromSystem [
-	
-	self yavuSystem purchaseSubsystem removeBrand: self
+{ #category : #accessing }
+YavuBrand class >> subsystemClass [
+	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
 { #category : #environment }
