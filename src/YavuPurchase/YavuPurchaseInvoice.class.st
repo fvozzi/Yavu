@@ -49,7 +49,6 @@ YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [
 YavuPurchaseInvoice >> addToSystem [
 
 	super addToSystem.
-	self halt.
 	self purchaseTransactions do: [ :each | 
 		each invoice: self.
 		self yavuSystem storedSubsystem save: each ]
