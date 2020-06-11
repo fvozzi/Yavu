@@ -145,15 +145,6 @@ YavuTransaction >> <= otherTransaction [
 ]
 
 { #category : #'sin categoria' }
-YavuTransaction >> = otraTransaccion [
-	"Devuelve true si el receptor es igual a otraTransaccion."
-
-	self class = otraTransaccion class ifFalse: [^false].
-	^self entity = otraTransaccion entity and: [
-		self date = otraTransaccion date]
-]
-
-{ #category : #'sin categoria' }
 YavuTransaction >> date [
 	^ date 
 ]
@@ -204,13 +195,6 @@ YavuTransaction >> entity [
 YavuTransaction >> entity: unaEntidad [
 	
 	entity:= unaEntidad
-]
-
-{ #category : #'sin categoria' }
-YavuTransaction >> hash [
-	"Answer a SmallInteger whose value is related to the receiver's identity."
-
-	^self entity hash bitXor: self date hash
 ]
 
 { #category : #initialization }
