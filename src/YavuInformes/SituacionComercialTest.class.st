@@ -59,9 +59,9 @@ SituacionComercialTest >> testIgualdadSituacionComercial [
 					cliente: customer
 					montoAdeudado: 100
 					fechaUltimoPago: '10/01/2010' asDate.					
-	self assert: (situacion1 = situacion2).
-	self deny: (situacion1 = situacion3).
-	self deny: (situacion2 = situacion3)
+	self assert: (situacion1 equalTo: situacion2).
+	self deny: (situacion1 equalTo: situacion3).
+	self deny: (situacion2 equalTo: situacion3)
 					
 	
 	

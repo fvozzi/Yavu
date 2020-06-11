@@ -197,6 +197,14 @@ YavuTransaction >> entity: unaEntidad [
 	entity:= unaEntidad
 ]
 
+{ #category : #'sin categoria' }
+YavuTransaction >> equalTo: otraSituacionComercial [
+	"Devuelve true si otraSituacionComercial es igual al receptor."
+	
+	^(self entity = otraSituacionComercial entity) and: [
+		self date = otraSituacionComercial date]
+]
+
 { #category : #initialization }
 YavuTransaction >> initialize [ 
 

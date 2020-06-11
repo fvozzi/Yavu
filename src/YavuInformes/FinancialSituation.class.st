@@ -105,18 +105,6 @@ FinancialSituation class >> nula [
 ]
 
 { #category : #'sin categoria' }
-FinancialSituation >> = otraSituacionComercial [
-	"Devuelve true si otraSituacionComercial es igual al receptor."
-	
-	^(((super = otraSituacionComercial and: [
-		self customer = otraSituacionComercial customer]) and: [
-			self fechaUltimoPago = otraSituacionComercial fechaUltimoPago]) and: [
-				self operationType = otraSituacionComercial operationType]) and: [
-					self operationCharacter = otraSituacionComercial operationCharacter]
-					
-]
-
-{ #category : #'sin categoria' }
 FinancialSituation >> actualizarDesde: aSituacionComercial [
 	"Actualizar el montoAdeudado del receptor con el montoAdeudado de aSituacionComercial.
 	NOTA: es un mecanismo utilizado para no tener que eliminar los duplicados, entonces si alguien ingresa una situación comercial para el mismo comercio, fechaUltimoPago, cliente, tipoDeOperacion y calidad en lugar de eliminar la existente y agregar la nueva le actualizamos la situacion comercial al cliente."
@@ -171,6 +159,18 @@ FinancialSituation >> customerDescription [
 		yourself
 ]
 
+{ #category : #'sin categoria' }
+FinancialSituation >> equalTo: otraSituacionComercial [
+	"Devuelve true si otraSituacionComercial es igual al receptor."
+	
+	^((((super equalTo: otraSituacionComercial) and: [
+		self customer = otraSituacionComercial customer]) and: [
+			self fechaUltimoPago = otraSituacionComercial fechaUltimoPago]) and: [
+				self operationType = otraSituacionComercial operationType]) and: [
+					self operationCharacter = otraSituacionComercial operationCharacter]
+					
+]
+
 { #category : #'as yet unclassified' }
 FinancialSituation >> esNula [
 	"Crea una nueva situación comercial nula para que el montoAdeudado sea 0."
@@ -208,16 +208,6 @@ FinancialSituation >> financialSituationDescription [
 FinancialSituation >> financialSituationDescriptionCSSLabel [
 	
 	^self type ifNotNil: [ :one | one financialSituationDescriptionCSSLabelFor: self ]
-]
-
-{ #category : #'sin categoria' }
-FinancialSituation >> hash [
-	"Answer a SmallInteger whose value is related to the receiver's identity."
-	
-	^(((super hash bitXor: self customer hash) 
-		bitXor: self fechaUltimoPago hash)
-			bitXor: self operationType hash)
-				bitXor: self operationCharacter hash
 ]
 
 { #category : #'sin categoria' }
