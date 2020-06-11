@@ -203,13 +203,13 @@ YavuPurchaseTransactionItem >> subsystem [
 { #category : #calculated }
 YavuPurchaseTransactionItem >> subtotal [
 	
-	^ self quantity * self unitPrice
+	^ (self quantity * self unitPrice) asFloat round: self subsystem decimalAccuracy
 ]
 
 { #category : #calculated }
 YavuPurchaseTransactionItem >> subtotalAfterTaxs [
 	
-	^ self quantity * self unitPriceAfterTaxs
+	^ (self quantity * self unitPriceAfterTaxs) asFloat round: self subsystem decimalAccuracy
 ]
 
 { #category : #calculated }
