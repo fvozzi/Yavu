@@ -152,5 +152,5 @@ TBSReportDataSelector >> steps [
 TBSReportDataSelector >> updateRoot: anHtmlRoot [
 
 	super updateRoot: anHtmlRoot.
-	anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'
+	"anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'"
 ]

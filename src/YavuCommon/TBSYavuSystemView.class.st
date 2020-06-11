@@ -149,8 +149,8 @@ TBSYavuSystemView >> systemName [
 TBSYavuSystemView >> updateRoot: anHtmlRoot [
 
 	super updateRoot: anHtmlRoot.
-	anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'.
+	"anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'.
 	anHtmlRoot stylesheet resourceUrl: 'css/financialReport.css'.
 	anHtmlRoot stylesheet resourceUrl: 'css/reportDataSelector.css'.
-	"anHtmlRoot stylesheet resourceUrl: 'css/sb-admin-2.css'."
+	anHtmlRoot stylesheet resourceUrl: 'css/sb-admin-2.css'."
 ]
