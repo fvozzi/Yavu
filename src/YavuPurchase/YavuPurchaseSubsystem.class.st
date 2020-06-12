@@ -80,7 +80,7 @@ YavuPurchaseSubsystem >> addSupplier: aProduct [
 	self system storedSubsystem save: aProduct
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> availablePurchaseTransactionsFor: aYavuSupplier [ 
 	
 	^ (self purchaseTransactionsOfSupplier: aYavuSupplier) select: [ :each | each available ]
@@ -92,7 +92,7 @@ YavuPurchaseSubsystem >> brands [
 	^ brands ifNil: [ brands := (self system storedSubsystem instancesOf: YavuBrand) copy ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> cashPaymentType [
 	self paymentTypes select: [ :each | each name = 'Efectivo' ]
 ]
@@ -103,7 +103,7 @@ YavuPurchaseSubsystem >> categories [
 	^ categories ifNil: [ categories := (self system storedSubsystem instancesOf: YavuCategory) copy ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> decimalAccuracy [
 
 	^ 2
@@ -162,16 +162,37 @@ YavuPurchaseSubsystem >> invoiceTypes [
 	^ YavuInvoiceType allSubclasses 
 ]
 
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> kilogramPresentationUnit [
+	
+	^ self presentationUnits detect: [ :each | each name = 'Kilogramo' ] ifNone: [ self kilogramPresentationUnitDefault ]
+]
+
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> kilogramPresentationUnitDefault [
+	
+	^ YavuProductPresentationUnit new
+		name: 'Kilogramo';
+		kilograms: 1;
+		yourself
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> name [ 
 
 	 ^ 'Compras'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
 YavuPurchaseSubsystem >> paymentTypes [
 
 	^ self system storedSubsystem instancesOf: YavuPaymentType 
+]
+
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> presentationUnits [
+
+	^ self system storedSubsystem instancesOf: YavuProductPresentationUnit 
 ]
 
 { #category : #accessing }

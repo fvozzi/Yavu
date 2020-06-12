@@ -7,7 +7,8 @@ Class {
 		'product',
 		'description',
 		'vatPercentage',
-		'unitPriceAfterTaxs'
+		'unitPriceAfterTaxs',
+		'presentationUnit'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -38,6 +39,21 @@ YavuPurchaseTransactionItem >> descriptionDescription [
 		accessor: #description;
 		priority: 105;
 		componentClass: TBSMagritteTextInputComponent;
+		yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransactionItem >> descriptionPresentationUnit [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #presentationUnit;
+		default: self subsystem kilogramPresentationUnit;
+		options: self subsystem presentationUnits;
+		label: 'Unidad Presentación';
+		priority: 150;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 
@@ -170,6 +186,18 @@ YavuPurchaseTransactionItem >> onUnitPriceChanged [
 	unitPrice = 0 ifFalse: [ 
 	unitPriceAfterTaxsFromUnitPrice := unitPrice + (unitPrice * self vatPercentage / 100).
 	unitPriceAfterTaxs := unitPriceAfterTaxsFromUnitPrice asFloat round: self subsystem decimalAccuracy]
+]
+
+{ #category : #accessing }
+YavuPurchaseTransactionItem >> presentationUnit [
+
+	^ presentationUnit
+]
+
+{ #category : #accessing }
+YavuPurchaseTransactionItem >> presentationUnit: aPresentationUnit [
+
+	presentationUnit := aPresentationUnit 
 ]
 
 { #category : #accessing }
