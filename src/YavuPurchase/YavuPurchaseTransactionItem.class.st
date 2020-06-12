@@ -51,7 +51,7 @@ YavuPurchaseTransactionItem >> descriptionPresentationUnit [
 		default: self subsystem kilogramPresentationUnit;
 		options: self subsystem presentationUnits;
 		label: 'Unidad Presentación';
-		priority: 150;
+		priority: 115;
 		beRequired;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
