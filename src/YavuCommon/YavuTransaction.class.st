@@ -6,7 +6,7 @@ Class {
 		'date',
 		'ts'
 	],
-	#category : #'YavuCommon-Transactions'
+	#category : #'YavuCommon-DomainObjects'
 }
 
 { #category : #'sin categoria' }
@@ -69,6 +69,12 @@ YavuTransaction class >> instanceOf: startDate entity: anEntity [
 
 	^self yavuSystem readOneOf: self 
 		where: [:each | (each entity in: (Array with: anEntity)) AND: [each date between: startDate and: startDate]]
+]
+
+{ #category : #'as yet unclassified' }
+YavuTransaction class >> instancesFrom: startDate to: endDate [
+
+	^ self yavuSystem storedSubsystem instancesOfClass: self from: startDate to: endDate 
 ]
 
 { #category : #'as yet unclassified' }

@@ -253,21 +253,6 @@ YavuEntity >> printOn: aStream [
 	
 ]
 
-{ #category : #environment }
-YavuEntity >> subsystem [
-
-	"self subclassResponsibility "
-	"Needs to be subclassResponsability but I do this beacause I need refactor YavuEntity subclasses."
-	
-	^ self yavuSystem subsystemOfClass: self subsystemClass 
-]
-
-{ #category : #environment }
-YavuEntity >> subsystemClass [ 
-
-	^ self class subsystemClass
-]
-
 { #category : #deprecated }
 YavuEntity >> ts [
 

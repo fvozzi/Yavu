@@ -188,6 +188,18 @@ YavuSystem >> companyName [
 	^self class companyName
 ]
 
+{ #category : #configuration }
+YavuSystem >> completeString: aString withZeros: anInteger [ 
+	
+	| formattedString |
+	
+	formattedString := aString.
+	anInteger - aString size timesRepeat: [ 
+		formattedString := '0', formattedString 
+		 ].
+	^ formattedString 
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> homeViewClass [ 
 

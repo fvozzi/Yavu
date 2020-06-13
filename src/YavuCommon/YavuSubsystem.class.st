@@ -32,6 +32,12 @@ YavuSubsystem class >> subsystemName [
 ]
 
 { #category : #configuration }
+YavuSubsystem class >> subsystemTag [
+
+	 ^ self subclassResponsibility 
+]
+
+{ #category : #configuration }
 YavuSubsystem class >> transactionsClasses [
 
 	^ YavuTransaction allSubclasses select: [ :each | each subsystemClass = self ]

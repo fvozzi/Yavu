@@ -140,6 +140,21 @@ YavuObject >> storeObject [
 	self yavuSystem commitUnitOfWork
 ]
 
+{ #category : #environment }
+YavuObject >> subsystem [
+
+	"self subclassResponsibility "
+	"Needs to be subclassResponsability but I do this beacause I need refactor YavuEntity subclasses."
+	
+	^ self yavuSystem subsystemOfClass: self subsystemClass 
+]
+
+{ #category : #environment }
+YavuObject >> subsystemClass [ 
+
+	^ self class subsystemClass
+]
+
 { #category : #'sin categoria' }
 YavuObject >> updateFrom: anYavuObject [
 

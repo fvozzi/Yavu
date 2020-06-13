@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeC class >> availableForSales [
+
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeC class >> discriminateVat [
 	
 	^ false

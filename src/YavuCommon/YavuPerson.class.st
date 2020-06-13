@@ -8,15 +8,6 @@ Class {
 	#category : #'YavuCommon-Entities'
 }
 
-{ #category : #'as yet unclassified' }
-YavuPerson class >> all [
-	"Devuelve todas las intancias del receptor en el sistema."
-
-	"Por performance no devolvemos todas las filas."
-
-	^OrderedCollection new
-]
-
 { #category : #'sin categoria' }
 YavuPerson class >> atNumeroDeDocumento: unString sexo: otroString ifAbsent: aBlock [
 	"Devuelve un invividuo o una organizacion dependiendo de si unString corresponde a un número de documento o a un número de cuit.

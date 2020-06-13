@@ -61,19 +61,19 @@ YavuMongoSubsystem >> instancesOf: aClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuMongoSubsystem >> instancesOfClass: aClass from: startDate to: anotherDate [
+	
+	^ repository selectMany: aClass where: [ :each | 
+		(each date >= startDate) &  (each date <= anotherDate )
+		]
+]
+
+{ #category : #'as yet unclassified' }
 YavuMongoSubsystem >> instancesOfClass: aClass from: startDate to: anotherDate entities: aCollection [ 
 	
 	^ repository selectMany: aClass where: [ :each | 
-		(each at: 'entity.__id') = (repository idOf: aCollection first )
+		((each at: 'entity.__id') = (repository idOf: aCollection first )) & (each date >= startDate) &  (each date <= anotherDate )
 		]
-		
-
-		"repository selectMany: aClass where: [:each | 
-			(aCollection includes: each entity)
-				and: [each date between: startDate and: anotherDate ] ]"
-			
-		"(self repository selectAll: aClass) select: [:each | 
-			(aCollection includes: each entity) and: [each date between: startDate and: anotherDate ] ]"
 ]
 
 { #category : #'as yet unclassified' }

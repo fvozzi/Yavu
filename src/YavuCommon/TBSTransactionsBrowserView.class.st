@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'entity',
 		'startDateLiteral',
-		'endDateLiteral'
+		'endDateLiteral',
+		'queryAllEntities'
 	],
 	#category : #'YavuCommon-View'
 }
@@ -43,13 +44,16 @@ TBSTransactionsBrowserView >> initialize [
 
 	super initialize.
 	startDateLiteral := Date today beginOfMonth yyyymmdd.
-	endDateLiteral := Date today endOfMonth yyyymmdd
+	endDateLiteral := Date today endOfMonth yyyymmdd.
+	queryAllEntities := false
 ]
 
 { #category : #subclassResponsability }
 TBSTransactionsBrowserView >> instances [
 
-	^ objectClass instancesFrom: self startDate to: self endDate entity: self entity
+	^ queryAllEntities 
+		ifTrue: [ objectClass instancesFrom: self startDate to: self endDate ]
+		ifFalse: [ objectClass instancesFrom: self startDate to: self endDate entity: self entity ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -83,11 +87,21 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 						labels: [ :each | each label]] ] mediumSize: 3.
 	html tbsColumn: [ 
 		html tbsRow: 'Entidad:'.
-		html tbsRow: [ html select
-		list: self possibleEntities;
-		selected: self selectedOrDefaultEntity ;
-		onChange: 'submit()';
-		callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 3.
+		html tbsRow: [ 
+			html select
+			list: self possibleEntities;
+			selected: self selectedOrDefaultEntity ;
+			onChange: 'submit()';
+			callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 2.
+	html tbsColumn: [ 
+		html tbsRow: 'Todas:'.
+		html tbsRow: [ 
+			html label: [
+				html checkbox
+					value: queryAllEntities ;
+					callback: [ :value | queryAllEntities := value ].
+			 ]]] mediumSize: 1.
+	
 	html tbsColumn: [ 
 		html tbsRow: 'Desde:'.
 		html tbsRow: [ html dateInput5
