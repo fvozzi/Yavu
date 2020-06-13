@@ -2,147 +2,29 @@ Class {
 	#name : #YavuPurchaseSubsystemTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'system'
+		'resources'
 	],
 	#category : #'YavuPurchase-Test'
 }
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> barraDamboLaPaulinaProduct [
-	
-	^ YavuProduct new 
-		brand: self laPaulinaBrand;
-		productType: self damboProductType;
-		vatPercentage: 21;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> damboProductType [
-	
-	^ (YavuProductType name: 'Dambo')
-			category: self quesoCategory;
-			yourself 
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> itemOnBarraDamboLaPaulina [
-	
-	^ YavuPurchaseTransactionItem new 
-		product: self barraDamboLaPaulinaProduct;
-		quantity: 1;
-		unitPrice: 10;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> laPaulinaBrand [
-	
-	^ YavuBrand name: 'La Paulina'
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> newQuesosDelAbastoSupplier [
-
-	^ (YavuSupplier name: 'Bulacio Cesar Oscar')
-			businessName: 'Quesos del Abasto';
-			vatCondition: YavuResponsableInscripto;
-			cuitNumber: '20144310579';
-			yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> newSubsystem [
-
-	YavuTestEnvironment beCurrent.
-	YavuTestEnvironment 
-		systemClass: (YavuRestaurantSystem
-			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuPurchaseSubsystem )).
-	^ YavuTestEnvironment currentSystem
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> panaderiaGalliPurchaseInvoice [
-	
-	^ YavuPurchaseInvoice new
-		entity: self panaderiaGalliSupplier;
-		date: '04/11/2020' asDate;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> panaderiaGalliSupplier [
-
-	^ (YavuSupplier name: 'Panaderia Galli')
-			businessName: 'Carlitos Pan';
-			vatCondition: YavuMonotributo;
-			yourself
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseSubsystemTest >> purchaseTransaction1 [
-	
-	^ YavuPurchaseTransaction  new
-		entity: self quesosDelAbastoSupplier;
-		date: '04/11/2020' asDate;
-		addPurchaseTransactionItem: self purchaseTransactionItem1;
-		yourself
-]
-
-{ #category : #'as yet unclassified' }
-YavuPurchaseSubsystemTest >> purchaseTransactionItem1 [
-	
-	^ YavuPurchaseTransactionItem new
-		product: self barraDamboLaPaulinaProduct;
-		quantity: 1;
-		unitPrice: 10;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> quesoCategory [
-
-	^ YavuCategory name: 'Quesos'
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseInvoice [
-	
-	^ YavuPurchaseInvoice new
-		entity: self quesosDelAbastoSupplier;
-		date: '04/11/2020' asDate;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> quesosDelAbastoPurchaseTransaction [
-	
-	^ YavuPurchaseTransaction  new
-		entity: self quesosDelAbastoSupplier;
-		date: '04/11/2020' asDate;
-		yourself
-]
-
-{ #category : #resources }
-YavuPurchaseSubsystemTest >> quesosDelAbastoSupplier [
-
-	^system purchaseSubsystem suppliers detect: [ :each | each businessName = 'Quesos del Abasto' ]
-]
 
 { #category : #running }
 YavuPurchaseSubsystemTest >> setUp [
 	"Hooks that subclasses may override to define the fixture of test."
 
-	system := self newSubsystem.
-	self newQuesosDelAbastoSupplier addToSystem
+	resources := YavuSystemTestResource current.
+	resources newQuesosDelAbastoSupplier addToSystem
+]
+
+{ #category : #accessing }
+YavuPurchaseSubsystemTest >> system [ 
+
+	^ resources system
 ]
 
 { #category : #running }
 YavuPurchaseSubsystemTest >> tearDown [
-	"Hooks that subclasses may override to define the fixture of test."
 
-	"YavuSupplier removeAll.
-	YavuPurchaseInvoice removeAll"
+	YavuSystemTestResource reset
 ]
 
 { #category : #tests }
@@ -150,7 +32,7 @@ YavuPurchaseSubsystemTest >> testAddPrefixAndInvoiceNumberToInvoice [
 
 	| invoice |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice := resources quesosDelAbastoPurchaseInvoice.
 	invoice prefix: 1.
 	invoice invoiceNumber: 100.
 	self assert: invoice prefix equals: 1.
@@ -166,8 +48,8 @@ YavuPurchaseSubsystemTest >> testAddProductsToPurchaseTransaction [
 
 	| purchaseTransaction itemProduct1 |
 	
-	purchaseTransaction := self quesosDelAbastoPurchaseTransaction.
-	itemProduct1 := self itemOnBarraDamboLaPaulina.
+	purchaseTransaction := resources quesosDelAbastoPurchaseTransaction.
+	itemProduct1 := resources itemOnBarraDamboLaPaulina.
 	purchaseTransaction addPurchaseTransactionItem: itemProduct1 .
 	self assert: purchaseTransaction purchaseTransactionItems size = 1.
 	self assert: (purchaseTransaction purchaseTransactionItems first product = itemProduct1 product). 
@@ -181,10 +63,10 @@ YavuPurchaseSubsystemTest >> testAddPurchaseInvoice [
 
 	| invoice |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice := resources quesosDelAbastoPurchaseInvoice.
 	invoice addToSystem.
-	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) size = 1.
-	self assert: (system purchaseSubsystem purchaseInvoicesOfSupplier: self quesosDelAbastoSupplier) first date = invoice date
+	self assert: (self system purchaseSubsystem purchaseInvoicesOfSupplier: resources quesosDelAbastoSupplier) size = 1.
+	self assert: (self system purchaseSubsystem purchaseInvoicesOfSupplier: resources quesosDelAbastoSupplier) first date = invoice date
 ]
 
 { #category : #tests }
@@ -192,9 +74,9 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactAVATCalculation [
 
 	| invoice |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice := resources quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
-	invoice addPurchaseTransaction: self purchaseTransaction1.
+	invoice addPurchaseTransaction: resources purchaseTransaction1.
 	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotal.
 	self assert: invoice total equals: (invoice netPrice + (invoice netPrice * invoice purchaseTransactionItems first vatPercentage / 100) asFloat round: 2).
 	self assert: invoice total equals: invoice purchaseTransactionItems first subtotalAfterTaxs 
@@ -205,9 +87,9 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactXVATCalculation [
 
 	| invoice |
 	
-	invoice := self panaderiaGalliPurchaseInvoice.
+	invoice := resources panaderiaGalliPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeC.
-	invoice addPurchaseTransaction: self purchaseTransaction1.
+	invoice addPurchaseTransaction: resources purchaseTransaction1.
 	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotalAfterTaxs.
 	self assert: invoice total equals: invoice netPrice.
 ]
@@ -217,9 +99,9 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 
 	| invoice |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice := resources quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
-	invoice := self panaderiaGalliPurchaseInvoice.
+	invoice := resources panaderiaGalliPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeC
 ]
 
@@ -228,7 +110,7 @@ YavuPurchaseSubsystemTest >> testQueryPurchaseInvoices [
 
 	| invoice query |
 	
-	invoice := self quesosDelAbastoPurchaseInvoice.
+	invoice := resources quesosDelAbastoPurchaseInvoice.
 	invoice addToSystem.
 	query := invoice class instancesFrom: invoice date to: invoice date entity: invoice entity.
 	self assert: query size = 1.
