@@ -106,6 +106,12 @@ YavuPurchaseSubsystem >> categories [
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> decimalAccuracy [
 
+	^ 4
+]
+
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> decimalFiscalAccuracy [
+
 	^ 2
 ]
 

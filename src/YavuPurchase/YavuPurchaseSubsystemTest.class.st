@@ -77,9 +77,12 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactAVATCalculation [
 	invoice := resources quesosDelAbastoPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
 	invoice addPurchaseTransaction: resources purchaseTransaction1.
-	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotal.
-	self assert: invoice total equals: (invoice netPrice + (invoice netPrice * invoice purchaseTransactionItems first vatPercentage / 100) asFloat round: 2).
-	self assert: invoice total equals: invoice purchaseTransactionItems first subtotalAfterTaxs 
+	self assert: invoice netPrice equals: ((invoice purchaseTransactionItems sum: [ :each | each subtotal]) round: self system purchaseSubsystem decimalFiscalAccuracy) .
+		self assert: invoice vat210 equals: ((invoice purchaseTransactionItems sum: [ :each | each subtotalAfterTaxs - each subtotal]) round: self system purchaseSubsystem decimalFiscalAccuracy) .
+	self assert: invoice total equals: invoice netPrice + invoice vat105 + invoice vat210.
+	self assert: invoice total equals: ((invoice purchaseTransactionItems sum: [ :each | each subtotalAfterTaxs ]) round: self system purchaseSubsystem decimalFiscalAccuracy)  
+	
+
 ]
 
 { #category : #tests }
@@ -90,7 +93,7 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactXVATCalculation [
 	invoice := resources panaderiaGalliPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeC.
 	invoice addPurchaseTransaction: resources purchaseTransaction1.
-	self assert: invoice netPrice equals: invoice purchaseTransactionItems first subtotalAfterTaxs.
+	self assert: invoice netPrice equals: ((invoice purchaseTransactionItems sum: [ :each | each subtotalAfterTaxs ]) round: self system purchaseSubsystem decimalFiscalAccuracy).
 	self assert: invoice total equals: invoice netPrice.
 ]
 
@@ -103,6 +106,16 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceTypeDependingOnSupplier [
 	self assert: invoice invoiceType = YavuInvoiceTypeA.
 	invoice := resources panaderiaGalliPurchaseInvoice.
 	self assert: invoice invoiceType = YavuInvoiceTypeC
+]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testPurchaseTransactionDecimalPrecision [
+
+	| purchaseTransaction |
+
+	purchaseTransaction := resources purchaseTransaction1.
+	self assert: purchaseTransaction total equals: 4746.421.
+	self assert: purchaseTransaction total equals: (purchaseTransaction purchaseTransactionItems inject: 0 into: [:accum :each | accum + each subtotalAfterTaxs  ]).
 ]
 
 { #category : #tests }

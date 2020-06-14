@@ -139,9 +139,12 @@ YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
 	
 	netPrice := vat105 := vat210 := 0.
 	self purchaseTransactionItems do: [ :each | 
-		netPrice := self subtotalPriceOf: each.
-		vat105 := self vat105ValueOf: each.
-		vat210 := self vat210ValueOf: each ]
+		netPrice := netPrice + (self subtotalPriceOf: each).
+		vat105 := vat105 + (self vat105ValueOf: each).
+		vat210 := vat210 + (self vat210ValueOf: each) ].
+	netPrice := netPrice round: self subsystem decimalFiscalAccuracy.
+	vat105 := vat105 round: self subsystem decimalFiscalAccuracy.
+	vat210 := vat210 round: self subsystem decimalFiscalAccuracy.
 ]
 
 { #category : #accessing }
@@ -171,7 +174,7 @@ YavuPurchaseInvoice >> subsystem [
 { #category : #calculated }
 YavuPurchaseInvoice >> subtotalPriceOf: aPurchaseTransactionItem [ 
 	
-	^ self invoiceType subtotalPriceOf: aPurchaseTransactionItem
+	^ (self invoiceType subtotalPriceOf: aPurchaseTransactionItem) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #accessing }
@@ -189,13 +192,13 @@ YavuPurchaseInvoice >> totalPriceOf: aPurchaseTransactionItem [
 { #category : #calculated }
 YavuPurchaseInvoice >> vat105ValueOf: aPurchaseTransactionItem [ 
 	
-	^ self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 10.5
+	^ (self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 10.5) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #calculated }
 YavuPurchaseInvoice >> vat210ValueOf: aPurchaseTransactionItem [ 
 	
-	^ self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 21.0
+	^ (self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #accessing }

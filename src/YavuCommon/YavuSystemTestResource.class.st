@@ -26,6 +26,24 @@ YavuSystemTestResource >> damboProductType [
 ]
 
 { #category : #resources }
+YavuSystemTestResource >> fontinaLaPaulinaProduct [
+	
+	^ YavuProduct new 
+		brand: self laPaulinaBrand;
+		productType: self fontinaProductType;
+		vatPercentage: 21;
+		yourself
+]
+
+{ #category : #resources }
+YavuSystemTestResource >> fontinaProductType [
+	
+	^ (YavuProductType name: 'Fontina')
+			category: self quesoCategory;
+			yourself 
+]
+
+{ #category : #resources }
 YavuSystemTestResource >> itemOnBarraDamboLaPaulina [
 	
 	^ YavuPurchaseTransactionItem new 
@@ -84,8 +102,9 @@ YavuSystemTestResource >> purchaseTransaction1 [
 	
 	^ YavuPurchaseTransaction  new
 		entity: self quesosDelAbastoSupplier;
-		date: '04/11/2020' asDate;
+		date: '06/01/2020' asDate;
 		addPurchaseTransactionItem: self purchaseTransactionItem1;
+		addPurchaseTransactionItem: self purchaseTransactionItem2;
 		yourself
 ]
 
@@ -94,8 +113,18 @@ YavuSystemTestResource >> purchaseTransactionItem1 [
 	
 	^ YavuPurchaseTransactionItem new
 		product: self barraDamboLaPaulinaProduct;
-		quantity: 1;
-		unitPrice: 10;
+		quantity: 3.9;
+		unitPrice: 388.98;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystemTestResource >> purchaseTransactionItem2 [
+	
+	^ YavuPurchaseTransactionItem new
+		product: self fontinaLaPaulinaProduct;
+		quantity: 4;
+		unitPrice: 601.41;
 		yourself
 ]
 
