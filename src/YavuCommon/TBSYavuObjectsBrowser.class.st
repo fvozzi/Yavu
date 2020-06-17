@@ -63,18 +63,12 @@ TBSYavuObjectsBrowser >> initializeInstances: aCollection class: aYavuObjectClas
 
 	instances := aCollection.
 	instanceClass := aYavuObjectClass.
-	self onInstancesCollectionChanged
+	report := self buildReport 
 ]
 
 { #category : #crud }
 TBSYavuObjectsBrowser >> newInstance [
 	^ instanceClass new
-]
-
-{ #category : #eventActions }
-TBSYavuObjectsBrowser >> onInstancesCollectionChanged [
-
-	report := self buildReport 
 ]
 
 { #category : #crud }

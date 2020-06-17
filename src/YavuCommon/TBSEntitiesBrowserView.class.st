@@ -28,8 +28,8 @@ TBSEntitiesBrowserView >> renderObjectClassSelection: html [
 	html text: 'Tipo de entidad:'.
 	html select
 		list: self possibleInstancesClasses;
-		selected: self selectedOrDefaultObjectClass ;
-		callback: [ :oneEntityClass | self onObjectSelection: oneEntityClass ];
+		selected: self objectClass ;
+		callback: [ :oneEntityClass | self objectClass: oneEntityClass ];
 		labels: [ :each | each label];
 		onChange: 'submit()'
 ]

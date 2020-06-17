@@ -17,6 +17,12 @@ TBSTransactionsBrowserView >> browserCaption [
 ]
 
 { #category : #'as yet unclassified' }
+TBSTransactionsBrowserView >> defaultEntity [ 
+	
+	self possibleEntities first
+]
+
+{ #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> endDate [
 	
 	^ self endDateLiteral asDate
@@ -39,13 +45,19 @@ TBSTransactionsBrowserView >> entity [
 	^ entity
 ]
 
+{ #category : #'as yet unclassified' }
+TBSTransactionsBrowserView >> entity: aYavuSupplier [ 
+	
+	entity := aYavuSupplier 
+]
+
 { #category : #initialization }
 TBSTransactionsBrowserView >> initialize [ 
 
 	super initialize.
 	startDateLiteral := Date today beginOfMonth yyyymmdd.
 	endDateLiteral := Date today endOfMonth yyyymmdd.
-	queryAllEntities := false
+	queryAllEntities := false.
 ]
 
 { #category : #subclassResponsability }
@@ -56,16 +68,17 @@ TBSTransactionsBrowserView >> instances [
 		ifFalse: [ objectClass instancesFrom: self startDate to: self endDate entity: self entity ]
 ]
 
-{ #category : #'as yet unclassified' }
-TBSTransactionsBrowserView >> onEntitySelection: aYavuSupplier [ 
-	
-	entity := aYavuSupplier 
+{ #category : #initialization }
+TBSTransactionsBrowserView >> onYavuSubsystemChanged [ 
+
+	super onYavuSubsystemChanged.
+	entity := self defaultEntity
 ]
 
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> possibleEntities [
 
-	^ self selectedOrDefaultObjectClass entityClass all
+	^ self objectClass entityClass all
 ]
 
 { #category : #subclassResponsability }
@@ -81,18 +94,18 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 		html tbsRow: 'Transacción:'.
 		html tbsRow: [html select
 						list: self possibleInstancesClasses;
-						selected: self selectedOrDefaultObjectClass ;
-						onChange: 'submit()';
-						callback: [ :oneObjectClass | self onObjectSelection: oneObjectClass ];
-						labels: [ :each | each label]] ] mediumSize: 3.
+						selected: self objectClass ;
+						callback: [ :oneObjectClass | self objectClass: oneObjectClass ];
+						labels: [ :each | each label]
+						] ] mediumSize: 3.
 	html tbsColumn: [ 
 		html tbsRow: 'Entidad:'.
 		html tbsRow: [ 
 			html select
 			list: self possibleEntities;
-			selected: self selectedOrDefaultEntity ;
+			selected: self entity ;
 			onChange: 'submit()';
-			callback: [ :oneEntity | self onEntitySelection: oneEntity ]] ] mediumSize: 2.
+			callback: [ :oneEntity | self entity: oneEntity ]] ] mediumSize: 2.
 	html tbsColumn: [ 
 		html tbsRow: 'Todas:'.
 		html tbsRow: [ 
@@ -113,15 +126,8 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 	html tbsColumn: [ 
 			html tbsRow: [ html tbsSubmitButton 
 				bePrimary;
-				callback: [ ];
+				callback: [ self search];
 				with: 'Buscar' ] ] mediumSize: 2
-]
-
-{ #category : #'as yet unclassified' }
-TBSTransactionsBrowserView >> selectedOrDefaultEntity [
-	
-	entity ifNil: [ ^ self possibleEntities first ].
-	^ entity
 ]
 
 { #category : #'as yet unclassified' }

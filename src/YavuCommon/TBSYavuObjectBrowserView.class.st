@@ -27,10 +27,16 @@ TBSYavuObjectBrowserView >> children [
 	^Array with: objectsBrowser 
 ]
 
+{ #category : #rendering }
+TBSYavuObjectBrowserView >> defaultObjectClass [
+
+	^ self possibleInstancesClasses  first 
+]
+
 { #category : #initialization }
 TBSYavuObjectBrowserView >> initialize [
 	super initialize.
-	objectsBrowser := self yavuObjectsBrowserClass onParent: self
+	objectsBrowser := self yavuObjectsBrowserClass onParent: self 
 ]
 
 { #category : #initialization }
@@ -46,16 +52,27 @@ TBSYavuObjectBrowserView >> instances [
 	self subclassResponsibility 
 ]
 
-{ #category : #eventActions }
-TBSYavuObjectBrowserView >> onObjectSelection: aClass [ 
-	
-	objectClass := aClass
+{ #category : #accessing }
+TBSYavuObjectBrowserView >> objectClass [
+	^ objectClass
+]
+
+{ #category : #accessing }
+TBSYavuObjectBrowserView >> objectClass: anObject [
+	objectClass := anObject.
+	self onObjectClassChanged
+]
+
+{ #category : #accessing }
+TBSYavuObjectBrowserView >> onObjectClassChanged [
+
+	objectsBrowser initializeInstances: self instances class: self objectClass
 ]
 
 { #category : #initialization }
 TBSYavuObjectBrowserView >> onYavuSubsystemChanged [
 
-	self onObjectSelection: self selectedOrDefaultObjectClass
+	self objectClass: self defaultObjectClass
 ]
 
 { #category : #subclassResponsability }
@@ -89,16 +106,14 @@ TBSYavuObjectBrowserView >> renderObjectClassSelection: html [
 { #category : #rendering }
 TBSYavuObjectBrowserView >> renderReportOn: html [
 
-	objectsBrowser updateInstances: self instances class: self selectedOrDefaultObjectClass.
 	objectsBrowser renderOn: html
 ]
 
-{ #category : #rendering }
-TBSYavuObjectBrowserView >> selectedOrDefaultObjectClass [
-
-	objectClass ifNil: [ ^ self possibleInstancesClasses  first ].
-	^ objectClass 
-
+{ #category : #eventActions }
+TBSYavuObjectBrowserView >> search [
+	objectsBrowser
+		updateInstances: self instances
+		class: self objectClass
 ]
 
 { #category : #accessing }
