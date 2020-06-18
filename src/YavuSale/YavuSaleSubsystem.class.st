@@ -48,3 +48,11 @@ YavuSaleSubsystem >> lastZNumber [
 
 	 ^ 0
 ]
+
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [ 
+	
+	^ self system storedSubsystem 
+		instancesOfClass: YavuPurchaseInvoice 
+		from: aDate beginOfMonth to: aDate endOfMonth 
+]

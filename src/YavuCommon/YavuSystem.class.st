@@ -137,6 +137,12 @@ YavuSystem class >> yavuObjects [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSystem >> accountingSubsystem [
+
+	^ self subsystemAt: 'accountingSubsystem'
+]
+
+{ #category : #'as yet unclassified' }
 YavuSystem >> addUser: aSicUser [
 	^ self loginSubsystem addUser: aSicUser
 ]
@@ -284,6 +290,12 @@ YavuSystem >> roles [
 	^self loginSubsystem roles
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSystem >> saleSubsystem [
+
+	^ self subsystemAt: 'saleSubsystem'
+]
+
 { #category : #accessing }
 YavuSystem >> setUpTransientSubsystem: aTransientSubsystem [
 
@@ -311,6 +323,12 @@ YavuSystem >> subsystemOfClass: aSubsystemClass [
 YavuSystem >> systemName [
 	
 	^ self class systemName 
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> toReviseStatus [
+	
+	^ Smalltalk at: #YavuToReviseWorkflowStatus 
 ]
 
 { #category : #subsystemsProtocol }

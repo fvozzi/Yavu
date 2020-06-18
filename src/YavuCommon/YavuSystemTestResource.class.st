@@ -75,7 +75,7 @@ YavuSystemTestResource >> newSubsystem [
 	YavuTestEnvironment beCurrent.
 	YavuTestEnvironment 
 		systemClass: (YavuRestaurantSystem
-			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuPurchaseSubsystem )).
+			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuPurchaseSubsystem with: YavuSaleSubsystem with: YavuAccountingSubsystem )).
 	^ YavuTestEnvironment currentSystem
 ]
 

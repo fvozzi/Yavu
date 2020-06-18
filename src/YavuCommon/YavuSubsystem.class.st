@@ -95,3 +95,8 @@ YavuSubsystem >> update: aYavuObject [
 
 	self subclassResponsibility 
 ]
+
+{ #category : #'as yet unclassified' }
+YavuSubsystem >> yavuSystem [
+	self shouldBeImplemented.
+]
