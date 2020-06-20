@@ -65,6 +65,11 @@ YavuObject >> company [
 	^self class company
 ]
 
+{ #category : #'magritte descriptions' }
+YavuObject >> componentRendererClass [
+	^ TBSMagritteFormRenderer
+]
+
 { #category : #'sin categoria' }
 YavuObject >> dbPersistedInstance [
 
@@ -75,7 +80,7 @@ YavuObject >> dbPersistedInstance [
 YavuObject >> descriptionContainer [
 	<magritteContainer>
 	^ super descriptionContainer
-		componentRenderer: TBSMagritteFormRenderer;
+		componentRenderer: self componentRendererClass;
 		yourself
 ]
 
@@ -187,6 +192,12 @@ YavuObject >> updateTS [
 YavuObject >> updateToSystem [ 
 
 	self yavuSystem storedSubsystem save: self
+]
+
+{ #category : #'as yet unclassified' }
+YavuObject >> useMagritteEditor [
+
+	^ true
 ]
 
 { #category : #'sin categoria' }

@@ -36,7 +36,7 @@ TBSYavuObjectBrowserView >> defaultObjectClass [
 { #category : #initialization }
 TBSYavuObjectBrowserView >> initialize [
 	super initialize.
-	objectsBrowser := self yavuObjectsBrowserClass onParent: self 
+	objectsBrowser := self yavuObjectsBrowserClass onParent: self.
 ]
 
 { #category : #initialization }

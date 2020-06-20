@@ -4,12 +4,18 @@ Class {
 	#category : #'YavuAccounting-Environment'
 }
 
+{ #category : #accessing }
+YavuAccountingSubsystem class >> label [ 
+
+	^ 'Contabilidad'
+]
+
 { #category : #configuration }
 YavuAccountingSubsystem class >> menuElements [
 
 	^ OrderedCollection new 
 		add: ((YavuSimpleMenuElement label: 'Administración' presenterClass: TBSEntitiesBrowserView subsystem: self) id: 1);
-		add: ((YavuSimpleMenuElement label: 'Declaracion de IVA' presenterClass: TBSYavuVatDeclarationView subsystem: self) id: 2);
+		add: ((YavuSimpleMenuElement label: 'Declaraciones y cierres' presenterClass: TBSTransactionsBrowserView subsystem: self) id: 2);
 		yourself
 ]
 
@@ -34,7 +40,7 @@ YavuAccountingSubsystem >> newVatDeclarationOnDate: aDate entity: aYavuBusinessN
 { #category : #'as yet unclassified' }
 YavuAccountingSubsystem >> purchasesOfEntity: aYavuBusinessName month: aDate [
 
-	^ self system purchaseSubsystem purchasesOfEntity: aYavuBusinessName month: aDate
+	^ self system purchaseSubsystem purchaseInvoicesOfBusinessName: aYavuBusinessName month: aDate
 ]
 
 { #category : #'as yet unclassified' }

@@ -218,6 +218,15 @@ YavuPurchaseSubsystem >> purchaseInvoices [
 	self shouldBeImplemented.
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> purchaseInvoicesOfBusinessName: aYavuBusinessName month: aDate [ 
+	
+	^ self system storedSubsystem 
+		instancesOfClass: YavuPurchaseInvoice
+		from: aDate beginOfMonth 
+		to: aDate endOfMonth 
+]
+
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [ 
 	

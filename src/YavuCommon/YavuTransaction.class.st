@@ -147,7 +147,8 @@ YavuTransaction class >> waTableReportColumns [
 YavuTransaction >> <= otherTransaction [
 	"Answer whether the receiver is less than or equal to the argument."
 	
-	^self entity <= otherTransaction entity and: [self date <= otherTransaction date]
+	self entity ifNil: [ ^ false ].
+	^ self entity <= otherTransaction entity and: [self date <= otherTransaction date]
 ]
 
 { #category : #'sin categoria' }

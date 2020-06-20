@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'subsystemClass',
 		'date',
-		'businessName'
+		'businessName',
+		'model'
 	],
 	#category : #'YavuAccounting-View'
 }
@@ -41,7 +42,7 @@ TBSYavuVatDeclarationView >> date: aDate [
 TBSYavuVatDeclarationView >> initialize [ 
 
 	super initialize.
-	businessName := self possibleBusinessNames first
+	"businessName := self possibleBusinessNames first"
 ]
 
 { #category : #initialization }
@@ -65,7 +66,7 @@ TBSYavuVatDeclarationView >> possibleBusinessNames [
 TBSYavuVatDeclarationView >> renderContentOn: html [
 
 	html form with: [ 
-	html tbsPanel beDefault with: [
+	html tbsPanel with: [
 		html tbsRow: [  
 		html tbsColumn: [html text: 'Razón Social'] mediumSize: 2.	
 		html tbsColumn: [
@@ -79,13 +80,18 @@ TBSYavuVatDeclarationView >> renderContentOn: html [
 			html dateInput
 				options: #(month year);
 				value: self date;
-				callback: [ :value | self date: value ].
+				callback: [ :value | self date: value ]
+				readonly.
 			html tbsSubmitButton 
 				bePrimary;
 				callback: [ self search];
 				with: 'Buscar'] mediumSize: 3.
 		html tbsColumn: [html text: 'Estado:'] mediumSize: 1.
-		html tbsColumn: [html text: 'A REVISAR'] mediumSize: 1] ] ]
+		html tbsColumn: [html text: 'A REVISAR'] mediumSize: 1] ] 
+		html tbsPanel with: [html tbsRow: [html text: 'Vat Declaration']].
+		html tbsPanel  with: [self renderSalesInvoiceOn: html  ]
+		html tbsPanel with: [  ]
+]
 		
 				 
 ]

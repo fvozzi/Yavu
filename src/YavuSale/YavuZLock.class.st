@@ -169,6 +169,11 @@ YavuZLock >> total [
 ]
 
 { #category : #accessing }
+YavuZLock >> vat105 [
+	^ 0
+]
+
+{ #category : #accessing }
 YavuZLock >> vat210 [
 	^ vat210
 ]

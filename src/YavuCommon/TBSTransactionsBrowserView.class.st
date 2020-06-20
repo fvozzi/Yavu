@@ -19,7 +19,7 @@ TBSTransactionsBrowserView >> browserCaption [
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> defaultEntity [ 
 	
-	self possibleEntities first
+	^ self possibleEntities first
 ]
 
 { #category : #'as yet unclassified' }
@@ -47,7 +47,7 @@ TBSTransactionsBrowserView >> entity [
 
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> entity: aYavuSupplier [ 
-	
+
 	entity := aYavuSupplier 
 ]
 
@@ -57,7 +57,7 @@ TBSTransactionsBrowserView >> initialize [
 	super initialize.
 	startDateLiteral := Date today beginOfMonth yyyymmdd.
 	endDateLiteral := Date today endOfMonth yyyymmdd.
-	queryAllEntities := false.
+	queryAllEntities := false
 ]
 
 { #category : #subclassResponsability }
