@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'vatPerception',
 		'iibbPerception',
-		'purchaseTransactions'
+		'purchaseTransactions',
+		'vatDeclarationMonth'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -37,7 +38,7 @@ YavuPurchaseInvoice class >> subsystemClass [
 
 { #category : #events }
 YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [ 
-	
+
 	purchaseTransactions add: aYavuPurchaseTransaction.
 	self onPurchaseTransactionsAdded
 ]
@@ -99,6 +100,20 @@ YavuPurchaseInvoice >> descriptionPurchaseTransactions [
 ]
 
 { #category : #descriptions }
+YavuPurchaseInvoice >> descriptionVatDeclarationMonth [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MADateDescription new 
+		componentClass: MAMonthYearSelectorComponent ;
+        	accessor: #vatDeclarationMonth ;
+        	label: 'Fecha';
+        	priority: 180;
+			beRequired;
+        	yourself
+]
+
+{ #category : #descriptions }
 YavuPurchaseInvoice >> descriptionVatPerception [
 
 	<magritteDescription>
@@ -124,6 +139,7 @@ YavuPurchaseInvoice >> iibbPerception: anObject [
 YavuPurchaseInvoice >> initialize [ 
 
 	super initialize.
+	vatDeclarationMonth := self date beginOfMonth.
 	vatPerception := iibbPerception  := 0.
 	purchaseTransactions := OrderedCollection new
 ]
@@ -151,7 +167,7 @@ YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
 YavuPurchaseInvoice >> purchaseTransactionItems [
 	
 	^ self purchaseTransactions inject: OrderedCollection new into: [ :accum :each |
-		accum addAll: each purchaseTransactionItems  ]
+		accum addAll: each purchaseTransactionItems; yourself  ]
 ]
 
 { #category : #accessing }
@@ -199,6 +215,16 @@ YavuPurchaseInvoice >> vat105ValueOf: aPurchaseTransactionItem [
 YavuPurchaseInvoice >> vat210ValueOf: aPurchaseTransactionItem [ 
 	
 	^ (self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalAccuracy 
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice >> vatDeclarationMonth [
+	^ vatDeclarationMonth
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice >> vatDeclarationMonth: anObject [
+	vatDeclarationMonth := anObject
 ]
 
 { #category : #accessing }
