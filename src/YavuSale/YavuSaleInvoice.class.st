@@ -30,5 +30,5 @@ YavuSaleInvoice class >> subsystemClass [
 { #category : #accessing }
 YavuSaleInvoice >> total [
 
-	^ self netPrice + self vat105 + self vat210 
+	^ (self netPrice + self vat105 + self vat210 ) round: self subsystem decimalAccuracy 
 ]

@@ -87,7 +87,8 @@ YavuMongoSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [
 { #category : #'As yet unclassified' }
 YavuMongoSubsystem >> remove: aYavuObject [ 
 	
-	self repository remove: aYavuObject
+	self repository remove: aYavuObject.
+	aYavuObject onStoreRemoved
 ]
 
 { #category : #'as yet unclassified' }

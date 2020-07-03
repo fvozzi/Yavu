@@ -8,7 +8,9 @@ Class {
 		'vatPerception',
 		'iibbPerception',
 		'purchaseTransactions',
-		'vatDeclarationMonth'
+		'vatDeclarationMonth',
+		'netPrice210',
+		'netPrice105'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
@@ -53,6 +55,12 @@ YavuPurchaseInvoice >> addToSystem [
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> amountOfVatAlicuot [
+	
+	^ self vatAlicuots size
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> availablePurchaseTransactions [
 
 	^ self subsystem availablePurchaseTransactionsFor: self entity
@@ -80,6 +88,34 @@ YavuPurchaseInvoice >> descriptionIibbPerception [
         	accessor: #iibbPerception;
         	label: 'Percepción IIBB';
         	priority: 155;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> descriptionNetPrice105 [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #netPrice105;
+        	label: 'Importe Neto 10.5% Iva';
+        	priority: 126;
+			min: 0.1;
+			beRequired;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> descriptionNetPrice210 [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #netPrice210;
+        	label: 'Importe Neto 21% Iva';
+        	priority: 125;
+			min: 0.1;
+			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
@@ -150,17 +186,59 @@ YavuPurchaseInvoice >> mementoClass [
 	^ MAStraightMemento
 ]
 
+{ #category : #accessing }
+YavuPurchaseInvoice >> netPrice105 [
+	^ netPrice105
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice >> netPrice105: anObject [
+	netPrice105 := anObject.
+	vat105 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.105) round: self subsystem decimalAccuracy.
+	netPrice := netPrice + netPrice105
+]
+
+{ #category : #calculated }
+YavuPurchaseInvoice >> netPrice105ValueOf: aPurchaseTransactionItem [ 
+	
+	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 10.5) round: self subsystem decimalFiscalAccuracy 
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice >> netPrice210 [
+	^ netPrice210
+]
+
+{ #category : #accessing }
+YavuPurchaseInvoice >> netPrice210: anObject [
+	netPrice210 := anObject.
+	vat210 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.21) round: self subsystem decimalAccuracy.
+	netPrice := netPrice + netPrice210 
+]
+
+{ #category : #calculated }
+YavuPurchaseInvoice >> netPrice210ValueOf: aPurchaseTransactionItem [ 
+	
+	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalFiscalAccuracy 
+]
+
 { #category : #events }
 YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
 	
-	netPrice := vat105 := vat210 := 0.
+	netPrice210 := netPrice105 := 0.
 	self purchaseTransactionItems do: [ :each | 
-		netPrice := netPrice + (self subtotalPriceOf: each).
-		vat105 := vat105 + (self vat105ValueOf: each).
-		vat210 := vat210 + (self vat210ValueOf: each) ].
-	netPrice := netPrice round: self subsystem decimalFiscalAccuracy.
-	vat105 := vat105 round: self subsystem decimalFiscalAccuracy.
-	vat210 := vat210 round: self subsystem decimalFiscalAccuracy.
+		netPrice105  := netPrice105 + (self netPrice105ValueOf: each).
+		netPrice210  := netPrice210 + (self netPrice210ValueOf: each)].
+	self netPrice105: (netPrice105 round: self subsystem decimalFiscalAccuracy).
+	self netPrice210: (netPrice210 round: self subsystem decimalFiscalAccuracy)
+]
+
+{ #category : #adding }
+YavuPurchaseInvoice >> onStoreRemoved [
+	"Self removed from the store, now we need to remove the references."
+	
+	self purchaseTransactions do: [ :each |
+		each invoice: nil; addToSystem  ]
 ]
 
 { #category : #accessing }
@@ -196,7 +274,7 @@ YavuPurchaseInvoice >> subtotalPriceOf: aPurchaseTransactionItem [
 { #category : #accessing }
 YavuPurchaseInvoice >> total [
 
-	^ self netPrice + self vat105 + self vat210 + self vatPerception + self iibbPerception 
+	^ (self netPrice + self vat105 + self vat210 + self vatPerception + self iibbPerception) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #calculated }
@@ -215,6 +293,17 @@ YavuPurchaseInvoice >> vat105ValueOf: aPurchaseTransactionItem [
 YavuPurchaseInvoice >> vat210ValueOf: aPurchaseTransactionItem [ 
 	
 	^ (self invoiceType vatValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalAccuracy 
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> vatAlicuots [
+	
+	| result |
+	
+	result := OrderedCollection new.
+	self vat210 > 0 ifTrue: [ result add: 21. ].
+	self vat105 > 0 ifTrue: [ result add: 10.5 ].
+	^ result
 ]
 
 { #category : #accessing }

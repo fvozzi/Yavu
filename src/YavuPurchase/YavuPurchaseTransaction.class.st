@@ -74,6 +74,7 @@ YavuPurchaseTransaction >> descriptionPurchaseTransactionItems [
 		priority: 120;
 		beRequired;
 		componentClass: TBSMagritteOneToManyComponent;
+		canExport: false;
 		yourself
 ]
 

@@ -12,6 +12,12 @@ Class {
 	#category : #'YavuCommon-DomainObjects'
 }
 
+{ #category : #'as yet unclassified' }
+YavuInvoice >> afipTipoComprobante [
+
+	^ self invoiceType afipTipoComprobante
+]
+
 { #category : #descriptions }
 YavuInvoice >> descriptionInvoiceNumber [
 
@@ -137,7 +143,7 @@ YavuInvoice >> formattedInvoiceNumber [
 { #category : #configuration }
 YavuInvoice >> formattedPrefix [
 	
-	^ self yavuSystem completeString: self prefix asString withZeros: 4
+	^ self yavuSystem completeString: self prefix asString withZeros: 5
 ]
 
 { #category : #initialization }

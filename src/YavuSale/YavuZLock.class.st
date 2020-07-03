@@ -33,6 +33,12 @@ YavuZLock class >> subsystemClass [
 	^ Smalltalk at: #YavuSaleSubsystem
 ]
 
+{ #category : #'as yet unclassified' }
+YavuZLock >> afipTipoComprobante [
+
+	^ '082'
+]
+
 { #category : #descriptions }
 YavuZLock >> descriptionLastTicketNumber [
 
@@ -106,13 +112,13 @@ YavuZLock >> descriptionZNumber [
 { #category : #configuration }
 YavuZLock >> formattedInvoiceNumber [
 	
-	^ self yavuSystem completeString: self invoiceNumber asString withZeros: 8
+	^ self yavuSystem completeString: self zNumber asString withZeros: 8
 ]
 
 { #category : #configuration }
 YavuZLock >> formattedPrefix [
 	
-	^ self yavuSystem completeString: self entity salePointNumber asString withZeros: 4
+	^ self yavuSystem completeString: self entity salePointNumber asString withZeros: 5
 ]
 
 { #category : #configuration }
@@ -126,6 +132,11 @@ YavuZLock >> initialize [
 
 	netPrice := vat210 := 0.
 	zNumber := self subsystem lastZNumber + 1
+]
+
+{ #category : #'as yet unclassified' }
+YavuZLock >> invoiceNumber [
+	^ self zNumber
 ]
 
 { #category : #configuration }
@@ -159,6 +170,12 @@ YavuZLock >> netPrice: anObject [
 YavuZLock >> onNetPriceChanged [
 
 	vat210 := netPrice * 0.21 round: self subsystem decimalAccuracy
+]
+
+{ #category : #configuration }
+YavuZLock >> prefix [
+	
+	^ self entity salePointNumber
 ]
 
 { #category : #accessing }

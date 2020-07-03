@@ -15,5 +15,5 @@ TBSYavuTransactionsBrowser >> renderAddInstanceForm: anInstance [
 	
 	^ anInstance useMagritteEditor 
 		ifTrue: [ super renderAddInstanceForm: anInstance   ]
-		ifFalse: [ TBSYavuVatDeclarationView new ]
+		ifFalse: [ "Specializaded editor hook" ]
 ]

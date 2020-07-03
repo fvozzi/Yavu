@@ -53,7 +53,7 @@ YavuSaleSubsystem >> lastZNumber [
 YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [ 
 	
 	^ (self system storedSubsystem 
-		instancesOfClass: YavuPurchaseInvoice 
+		instancesOfClass: YavuSaleInvoice 
 		from: aDate beginOfMonth to: aDate endOfMonth ),
 		(self system storedSubsystem 
 		instancesOfClass: YavuZLock  

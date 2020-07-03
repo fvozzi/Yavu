@@ -37,10 +37,10 @@ YavuPurchaseSubsystemTest >> testAddPrefixAndInvoiceNumberToInvoice [
 	invoice invoiceNumber: 100.
 	self assert: invoice prefix equals: 1.
 	self assert: invoice invoiceNumber equals: 100.
-	self assert: invoice formattedPrefix equals: '0001'.
+	self assert: invoice formattedPrefix equals: '00001'.
 	self assert: invoice formattedInvoiceNumber equals: '00000100'.
 	invoice prefix: 103.
-	self assert: invoice formattedPrefix equals: '0103'
+	self assert: invoice formattedPrefix equals: '00103'
 ]
 
 { #category : #tests }
@@ -91,7 +91,7 @@ YavuPurchaseSubsystemTest >> testPurchaseInvoiceFactXVATCalculation [
 	| invoice |
 	
 	invoice := resources panaderiaGalliPurchaseInvoice.
-	self assert: invoice invoiceType = YavuInvoiceTypeC.
+	self assert: invoice invoiceType equals: YavuInvoiceTypeC.
 	invoice addPurchaseTransaction: resources purchaseTransaction1.
 	self assert: invoice netPrice equals: ((invoice purchaseTransactionItems sum: [ :each | each subtotalAfterTaxs ]) round: self system purchaseSubsystem decimalFiscalAccuracy).
 	self assert: invoice total equals: invoice netPrice.

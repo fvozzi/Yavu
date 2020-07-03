@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeC class >> afipTipoComprobante [
+	^ '011'
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeC class >> availableForSales [
 
 	^ false
@@ -20,6 +25,13 @@ YavuInvoiceTypeC class >> discriminateVat [
 YavuInvoiceTypeC class >> formattedInvoiceType [
 
 	^ 'FACT C'
+]
+
+{ #category : #'as yet unclassified' }
+YavuInvoiceTypeC class >> netPriceValueOf: aPurchaseTransactionItem vatPercentaje: aPercentaje [
+	^ aPurchaseTransactionItem product vatPercentage = aPercentaje 
+		ifTrue: [ aPurchaseTransactionItem subtotalAfterTaxs] 
+		ifFalse: [ 0 ]
 ]
 
 { #category : #accessing }

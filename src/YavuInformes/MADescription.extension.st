@@ -7,6 +7,11 @@ MADescription >> beBDMapping [
 ]
 
 { #category : #'*YavuInformes-Extensions' }
+MADescription >> csvLabel [
+	^self propertyAt: #csvLabel ifAbsent: [ self label greaseString ]
+]
+
+{ #category : #'*YavuInformes-Extensions' }
 MADescription class >> defaultMapping [
 
 	^false

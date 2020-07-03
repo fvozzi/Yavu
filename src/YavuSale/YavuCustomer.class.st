@@ -38,6 +38,12 @@ YavuCustomer >> address: anObject [
 	address := anObject
 ]
 
+{ #category : #descriptions }
+YavuCustomer >> afipCodigoDocumentoComprador [
+	
+	^ self vatCondition afipCodigoDocumentoComprador
+]
+
 { #category : #accessing }
 YavuCustomer >> cuitNumber [
 	^ cuitNumber
@@ -134,6 +140,12 @@ YavuCustomer >> email: anObject [
 YavuCustomer >> invoiceType [
 	
 	^ self vatCondition invoiceType
+]
+
+{ #category : #'as yet unclassified' }
+YavuCustomer >> legalName [
+	
+	^ self name
 ]
 
 { #category : #accessing }

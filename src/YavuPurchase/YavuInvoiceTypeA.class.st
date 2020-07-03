@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> afipTipoComprobante [
+	^ '001'
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeA class >> availableForSales [
 
 	^ true
@@ -23,6 +28,13 @@ YavuInvoiceTypeA class >> formattedInvoiceType [
 ]
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> netPriceValueOf: aPurchaseTransactionItem vatPercentaje: aPercentaje [
+	^ aPurchaseTransactionItem product vatPercentage = aPercentaje 
+		ifTrue: [ aPurchaseTransactionItem subtotal ] 
+		ifFalse: [ 0 ]
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeA class >> subtotalPriceOf: aPurchaseTransactionItem [ 
 	^ aPurchaseTransactionItem subtotal 
 ]
@@ -34,10 +46,8 @@ YavuInvoiceTypeA class >> totalPriceOf: aPurchaseTransactionItem [
 ]
 
 { #category : #'as yet unclassified' }
-YavuInvoiceTypeA class >> vatValueOf: aPurchaseTransactionItem vatPercentaje: aPercentaje [
-	^ aPurchaseTransactionItem product vatPercentage = aPercentaje 
-		ifTrue: [ aPurchaseTransactionItem subtotalTaxs ] 
-		ifFalse: [ 0 ]
+YavuInvoiceTypeA class >> vatValueOf: aValue vatPercentaje: aPercentaje [
+	^ aValue * aPercentaje
 	
 
 ]

@@ -39,13 +39,13 @@ YavuVatDeclaration >> descriptionDate [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
-	^MADateDescription new 
-		componentClass: MAMonthYearSelectorComponent ;
-        	accessor: #date;
-        	label: 'Fecha';
-        	priority: 20;
+	^ MADateDescription new
+		componentClass: MAMonthYearSelectorComponent;
+		accessor: #date;
+		label: 'Fecha';
+		priority: 20;
 		beRequired;
-        	yourself
+		yourself
 ]
 
 { #category : #descriptions }
@@ -58,10 +58,10 @@ YavuVatDeclaration >> descriptionPurchasesCollection [
 		"classes: (OrderedCollection with: YavuPurchaseInvoice );"
 		default: nil;
 		label: 'Compras';
-		priority: 120;
+		priority: 140;
 		beReadonly;
 		componentClass: TBSMagritteOneToManyComponent;
-		reference: (YavuPurchaseInvoice new descriptionEntity, YavuPurchaseInvoice new descriptionDate );
+		reference: self subsystem purchaseInvoiceDescriptionsForVatDeclaration;
 		yourself
 		
 	
@@ -77,13 +77,26 @@ YavuVatDeclaration >> descriptionSalesCollection [
 		"classes: (OrderedCollection with: YavuPurchaseInvoice );"
 		default: nil;
 		label: 'Ventas';
-		priority: 120;
+		priority: 150;
 		beReadonly;
 		componentClass: TBSMagritteOneToManyComponent;
-		reference: (YavuSaleInvoice new descriptionEntity, YavuSaleInvoice new descriptionDate );
+		reference: self subsystem saleInvoiceDescriptionsForVatDeclaration;
 		yourself
 		
 	
+]
+
+{ #category : #descriptions }
+YavuVatDeclaration >> descriptionVatTax [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #vatTax;
+        	label: 'IVA a pagar';
+        	priority: 130;
+			componentClass: TBSMagritteTextInputComponent;
+			beReadonly;
+        	yourself
 ]
 
 { #category : #descriptions }
@@ -93,7 +106,7 @@ YavuVatDeclaration >> descriptionVatTaxCredit [
 	^ MANumberDescription new 
         	accessor: #vatTaxCredit;
         	label: 'IVA Crédito';
-        	priority: 110;
+        	priority: 120;
 			componentClass: TBSMagritteTextInputComponent;
 			beReadonly;
         	yourself
@@ -178,6 +191,11 @@ YavuVatDeclaration >> state: anObject [
 YavuVatDeclaration >> useMagritteEditor [
 
 	^ true
+]
+
+{ #category : #accessing }
+YavuVatDeclaration >> vatTax [
+	^ self vatTaxDebit - self vatTaxCredit
 ]
 
 { #category : #accessing }

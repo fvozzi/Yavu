@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #testing }
+YavuResponsableInscripto class >> afipCodigoDocumentoComprador [
+
+	^ '80'
+]
+
+{ #category : #testing }
 YavuResponsableInscripto class >> cuitNumberIsRequired [
 
 	^ true

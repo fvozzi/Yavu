@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #testing }
+YavuVatCondition class >> afipCodigoDocumentoComprador [
+
+	^ '99'
+]
+
+{ #category : #testing }
 YavuVatCondition class >> cuitNumberIsRequired [
 
 	^ false

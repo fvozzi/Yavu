@@ -24,6 +24,18 @@ YavuCashRegister class >> subsystemClass [
 	^ Smalltalk at: #YavuSaleSubsystem
 ]
 
+{ #category : #'as yet unclassified' }
+YavuCashRegister >> afipCodigoDocumentoComprador [
+	
+	^ '99'
+]
+
+{ #category : #'as yet unclassified' }
+YavuCashRegister >> cuitNumber [
+	
+	^ '0'
+]
+
 { #category : #descriptions }
 YavuCashRegister >> descriptionPrefix [
 
@@ -37,6 +49,12 @@ YavuCashRegister >> descriptionPrefix [
 			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuCashRegister >> legalName [
+	
+	^ ''
 ]
 
 { #category : #accessing }

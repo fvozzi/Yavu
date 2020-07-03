@@ -132,13 +132,13 @@ YavuPurchaseSubsystem >> dependencies [
 					(YavuNotNullDependecyChecker
 						on: YavuPurchaseTransaction
 						referencesMethod: #invoice));
-		at: YavuPurchaseInvoice
+		"at: YavuPurchaseInvoice
 			put:
 			(OrderedCollection
 				with:
 					(YavuObjectDependecyChecker
 						on: YavuPurchaseTransaction
-						referencesMethod: #invoice));
+						referencesMethod: #invoice));"
 		at: YavuBrand
 			put:
 			(OrderedCollection

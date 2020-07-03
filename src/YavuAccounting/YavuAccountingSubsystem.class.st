@@ -38,9 +38,40 @@ YavuAccountingSubsystem >> newVatDeclarationOnDate: aDate entity: aYavuBusinessN
 ]
 
 { #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
+	
+	| yavuPurchaseInvoice |
+	
+	yavuPurchaseInvoice := YavuPurchaseInvoice new.
+	^ yavuPurchaseInvoice descriptionEntity,
+	  yavuPurchaseInvoice descriptionDate,
+	  yavuPurchaseInvoice descriptionInvoiceTypeAndNumber,
+	  yavuPurchaseInvoice descriptionIibbPerception,
+	  yavuPurchaseInvoice descriptionVatPerception,
+	  yavuPurchaseInvoice descriptionVat105,
+	  yavuPurchaseInvoice descriptionVat210,
+	  yavuPurchaseInvoice descriptionNetPrice,
+	  yavuPurchaseInvoice descriptionTotal
+]
+
+{ #category : #'as yet unclassified' }
 YavuAccountingSubsystem >> purchasesOfEntity: aYavuBusinessName month: aDate [
 
 	^ self system purchaseSubsystem purchaseInvoicesOfBusinessName: aYavuBusinessName month: aDate
+]
+
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> saleInvoiceDescriptionsForVatDeclaration [
+	
+	| yavuPurchaseInvoice |
+	
+	yavuPurchaseInvoice := YavuSaleInvoice new.
+	^ yavuPurchaseInvoice descriptionEntity,
+	  yavuPurchaseInvoice descriptionDate,
+	  yavuPurchaseInvoice descriptionInvoiceTypeAndNumber,
+	  yavuPurchaseInvoice descriptionVat210,
+	  yavuPurchaseInvoice descriptionNetPrice,
+	  yavuPurchaseInvoice descriptionTotal
 ]
 
 { #category : #'as yet unclassified' }

@@ -109,6 +109,10 @@ YavuObject >> maDescriptionForReport [
 ]
 
 { #category : #adding }
+YavuObject >> onStoreRemoved [
+]
+
+{ #category : #adding }
 YavuObject >> removeFromSystem [
 
 	^ self subsystem removeFromSystem: self
