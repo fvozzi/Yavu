@@ -68,3 +68,9 @@ TBSMigrationView >> renderContentOn: html [
 			html div class: 'table-responsive'; with: [  html render: self buildReport ]
 	]]
 ]
+
+{ #category : #running }
+TBSMigrationView >> run [ 
+
+	^ self migrationToRun run
+]
