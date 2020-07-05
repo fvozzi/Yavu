@@ -209,14 +209,14 @@ YavuPurchaseInvoice >> netPrice105 [
 { #category : #accessing }
 YavuPurchaseInvoice >> netPrice105: anObject [
 	netPrice105 := anObject ifNil: [ 0 ].
-	vat105 := (self invoiceType vatValueOf: netPrice105 vatPercentaje: 0.105) round: self subsystem decimalAccuracy.
+	vat105 := (self invoiceType vatValueOf: netPrice105 vatPercentaje: 0.105) round: self subsystem decimalFiscalAccuracy.
 	netPrice := netPrice + netPrice105
 ]
 
 { #category : #calculated }
 YavuPurchaseInvoice >> netPrice105ValueOf: aPurchaseTransactionItem [ 
 	
-	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 10.5) round: self subsystem decimalFiscalAccuracy 
+	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 10.5) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #accessing }
@@ -227,14 +227,14 @@ YavuPurchaseInvoice >> netPrice210 [
 { #category : #accessing }
 YavuPurchaseInvoice >> netPrice210: anObject [
 	netPrice210 := anObject.
-	vat210 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.21) round: self subsystem decimalAccuracy.
+	vat210 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.21) round: self subsystem decimalFiscalAccuracy.
 	netPrice := netPrice + netPrice210 
 ]
 
 { #category : #calculated }
 YavuPurchaseInvoice >> netPrice210ValueOf: aPurchaseTransactionItem [ 
 	
-	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalFiscalAccuracy 
+	^ (self invoiceType netPriceValueOf: aPurchaseTransactionItem vatPercentaje: 21.0) round: self subsystem decimalAccuracy 
 ]
 
 { #category : #events }
@@ -289,7 +289,7 @@ YavuPurchaseInvoice >> subtotalPriceOf: aPurchaseTransactionItem [
 { #category : #accessing }
 YavuPurchaseInvoice >> total [
 
-	^ (self netPrice + self vat105 + self vat210 + self vatPerception + self iibbPerception) round: self subsystem decimalAccuracy 
+	^ (self netPrice + self vat105 + self vat210 + self vatPerception + self iibbPerception) round: self subsystem decimalFiscalAccuracy 
 ]
 
 { #category : #calculated }

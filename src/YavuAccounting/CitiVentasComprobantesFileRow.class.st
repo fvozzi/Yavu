@@ -119,6 +119,12 @@ CitiVentasComprobantesFileRow >> puntoDeVenta [
 	^ self invoice formattedPrefix 
 ]
 
+{ #category : #acccessing }
+CitiVentasComprobantesFileRow >> tipoCambio [
+	
+	^ '0001000000'
+]
+
 { #category : #'as yet unclassified' }
 CitiVentasComprobantesFileRow >> tipoComprobante [
 
