@@ -58,6 +58,12 @@ CitiComprasComprobantesFileRow >> despachoImportacion [
 	^ '                ' 
 ]
 
+{ #category : #acccessing }
+CitiComprasComprobantesFileRow >> fecha [
+	
+	^ self invoice date yyyymmdd copyReplaceAll: '-' with: ''
+]
+
 { #category : #'as yet unclassified' }
 CitiComprasComprobantesFileRow >> importeDePercepcionesNacionales [
 	
