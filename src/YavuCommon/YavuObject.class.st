@@ -22,6 +22,15 @@ YavuObject class >> empresaActual [
 	^YavuPersistentSubsystem empresaActual 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuObject class >> maPossibleCommands [
+	^OrderPreservingDictionary new
+		at: #viewInstance: put: 'ver';
+		at: #editInstance: put: 'modificar';
+		at: #removeInstance: put: 'eliminar';
+		yourself
+]
+
 { #category : #'sin categoria' }
 YavuObject class >> sicSession [
 	"Devuelve la sesión web actual."

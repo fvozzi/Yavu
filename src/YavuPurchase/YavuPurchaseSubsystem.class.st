@@ -38,6 +38,12 @@ YavuPurchaseSubsystem class >> subsystemTag [
 	 ^'purchaseSubsystem'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> accountingAccounts [
+
+	^ self system accountingSubsystem accountingAccounts
+]
+
 { #category : #crud }
 YavuPurchaseSubsystem >> addBrand: aBrand [
 	
@@ -219,12 +225,13 @@ YavuPurchaseSubsystem >> purchaseInvoices [
 ]
 
 { #category : #'as yet unclassified' }
-YavuPurchaseSubsystem >> purchaseInvoicesOfBusinessName: aYavuBusinessName month: aDate [ 
+YavuPurchaseSubsystem >> purchaseInvoicesOfBusinessName: aYavuBusinessName vatDeclarationMonth: aDate [ 
 	
 	^ self system storedSubsystem 
 		instancesOfClass: YavuPurchaseInvoice
 		from: aDate beginOfMonth 
 		to: aDate endOfMonth 
+		dateSelector: #vatDeclarationMonth
 ]
 
 { #category : #'api/queries' }

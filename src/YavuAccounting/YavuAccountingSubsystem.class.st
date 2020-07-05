@@ -32,12 +32,87 @@ YavuAccountingSubsystem class >> subsystemTag [
 ]
 
 { #category : #'as yet unclassified' }
-YavuAccountingSubsystem >> newVatDeclarationOnDate: aDate entity: aYavuBusinessName [ 
-	
-	^ YavuVatDeclaration entity: aYavuBusinessName date: aDate
+YavuAccountingSubsystem >> accountingAccounts [
+
+	^ YavuAccountingAccount all
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'api/queries' }
+YavuAccountingSubsystem >> decimalFiscalAccuracy [
+
+	^ 2
+]
+
+{ #category : #afip }
+YavuAccountingSubsystem >> generateComprasAlicuotasFileOn: aYavuVatDeclaration [
+	
+	| file |
+
+	file := FileSystem memory root / 'ComprasAlicuotas', aYavuVatDeclaration date yyyymmdd, '.txt'.
+	file writeStreamDo: [ :stream | 
+		aYavuVatDeclaration purchases do: [ :purchaseInvoice |
+			purchaseInvoice vatAlicuots do: [ :each | 
+				stream 
+					nextPutAll: (CitiComprasAlicuotasFileRow on: purchaseInvoice alicuota: each) output;
+					cr ]
+				]
+		 ].
+	^ file
+]
+
+{ #category : #afip }
+YavuAccountingSubsystem >> generateComprasComprobantesFileOn: aYavuVatDeclaration [
+	
+	| file |
+
+	file := FileSystem memory root / 'ComprasComprobantes', aYavuVatDeclaration date yyyymmdd, '.txt'.
+	file writeStreamDo: [ :stream | 
+		aYavuVatDeclaration purchases do: [ :purchaseInvoice |
+			stream 
+				nextPutAll: (CitiComprasComprobantesFileRow on: purchaseInvoice) output;
+				cr ]
+		 ].
+	^ file
+]
+
+{ #category : #afip }
+YavuAccountingSubsystem >> generateVentasAlicuotasFileOn: aYavuVatDeclaration [
+	
+	| file |
+
+	file := FileSystem memory root / 'VentasAlicuotas', aYavuVatDeclaration date yyyymmdd, '.txt'.
+	file writeStreamDo: [ :stream | 
+		aYavuVatDeclaration sales do: [ :saleInvoice |
+				stream 
+					nextPutAll: (CitiVentasAlicuotasFileRow on: saleInvoice ) output;
+					cr 
+				]
+		 ].
+	^ file
+]
+
+{ #category : #afip }
+YavuAccountingSubsystem >> generateVentasComprobantesFileOn: aYavuVatDeclaration [
+	
+	| file |
+
+	file := FileSystem memory root / 'VentasComprobantes', aYavuVatDeclaration date yyyymmdd, '.txt'.
+	file writeStreamDo: [ :stream | 
+		aYavuVatDeclaration sales do: [ :saleInvoice |
+			stream 
+				nextPutAll: (CitiVentasComprobantesFileRow on: saleInvoice) output;
+				cr ]
+		 ].
+	^ file
+]
+
+{ #category : #accessing }
+YavuAccountingSubsystem >> name [ 
+
+	 ^ 'Contabilidad'
+]
+
+{ #category : #afip }
 YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	
 	| yavuPurchaseInvoice |
@@ -45,6 +120,7 @@ YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	yavuPurchaseInvoice := YavuPurchaseInvoice new.
 	^ yavuPurchaseInvoice descriptionEntity,
 	  yavuPurchaseInvoice descriptionDate,
+	  yavuPurchaseInvoice descriptionAccountingAccount,
 	  yavuPurchaseInvoice descriptionInvoiceTypeAndNumber,
 	  yavuPurchaseInvoice descriptionIibbPerception,
 	  yavuPurchaseInvoice descriptionVatPerception,
@@ -54,41 +130,48 @@ YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	  yavuPurchaseInvoice descriptionTotal
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #afip }
 YavuAccountingSubsystem >> purchasesOfEntity: aYavuBusinessName month: aDate [
 
-	^ self system purchaseSubsystem purchaseInvoicesOfBusinessName: aYavuBusinessName month: aDate
+	^ self system purchaseSubsystem purchaseInvoicesOfBusinessName: aYavuBusinessName vatDeclarationMonth: aDate
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #afip }
 YavuAccountingSubsystem >> saleInvoiceDescriptionsForVatDeclaration [
 	
-	| yavuPurchaseInvoice |
+	| yavuSaleInvoice |
 	
-	yavuPurchaseInvoice := YavuSaleInvoice new.
-	^ yavuPurchaseInvoice descriptionEntity,
-	  yavuPurchaseInvoice descriptionDate,
-	  yavuPurchaseInvoice descriptionInvoiceTypeAndNumber,
-	  yavuPurchaseInvoice descriptionVat210,
-	  yavuPurchaseInvoice descriptionNetPrice,
-	  yavuPurchaseInvoice descriptionTotal
+	yavuSaleInvoice := YavuSaleInvoice new.
+	^ yavuSaleInvoice descriptionEntity,
+	  yavuSaleInvoice descriptionDate,
+	  yavuSaleInvoice descriptionInvoiceTypeAndNumber,
+	  yavuSaleInvoice descriptionVat210,
+	  yavuSaleInvoice descriptionNetPrice,
+	  yavuSaleInvoice descriptionTotal
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #afip }
 YavuAccountingSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 
 	^ self system saleSubsystem salesOfEntity: aYavuBusinessName month: aDate
 ]
 
-{ #category : #'as yet unclassified' }
-YavuAccountingSubsystem >> vatDeclarationOnDate: aDate entity: aYavuBusinessName [ 
+{ #category : #afip }
+YavuAccountingSubsystem >> zipCitiFilesOf: aYavuVatDeclaration [ 
 	
-	| declaration instances entities |
+	| comprasComprobantesFile comprasAlicuotasFile ventasComprobantesFile ventasAlicuotasFile zipFile zip |
 	
-	entities := OrderedCollection with: aYavuBusinessName.
-	instances := self system storedSubsystem instancesOfClass: YavuVatDeclaration from: aDate to: aDate entities: entities.
-	declaration := instances ifEmpty: [ self newVatDeclarationOnDate: aDate entity: aYavuBusinessName ] ifNotEmpty: [:col | col first ].
-	declaration sales: (self salesOfEntity: aYavuBusinessName month: aDate).
-	declaration purchases: (self purchasesOfEntity: aYavuBusinessName month: aDate).
-	^ declaration 
+	comprasComprobantesFile := self generateComprasComprobantesFileOn: aYavuVatDeclaration.
+	comprasAlicuotasFile := self generateComprasAlicuotasFileOn: aYavuVatDeclaration.
+	ventasComprobantesFile := self generateVentasComprobantesFileOn: aYavuVatDeclaration.
+	ventasAlicuotasFile := self generateVentasAlicuotasFileOn: aYavuVatDeclaration.
+	zipFile := FileSystem memory root / 'Citi', aYavuVatDeclaration date yyyymmdd, '.zip'.
+	zip := ZipArchive new.
+	zip addFile: comprasComprobantesFile as: comprasComprobantesFile basename.
+	zip addFile: comprasAlicuotasFile  as: comprasAlicuotasFile basename.
+	zip addFile: ventasComprobantesFile  as: ventasComprobantesFile basename.
+	zip addFile: ventasAlicuotasFile  as: ventasAlicuotasFile basename.
+	zip writeToFile: zipFile.
+	^ zipFile
+	
 ]

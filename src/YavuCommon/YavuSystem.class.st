@@ -77,13 +77,7 @@ YavuSystem class >> mainView [
 
 { #category : #subsystemsProtocol }
 YavuSystem class >> menuElements [
-
-	^ self enabledSubsystemsClasses
-		inject: OrderedCollection new
-		into: [ :menues :subsystemClass | 
-			menues
-				addAll: subsystemClass menuElements;
-				yourself ]
+	^ self subsystemsMenuElements, self systemMenuElements
 ]
 
 { #category : #configuration }
@@ -109,6 +103,22 @@ YavuSystem class >> setUpTransientSubsystem: aTransientSubsystem [
 ]
 
 { #category : #configuration }
+YavuSystem class >> subsystemName [
+	
+	^ self systemName
+]
+
+{ #category : #subsystemsProtocol }
+YavuSystem class >> subsystemsMenuElements [
+	^ self enabledSubsystemsClasses
+		inject: OrderedCollection new
+		into: [ :menues :subsystemClass | 
+			menues
+				addAll: subsystemClass menuElements;
+				yourself ]
+]
+
+{ #category : #configuration }
 YavuSystem class >> superAdministratorRole [
 
 	^ (YavuRole name: 'Super Administrador') 
@@ -116,6 +126,15 @@ YavuSystem class >> superAdministratorRole [
 		yavuObjects: self yavuObjects;
 		yourself
 
+]
+
+{ #category : #subsystemsProtocol }
+YavuSystem class >> systemMenuElements [
+
+	^ OrderedCollection new 
+		add: ((YavuSimpleMenuElement label: 'Migraciones' presenterClass: TBSMigrationView subsystem: self) id: 1);
+		add: ((YavuSimpleMenuElement label: 'Acerca de' presenterClass: TBSSystemAboutView subsystem: self) id: 2);
+		yourself
 ]
 
 { #category : #configuration }
@@ -206,6 +225,12 @@ YavuSystem >> completeString: aString withZeros: anInteger [
 	^ formattedString 
 ]
 
+{ #category : #initialization }
+YavuSystem >> enabledSubsystems [
+
+	^ subsystems
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> homeViewClass [ 
 
@@ -268,6 +293,14 @@ YavuSystem >> menuElements [
 	^ self class menuElements 
 ]
 
+{ #category : #rendering }
+YavuSystem >> migrationsToRun [
+
+	^ YavuSystemMigration allSubclasses select: [ :each |
+		each wasAlreadyRun not
+		 ]
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> name [
 	self shouldBeImplemented.
@@ -276,6 +309,11 @@ YavuSystem >> name [
 { #category : #'as yet unclassified' }
 YavuSystem >> purchaseSubsystem [
 	^ self subsystemAt: 'purchaseSubsystem'
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> ranMigrationsLog [
+		^ self storedSubsystem instancesOf: YavuSystemMigrationLog
 ]
 
 { #category : #'as yet unclassified' }

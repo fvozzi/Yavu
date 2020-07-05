@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'vatTaxDebit',
 		'vatTaxCredit',
-		'state',
 		'officialPresentationDate',
 		'sales',
 		'purchases'
@@ -29,6 +28,14 @@ YavuVatDeclaration class >> label [
 	^ 'Declaración de IVA'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuVatDeclaration class >> maPossibleCommands [
+
+	^ super maPossibleCommands
+		at: #downloadFiles: put: 'Descargar CITI';
+		yourself
+]
+
 { #category : #accessing }
 YavuVatDeclaration class >> subsystemClass [
 	^ Smalltalk at: #YavuAccountingSubsystem
@@ -44,7 +51,20 @@ YavuVatDeclaration >> descriptionDate [
 		accessor: #date;
 		label: 'Fecha';
 		priority: 20;
-		beRequired;
+		beReadonly;
+		yourself
+]
+
+{ #category : #descriptions }
+YavuVatDeclaration >> descriptionOfficialPresentationDate [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^ MADateDescription new
+		componentClass: TBSMagritteDateInputComponent;
+		accessor: #officialPresentationDate;
+		label: 'Fecha Presentación AFIP';
+		priority: 30;
 		yourself
 ]
 
@@ -74,7 +94,6 @@ YavuVatDeclaration >> descriptionSalesCollection [
 	<magritteDescription>
 	^MAToManyRelationDescription new
 		accessor: #sales;
-		"classes: (OrderedCollection with: YavuPurchaseInvoice );"
 		default: nil;
 		label: 'Ventas';
 		priority: 150;
@@ -125,20 +144,13 @@ YavuVatDeclaration >> descriptionVatTaxDebit [
         	yourself
 ]
 
-{ #category : #initialization }
-YavuVatDeclaration >> initialize [ 
-
-	super initialize.
-	self 
-		initializePurchasesInvoice;
-		initializeSalesInvoice
-]
-
 { #category : #'sin categoria' }
 YavuVatDeclaration >> initializeEntity: anEntity date: aDate [
 
-	super initializeEntity: anEntity date: aDate.
-	state := self yavuSystem toReviseStatus
+	super initializeEntity: anEntity date: (Date today addMonths: -1) beginOfMonth.
+	self 
+		initializePurchasesInvoice;
+		initializeSalesInvoice
 	
 	
 ]
@@ -146,13 +158,24 @@ YavuVatDeclaration >> initializeEntity: anEntity date: aDate [
 { #category : #'as yet unclassified' }
 YavuVatDeclaration >> initializePurchasesInvoice [
 	purchases := self subsystem purchasesOfEntity: self entity month: self date.
-	vatTaxCredit := (purchases sum: [ :each | each vat105 + each vat210 ]) round: 2
+	vatTaxCredit := (purchases inject: 0 into: [:accum :each | accum + (each vat105 + each vat210) ]) round: 2
 ]
 
 { #category : #'as yet unclassified' }
 YavuVatDeclaration >> initializeSalesInvoice [
 	sales := self subsystem salesOfEntity: self entity month: self date.
-	vatTaxDebit := (sales sum: [ :each | each vat105 + each vat210 ]) round: 2
+	vatTaxDebit := (sales inject: 0 into: [:accum :each | accum + (each vat105 + each vat210) ]) round: 2
+]
+
+{ #category : #descriptions }
+YavuVatDeclaration >> maDescriptionForReport [
+	"Devuelve un magritte description para ver en una tabla."
+
+	^self descriptionEntity, 
+	self descriptionDate, 
+	self descriptionVatTax, 
+	self descriptionVatTaxDebit,
+	self descriptionVatTaxCredit 
 ]
 
 { #category : #accessing }
@@ -177,16 +200,6 @@ YavuVatDeclaration >> sales [
 	^ sales
 ]
 
-{ #category : #accessing }
-YavuVatDeclaration >> state [
-	^ state
-]
-
-{ #category : #accessing }
-YavuVatDeclaration >> state: anObject [
-	state := anObject
-]
-
 { #category : #'as yet unclassified' }
 YavuVatDeclaration >> useMagritteEditor [
 
@@ -195,7 +208,7 @@ YavuVatDeclaration >> useMagritteEditor [
 
 { #category : #accessing }
 YavuVatDeclaration >> vatTax [
-	^ self vatTaxDebit - self vatTaxCredit
+	^ (self vatTaxDebit - self vatTaxCredit) round: self subsystem  decimalFiscalAccuracy 
 ]
 
 { #category : #accessing }
@@ -216,4 +229,10 @@ YavuVatDeclaration >> vatTaxDebit [
 { #category : #accessing }
 YavuVatDeclaration >> vatTaxDebit: anObject [
 	vatTaxDebit := anObject
+]
+
+{ #category : #'as yet unclassified' }
+YavuVatDeclaration >> zipFileToDownload [
+
+	^ self subsystem zipCitiFilesOf: self
 ]

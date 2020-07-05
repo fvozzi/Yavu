@@ -49,6 +49,12 @@ YavuSaleSubsystem >> lastZNumber [
 	 ^ 0
 ]
 
+{ #category : #accessing }
+YavuSaleSubsystem >> name [ 
+
+	 ^ 'Ventas'
+]
+
 { #category : #'as yet unclassified' }
 YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [ 
 	

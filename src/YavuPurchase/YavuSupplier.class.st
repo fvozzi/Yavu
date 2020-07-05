@@ -8,7 +8,8 @@ Class {
 		'cuitNumber',
 		'address',
 		'phoneNumber',
-		'openingHours'
+		'openingHours',
+		'accountingAccount'
 	],
 	#category : #'YavuPurchase-Entities'
 }
@@ -28,6 +29,16 @@ YavuSupplier class >> label [
 { #category : #accessing }
 YavuSupplier class >> subsystemClass [
 	^ Smalltalk at: #YavuPurchaseSubsystem
+]
+
+{ #category : #accessing }
+YavuSupplier >> accountingAccount [
+	^ accountingAccount
+]
+
+{ #category : #accessing }
+YavuSupplier >> accountingAccount: anObject [
+	accountingAccount := anObject
 ]
 
 { #category : #accessing }
@@ -146,6 +157,21 @@ YavuSupplier >> descriptionPhoneNumber [
 		componentClass: TBSMagritteTextInputComponent;
       	yourself
 
+]
+
+{ #category : #descriptions }
+YavuSupplier >> descriptionSubcategory [
+	
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #accountingAccount;
+		label: 'Cuenta Contable';
+		priority: 190;
+		options: self subsystem accountingAccounts;
+		beSorted;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
 ]
 
 { #category : #descriptions }

@@ -12,6 +12,6 @@ TBSMagritteDateInputComponent >> renderButtonOn: html [
 TBSMagritteDateInputComponent >> renderInputOn: html [
 
 	html dateInput5
-		value: (self value ifNotNil: [self value yyyymmdd ]);
-		callback: [ :value | self value: value asDate]
+		value: (self value notNil ifTrue: [self value yyyymmdd ]);
+		callback: [ :value | self value: (value ifEmpty: [] ifNotEmpty: [ value asDate])]
 ]

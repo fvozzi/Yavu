@@ -33,11 +33,7 @@ TBSYavuObjectsBrowser >> buildReport [
 
 	^(TBSMagritteReport rows: instances  description: instanceClass new maDescriptionForReport)
 		batchSize: 20;
-		addColumn: (MACommandColumn new
-						addCommandOn: self selector: #viewInstance: text: 'ver';
-						addCommandOn: self selector: #editInstance: text: 'modificar';
-						addCommandOn: self selector: #removeInstance: text: 'eliminar';
-						yourself);
+		addColumn: self maCommandColumn;
 		tableEmpty: 'No hay elementos', instanceClass label, ' para mostrar. Use la opción Buscar.'
 		yourself
 ]
@@ -46,6 +42,23 @@ TBSYavuObjectsBrowser >> buildReport [
 TBSYavuObjectsBrowser >> children [
 
 	^Array with: report
+]
+
+{ #category : #crud }
+TBSYavuObjectsBrowser >> downloadFiles:  anInstance [
+
+	| document fileToDownload |
+
+	fileToDownload := anInstance zipFileToDownload.
+	document:= WAMimeDocument
+			on: fileToDownload binaryReadStream contents
+			mimeType: (WAMimeType main: 'application' sub: 'zip')
+			fileName: (fileToDownload basename, '.zip').
+
+	self requestContext respond: [ :response |
+		response
+			doNotCache;
+			document: document ] 
 ]
 
 { #category : #crud }
@@ -64,6 +77,18 @@ TBSYavuObjectsBrowser >> initializeInstances: aCollection class: aYavuObjectClas
 	instances := aCollection.
 	instanceClass := aYavuObjectClass.
 	report := self buildReport 
+]
+
+{ #category : #rendering }
+TBSYavuObjectsBrowser >> maCommandColumn [
+	
+	| column |
+	
+	column := MACommandColumn new.
+	instanceClass maPossibleCommands keysAndValuesDo: [ :commandSymbol :label |
+		column addCommandOn: self selector: commandSymbol text: label ].
+	^ column
+	
 ]
 
 { #category : #crud }

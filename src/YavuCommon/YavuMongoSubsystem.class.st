@@ -63,8 +63,14 @@ YavuMongoSubsystem >> instancesOf: aClass [
 { #category : #'as yet unclassified' }
 YavuMongoSubsystem >> instancesOfClass: aClass from: startDate to: anotherDate [
 	
+	^self instancesOfClass: aClass from: startDate to: anotherDate dateSelector: #date
+]
+
+{ #category : #'as yet unclassified' }
+YavuMongoSubsystem >> instancesOfClass: aClass from: startDate to: anotherDate dateSelector: aSymbol [
+	
 	^ repository selectMany: aClass where: [ :each | 
-		(each date >= startDate) &  (each date <= anotherDate )
+		((each perform: aSymbol) >= startDate) &  ((each perform: aSymbol) <= anotherDate )
 		]
 ]
 
@@ -82,6 +88,12 @@ YavuMongoSubsystem >> instancesOfClass: aClass withEntity: aYavuSupplier [
 	^ repository selectMany: aClass where: [ :each | 
 		(each at: 'entity.__id') = (repository idOf: aYavuSupplier )
 		]
+]
+
+{ #category : #accessing }
+YavuMongoSubsystem >> name [ 
+
+	 ^ 'Mongo DB'
 ]
 
 { #category : #'As yet unclassified' }

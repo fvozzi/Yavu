@@ -187,6 +187,7 @@ YavuTransaction >> descriptionEntity [
 		options: self class entityClass all;
 		label: self class entityLabel;
 		priority: 10;
+		sorted: true;
 		beRequired;
 		beReadonly;
 		componentClass: TBSMagritteSelectListComponent;
@@ -236,7 +237,7 @@ YavuTransaction >> maDescriptionForReport [
 
 { #category : #'as yet unclassified' }
 YavuTransaction >> ts [
-	 ts isNil ifTrue: [ ts:= TimeStamp now ].
+	 ts isNil ifTrue: [ ts:= DateAndTime now ].
 	^ts
 ]
 

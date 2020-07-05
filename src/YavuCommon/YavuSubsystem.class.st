@@ -85,18 +85,12 @@ YavuSubsystem >> removeFromSystem: aYavuObject [
 			ifFalse: [ Error signal: 'No puedo borrar el objeto porque esta siendo usado por el sistema.' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuSubsystem >> system [
 	^ system
 ]
 
-{ #category : #updating }
-YavuSubsystem >> update: aYavuObject [
-
-	self subclassResponsibility 
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 YavuSubsystem >> yavuSystem [
 	self shouldBeImplemented.
 ]

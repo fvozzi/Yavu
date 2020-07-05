@@ -38,6 +38,12 @@ YavuPurchaseInvoice class >> subsystemClass [
 	^ Smalltalk at: #YavuPurchaseSubsystem
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> accountingAccount [
+
+	^ self entity accountingAccount 
+]
+
 { #category : #events }
 YavuPurchaseInvoice >> addPurchaseTransaction: aYavuPurchaseTransaction [ 
 
@@ -64,6 +70,19 @@ YavuPurchaseInvoice >> amountOfVatAlicuot [
 YavuPurchaseInvoice >> availablePurchaseTransactions [
 
 	^ self subsystem availablePurchaseTransactionsFor: self entity
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> descriptionAccountingAccount [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #accountingAccount;
+		label: 'Cuenta contable';
+		priority: 10;
+		beReadonly;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
 ]
 
 { #category : #descriptions }
@@ -100,8 +119,6 @@ YavuPurchaseInvoice >> descriptionNetPrice105 [
         	accessor: #netPrice105;
         	label: 'Importe Neto 10.5% Iva';
         	priority: 126;
-			min: 0.1;
-			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
@@ -114,8 +131,6 @@ YavuPurchaseInvoice >> descriptionNetPrice210 [
         	accessor: #netPrice210;
         	label: 'Importe Neto 21% Iva';
         	priority: 125;
-			min: 0.1;
-			beRequired;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
 ]
@@ -176,7 +191,7 @@ YavuPurchaseInvoice >> initialize [
 
 	super initialize.
 	vatDeclarationMonth := self date beginOfMonth.
-	vatPerception := iibbPerception  := 0.
+	netPrice105 := netPrice210 := vatPerception := iibbPerception  := 0.
 	purchaseTransactions := OrderedCollection new
 ]
 
@@ -193,8 +208,8 @@ YavuPurchaseInvoice >> netPrice105 [
 
 { #category : #accessing }
 YavuPurchaseInvoice >> netPrice105: anObject [
-	netPrice105 := anObject.
-	vat105 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.105) round: self subsystem decimalAccuracy.
+	netPrice105 := anObject ifNil: [ 0 ].
+	vat105 := (self invoiceType vatValueOf: netPrice105 vatPercentaje: 0.105) round: self subsystem decimalAccuracy.
 	netPrice := netPrice + netPrice105
 ]
 
