@@ -126,6 +126,8 @@ YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	  yavuPurchaseInvoice descriptionVatPerception,
 	  yavuPurchaseInvoice descriptionVat105,
 	  yavuPurchaseInvoice descriptionVat210,
+	  yavuPurchaseInvoice descriptionNetPrice105,
+	  yavuPurchaseInvoice descriptionNetPrice210,
 	  yavuPurchaseInvoice descriptionNetPrice,
 	  yavuPurchaseInvoice descriptionTotal
 ]

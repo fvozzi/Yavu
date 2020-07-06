@@ -202,6 +202,12 @@ YavuPurchaseInvoice >> mementoClass [
 ]
 
 { #category : #accessing }
+YavuPurchaseInvoice >> netPrice [ 
+
+	^ self netPrice105 + self netPrice210 
+]
+
+{ #category : #accessing }
 YavuPurchaseInvoice >> netPrice105 [
 	^ netPrice105
 ]
