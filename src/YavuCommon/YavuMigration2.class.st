@@ -7,11 +7,24 @@ Class {
 { #category : #accessing }
 YavuMigration2 class >> description [ 
 
-	^ 'Prueba Actualizo todas las facturas de compras seteando el precio neto 21 o el precio neto 10.5 según el iva que tenga ingresado. Es decir, si tiene iva 21 entonces seteo en precio neto 21 el valor que se encuentra ingresado en precio neto. Lo mismo para iva 10.5'
+	^ 'Actualiza el precio neto que habia quedado duplicado por un error en la migración 1.'
 ]
 
 { #category : #accessing }
 YavuMigration2 class >> migrationIdentifier [
 
 	 ^ 2
+]
+
+{ #category : #'as yet unclassified' }
+YavuMigration2 class >> runMigration [
+
+	| purchaseInvoices |
+	
+	purchaseInvoices := self yavuSystem storedSubsystem instancesOf: (Smalltalk at: #YavuPurchaseInvoice).
+	purchaseInvoices do: [ :each |
+	(each netPrice105 > 0 or: [ each netPrice210 > 0 ]) ifTrue: [ 
+			each netPrice: each netPrice105 + each netPrice210.
+			self yavuSystem storedSubsystem save: each]
+		]
 ]
