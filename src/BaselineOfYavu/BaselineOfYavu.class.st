@@ -25,6 +25,7 @@ BaselineOfYavu >> baseline: spec [
 			self bootstrap: spec.
 			self xmlParser: spec.
 			self telePharoServer: spec.
+			self neoCSV: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].
@@ -70,6 +71,18 @@ BaselineOfYavu >> materialDesignLite: spec [
 	spec
     	baseline: 'MaterialDesignLite'
     	with: [ spec repository: 'github://DuneSt/MaterialDesignLite:v2.x.x/src' ]
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> neoCSV: spec [
+
+	spec 
+		project: 'NeoCSV' with: [
+				spec
+					className: 'ConfigurationOfNeoCSV';
+					versionString: #'stable';
+					loads: #( 'default' );
+					repository: 'http://mc.stfx.eu/Neo']
 ]
 
 { #category : #accessing }
