@@ -53,7 +53,7 @@ TBSYavuObjectsBrowser >> downloadFiles:  anInstance [
 	document:= WAMimeDocument
 			on: fileToDownload binaryReadStream contents
 			mimeType: (WAMimeType main: 'application' sub: 'zip')
-			fileName: (fileToDownload basename, '.zip').
+			fileName: (fileToDownload basename).
 
 	self requestContext respond: [ :response |
 		response

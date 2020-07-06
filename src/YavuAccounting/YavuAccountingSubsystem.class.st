@@ -48,7 +48,7 @@ YavuAccountingSubsystem >> generateComprasAlicuotasFileOn: aYavuVatDeclaration [
 	
 	| file |
 
-	file := FileSystem memory root / 'ComprasAlicuotas', aYavuVatDeclaration date yyyymmdd, '.txt'.
+	file := FileSystem memory root / 'ComprasAlicuotas', aYavuVatDeclaration date yyyymmdd, 'txt'.
 	file writeStreamDo: [ :stream | 
 		aYavuVatDeclaration purchases do: [ :purchaseInvoice |
 			purchaseInvoice vatAlicuots do: [ :each | 
@@ -167,7 +167,7 @@ YavuAccountingSubsystem >> zipCitiFilesOf: aYavuVatDeclaration [
 	comprasAlicuotasFile := self generateComprasAlicuotasFileOn: aYavuVatDeclaration.
 	ventasComprobantesFile := self generateVentasComprobantesFileOn: aYavuVatDeclaration.
 	ventasAlicuotasFile := self generateVentasAlicuotasFileOn: aYavuVatDeclaration.
-	zipFile := FileSystem memory root / 'Citi', aYavuVatDeclaration date yyyymmdd, '.zip'.
+	zipFile := FileSystem memory root / 'Citi', aYavuVatDeclaration date yyyymmdd, 'zip'.
 	zip := ZipArchive new.
 	zip addFile: comprasComprobantesFile as: comprasComprobantesFile basename.
 	zip addFile: comprasAlicuotasFile  as: comprasAlicuotasFile basename.
