@@ -30,7 +30,7 @@ YavuSystemMigration class >> migrationIdentifier [
 YavuSystemMigration class >> run [ 
 	
 	self wasAlreadyRun ifFalse: [  
-		[ self runMigration ] on: Error do: [ :ex | ^ ex description ].
+		[ self runMigration ] on: Error do: [ :ex | ^ ex pass ].
 		self logMigrationSuccessful]
 ]
 

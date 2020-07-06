@@ -48,6 +48,7 @@ TBSMigrationView >> ranMigrationsLog [
 { #category : #rendering }
 TBSMigrationView >> renderContentOn: html [
 
+	html form: [ 
 	html tbsPanel: [
 		html tbsPageHeader: [  
 	html tbsRow: [ 
@@ -67,10 +68,11 @@ TBSMigrationView >> renderContentOn: html [
 	html tbsPanelBody: [  
 			html div class: 'table-responsive'; with: [  html render: self buildReport ]
 	]]
+ ]
 ]
 
 { #category : #running }
 TBSMigrationView >> run [ 
 
-	^ self migrationToRun run
+	^[ self migrationToRun run] on: Error do: [ :ex | self inform: ex description ]
 ]
