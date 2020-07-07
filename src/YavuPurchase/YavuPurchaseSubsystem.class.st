@@ -1,13 +1,6 @@
 Class {
 	#name : #YavuPurchaseSubsystem,
 	#superclass : #YavuSubsystem,
-	#instVars : [
-		'suppliers',
-		'brands',
-		'categories',
-		'productTypes',
-		'products'
-	],
 	#category : #'YavuPurchase-Environment'
 }
 
@@ -45,45 +38,10 @@ YavuPurchaseSubsystem >> accountingAccounts [
 ]
 
 { #category : #crud }
-YavuPurchaseSubsystem >> addBrand: aBrand [
-	
-	self brands add: aBrand.
-	self system storedSubsystem save: aBrand
-]
-
-{ #category : #crud }
-YavuPurchaseSubsystem >> addCategory: aCategory [
-	
-	self categories add: aCategory.
-	self system storedSubsystem save: aCategory
-]
-
-{ #category : #crud }
-YavuPurchaseSubsystem >> addProduct: aProduct [
-	
-	self products add: aProduct.
-	self system storedSubsystem save: aProduct
-]
-
-{ #category : #crud }
-YavuPurchaseSubsystem >> addProductType: aProductType [
-	
-	self productTypes add: aProductType.
-	self system storedSubsystem save: aProductType
-]
-
-{ #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
 	self system storedSubsystem save: aPurchaseInvoice
 
-]
-
-{ #category : #crud }
-YavuPurchaseSubsystem >> addSupplier: aProduct [
-	
-	self suppliers add: aProduct.
-	self system storedSubsystem save: aProduct
 ]
 
 { #category : #'api/queries' }
@@ -95,7 +53,7 @@ YavuPurchaseSubsystem >> availablePurchaseTransactionsFor: aYavuSupplier [
 { #category : #accessing }
 YavuPurchaseSubsystem >> brands [
 
-	^ brands ifNil: [ brands := (self system storedSubsystem instancesOf: YavuBrand) copy ]
+	^ self system storedSubsystem instancesOf: YavuBrand
 ]
 
 { #category : #'api/queries' }
@@ -106,7 +64,7 @@ YavuPurchaseSubsystem >> cashPaymentType [
 { #category : #accessing }
 YavuPurchaseSubsystem >> categories [
 
-	^ categories ifNil: [ categories := (self system storedSubsystem instancesOf: YavuCategory) copy ]
+	^ self system storedSubsystem instancesOf: YavuCategory
 ]
 
 { #category : #'api/queries' }
@@ -201,6 +159,14 @@ YavuPurchaseSubsystem >> paymentTypes [
 	^ self system storedSubsystem instancesOf: YavuPaymentType 
 ]
 
+{ #category : #'As yet unclassified' }
+YavuPurchaseSubsystem >> possibleRecipeIngredients [
+	"Answer possible products and other recipes"
+	
+	^ self products
+	
+]
+
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> presentationUnits [
 
@@ -210,13 +176,13 @@ YavuPurchaseSubsystem >> presentationUnits [
 { #category : #accessing }
 YavuPurchaseSubsystem >> productTypes [
 
-	^ productTypes ifNil: [ productTypes := (self system storedSubsystem instancesOf: YavuProductType) copy ]
+	^ self system storedSubsystem instancesOf: YavuProductType
 ]
 
 { #category : #accessing }
 YavuPurchaseSubsystem >> products [
 
-	^ products ifNil: [ products := (self system storedSubsystem instancesOf: YavuProduct) copy ]
+	^ self system storedSubsystem instancesOf: YavuProduct
 ]
 
 { #category : #'api/queries' }
