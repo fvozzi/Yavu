@@ -19,7 +19,6 @@ BaselineOfYavu >> baseline: spec [
 			"Dependencies"
 			self voyageMongo: spec.
 			self seaside3: spec.
-			self materialDesignLite: spec.
 			self magritte3: spec.
 			self glorp: spec.
 			self bootstrap: spec.
@@ -63,14 +62,6 @@ BaselineOfYavu >> magritte3: spec [
 		with: [ spec 
 			loads: #('Core' 'Magritte-Seaside');
 			repository: 'github://magritte-metamodel/magritte:master/repository']
-]
-
-{ #category : #dependencies }
-BaselineOfYavu >> materialDesignLite: spec [
-
-	spec
-    	baseline: 'MaterialDesignLite'
-    	with: [ spec repository: 'github://DuneSt/MaterialDesignLite:v2.x.x/src' ]
 ]
 
 { #category : #dependencies }
