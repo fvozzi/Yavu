@@ -55,7 +55,7 @@ YavuUser class >> new [
 	
 	^ super new 
 		name: 'Usuario';
-		yourSelf 
+		yourself 
 ]
 
 { #category : #accessing }
