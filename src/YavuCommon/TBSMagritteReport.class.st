@@ -37,7 +37,7 @@ TBSMagritteReport >> defaultShowStriped [
 { #category : #'rendering-batch' }
 TBSMagritteReport >> renderBatchDivOn: html [
 	html form: [ 
-		html tbsButtonToolbar
+		html buttonToolbar
 			class: 'pagination' ;
 			with: [
 				self showBatchFirstLast
@@ -64,40 +64,40 @@ TBSMagritteReport >> renderBatchFirstOn: html [
 
 { #category : #'rendering-batch' }
 TBSMagritteReport >> renderBatchItemsOn: html [
-	html tbsButtonGroup: [ 
+	html buttonGroup: [ 
 		(self showBatchFirstLast or: [ self batchPageRangeStart = self defaultBatchPage ])
 			ifFalse: [
-				html tbsButton
-					beExtraSmall;
+				html formButton
+					beSmall;
 					callback: [ self batchPage: self defaultBatchPage ];
 					with: self defaultBatchPage ].
 
 		(self batchPageRangeStart -1) > self defaultBatchPage
 			ifTrue: [
-				html tbsButton
-					beExtraSmall;
+				html formButton
+					beSmall;
 					beDisabled;
 					with: '...' ].
 
 		self batchPageRange do: [ :index |
-			html tbsButton
+			html formButton
 				bePrimaryIf: [ self batchPage = index ];
 				beDisabledIf: [ self batchPage = index ];
 				callback: [ self batchPage: index ];
-				beExtraSmall;
+				beSmall;
 				with: index ].
 	
 		self batchPageRangeEnd < (self batchMaxPages - 1)
 			ifTrue: [
-				html tbsButton
-					beExtraSmall;
+				html formButton
+					beSmall;
 					beDisabled;
 					with: '...' ].
 		
 		(self showBatchFirstLast or: [ self batchPageRangeEnd = self batchMaxPages ])
 			ifFalse: [
-				html tbsButton
-					beExtraSmall;
+				html formButton
+					beSmall;
 					callback: [ self batchPage: self batchMaxPages ];
 					with: self batchMaxPages ] ]
 
@@ -116,22 +116,26 @@ TBSMagritteReport >> renderBatchLastOn: html [
 
 { #category : #'rendering-batch' }
 TBSMagritteReport >> renderBatchNextOn: html [
-	html tbsButtonGroup: [ 
-		html tbsButton
+	html buttonGroup: [ 
+		html formButton
 			callback: [ self nextPage ];
 			beDisabledIf: [ self isOnLastPage ];
-			beExtraSmall;
-			with: [ html tbsGlyphIcon iconForward ] ]
+			beSmall;
+			with:  [ html div
+				fontAwesome;
+				with: [ html navigationLink fontAwesomeForwardIcon ] ]]
 ]
 
 { #category : #'rendering-batch' }
 TBSMagritteReport >> renderBatchPreviousOn: html [
-	html tbsButtonGroup: [ 
-		html tbsButton
+	html buttonGroup: [ 
+		html formButton
 			callback: [ self previousPage ];
 			beDisabledIf: [ self isOnFirstPage ];
-			beExtraSmall;
-			with: [ html tbsGlyphIcon iconBackward ] ]
+			beSmall;
+			with: [ html div
+				fontAwesome;
+				with: [ html navigationLink fontAwesomeBackwardIcon ] ]]
 ]
 
 { #category : #rendering }
