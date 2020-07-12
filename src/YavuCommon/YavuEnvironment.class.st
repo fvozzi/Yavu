@@ -32,6 +32,12 @@ YavuEnvironment class >> currentSystem [
 ]
 
 { #category : #seaside }
+YavuEnvironment class >> fontAwesomeLibrary [
+	
+	^ self subclassResponsibility 
+]
+
+{ #category : #seaside }
 YavuEnvironment class >> jqLibrary [
 	
 	^ self subclassResponsibility 
@@ -58,7 +64,8 @@ YavuEnvironment class >> registerSeasideApplication [
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
 		preferenceAt: #maximumRelativeAge put: 28800;
 		addLibrary: self jqLibrary;
-		addLibrary: self tbsLibrary
+		addLibrary: self tbsLibrary;
+		addLibrary: self fontAwesomeLibrary
 ]
 
 { #category : #seaside }

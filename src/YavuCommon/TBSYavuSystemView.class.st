@@ -54,7 +54,7 @@ TBSYavuSystemView >> executeMenuActionFor: aMenuElement [
 TBSYavuSystemView >> initialize [ 
 	
 	super initialize.
-	navBar := TBSYavuSystemNavBar onParent: self.
+	"navBar := TBSYavuSystemNavBar onParent: self."
 	content := self session yavuSystem homeViewClass onParent: self
 ]
 
@@ -62,69 +62,76 @@ TBSYavuSystemView >> initialize [
 TBSYavuSystemView >> renderContentOn: html [
 
 	self renderNavigationBarOn:  html.
-	html tbsColumn largeSize: 12; with: [self content renderOn: html]
+	html column largeSize: 12; with: [self content renderOn: html]
 ]
 
 { #category : #'rendering navbar' }
 TBSYavuSystemView >> renderNavbarHeaderOn: html [
-	html tbsNavbarHeader
-		with: [ html tbsNavbarBrand
+	html navigationBarBrand
 				callback: [ self content: self systemHomeView.
 					];
-				with: self systemName ]
+				with: self systemName 
 ]
 
 { #category : #'rendering navbar' }
 TBSYavuSystemView >> renderNavbarSubsystemsMenues: html [
-
-
-	html unorderedList
-		class: 'nav navbar-nav';
-		with: [ (self session yavuSystem allowedRootMenuActions
-				groupedBy: [ :each | each subsystem ])
-				keysAndValuesDo: [ :subsystem :submenues | 
-					html tbsNavItem
-						class: 'dropdown';
-						with: [ html anchor
-								class: 'dropdown-toggle';
-								attributeAt: 'data-toggle' put: 'dropdown';
-								attributeAt: 'href' put: '#';
-								with: subsystem subsystemName.
-							html unorderedList
-								class: 'dropdown-menu';
+	(self session yavuSystem allowedRootMenuActions
+		groupedBy: [ :each | each subsystem ])
+		keysAndValuesDo: [ :subsystem :submenues | 
+			html navigationItem dropdown
+				with: [ html div
+						fontAwesome;
+						with: [ html navigationLink
+								class: subsystem fontAwesomeClass;
+								dropdownToggle;
+								dataToggle: 'dropdown';
+								with: ' ', subsystem subsystemName.
+							html dropdownMenu
+								attributeAt: 'aria-labelledby' put: 'navbarDropdown';
 								with: [ submenues
 										do: [ :each | 
 											| menuItem |
-											menuItem := html tbsNavItem.
+											menuItem := html dropdownItem.
 											each id = selectedMenuID
 												ifTrue: [ menuItem beActive ].
 											menuItem
-												with: [ html anchor
-														callback: [ self executeMenuActionFor: each ];
-														with: each label ] ] ] ] ] ]
+												callback: [ self executeMenuActionFor: each ];
+												with: each label ] ] ] ] ]
 ]
 
 { #category : #'rendering navbar' }
 TBSYavuSystemView >> renderNavbarSystemMenues: html [
-	^ html unorderedList
-		class: 'nav navbar-nav navbar-right';
-		with: [ html tbsNavItem
-				with: [ html anchor
-						callback: [ self content: (WAConfirmLogOffView onParent: self)];
-						with: [ html span class: 'glyphicon glyphicon-log-out'.
-							html text: ' Salir' ] ] ]
+	^ html navigationItem
+		with: [ html div
+				fontAwesome;
+				with: [ html navigationLink fontAwesomeSignOutIcon
+						callback: [ self content: (WAConfirmLogOffView onParent: self) ];
+						with: ' Salir' ] ]
 ]
 
 { #category : #'rendering navbar' }
 TBSYavuSystemView >> renderNavigationBarOn: html [
 
-	html tbsNavbar
-		beDefault;
-		beInverse;
-		with: [ html tbsContainer
-				with: [ self renderNavbarHeaderOn: html.
-					self renderNavbarSubsystemsMenues: html.
-					self renderNavbarSystemMenues: html ] ]
+	| bar id |
+	
+	id :=  '#navbarCollapsed'..
+	bar := html navigationBar.
+	bar id: id.
+	bar beDark; expandLarge.
+	bar background beDark.
+	bar 	with: [ 
+	
+		self renderNavbarHeaderOn: html.
+		html
+			navigationBarToggler
+			beButtonType;
+			collapse;
+			dataTarget: id;
+			with: [ html navigationBarTogglerIcon ].
+	html navigationBarCollapse collapse id: 'navbarCollapsed'; with: [ 
+			html navigationBarNavigation: [
+		self renderNavbarSubsystemsMenues: html.
+					self renderNavbarSystemMenues: html ] ]]
 ]
 
 { #category : #hooks }
@@ -148,9 +155,6 @@ TBSYavuSystemView >> systemName [
 { #category : #'as yet unclassified' }
 TBSYavuSystemView >> updateRoot: anHtmlRoot [
 
-	super updateRoot: anHtmlRoot.
-	"anHtmlRoot stylesheet resourceUrl: 'css/tbsReportDataSelector.css'.
-	anHtmlRoot stylesheet resourceUrl: 'css/financialReport.css'.
-	anHtmlRoot stylesheet resourceUrl: 'css/reportDataSelector.css'.
-	anHtmlRoot stylesheet resourceUrl: 'css/sb-admin-2.css'."
+	super updateRoot: anHtmlRoot.  
+	anHtmlRoot title: self session yavuSystem companyName, ' (', self session yavuSystem loggedUser name, ')'
 ]

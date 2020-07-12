@@ -54,16 +54,16 @@ TBSYavuLogin >> password: aPassword [
 TBSYavuLogin >> renderContentOn: html [
 
 	html form: [  
-	html tbsContainer: [ 
+	html container: [ 
 		html heading level: 2; with: system label.
-		html tbsFormGroup: [ 
+		html formGroup: [ 
 			html label for: 'userNameLogin'; with: 'Usuario'.
 			html textInput tbsFormControl; id: 'userNameLogin'; placeholder: 'Ingrese su usuario'; on: #userName of: self].
-		html tbsFormGroup: [ 
+		html formGroup: [ 
 			html label for: 'passwordLogin'; with: 'Clave'.
 			html passwordInput tbsFormControl; id: 'passwordLogin'; placeholder: 'Clave'; on: #password of: self].
 		errorDescription notNil ifTrue: [ self renderFailedLoginOn: html ].
-		html tbsButton 
+		html formButton 
 			bePrimary;
 			callback: [ self login ];
 			with: 'Ingresar'.
@@ -92,6 +92,13 @@ TBSYavuLogin >> succeedLogin: aSystem [
 	self resetErrorDescription.
 	self session yavuSystem: aSystem.
 	self call: aSystem mainView new
+]
+
+{ #category : #updating }
+TBSYavuLogin >> updateRoot: anHtmlRoot [
+
+	super updateRoot: anHtmlRoot.  
+	anHtmlRoot title: system companyName 
 ]
 
 { #category : #accessing }

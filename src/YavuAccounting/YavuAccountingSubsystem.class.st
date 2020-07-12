@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuAccounting-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem class >> fontAwesomeClass [
+
+	^ 'fa-th-list'
+]
+
 { #category : #accessing }
 YavuAccountingSubsystem class >> label [ 
 

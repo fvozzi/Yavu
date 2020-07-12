@@ -90,41 +90,41 @@ TBSTransactionsBrowserView >> possibleInstancesClasses [
 { #category : #subclassResponsability }
 TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 
-	html tbsColumn: [ 
-		html tbsRow: 'Transacción:'.
-		html tbsRow: [html select
+	html column: [ 
+		html row: 'Transacción:'.
+		html row: [html select
 						list: self possibleInstancesClasses;
 						selected: self objectClass ;
 						callback: [ :oneObjectClass | self objectClass: oneObjectClass ];
 						labels: [ :each | each label]
 						] ] mediumSize: 3.
-	html tbsColumn: [ 
-		html tbsRow: 'Entidad:'.
-		html tbsRow: [ 
+	html column: [ 
+		html row: 'Entidad:'.
+		html row: [ 
 			html select
 			list: self possibleEntities;
 			selected: self entity ;
 			onChange: 'submit()';
 			callback: [ :oneEntity | self entity: oneEntity ]] ] mediumSize: 2.
-	html tbsColumn: [ 
-		html tbsRow: 'Todas:'.
-		html tbsRow: [ 
+	html column: [ 
+		html row: 'Todas:'.
+		html row: [ 
 			html label: [
 				html checkbox
 					value: queryAllEntities ;
 					callback: [ :value | queryAllEntities := value ].
 			 ]]] mediumSize: 1.
 	
-	html tbsColumn: [ 
-		html tbsRow: 'Desde:'.
-		html tbsRow: [ html dateInput5
+	html column: [ 
+		html row: 'Desde:'.
+		html row: [ html dateInput5
 						on: #startDateLiteral of: self] ] mediumSize: 2.
-	html tbsColumn: [ 
-		html tbsRow: 'Hasta:'.
-		html tbsRow: [ html dateInput5
+	html column: [ 
+		html row: 'Hasta:'.
+		html row: [ html dateInput5
 						on: #endDateLiteral of: self] ] mediumSize: 2.
-	html tbsColumn: [ 
-			html tbsRow: [ html tbsSubmitButton 
+	html column: [ 
+			html row: [ html formButton 
 				bePrimary;
 				callback: [ self search];
 				with: 'Buscar' ] ] mediumSize: 2

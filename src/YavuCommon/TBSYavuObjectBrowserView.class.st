@@ -85,16 +85,15 @@ TBSYavuObjectBrowserView >> possibleInstancesClasses [
 TBSYavuObjectBrowserView >> renderContentOn: html [
 	"Renderiza el contenido del receptor en html."
 
-	html tbsPanel beDefault
-		with: [ html
-				tbsPanelHeading: [ html tbsPanelTitle
-						level: 3;
-						with: self browserCaption ].
-			html
-				tbsPanelBody: [ 
-					html form: [ self renderObjectClassSelection: html ].
-					 ].
-			self renderReportOn: html ]
+	html break.
+	html
+		form: [ html
+				card: [ html
+						cardBody: [ 
+							
+							html row: [html cardTitle level5 with: self browserCaption].
+							html row: [ self renderObjectClassSelection: html ] ].
+							html row: [self renderReportOn: html ]] ]
 ]
 
 { #category : #subclassResponsability }

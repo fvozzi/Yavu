@@ -18,3 +18,9 @@ WAYavuBootstrap >> initializeParent: aWAComponent [
 
 	parent := aWAComponent 
 ]
+
+{ #category : #rendering }
+WAYavuBootstrap >> rendererClass [
+	
+	^ SBSHtmlCanvas 
+]

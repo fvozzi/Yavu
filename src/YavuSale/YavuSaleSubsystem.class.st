@@ -4,6 +4,13 @@ Class {
 	#category : #'YavuSale-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem class >> fontAwesomeClass [
+	
+
+	^ 'fa-money'
+]
+
 { #category : #accessing }
 YavuSaleSubsystem class >> label [ 
 

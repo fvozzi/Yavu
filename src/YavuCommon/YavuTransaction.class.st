@@ -172,7 +172,7 @@ YavuTransaction >> descriptionDate [
         	accessor: #date;
         	label: 'Fecha';
         	priority: 20;
-		beRequired;
+		   beRequired;
         	yourself
 ]
 

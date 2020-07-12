@@ -72,7 +72,7 @@ TBSMagritteFormRenderer >> renderElement: aDescription [
 	aDescription group = group
 		ifFalse: [ self renderGroup: aDescription ].
 		
-	html tbsFormGroup
+	html formGroup
 		class: (self classFor: aDescription);
 		with: [
 			| tag |

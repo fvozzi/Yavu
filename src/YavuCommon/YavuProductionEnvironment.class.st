@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #seaside }
+YavuProductionEnvironment class >> fontAwesomeLibrary [
+	
+	^ FAWDeploymentLibrary
+]
+
+{ #category : #seaside }
 YavuProductionEnvironment class >> jqLibrary [
 	
 	^ JQDeploymentLibrary
@@ -25,5 +31,5 @@ YavuProductionEnvironment class >> seasideApplicationName [
 { #category : #seaside }
 YavuProductionEnvironment class >> tbsLibrary [
 	
-	^ TBSDeploymentLibrary
+	^ SBSDeploymentLibrary
 ]

@@ -128,13 +128,14 @@ TBSYavuObjectsBrowser >> renderAddInstanceForm: anInstance [
 { #category : #rendering }
 TBSYavuObjectsBrowser >> renderContentOn: html [
 
-	html tbsPanelBody: [ 
+	html cardBody: [ 
 		html form: [ 
-		html tbsColumn: [ 
-			html tbsSubmitButton 
+		html column: [ 
+			html formButton 
 			beSuccess;
 			callback: [ self addInstance ];
 			with: 'Agregar ' , instanceClass label]].
+	html break.
 	html div class: 'table-responsive'; with: [  html render: report ]]
 ]
 

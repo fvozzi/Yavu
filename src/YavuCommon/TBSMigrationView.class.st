@@ -49,26 +49,24 @@ TBSMigrationView >> ranMigrationsLog [
 TBSMigrationView >> renderContentOn: html [
 
 	html form: [ 
-	html tbsPanel: [
-		html tbsPageHeader: [  
-	html tbsRow: [ 
-		html tbsColumn: [ 
+		html cardBody: [ 
+	html row: [ 
+		html column: [ 
 	html text: 'Migraciones: '.
 	html select
 		list: self migrationsToRun;
 		callback: [ :oneMigration | self migrationToRun: oneMigration ];
 		labels: [ :each | each shortDescription]
 		] mediumSize: 10.
-	html tbsColumn: [ 
-			html tbsRow: [ html tbsSubmitButton 
+	html column: [ 
+			html row: [ html formButton 
 				bePrimary;
 				callback: [ self run];
 				with: 'Ejecutar' ] ] mediumSize: 2
-	]].
-	html tbsPanelBody: [  
-			html div class: 'table-responsive'; with: [  html render: self buildReport ]
-	]]
- ]
+	]]].
+	html div class: 'table-responsive'; with: [  html render: self buildReport ]
+	
+ 
 ]
 
 { #category : #running }

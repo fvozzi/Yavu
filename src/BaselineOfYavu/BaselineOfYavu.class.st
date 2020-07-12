@@ -20,10 +20,9 @@ BaselineOfYavu >> baseline: spec [
 			self voyageMongo: spec.
 			self seaside3: spec.
 			self magritte3: spec.
-			self glorp: spec.
 			self bootstrap: spec.
+			self fontAwesome: spec.
 			self xmlParser: spec.
-			self telePharoServer: spec.
 			self neoCSV: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
@@ -33,7 +32,7 @@ BaselineOfYavu >> baseline: spec [
 			spec package: 'YavuRestaurant' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuSale' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuAccounting' with: [spec requires: 'YavuCommon'].
-			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Glorp' 'Bootstrap' 'TelePharo')]
+			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Bootstrap4' 'FontAwesome')]
 			]
 		
 ]
@@ -42,8 +41,16 @@ BaselineOfYavu >> baseline: spec [
 BaselineOfYavu >> bootstrap: spec [
 
 	spec
-		baseline:'Bootstrap'
- 		with: [ spec repository: 'github://astares/Seaside-Bootstrap:master/src']
+		baseline:'Bootstrap4'
+ 		with: [ spec repository: 'github://astares/Seaside-Bootstrap4:master/src']
+]
+
+{ #category : #dependencies }
+BaselineOfYavu >> fontAwesome: spec [
+
+	spec
+		baseline:'FontAwesome'
+ 		with: [ spec repository: 'github://astares/Seaside-FontAwesome:master/src']
 ]
 
 { #category : #dependencies }
@@ -86,7 +93,7 @@ BaselineOfYavu >> seaside3: spec [
 
 	spec
 		baseline: 'Seaside3'
-		with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.4/repository']
+		with: [ spec repository: 'github://SeasideSt/Seaside:v3.4.1/repository']
 		
 	
 ]

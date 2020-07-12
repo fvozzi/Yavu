@@ -13,6 +13,11 @@ YavuSubsystem class >> entitiesClasses [
 	^ YavuEntity allSubclasses select: [ :each | each subsystemClass = self ]
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSubsystem class >> fontAwesomeClass [
+	self subclassResponsibility
+]
+
 { #category : #configuration }
 YavuSubsystem class >> menuElements [
 	

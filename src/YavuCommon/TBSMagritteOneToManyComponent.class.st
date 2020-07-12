@@ -72,7 +72,10 @@ TBSMagritteOneToManyComponent >> renderSelectButtonOn: html [
 		beSubmit;
 		class: 'btn';
 		callback: [self add];
-		with: [html tbsGlyphIcon iconPlus. html space; text: (self labelForSelector: #add)]
+		with: [
+				html div fontAwesome; 
+				with: [html span fontAwesomePlusSquareIcon]. 
+				html space; text: (self labelForSelector: #add)]
 
 ]
 

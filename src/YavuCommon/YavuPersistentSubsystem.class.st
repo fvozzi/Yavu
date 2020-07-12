@@ -167,7 +167,7 @@ YavuPersistentSubsystem >> commerceOfName: aName inCompany: aCompany [
 { #category : #'as yet unclassified' }
 YavuPersistentSubsystem >> createDBConnection [
 
-	dbConnection := StGLORPPersistence createConnection
+	dbConnection := (Smalltalk at: #StGLORPPersistence) createConnection
 ]
 
 { #category : #'as yet unclassified' }

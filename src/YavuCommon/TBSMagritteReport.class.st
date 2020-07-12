@@ -136,19 +136,21 @@ TBSMagritteReport >> renderBatchPreviousOn: html [
 
 { #category : #rendering }
 TBSMagritteReport >> renderContentOn: html [
-	| tag |
-	tag := html tbsTable
+	| tag class |
+	tag := html table
 		id: self ajaxId;
 		yourself.
+	class := 'table'.
 	self showBordered 
-		ifTrue: [ tag beBordered ].
+		ifTrue: [ class := class, ' table-bordered' ].
 	self showStriped 
-		ifTrue: [ tag beStriped ].
+		ifTrue: [ class := class, ' table-striped' ].
 	self showCondensed 
-		ifTrue: [ tag beCondensed ].
+		ifTrue: [ class := class, ' table-condensed' ].
 	self showHover 
-		ifTrue: [ tag beHover ].
+		ifTrue: [ class := class, ' table-hover'  ].
 	
+	tag class: class.
 	tag with: [ self renderTableOn: html ]
 ]
 

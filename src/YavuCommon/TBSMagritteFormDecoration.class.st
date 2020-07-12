@@ -40,7 +40,7 @@ TBSMagritteFormDecoration >> renderButtonsOn: html [
 	self buttons 
 		do: [ :each |
 			| tag |
-			tag := html tbsButton
+			tag := html formButton 
 				accessKey: each value first;
 				callback: [ self execute: each key ];
 				text: each value.
@@ -50,8 +50,9 @@ TBSMagritteFormDecoration >> renderButtonsOn: html [
 
 { #category : #rendering }
 TBSMagritteFormDecoration >> renderContentOn: html [
+
 	self renderLegendOn: html.
-	html tbsForm
+	html form
 		class: 'magritte';
 		class: self formCss;
 		multipart: self requiresMultipartForm;
@@ -65,4 +66,10 @@ TBSMagritteFormDecoration >> renderContentOn: html [
 TBSMagritteFormDecoration >> renderLegendOn: html [
 	self legend notNil ifTrue: [
 		html legend: self legend ]
+]
+
+{ #category : #rendering }
+TBSMagritteFormDecoration >> rendererClass [
+
+		^SBSHtmlCanvas
 ]

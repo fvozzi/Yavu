@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuPurchase-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem class >> fontAwesomeClass [
+
+	^ 'fa-shopping-cart'
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem class >> label [ 
 

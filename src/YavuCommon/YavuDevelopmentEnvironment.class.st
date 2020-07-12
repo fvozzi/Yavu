@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #seaside }
+YavuDevelopmentEnvironment class >> fontAwesomeLibrary [
+	
+	^ FAWDevelopmentLibrary
+]
+
+{ #category : #seaside }
 YavuDevelopmentEnvironment class >> jqLibrary [
 	
 	^ JQDevelopmentLibrary
@@ -19,5 +25,5 @@ YavuDevelopmentEnvironment class >> mongoDatabaseName [
 { #category : #seaside }
 YavuDevelopmentEnvironment class >> tbsLibrary [
 	
-	^ TBSDevelopmentLibrary
+	^ SBSDevelopmentLibrary
 ]

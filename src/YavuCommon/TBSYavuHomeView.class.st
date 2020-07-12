@@ -6,10 +6,10 @@ Class {
 
 { #category : #rendering }
 TBSYavuHomeView >> renderContentOn: html [
-	html tbsContainer
+	html container
 		class: 'theme-showcase';
 		with: [ html
-				tbsJumbotron: [ html heading: 'Yavusoft'.
+				jumbotron: [ html heading: 'Yavusystem'.
 					html
 						paragraph: [ html
 								text:

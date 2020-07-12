@@ -15,6 +15,12 @@ YavuSecuritySubsystem class >> entitiesClasses [
 	^ OrderedCollection with: YavuUser with: YavuRole
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSecuritySubsystem class >> fontAwesomeClass [
+	
+	^ 'fa-group'
+]
+
 { #category : #configuration }
 YavuSecuritySubsystem class >> menuElements [
 

@@ -25,12 +25,12 @@ TBSListCompositionComponent >> renderEditorButtonAddOn: html [
 				beSubmit;
 				class: 'btn';
 				callback: [ self add ];
-				with: [html tbsGlyphIcon iconForward].
+				with: [html text: 'Add'].
 			html button
 				class: 'btn';
 				beSubmit;
 				callback: [ self remove ];
-				with: [html tbsGlyphIcon iconBackward]].
+				with: [html text: 'Remove']].
 ]
 
 { #category : #'as yet unclassified' }
