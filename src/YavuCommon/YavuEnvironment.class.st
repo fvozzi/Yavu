@@ -57,7 +57,8 @@ YavuEnvironment class >> newSystem [
 
 { #category : #seaside }
 YavuEnvironment class >> registerSeasideApplication [
-
+	"Register the seaside app."
+	
 	SBSHtmlCanvas selectAsDefault.
 	^ (WAAdmin
 		register: self seasideApplicationRoot
