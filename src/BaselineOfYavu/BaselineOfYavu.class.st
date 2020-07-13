@@ -42,7 +42,7 @@ BaselineOfYavu >> bootstrap: spec [
 
 	spec
 		baseline:'Bootstrap4'
- 		with: [ spec repository: 'github://astares/Seaside-Bootstrap4:master/src']
+ 		with: [ spec repository: 'github://fvozzi/Seaside-Bootstrap4:master/src']
 ]
 
 { #category : #dependencies }
