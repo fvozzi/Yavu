@@ -73,6 +73,12 @@ YavuPurchaseInvoice >> availablePurchaseTransactions [
 ]
 
 { #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> cuitNumber [
+
+	^ self entity cuitNumber 
+]
+
+{ #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> descriptionAccountingAccount [
 
 	<magritteDescription>
@@ -83,6 +89,19 @@ YavuPurchaseInvoice >> descriptionAccountingAccount [
 		beReadonly;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> descriptionCUITNumber [
+
+	<magritteDescription>
+	^MAStringDescription new 
+      accessor: #cuitNumber;
+      label: 'CUIT';
+      	priority: 140;
+	  	visible: false;
+		componentClass: TBSMagritteTextInputComponent;
+      	yourself
 ]
 
 { #category : #descriptions }

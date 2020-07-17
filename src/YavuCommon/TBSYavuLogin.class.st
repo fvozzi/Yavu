@@ -74,7 +74,7 @@ TBSYavuLogin >> renderContentOn: html [
 { #category : #rendering }
 TBSYavuLogin >> renderFailedLoginOn: html [ 
 
-	html tbsAlert 
+	html alert 
 		beWarning;
 		with: [ html strong:  errorDescription ].
 

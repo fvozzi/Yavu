@@ -126,6 +126,7 @@ YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	yavuPurchaseInvoice := YavuPurchaseInvoice new.
 	^ yavuPurchaseInvoice descriptionEntity,
 	  yavuPurchaseInvoice descriptionDate,
+	  yavuPurchaseInvoice descriptionCUITNumber,
 	  yavuPurchaseInvoice descriptionAccountingAccount,
 	  yavuPurchaseInvoice descriptionInvoiceTypeAndNumber,
 	  yavuPurchaseInvoice descriptionIibbPerception,
