@@ -90,6 +90,12 @@ YavuPurchaseTransaction >> descriptionTotal [
         	yourself
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseTransaction >> discriminateVat [
+	
+	^ self entity vatCondition discriminateVat 
+]
+
 { #category : #initialization }
 YavuPurchaseTransaction >> initialize [ 
 

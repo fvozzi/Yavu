@@ -15,3 +15,9 @@ YavuVatCondition class >> cuitNumberIsRequired [
 
 	^ false
 ]
+
+{ #category : #'as yet unclassified' }
+YavuVatCondition class >> discriminateVat [ 
+	
+	^ self subclassResponsibility 
+]

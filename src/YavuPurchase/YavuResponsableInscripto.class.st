@@ -17,6 +17,12 @@ YavuResponsableInscripto class >> cuitNumberIsRequired [
 ]
 
 { #category : #'as yet unclassified' }
+YavuResponsableInscripto class >> discriminateVat [ 
+	
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
 YavuResponsableInscripto class >> invoiceType [
 	
 	^ YavuInvoiceTypeA 

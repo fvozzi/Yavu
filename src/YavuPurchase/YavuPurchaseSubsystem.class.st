@@ -50,6 +50,12 @@ YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [
 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> allAvailableRecipes [
+	
+	^ YavuRecipe all
+]
+
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> availablePurchaseTransactionsFor: aYavuSupplier [ 
 	

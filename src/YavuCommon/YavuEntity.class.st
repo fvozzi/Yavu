@@ -139,6 +139,11 @@ YavuEntity class >> subsystemClass [
 	^ YavuSubsystem 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuEntity >> <= aYavuSaleProduct [ 
+	^ self name <= aYavuSaleProduct name
+]
+
 { #category : #'sin categoria' }
 YavuEntity >> atributos [
 	^ atributos
