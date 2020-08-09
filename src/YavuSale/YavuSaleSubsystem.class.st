@@ -76,6 +76,12 @@ YavuSaleSubsystem >> name [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSaleSubsystem >> priceListAt: aDate [ 
+	
+	^ (self system storedSubsystem instancesOf: YavuPriceList) first
+]
+
+{ #category : #'as yet unclassified' }
 YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [ 
 	
 	^ (self system storedSubsystem 

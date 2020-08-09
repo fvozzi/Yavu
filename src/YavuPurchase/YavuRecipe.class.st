@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'recipeIngredients',
 		'amountOfPortions',
-		'process'
+		'process',
+		'availableAsIngredient'
 	],
 	#category : #'YavuPurchase-Entities'
 }
@@ -36,6 +37,16 @@ YavuRecipe >> amountOfPortions: anObject [
 	amountOfPortions := anObject
 ]
 
+{ #category : #accessing }
+YavuRecipe >> availableAsIngredient [
+	^ availableAsIngredient
+]
+
+{ #category : #accessing }
+YavuRecipe >> availableAsIngredient: anObject [
+	availableAsIngredient := anObject
+]
+
 { #category : #'as yet unclassified' }
 YavuRecipe >> descriptionAmountOfPortions [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
@@ -52,6 +63,19 @@ YavuRecipe >> descriptionAmountOfPortions [
 ]
 
 { #category : #'as yet unclassified' }
+YavuRecipe >> descriptionAvailableAsIngredient [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MABooleanDescription new 
+		accessor: #availableAsIngredient;
+		label: 'Ingrediente?';
+		priority: 120;
+		componentClass: TBSMagritteCheckboxComponent;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 YavuRecipe >> descriptionProcess [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -60,7 +84,6 @@ YavuRecipe >> descriptionProcess [
 		accessor: #process;
 		label: 'Proceso';
 		priority: 130;
-		beRequired;
 		componentClass: TBSMagritteTextAreaComponent;
 		yourself
 ]
@@ -85,6 +108,7 @@ YavuRecipe >> descriptionPurchaseTransactionItems [
 { #category : #'sin categoria' }
 YavuRecipe >> initialize [ 
 
+	availableAsIngredient := false.
 	recipeIngredients := OrderedCollection new
 ]
 

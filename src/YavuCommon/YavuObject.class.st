@@ -58,6 +58,7 @@ YavuObject class >> yavuSystem [
 { #category : #adding }
 YavuObject >> addToSystem [
 	
+	self halt.
 	self yavuSystem storedSubsystem save: self
 ]
 
@@ -204,7 +205,7 @@ YavuObject >> updateTS [
 { #category : #adding }
 YavuObject >> updateToSystem [ 
 
-	self yavuSystem storedSubsystem save: self
+	self yavuSystem storedSubsystem update: self
 ]
 
 { #category : #'as yet unclassified' }

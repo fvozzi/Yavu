@@ -120,6 +120,18 @@ YavuSaleProduct >> descriptionSaleCategory [
 ]
 
 { #category : #descriptions }
+YavuSaleProduct >> descriptionSubtitle [
+
+	<magritteDescription>
+	^MAStringDescription new 
+      accessor: #subtitle ;
+      label: 'Subtitulo';
+      	priority: 105;
+		componentClass: TBSMagritteTextInputComponent;
+      	yourself
+]
+
+{ #category : #descriptions }
 YavuSaleProduct >> descriptionValidEndDate [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
@@ -163,6 +175,7 @@ YavuSaleProduct >> recipe [
 
 { #category : #accessing }
 YavuSaleProduct >> recipe: anObject [
+
 	recipe := anObject
 ]
 
@@ -174,6 +187,16 @@ YavuSaleProduct >> saleProductCategory [
 { #category : #accessing }
 YavuSaleProduct >> saleProductCategory: anObject [
 	saleProductCategory := anObject
+]
+
+{ #category : #accessing }
+YavuSaleProduct >> subtitle [
+	^ subtitle
+]
+
+{ #category : #accessing }
+YavuSaleProduct >> subtitle: anObject [
+	subtitle := anObject
 ]
 
 { #category : #'as yet unclassified' }

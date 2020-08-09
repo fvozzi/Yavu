@@ -52,13 +52,39 @@ TBSCustomerMenuView >> category: aCategory [
 	category := aCategory 
 ]
 
+{ #category : #accessing }
+TBSCustomerMenuView >> currentPriceList [
+	^ currentPriceList
+]
+
+{ #category : #accessing }
+TBSCustomerMenuView >> currentPriceList: anObject [
+	currentPriceList := anObject
+]
+
 { #category : #initialization }
 TBSCustomerMenuView >> initialize [ 
 
 	super initialize.
-	activeProductsByCategory := self session yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategory].
+	activeProductsByCategory := self yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategory].
 	categories := activeProductsByCategory keys.
-	category := categories ifNotEmpty: [ :col | col first ]
+	category := categories ifNotEmpty: [ :col | col first ].
+	currentPriceList := self yavuSystem currentPriceList
+]
+
+{ #category : #'as yet unclassified' }
+TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [ 
+
+	| priceListItem priceDescription |
+
+	priceListItem := self currentPriceList priceListItemOf: aYavuSaleProduct.
+	priceListItem ifNil: [ ^ 'Ups, ni idea. Preguntale al Tibu!' ].
+	priceDescription := WriteStream on: String new.
+	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', priceListItem price1 asString).
+	priceListItem sizeDescription2 notEmpty ifTrue: [ 
+		priceDescription nextPutAll: (' | ', priceListItem sizeDescription2, ' $ ', priceListItem price2 asString)].
+	^ priceDescription contents
+	
 ]
 
 { #category : #rendering }
@@ -68,12 +94,13 @@ TBSCustomerMenuView >> renderContentOn: html [
 	html form: [ 
 	html containerFluid: [ 
 		html row: [ 
-			html column mediumSize: 2; with: [ self renderMenuCategoriesOn: html ].
-			html column mediumSize: 10; with: [ self renderMenuOn: html ].
+			html column mediumSize: 12; smallSize: 12; marginBottom: 1; with: [ self renderMenuImageHeaderOn: html ]].
+		html row: [ 
+			html column mediumSize: 2; smallSize: 12; with: [ self renderMenuCategoriesOn: html ].
+			html column mediumSize: 10; smallSize: 12; with: [ self renderMenuOn: html ].
 			 ].
 	
 		 ] ]
-	
 ]
 
 { #category : #rendering }
@@ -93,10 +120,18 @@ TBSCustomerMenuView >> renderMenuCategoriesOn: html [
 ]
 
 { #category : #rendering }
+TBSCustomerMenuView >> renderMenuImageHeaderOn: html [
+	^ html  
+		imageFluid 
+		floatRight;
+		resourceUrl: 'img/' , 'logoEsquina.png' 
+]
+
+{ #category : #rendering }
 TBSCustomerMenuView >> renderMenuOn: html [
 	| products columnsPerRow amountOfrows index columnSize |
 	products := self activeProductsByCategory at: self category.
-	columnsPerRow := 3.
+	columnsPerRow := 4.
 	columnSize := 12 // columnsPerRow.
 	amountOfrows := products size // columnsPerRow.
 	products size \\ columnsPerRow > 0
@@ -108,7 +143,7 @@ TBSCustomerMenuView >> renderMenuOn: html [
 			offset := (rowIndex - 1) * columnsPerRow.
 			product := products at: colIndex + offset ifAbsent: [ ].
 			product notNil ifTrue: [ 
-				html column mediumSize: columnSize; with: [
+				html column mediumSize: columnSize; smallSize: 12; with: [
 				self renderProductCard: product on: html  ]
 			] ]]]
 ]
@@ -116,18 +151,18 @@ TBSCustomerMenuView >> renderMenuOn: html [
 { #category : #rendering }
 TBSCustomerMenuView >> renderProductCard: product on: html [
 	^ html card
-		style: 'width: 18rem;';
+		style: 'width: 16.3rem;';
 		with: [ html cardImage resourceUrl: 'img/' , product imageName.
 			html
 				cardBody: [ html cardTitle level5 with: product name.
 					html cardSubtitle
 						level6;
 						mutedText;
-						with: product name.
+						with: product subtitle.
 					html cardText: product description.
 					html cardSubtitle
 						level6;
-						with: 'Pinta: ', '$', '140', '| 1/2 Pinta: ', '$', '90'  ] ]
+						with: (self priceMenuDescriptionOf: product) ] ]
 ]
 
 { #category : #rendering }

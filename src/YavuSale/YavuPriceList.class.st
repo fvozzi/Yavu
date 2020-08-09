@@ -60,6 +60,12 @@ YavuPriceList >> mementoClass [
 	^ MAStraightMemento
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPriceList >> priceListItemOf: aProduct [ 
+	
+	^ self priceListItems detect: [ :each | each product = aProduct ] ifNone: [ ]
+]
+
 { #category : #accessing }
 YavuPriceList >> priceListItems [
 	^ priceListItems

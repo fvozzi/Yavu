@@ -31,6 +31,12 @@ YavuRestaurantSystem >> activeSaleProducts [
 ]
 
 { #category : #'as yet unclassified' }
+YavuRestaurantSystem >> currentPriceList [
+	
+	^ self saleSubsystem priceListAt: Date today 
+]
+
+{ #category : #'as yet unclassified' }
 YavuRestaurantSystem >> menuCategories [
 	
 	^ YavuSaleCategory all

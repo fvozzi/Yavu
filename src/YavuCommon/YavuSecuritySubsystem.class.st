@@ -143,12 +143,6 @@ YavuSecuritySubsystem >> searchUserName: aName password: aPassword [
 		ifNone: [ Error signal: 'Usuario o contraseña incorrecta.' ]
 ]
 
-{ #category : #crud }
-YavuSecuritySubsystem >> update: aYavuObject [
-	
-	self system storedSubsystem update: aYavuObject
-]
-
 { #category : #configuration }
 YavuSecuritySubsystem >> userClass [
 	^YavuUser 
