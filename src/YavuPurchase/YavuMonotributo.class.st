@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-YavuMonotributo class >> discriminateVat [ 
-	
-	^ false
-]
-
-{ #category : #'as yet unclassified' }
 YavuMonotributo class >> invoiceType [
 	
 	^ YavuInvoiceTypeC

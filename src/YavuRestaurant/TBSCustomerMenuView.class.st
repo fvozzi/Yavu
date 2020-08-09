@@ -4,8 +4,7 @@ Class {
 	#instVars : [
 		'category',
 		'categories',
-		'activeProductsByCategory',
-		'currentPriceList'
+		'activeProductsByCategory'
 	],
 	#category : #'YavuRestaurant-View'
 }
