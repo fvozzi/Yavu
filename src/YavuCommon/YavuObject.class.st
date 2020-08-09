@@ -58,7 +58,6 @@ YavuObject class >> yavuSystem [
 { #category : #adding }
 YavuObject >> addToSystem [
 	
-	self halt.
 	self yavuSystem storedSubsystem save: self
 ]
 

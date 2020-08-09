@@ -54,7 +54,7 @@ YavuSystemTestResource >> fontinaProductType [
 { #category : #resources }
 YavuSystemTestResource >> itemOnBarraDamboLaPaulina [
 	
-	^ YavuPurchaseTransactionItem new 
+	^ (YavuPurchaseTransactionItem owner: self quesosDelAbastoPurchaseTransaction )
 		product: self barraDamboLaPaulinaProduct;
 		quantity: 1;
 		unitPrice: 10;
@@ -178,18 +178,22 @@ YavuSystemTestResource >> panaderiaGalliSupplier [
 { #category : #'as yet unclassified' }
 YavuSystemTestResource >> purchaseTransaction1 [
 	
-	^ YavuPurchaseTransaction  new
+	| purchase |
+	
+	purchase := YavuPurchaseTransaction  new.
+	purchase
 		entity: self quesosDelAbastoSupplier;
-		date: '06/01/2020' asDate;
-		addPurchaseTransactionItem: self purchaseTransactionItem1;
-		addPurchaseTransactionItem: self purchaseTransactionItem2;
+		date: '06/01/2020' asDate.
+	^ purchase
+		addPurchaseTransactionItem: (self purchaseTransactionItem1On: purchase);
+		addPurchaseTransactionItem: (self purchaseTransactionItem2On: purchase);
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
-YavuSystemTestResource >> purchaseTransactionItem1 [
+YavuSystemTestResource >> purchaseTransactionItem1On: purchase [
 	
-	^ YavuPurchaseTransactionItem new
+	^ (YavuPurchaseTransactionItem owner: purchase)
 		product: self barraDamboLaPaulinaProduct;
 		quantity: 3.9;
 		unitPrice: 388.98;
@@ -197,9 +201,9 @@ YavuSystemTestResource >> purchaseTransactionItem1 [
 ]
 
 { #category : #'as yet unclassified' }
-YavuSystemTestResource >> purchaseTransactionItem2 [
+YavuSystemTestResource >> purchaseTransactionItem2On: purchase [
 	
-	^ YavuPurchaseTransactionItem new
+	^ (YavuPurchaseTransactionItem owner: purchase)
 		product: self fontinaLaPaulinaProduct;
 		quantity: 4;
 		unitPrice: 601.41;
