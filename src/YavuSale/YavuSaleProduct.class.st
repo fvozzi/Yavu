@@ -7,7 +7,8 @@ Class {
 		'saleProductCategory',
 		'validStartDate',
 		'validEndDate',
-		'imageName'
+		'imageName',
+		'subtitle'
 	],
 	#category : #'YavuSale-Entities'
 }

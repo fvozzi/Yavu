@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'category',
 		'categories',
-		'activeProductsByCategory'
+		'activeProductsByCategory',
+		'currentPriceList'
 	],
 	#category : #'YavuRestaurant-View'
 }
@@ -158,7 +159,7 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 					html cardSubtitle
 						level6;
 						mutedText;
-						with: product subtitle.
+						with: product name.
 					html cardText: product description.
 					html cardSubtitle
 						level6;
