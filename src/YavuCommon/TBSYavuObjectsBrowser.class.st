@@ -63,12 +63,15 @@ TBSYavuObjectsBrowser >> downloadFiles:  anInstance [
 
 { #category : #crud }
 TBSYavuObjectsBrowser >> editInstance: anEntity [
-	| answer |
+	| answer originalObject |
 	
 	
-	answer := parent call: (self renderAddInstanceForm: anEntity).
+	originalObject := anEntity.
+	answer := parent call: (self renderAddInstanceForm: anEntity deepCopy).
 	answer notNil
-		ifTrue: [ answer updateToSystem ]
+		ifTrue: [ 
+			originalObject  copyFrom: answer.
+			originalObject updateToSystem ]
 ]
 
 { #category : #initialization }
@@ -117,7 +120,7 @@ TBSYavuObjectsBrowser >> renderAddInstanceForm: anInstance [
 	component addDecoration: (
 		TBSMagritteFormDecoration new
 					buttons: { #save -> 'Guardar'. #cancel -> 'Cancelar' }; 
-					formCss: 'form-horizontal';
+					formCss: '.col-form-label';
 					legend: 'Agregar ', anInstance class label;
 					yourself).
 	component addDecoration: TBSMagritteValidationDecoration new.

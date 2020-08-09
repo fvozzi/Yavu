@@ -74,6 +74,7 @@ TBSMagritteFormRenderer >> renderElement: aDescription [
 		
 	html formGroup
 		class: (self classFor: aDescription);
+		class: 'row';
 		with: [
 			| tag |
 			self renderLabel: aDescription.
@@ -110,7 +111,7 @@ TBSMagritteFormRenderer >> renderLabel: aDescription [
 	(self childAt: aDescription) hasLabelId
 		ifTrue: [ label for: (self childAt: aDescription) labelId ].
 	self formInline ifTrue: [ label class: 'sr-only' ].
-	self formHorizontal ifTrue: [ label class: 'col-sm-2'; class: 'control-label' ].
+	self formHorizontal ifTrue: [ label class: 'col-sm-2'; class: 'col-form-label' ].
 	label with: [ html html: aDescription label ]
 ]
 

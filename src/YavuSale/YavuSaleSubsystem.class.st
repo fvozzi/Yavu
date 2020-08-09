@@ -38,6 +38,19 @@ YavuSaleSubsystem class >> subsystemTag [
 	 ^'saleSubsystem'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem >> activeSaleProducts [
+	"Si en algun momento hay muchos productos desactivados se deberia hacer la consulta con fechas a la BD."
+	
+	^ YavuSaleProduct all select: [ :each | each validAt: Date today ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem >> allAvailableRecipes [
+	
+	^ self system purchaseSubsystem allAvailableRecipes
+]
+
 { #category : #'api/queries' }
 YavuSaleSubsystem >> decimalAccuracy [
 
@@ -60,6 +73,12 @@ YavuSaleSubsystem >> lastZNumber [
 YavuSaleSubsystem >> name [ 
 
 	 ^ 'Ventas'
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem >> priceListAt: aDate [ 
+	
+	^ (self system storedSubsystem instancesOf: YavuPriceList) first
 ]
 
 { #category : #'as yet unclassified' }

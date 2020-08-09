@@ -139,6 +139,11 @@ YavuEntity class >> subsystemClass [
 	^ YavuSubsystem 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuEntity >> <= aYavuSaleProduct [ 
+	^ self name <= aYavuSaleProduct name
+]
+
 { #category : #'sin categoria' }
 YavuEntity >> atributos [
 	^ atributos
@@ -166,7 +171,6 @@ YavuEntity >> descriptionName [
 		priority: 100;
 		required: true;
 		requiredErrorMessage: 'Debe completar el nombre.';
-		comment: 'Complete el nombre';
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -262,10 +266,4 @@ YavuEntity >> ts [
 { #category : #'sin categoria' }
 YavuEntity >> ts: anObject [
 	ts := anObject
-]
-
-{ #category : #crud }
-YavuEntity >> updateToSystem [ 
-
-	self subsystem update: self
 ]

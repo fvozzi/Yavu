@@ -8,10 +8,23 @@ Class {
 		'description',
 		'vatPercentage',
 		'unitPriceAfterTaxs',
-		'presentationUnit'
+		'presentationUnit',
+		'owner'
 	],
 	#category : #'YavuPurchase-DomainObjects'
 }
+
+{ #category : #accessing }
+YavuPurchaseTransactionItem class >> label [ 
+
+	^ 'Item de Compra'
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseTransactionItem class >> owner: aYavuPurchaseTransaction [ 
+	
+	^ self new initializeOwner: aYavuPurchaseTransaction 
+]
 
 { #category : #accessing }
 YavuPurchaseTransactionItem class >> subsystemClass [
@@ -147,14 +160,24 @@ YavuPurchaseTransactionItem >> initialize [
 	
 ]
 
+{ #category : #initialization }
+YavuPurchaseTransactionItem >> initializeOwner: anObject [
+
+	owner := anObject 
+	
+]
+
 { #category : #calculated }
 YavuPurchaseTransactionItem >> initializeVatPercentage [
+	vatPercentage := owner discriminateVat
+		ifTrue: [ self vatPercentageFromProduct ]
+		ifFalse: [ 0 ]
+]
 
-	vatPercentage :=
-		product 
-			ifNil: [  self yavuSystem purchaseSubsystem vatPercentageDefault ]
-			ifNotNil: [ :selectedProduct | selectedProduct vatPercentage ]
+{ #category : #'as yet unclassified' }
+YavuPurchaseTransactionItem >> mementoClass [
 
+	^MAStraightMemento
 ]
 
 { #category : #accessing }
@@ -186,6 +209,11 @@ YavuPurchaseTransactionItem >> onUnitPriceChanged [
 	unitPrice = 0 ifFalse: [ 
 	unitPriceAfterTaxsFromUnitPrice := unitPrice + (unitPrice * self vatPercentage / 100).
 	unitPriceAfterTaxs := unitPriceAfterTaxsFromUnitPrice asFloat round: self subsystem decimalAccuracy]
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseTransactionItem >> owner: aYavuPurchaseTransaction [ 
+	owner := aYavuPurchaseTransaction
 ]
 
 { #category : #accessing }
@@ -277,4 +305,11 @@ YavuPurchaseTransactionItem >> vatPercentage [
 
 	vatPercentage ifNil: [ self initializeVatPercentage].
 	^ vatPercentage 
+]
+
+{ #category : #calculated }
+YavuPurchaseTransactionItem >> vatPercentageFromProduct [
+	^ product
+		ifNil: [ self yavuSystem purchaseSubsystem vatPercentageDefault ]
+		ifNotNil: [ :selectedProduct | selectedProduct vatPercentage ]
 ]

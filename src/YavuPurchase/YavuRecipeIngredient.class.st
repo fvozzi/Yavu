@@ -4,10 +4,17 @@ Class {
 	#instVars : [
 		'ingredient',
 		'unit',
-		'quantity'
+		'quantity',
+		'owner'
 	],
 	#category : #'YavuPurchase-Entities'
 }
+
+{ #category : #'as yet unclassified' }
+YavuRecipeIngredient class >> owner: aYavuRecipe [ 
+	
+		^ self new initializeOwner: aYavuRecipe 
+]
 
 { #category : #accessing }
 YavuRecipeIngredient class >> subsystemClass [
@@ -67,6 +74,12 @@ YavuRecipeIngredient >> ingredient [
 { #category : #accessing }
 YavuRecipeIngredient >> ingredient: anObject [
 	ingredient := anObject
+]
+
+{ #category : #'as yet unclassified' }
+YavuRecipeIngredient >> initializeOwner: aYavuRecipe [ 
+	
+	owner := aYavuRecipe 
 ]
 
 { #category : #accessing }

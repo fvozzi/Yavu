@@ -24,3 +24,9 @@ WAYavuBootstrap >> rendererClass [
 	
 	^ SBSHtmlCanvas 
 ]
+
+{ #category : #'sin categoria' }
+WAYavuBootstrap >> yavuSystem [ 
+
+	^ self session yavuSystem 
+]

@@ -50,6 +50,12 @@ YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [
 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> allAvailableRecipes [
+	
+	^ YavuRecipe all
+]
+
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> availablePurchaseTransactionsFor: aYavuSupplier [ 
 	
@@ -169,7 +175,10 @@ YavuPurchaseSubsystem >> paymentTypes [
 YavuPurchaseSubsystem >> possibleRecipeIngredients [
 	"Answer possible products and other recipes"
 	
-	^ self products
+	| possibleRecipesAsIngredients |
+	
+	possibleRecipesAsIngredients := self recipes select: [ :each | each availableAsIngredient ].
+	^ self products, possibleRecipesAsIngredients 
 	
 ]
 
@@ -228,6 +237,12 @@ YavuPurchaseSubsystem >> purchaseTransactionsOfSupplier: aYavuSupplier [
 	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseTransaction withEntity: aYavuSupplier
 ]
 
+{ #category : #accessing }
+YavuPurchaseSubsystem >> recipes [
+
+	^ self system storedSubsystem instancesOf: YavuRecipe
+]
+
 { #category : #crud }
 YavuPurchaseSubsystem >> removeBrand: aBrand [
 	
@@ -267,12 +282,6 @@ YavuPurchaseSubsystem >> removeSupplier: aSupplier [
 YavuPurchaseSubsystem >> suppliers [
 
 	^ self system storedSubsystem instancesOf: YavuSupplier
-]
-
-{ #category : #crud }
-YavuPurchaseSubsystem >> update: aYavuObject [
-	
-	self system storedSubsystem update: aYavuObject
 ]
 
 { #category : #accessing }

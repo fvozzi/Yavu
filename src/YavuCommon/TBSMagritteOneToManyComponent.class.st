@@ -4,6 +4,16 @@ Class {
 	#category : #'YavuCommon-Bootstrap-Magritte'
 }
 
+{ #category : #actions }
+TBSMagritteOneToManyComponent >> add [
+
+	self root 
+		show: (self validatedFormOn: (self selected owner: self model) forOperation: 'Agregar')
+		onAnswer: [ :result |
+			result isNil
+				ifFalse: [ self value: (self value copyWith: result); refresh ] ]
+]
+
 { #category : #private }
 TBSMagritteOneToManyComponent >> buildReport [
 
@@ -33,6 +43,13 @@ TBSMagritteOneToManyComponent >> csvDocument [
 		
 ]
 
+{ #category : #actions }
+TBSMagritteOneToManyComponent >> edit: anObject [
+
+	anObject owner: self model.
+	super edit: anObject 
+]
+
 { #category : #'*YavuCommon' }
 TBSMagritteOneToManyComponent >> exportCsv [
 	self requestContext respond: [ :response |
@@ -46,6 +63,12 @@ TBSMagritteOneToManyComponent >> exportCsv [
 TBSMagritteOneToManyComponent >> exportFilename [
 	^self magritteDescription filename
 		
+]
+
+{ #category : #actions }
+TBSMagritteOneToManyComponent >> refresh [
+	self report rows: self value.
+	self value: self value
 ]
 
 { #category : #'*YavuCommon' }
@@ -84,4 +107,22 @@ TBSMagritteOneToManyComponent >> renderViewerOn: html [
 
 	super renderViewerOn: html.
 	self renderButtonsOn: html
+]
+
+{ #category : #private }
+TBSMagritteOneToManyComponent >> validatedFormOn: result forOperation: aString [
+	| component |
+	component := result asComponent.
+	component addMessage: aString , ' ' , self selected label.
+	component
+		addDecoration:
+			(TBSMagritteFormDecoration new
+				buttons:
+					{(#save -> 'Guardar').
+					(#cancel -> 'Cancelar')};
+				formCss: '.col-form-label';
+				yourself).
+	component addDecoration: TBSMagritteValidationDecoration new.
+	component magritteDescription tbsFormHorizontal: true.
+	^ component
 ]

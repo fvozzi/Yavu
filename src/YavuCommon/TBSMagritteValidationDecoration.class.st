@@ -8,7 +8,7 @@ Class {
 TBSMagritteValidationDecoration >> renderErrorsOn: html [
 	html break.
 		
-	html tbsAlert
+	html alert
 		beDanger;
 		with: [
 			html anchor 
