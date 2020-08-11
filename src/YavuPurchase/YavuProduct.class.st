@@ -40,7 +40,8 @@ YavuProduct >> brand: aBrand [
 
 { #category : #accessing }
 YavuProduct >> category [
-
+	"Just a comment."
+	
 	 ^ self productType category
 ]
 
