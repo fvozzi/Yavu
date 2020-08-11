@@ -31,7 +31,7 @@ TBSYavuObjectsBrowser >> addInstance [
 TBSYavuObjectsBrowser >> buildReport [
 	"Create a MAReport new instance showing the reciver selected model class instances."
 
-	^(TBSMagritteReport rows: instances  description: instanceClass new maDescriptionForReport)
+	^(TBSMagritteReport rows: instances description: instanceClass new maDescriptionForReport)
 		batchSize: 20;
 		addColumn: self maCommandColumn;
 		tableEmpty: 'No hay elementos', instanceClass label, ' para mostrar. Use la opción Buscar.'
@@ -65,7 +65,7 @@ TBSYavuObjectsBrowser >> downloadFiles:  anInstance [
 TBSYavuObjectsBrowser >> editInstance: anEntity [
 	| answer originalObject |
 	
-	
+	 
 	originalObject := anEntity.
 	answer := parent call: (self renderAddInstanceForm: anEntity deepCopy).
 	answer notNil
@@ -102,7 +102,7 @@ TBSYavuObjectsBrowser >> newInstance [
 { #category : #crud }
 TBSYavuObjectsBrowser >> removeInstance: anInstance [
 	| answer |
-	answer := parent
+	answer := parent 
 		call: (self renderRemoveInstanceForm: instanceClass new).
 	answer notNil
 		ifTrue: [ [ anInstance removeFromSystem ]
@@ -190,6 +190,6 @@ TBSYavuObjectsBrowser >> updateReport [
 
 { #category : #crud }
 TBSYavuObjectsBrowser >> viewInstance: anInstance [
-
+ 
 	self call: (self renderViewInstanceForm: anInstance)
 ]
