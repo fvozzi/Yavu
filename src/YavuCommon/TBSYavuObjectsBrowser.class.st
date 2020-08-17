@@ -67,7 +67,7 @@ TBSYavuObjectsBrowser >> editInstance: anEntity [
 	
 	 
 	originalObject := anEntity.
-	answer := parent call: (self renderAddInstanceForm: anEntity deepCopy).
+	answer := parent call: (self renderAddInstanceForm: anEntity copy).
 	answer notNil
 		ifTrue: [ 
 			originalObject  copyFrom: answer.
@@ -191,5 +191,5 @@ TBSYavuObjectsBrowser >> updateReport [
 { #category : #crud }
 TBSYavuObjectsBrowser >> viewInstance: anInstance [
  
-	self call: (self renderViewInstanceForm: anInstance)
+	parent call: (self renderViewInstanceForm: anInstance)
 ]
