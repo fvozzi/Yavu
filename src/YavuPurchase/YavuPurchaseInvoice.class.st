@@ -130,13 +130,28 @@ YavuPurchaseInvoice >> descriptionIibbPerception [
         	yourself
 ]
 
+{ #category : #descriptions }
+YavuPurchaseInvoice >> descriptionNetPrice [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #netPrice;
+        	label: 'Neto Gravado';
+			visible: false;
+        	priority: 125;
+			min: 0.1;
+			beRequired;
+			componentClass: TBSMagritteTextInputComponent;
+        	yourself
+]
+
 { #category : #'as yet unclassified' }
 YavuPurchaseInvoice >> descriptionNetPrice105 [
 
 	<magritteDescription>
 	^ MANumberDescription new 
         	accessor: #netPrice105;
-        	label: 'Importe Neto 10.5% Iva';
+        	label: 'Neto 10.5% Iva';
         	priority: 126;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
@@ -148,7 +163,7 @@ YavuPurchaseInvoice >> descriptionNetPrice210 [
 	<magritteDescription>
 	^ MANumberDescription new 
         	accessor: #netPrice210;
-        	label: 'Importe Neto 21% Iva';
+        	label: 'Neto 21% Iva';
         	priority: 125;
 			componentClass: TBSMagritteTextInputComponent;
         	yourself
@@ -221,6 +236,12 @@ YavuPurchaseInvoice >> mementoClass [
 ]
 
 { #category : #accessing }
+YavuPurchaseInvoice >> netPrice [
+
+	^ netPrice105 + netPrice210 
+]
+
+{ #category : #accessing }
 YavuPurchaseInvoice >> netPrice105 [
 	^ netPrice105
 ]
@@ -228,8 +249,7 @@ YavuPurchaseInvoice >> netPrice105 [
 { #category : #accessing }
 YavuPurchaseInvoice >> netPrice105: anObject [
 	netPrice105 := anObject ifNil: [ 0 ].
-	vat105 := (self invoiceType vatValueOf: netPrice105 vatPercentaje: 0.105) round: self subsystem decimalFiscalAccuracy.
-	netPrice := netPrice + netPrice105
+	vat105 := (self invoiceType vatValueOf: netPrice105 vatPercentaje: 0.105) round: self subsystem decimalFiscalAccuracy
 ]
 
 { #category : #calculated }
@@ -247,7 +267,6 @@ YavuPurchaseInvoice >> netPrice210 [
 YavuPurchaseInvoice >> netPrice210: anObject [
 	netPrice210 := anObject.
 	vat210 := (self invoiceType vatValueOf: anObject vatPercentaje: 0.21) round: self subsystem decimalFiscalAccuracy.
-	netPrice := netPrice + netPrice210 
 ]
 
 { #category : #calculated }
