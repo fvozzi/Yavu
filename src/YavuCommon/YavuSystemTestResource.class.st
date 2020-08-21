@@ -154,10 +154,7 @@ YavuSystemTestResource >> newSubsystem [
 { #category : #resources }
 YavuSystemTestResource >> panaderiaGalliPurchaseInvoice [
 	
-	^ YavuPurchaseInvoice new
-		entity: self panaderiaGalliSupplier;
-		date: '04/11/2020' asDate;
-		yourself
+	^ YavuPurchaseInvoice entity: self panaderiaGalliSupplier	date: '04/11/2020' asDate
 ]
 
 { #category : #resources }
@@ -213,9 +210,7 @@ YavuSystemTestResource >> quesoCategory [
 { #category : #resources }
 YavuSystemTestResource >> quesosDelAbastoPurchaseInvoice [
 	
-	^ YavuPurchaseInvoice new
-		entity: self quesosDelAbastoSupplier;
-		date: '04/11/2020' asDate;
+	^ (YavuPurchaseInvoice entity: self quesosDelAbastoSupplier 	date: '04/11/2020' asDate)
 		yourself
 ]
 

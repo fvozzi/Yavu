@@ -328,7 +328,8 @@ YavuPurchaseInvoice >> onPurchaseTransactionsAdded [
 		netPrice105  := netPrice105 + (self netPrice105ValueOf: each).
 		netPrice210  := netPrice210 + (self netPrice210ValueOf: each)].
 	self netPrice105: (netPrice105 round: self subsystem decimalFiscalAccuracy).
-	self netPrice210: (netPrice210 round: self subsystem decimalFiscalAccuracy)
+	self netPrice210: (netPrice210 round: self subsystem decimalFiscalAccuracy).
+	self netPrice: (netPrice105 + netPrice210 round: self subsystem decimalFiscalAccuracy)
 ]
 
 { #category : #adding }

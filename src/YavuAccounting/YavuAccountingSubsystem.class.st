@@ -60,7 +60,7 @@ YavuAccountingSubsystem >> generateComprasAlicuotasFileOn: aYavuVatDeclaration [
 			purchaseInvoice vatAlicuots do: [ :each | 
 				stream 
 					nextPutAll: (CitiComprasAlicuotasFileRow on: purchaseInvoice alicuota: each) output;
-					cr ]
+					crlf ]
 				]
 		 ].
 	^ file
@@ -76,7 +76,7 @@ YavuAccountingSubsystem >> generateComprasComprobantesFileOn: aYavuVatDeclaratio
 		aYavuVatDeclaration purchases do: [ :purchaseInvoice |
 			stream 
 				nextPutAll: (CitiComprasComprobantesFileRow on: purchaseInvoice) output;
-				cr ]
+				crlf ]
 		 ].
 	^ file
 ]
@@ -91,7 +91,7 @@ YavuAccountingSubsystem >> generateVentasAlicuotasFileOn: aYavuVatDeclaration [
 		aYavuVatDeclaration sales do: [ :saleInvoice |
 				stream 
 					nextPutAll: (CitiVentasAlicuotasFileRow on: saleInvoice ) output;
-					cr 
+					crlf
 				]
 		 ].
 	^ file
@@ -107,7 +107,7 @@ YavuAccountingSubsystem >> generateVentasComprobantesFileOn: aYavuVatDeclaration
 		aYavuVatDeclaration sales do: [ :saleInvoice |
 			stream 
 				nextPutAll: (CitiVentasComprobantesFileRow on: saleInvoice) output;
-				cr ]
+				crlf ]
 		 ].
 	^ file
 ]
@@ -170,6 +170,7 @@ YavuAccountingSubsystem >> zipCitiFilesOf: aYavuVatDeclaration [
 	
 	| comprasComprobantesFile comprasAlicuotasFile ventasComprobantesFile ventasAlicuotasFile zipFile zip |
 	
+	self halt.
 	comprasComprobantesFile := self generateComprasComprobantesFileOn: aYavuVatDeclaration.
 	comprasAlicuotasFile := self generateComprasAlicuotasFileOn: aYavuVatDeclaration.
 	ventasComprobantesFile := self generateVentasComprobantesFileOn: aYavuVatDeclaration.
