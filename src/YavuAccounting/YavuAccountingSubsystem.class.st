@@ -169,8 +169,7 @@ YavuAccountingSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 YavuAccountingSubsystem >> zipCitiFilesOf: aYavuVatDeclaration [ 
 	
 	| comprasComprobantesFile comprasAlicuotasFile ventasComprobantesFile ventasAlicuotasFile zipFile zip |
-	
-	self halt.
+
 	comprasComprobantesFile := self generateComprasComprobantesFileOn: aYavuVatDeclaration.
 	comprasAlicuotasFile := self generateComprasAlicuotasFileOn: aYavuVatDeclaration.
 	ventasComprobantesFile := self generateVentasComprobantesFileOn: aYavuVatDeclaration.
