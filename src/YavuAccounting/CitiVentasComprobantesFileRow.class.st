@@ -26,7 +26,7 @@ CitiVentasComprobantesFileRow >> codigoDocumentoComprador [
 CitiVentasComprobantesFileRow >> columns [
 	"Answer the columns of the receiver output file."
 
-	^ #(fecha tipoComprobante puntoDeVenta numeroComprobante numeroHastaComprobante codigoDocumentoComprador numeroDocumentoComprador denominacionComprador total noGravado percepcionANoCategorizados importeExentos importeDePercepcionesNacionales percepcionIIBB	 percepcionesImpuestosMunicipales impuestosInternos tipoMoneda tipoCambio cantidadAlicuotasIVA codigoDeOperacion #otrosTributos fechoVencimientoPago)
+	^ #(fecha tipoComprobante puntoDeVenta numeroComprobante numeroHastaComprobante codigoDocumentoComprador numeroDocumentoComprador denominacionComprador total noGravado percepcionANoCategorizados importeExentos importeDePercepcionesNacionales percepcionIIBB	 percepcionesImpuestosMunicipales impuestosInternos tipoMoneda tipoCambio cantidadAlicuotasIVA codigoDeOperacion otrosTributos fechoVencimientoPago)
 ]
 
 { #category : #'as yet unclassified' }

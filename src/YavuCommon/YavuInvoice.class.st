@@ -127,13 +127,6 @@ YavuInvoice >> descriptionVat210 [
         	yourself
 ]
 
-{ #category : #accessing }
-YavuInvoice >> entity: aSupplier [
-
-	super entity: aSupplier.
-	self onEntityChanded
-]
-
 { #category : #configuration }
 YavuInvoice >> formattedInvoiceNumber [
 	
@@ -154,6 +147,14 @@ YavuInvoice >> initialize [
 ]
 
 { #category : #accessing }
+YavuInvoice >> initializeEntity: unaEntidad date: unaFecha [
+	"Inicializa la entidad del receptor con unaEntidad y la fecha con unaFecha."
+	
+	super initializeEntity: unaEntidad date: unaFecha.
+	invoiceType := unaEntidad invoiceType
+]
+
+{ #category : #accessing }
 YavuInvoice >> invoiceNumber [
 	^ invoiceNumber
 ]
@@ -165,7 +166,8 @@ YavuInvoice >> invoiceNumber: anObject [
 
 { #category : #accessing }
 YavuInvoice >> invoiceType [
-	^ invoiceType
+
+	^invoiceType 
 ]
 
 { #category : #accessing }

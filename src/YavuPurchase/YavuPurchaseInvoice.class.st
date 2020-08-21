@@ -131,13 +131,28 @@ YavuPurchaseInvoice >> descriptionIibbPerception [
 ]
 
 { #category : #descriptions }
+YavuPurchaseInvoice >> descriptionInvoiceType [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #invoiceType;
+		default: nil;
+		beReadonly;
+		optionsAndLabels: (self subsystem invoiceTypes collect: [:each | each -> each formattedInvoiceType]);
+		label: 'Tipo';
+		priority: 100;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
+]
+
+{ #category : #descriptions }
 YavuPurchaseInvoice >> descriptionNetPrice [
 
 	<magritteDescription>
 	^ MANumberDescription new 
         	accessor: #netPrice;
         	label: 'Neto Gravado';
-			visible: false;
         	priority: 125;
 			min: 0.1;
 			beRequired;
@@ -210,6 +225,24 @@ YavuPurchaseInvoice >> descriptionVatPerception [
         	yourself
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> hiddenDescriptions [
+
+	^ self invoiceType hiddenDescriptionsOn: self
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> hiddenDescriptionsOnTypeA [
+
+	^#(netPrice)
+]
+
+{ #category : #'as yet unclassified' }
+YavuPurchaseInvoice >> hiddenDescriptionsOnTypeC [
+
+	^#(netPrice105 netPrice210 vat105 vat210 iibbPerception vatPerception)
+]
+
 { #category : #accessing }
 YavuPurchaseInvoice >> iibbPerception [
 	^ iibbPerception
@@ -229,6 +262,16 @@ YavuPurchaseInvoice >> initialize [
 	purchaseTransactions := OrderedCollection new
 ]
 
+{ #category : #accessing }
+YavuPurchaseInvoice >> magritteDescription [ 
+	
+	| setOfDescriptionsToHidde |
+	
+	self invoiceType ifNil: [ ^super magritteDescription ].
+	setOfDescriptionsToHidde := self hiddenDescriptions asSet.
+	^ super magritteDescription reject: [:each | setOfDescriptionsToHidde includes: each accessor readSelector]
+]
+
 { #category : #descriptions }
 YavuPurchaseInvoice >> mementoClass [
 
@@ -238,7 +281,9 @@ YavuPurchaseInvoice >> mementoClass [
 { #category : #accessing }
 YavuPurchaseInvoice >> netPrice [
 
-	^ netPrice105 + netPrice210 
+	^ self invoiceType discriminateVat 
+		ifTrue: [ self netPrice105 + self netPrice210 ]
+		ifFalse: [ super netPrice ]
 ]
 
 { #category : #accessing }

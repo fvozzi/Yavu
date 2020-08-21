@@ -74,9 +74,7 @@ YavuSystemTestResource >> laChispaFilmCustomer [
 { #category : #resources }
 YavuSystemTestResource >> laChispaFilmSaleInvoice29 [
 	
-	^ YavuSaleInvoice new
-		entity: self laChispaFilmCustomer;
-		date: '01//17/2020' asDate;
+	^ (YavuSaleInvoice 	entity: self laChispaFilmCustomer	date: '01//17/2020' asDate)
 		prefix: 3;
 		invoiceNumber: 29;
 		netPrice: 11570.25;
@@ -93,9 +91,7 @@ YavuSystemTestResource >> laPaulinaBrand [
 { #category : #'as yet unclassified' }
 YavuSystemTestResource >> luisLatancioPurchaseInvoiceNumber44 [
 	
-	^YavuPurchaseInvoice new
-		entity: self luisLatancioSupplier;
-		date: '05/01/2020' asDate;
+	^(YavuPurchaseInvoice entity: self luisLatancioSupplier date: '05/01/2020' asDate)
 		prefix: 3;
 		invoiceNumber: 44;
 		netPrice: 40000;
@@ -115,9 +111,7 @@ YavuSystemTestResource >> luisLatancioSupplier [
 { #category : #resources }
 YavuSystemTestResource >> maxiconsumoPurchaseInvoiceNumber54895 [
 	
-	^ YavuPurchaseInvoice new
-		entity: self maxiconsumoSupplier;
-		date: '05/12/2020' asDate;
+	^ (YavuPurchaseInvoice entity: self maxiconsumoSupplier	date: '05/12/2020' asDate)
 		prefix: 3193;
 		invoiceNumber: 54895;
 		netPrice210: 7854.43;
@@ -228,9 +222,7 @@ YavuSystemTestResource >> quesosDelAbastoPurchaseInvoice [
 { #category : #resources }
 YavuSystemTestResource >> quesosDelAbastoPurchaseInvoiceNumber34089 [
 	
-	^ YavuPurchaseInvoice new
-		entity: self quesosDelAbastoSupplier;
-		date: '05/20/2020' asDate;
+	^ (YavuPurchaseInvoice entity: self quesosDelAbastoSupplier	date: '05/20/2020' asDate)
 		prefix: 2;
 		invoiceNumber: 34089;
 		netPrice210: 10122.46;

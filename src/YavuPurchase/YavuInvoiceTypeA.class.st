@@ -28,6 +28,12 @@ YavuInvoiceTypeA class >> formattedInvoiceType [
 ]
 
 { #category : #'as yet unclassified' }
+YavuInvoiceTypeA class >> hiddenDescriptionsOn: aPurchaseInvoice [
+
+	^aPurchaseInvoice hiddenDescriptionsOnTypeA
+]
+
+{ #category : #'as yet unclassified' }
 YavuInvoiceTypeA class >> netPriceValueOf: aPurchaseTransactionItem vatPercentaje: aPercentaje [
 	^ aPurchaseTransactionItem product vatPercentage = aPercentaje 
 		ifTrue: [ aPurchaseTransactionItem subtotal ] 

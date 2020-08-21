@@ -156,6 +156,6 @@ CitiComprasComprobantesFileRow >> tipoMoneda [
 
 { #category : #'as yet unclassified' }
 CitiComprasComprobantesFileRow >> total [
-	
+
 	^ self formatNumber: self invoice total withZeros: 15
 ]
