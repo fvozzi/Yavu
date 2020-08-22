@@ -178,7 +178,7 @@ YavuPurchaseSubsystem >> possibleRecipeIngredients [
 	| possibleRecipesAsIngredients |
 	
 	possibleRecipesAsIngredients := self recipes select: [ :each | each availableAsIngredient ].
-	^ self products, possibleRecipesAsIngredients 
+	^ self productTypes, possibleRecipesAsIngredients 
 	
 ]
 
