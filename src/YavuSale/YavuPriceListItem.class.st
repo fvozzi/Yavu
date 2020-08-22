@@ -42,7 +42,6 @@ YavuPriceListItem >> descriptionPrice2 [
 	<magritteDescription>
 	^ MANumberDescription new 
         	accessor: #price2;
-			beRequired;
         	label: 'Precio tamaño 2';
         	priority: 140;
         	yourself
