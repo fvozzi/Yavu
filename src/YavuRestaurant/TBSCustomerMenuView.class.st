@@ -82,7 +82,7 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 	priceListItem ifNil: [ ^ 'Ups, ni idea. Preguntale al Tibu!' ].
 	priceDescription := WriteStream on: String new.
 	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', priceListItem price1 asString).
-	priceListItem sizeDescription2 notEmpty ifTrue: [ 
+	priceListItem sizeDescription2 notNil ifTrue: [ 
 		priceDescription nextPutAll: (' | ', priceListItem sizeDescription2, ' $ ', priceListItem price2 asString)].
 	^ priceDescription contents
 	
