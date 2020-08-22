@@ -65,13 +65,13 @@ TBSYavuObjectsBrowser >> downloadFiles:  anInstance [
 TBSYavuObjectsBrowser >> editInstance: anEntity [
 	| answer originalObject |
 	
-	 
-	originalObject := anEntity.
-	answer := parent call: (self renderAddInstanceForm: anEntity copy).
+	originalObject := anEntity copy.
+	answer := parent call: (self renderAddInstanceForm: anEntity).
 	answer notNil
 		ifTrue: [ 
-			originalObject  copyFrom: answer.
-			originalObject updateToSystem ]
+			answer updateToSystem ]
+		ifFalse: [ 
+			anEntity  copyFrom: originalObject ]
 ]
 
 { #category : #initialization }
