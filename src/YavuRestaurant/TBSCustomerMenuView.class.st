@@ -11,6 +11,11 @@ Class {
 }
 
 { #category : #rendering }
+TBSCustomerMenuView class >> canBeRoot [
+	^ true
+]
+
+{ #category : #rendering }
 TBSCustomerMenuView class >> imagePlaceHolderSVG [
 
 	^'<svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://localhost:8081/img/tbsPremium.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>'
@@ -68,7 +73,7 @@ TBSCustomerMenuView >> initialize [
 
 	super initialize.
 	activeProductsByCategory := self yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategory].
-	categories := activeProductsByCategory keys.
+	categories := activeProductsByCategory keys asSortedCollection.
 	category := categories ifNotEmpty: [ :col | col first ].
 	currentPriceList := self yavuSystem currentPriceList
 ]
@@ -79,7 +84,7 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 	| priceListItem priceDescription |
 
 	priceListItem := self currentPriceList priceListItemOf: aYavuSaleProduct.
-	priceListItem ifNil: [ ^ 'Ups, ni idea. Preguntale al Tibu!' ].
+	priceListItem ifNil: [ ^ 'Precio?. Preguntale al Tibu!' ].
 	priceDescription := WriteStream on: String new.
 	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', priceListItem price1 asString).
 	priceListItem sizeDescription2 notNil ifTrue: [ 
@@ -159,7 +164,7 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 					html cardSubtitle
 						level6;
 						mutedText;
-						with: product name.
+						with: product subtitle.
 					html cardText: product description.
 					html cardSubtitle
 						level6;
