@@ -169,6 +169,7 @@ YavuPurchaseTransactionItem >> initializeOwner: anObject [
 
 { #category : #calculated }
 YavuPurchaseTransactionItem >> initializeVatPercentage [
+
 	vatPercentage := owner discriminateVat
 		ifTrue: [ self vatPercentageFromProduct ]
 		ifFalse: [ 0 ]

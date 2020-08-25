@@ -42,7 +42,7 @@ YavuRole >> descriptionMenuElements [
 		label: 'Acceso';
 		priority: 130;
 		beExtensible;
-		componentClass: MAListCompositonComponent;
+		componentClass: TBSListCompositionComponent;
 		options: self yavuSystem menuElements;
 			reference: MAStringDescription new;
 		beSorted; 
@@ -95,7 +95,7 @@ YavuRole >> yavuObjectsDescription [
 		label: 'Objetos permitidos';
 		priority: 140;
 		beExtensible;
-		componentClass: MAListCompositonComponent;
+		componentClass: TBSListCompositionComponent;
 		options: self yavuSystem yavuObjects;
 		beSorted; 
 		reference: MAStringDescription new;

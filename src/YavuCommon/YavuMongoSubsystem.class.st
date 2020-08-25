@@ -23,6 +23,14 @@ YavuMongoSubsystem class >> repository [
 ]
 
 { #category : #'as yet unclassified' }
+YavuMongoSubsystem >> entityOfClass: aClass withName: aName [ 
+	
+	^ repository selectOne: aClass where: [ :each | 
+		(each at: 'name') = aName
+		]
+]
+
+{ #category : #'as yet unclassified' }
 YavuMongoSubsystem >> existsInstancesOf: aClass dependentOf: aYavuObject referencesMethod: aSymbol [ 
 	
 	^ (repository selectMany: aClass where: [ :each | 

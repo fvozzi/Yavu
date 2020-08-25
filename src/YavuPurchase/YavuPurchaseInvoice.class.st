@@ -194,7 +194,7 @@ YavuPurchaseInvoice >> descriptionPurchaseTransactions [
 		default: nil;
 		label: 'Remitos';
 		priority: 120;
-		componentClass: MAListCompositonComponent;
+		componentClass: TBSListCompositionComponent;
 		options: self availablePurchaseTransactions;
 		yourself
 ]

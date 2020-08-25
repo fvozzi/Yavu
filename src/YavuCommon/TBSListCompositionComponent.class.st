@@ -18,15 +18,15 @@ TBSListCompositionComponent >> renderEditorAvailableOn: html [
 { #category : #'as yet unclassified' }
 TBSListCompositionComponent >> renderEditorButtonAddOn: html [
 	html div
-		class: 'btn-group';
 		class: 'btn-group-vertical';
 		with: [
-			html button
+			html formButton
 				beSubmit;
+				bePrimary;
 				class: 'btn';
 				callback: [ self add ];
 				with: [html text: 'Add'].
-			html button
+			html formButton
 				class: 'btn';
 				beSubmit;
 				callback: [ self remove ];
