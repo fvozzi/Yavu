@@ -158,7 +158,7 @@ TBSCustomerMenuView >> renderMenuOn: html [
 TBSCustomerMenuView >> renderProductCard: product on: html [
 	^ html card
 		style: 'width: 16.3rem;';
-		with: [ html cardImage resourceUrl: 'img/' , product imageName.
+		with: [ html cardImage resourceUrl: 'img/baja/' , product imageName.
 			html
 				cardBody: [ html cardTitle level5 with: product name.
 					html cardSubtitle
