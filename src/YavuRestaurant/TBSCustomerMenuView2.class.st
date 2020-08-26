@@ -75,7 +75,7 @@ TBSCustomerMenuView2 >> renderMenuCategoryHeaderOf: each on: html [
 						dataToggle: 'collapse';
 						dataTarget: '#collapse' , each name;
 						attributeAt: 'aria-expanded' put: 'true';
-						attributeAt: 'aria-controls' put: 'collapseOne';
+						attributeAt: 'aria-controls' put: 'collapse,' each name;
 						with: each name ] ]
 ]
 
