@@ -27,13 +27,24 @@ TBSCustomerMenuView2 >> renderMenuAccordionOn: html [
 		id: 'accordion';
 		with: [ 
 	self categories
-		do: [ :eachCategory | 
+		doWithIndex: [ :eachCategory :index| 
 			html card: [ 
-				self renderMenuCategoryHeaderOf: eachCategory on: html.
+				html cardHeader
+		id: 'heading' , eachCategory name;
+		with: [ html heading
+				level: 5;
+				class: 'mb-0';
+				with: [ html formButton
+						beLink;
+						dataToggle: 'collapse';
+						dataTarget: '#collapse' , index asString;
+						attributeAt: 'aria-expanded' put: 'true';
+						attributeAt: 'aria-controls' put: 'collapse', index asString;
+						with: eachCategory name ] ].
 				html div 	
-					id: 'collapse', eachCategory name;
+					id: 'collapse', index asString;
 					class: 'collapse';
-					attributeAt: 'aria-labelledby' put: 'heading', eachCategory name;
+					attributeAt: 'aria-labelledby' put: 'heading', index asString;
 					attributeAt: 'data-parent' put: '#accordion';
 					with: [ 
 						html cardBody: [ 
@@ -75,7 +86,7 @@ TBSCustomerMenuView2 >> renderMenuCategoryHeaderOf: each on: html [
 						dataToggle: 'collapse';
 						dataTarget: '#collapse' , each name;
 						attributeAt: 'aria-expanded' put: 'true';
-						attributeAt: 'aria-controls' put: 'collapse,' each name;
+						attributeAt: 'aria-controls' put: 'collapse', each name;
 						with: each name ] ]
 ]
 
