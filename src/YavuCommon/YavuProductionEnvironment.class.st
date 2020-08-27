@@ -23,6 +23,17 @@ YavuProductionEnvironment class >> mongoDatabaseName [
 ]
 
 { #category : #seaside }
+YavuProductionEnvironment class >> resourceBaseUrl [
+	^ 'http://lagoonbeer.com.ar:8081'
+]
+
+{ #category : #seaside }
+YavuProductionEnvironment class >> restaurantApplicationMenu [
+
+	^ 'antimenu' 
+]
+
+{ #category : #seaside }
 YavuProductionEnvironment class >> seasideApplicationName [
 	
 	^ CurrentSystemClass seasideApplicationName

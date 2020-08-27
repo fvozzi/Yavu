@@ -143,6 +143,12 @@ YavuSecuritySubsystem >> searchUserName: aName password: aPassword [
 		ifNone: [ Error signal: 'Usuario o contraseña incorrecta.' ]
 ]
 
+{ #category : #initialization }
+YavuSecuritySubsystem >> setGuestUser [
+
+	self loggedUser: YavuGuestUser current
+]
+
 { #category : #configuration }
 YavuSecuritySubsystem >> userClass [
 	^YavuUser 

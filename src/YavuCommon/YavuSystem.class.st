@@ -334,6 +334,13 @@ YavuSystem >> saleSubsystem [
 	^ self subsystemAt: 'saleSubsystem'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSystem >> setGuestUser [
+
+	^(self subsystemAt: 'loginSubsystem') setGuestUser
+	
+]
+
 { #category : #accessing }
 YavuSystem >> setUpTransientSubsystem: aTransientSubsystem [
 

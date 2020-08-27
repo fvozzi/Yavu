@@ -60,6 +60,15 @@ YavuEnvironment class >> registerSeasideApplication [
 	"Register the seaside app."
 	
 	SBSHtmlCanvas selectAsDefault.
+	(WAAdmin
+		register: self restaurantApplicationMenuRoot
+		asApplicationAt: self restaurantApplicationMenu)
+		preferenceAt: #sessionClass put: YavuGuestSession;
+		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
+		preferenceAt: #maximumRelativeAge put: 28800;
+		addLibrary: self jqLibrary;
+		addLibrary: self tbsLibrary;
+		addLibrary: self fontAwesomeLibrary.
 	^ (WAAdmin
 		register: self seasideApplicationRoot
 		asApplicationAt: self seasideApplicationName)
@@ -74,6 +83,18 @@ YavuEnvironment class >> registerSeasideApplication [
 { #category : #seaside }
 YavuEnvironment class >> resourceBaseUrl [
 	^ 'http://localhost:8081'
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment class >> restaurantApplicationMenu [
+
+	^ 'antimenu' 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment class >> restaurantApplicationMenuRoot [
+
+	^ TBSCustomerMenuView2 
 ]
 
 { #category : #seaside }
