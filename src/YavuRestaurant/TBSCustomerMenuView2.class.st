@@ -8,6 +8,7 @@ Class {
 TBSCustomerMenuView2 >> renderContentOn: html [
 
 	html containerFluid: [ 
+			html column mediumSize: 12; smallSize: 12; marginBottom: 1; with: [ self renderMenuImageHeaderOn: html ].
 		self renderMenuAccordionOn: html 
 			 ].
 	

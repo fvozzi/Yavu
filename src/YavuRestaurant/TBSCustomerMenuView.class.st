@@ -128,8 +128,8 @@ TBSCustomerMenuView >> renderMenuCategoriesOn: html [
 { #category : #rendering }
 TBSCustomerMenuView >> renderMenuImageHeaderOn: html [
 	^ html  
-		imageFluid 
-		floatRight;
+		imageFluid
+		width: '100%';
 		resourceUrl: 'img/' , 'logoEsquina.png' 
 ]
 
