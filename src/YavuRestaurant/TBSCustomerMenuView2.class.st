@@ -59,3 +59,12 @@ TBSCustomerMenuView2 >> renderMenuOn: html category: each [
 		self renderMenuOn: html
 	
 ]
+
+{ #category : #updating }
+TBSCustomerMenuView2 >> updateRoot: anHtmlRoot [
+
+    super updateRoot: anHtmlRoot.
+    anHtmlRoot meta
+        name: 'viewport';
+        content: 'width=device-width, initial-scale=1.0'
+]
