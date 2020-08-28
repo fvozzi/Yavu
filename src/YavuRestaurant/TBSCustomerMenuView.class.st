@@ -127,10 +127,15 @@ TBSCustomerMenuView >> renderMenuCategoriesOn: html [
 
 { #category : #rendering }
 TBSCustomerMenuView >> renderMenuImageHeaderOn: html [
-	^ html  
-		imageFluid
-		width: '100%';
-		resourceUrl: 'img/' , 'logoEsquina.png' 
+
+	| image |
+	
+	html div 
+		id: #imageMenuLogo;
+		with: [ 
+			image := 	html imageFluid.
+			image width: '100%'; resourceUrl: 'img/' , 'logoEsquina.png'.
+			image attributes at: 'max-width' put: '600px']
 ]
 
 { #category : #rendering }

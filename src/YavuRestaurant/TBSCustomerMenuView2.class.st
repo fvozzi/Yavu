@@ -61,6 +61,15 @@ TBSCustomerMenuView2 >> renderMenuOn: html category: each [
 	
 ]
 
+{ #category : #hooks }
+TBSCustomerMenuView2 >> style [
+
+	^ '#imageMenuLogo {
+			width: 100%;
+  			max-width: 600px;
+		}'
+]
+
 { #category : #updating }
 TBSCustomerMenuView2 >> updateRoot: anHtmlRoot [
 
