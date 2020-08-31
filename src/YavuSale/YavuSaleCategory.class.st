@@ -1,6 +1,9 @@
 Class {
 	#name : #YavuSaleCategory,
 	#superclass : #YavuEntity,
+	#instVars : [
+		'order'
+	],
 	#category : #'YavuSale-Entities'
 }
 
@@ -19,4 +22,40 @@ YavuSaleCategory class >> label [
 { #category : #accessing }
 YavuSaleCategory class >> subsystemClass [
 	^ Smalltalk at: #YavuSaleSubsystem
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleCategory >> descriptionOrder [
+
+	<magritteDescription>
+	^MANumberDescription new 
+      accessor: #order;
+      label: 'Orden';
+      	priority: 140;
+		beRequired;
+		componentClass: TBSMagritteTextInputComponent;
+      	yourself
+]
+
+{ #category : #accessing }
+YavuSaleCategory >> order [
+	order ifNil: [ order := 1 ].
+	^ order
+]
+
+{ #category : #accessing }
+YavuSaleCategory >> order: anObject [
+	order := anObject
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleCategory >> price1OfPriceListItem: aPriceListItem [
+
+	^ aPriceListItem price1
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleCategory >> price2OfPriceListItem: aPriceListItem [
+
+	^ aPriceListItem price2
 ]

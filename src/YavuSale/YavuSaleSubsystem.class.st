@@ -91,3 +91,9 @@ YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 		instancesOfClass: YavuZLock  
 		from: aDate beginOfMonth to: aDate endOfMonth )
 ]
+
+{ #category : #'as yet unclassified' }
+YavuSaleSubsystem >> specialOfferCategory [
+
+	^ YavuSaleSpecialOrderCategory current
+]

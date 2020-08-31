@@ -72,8 +72,8 @@ TBSCustomerMenuView >> currentPriceList: anObject [
 TBSCustomerMenuView >> initialize [ 
 
 	super initialize.
-	activeProductsByCategory := self yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategory].
-	categories := activeProductsByCategory keys asSortedCollection.
+	activeProductsByCategory := self yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategoryOrSpecialOfferCategory].
+	categories := activeProductsByCategory keys asSortedCollection: [:a :b | a order < b order].
 	category := categories ifNotEmpty: [ :col | col first ].
 	currentPriceList := self yavuSystem currentPriceList
 ]
@@ -84,11 +84,11 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 	| priceListItem priceDescription |
 
 	priceListItem := self currentPriceList priceListItemOf: aYavuSaleProduct.
-	priceListItem ifNil: [ ^ 'Precio?. Preguntale al Tibu!' ].
+	priceListItem ifNil: [ ^ 'Precio?. Llamalo a Jorge!' ].
 	priceDescription := WriteStream on: String new.
-	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', priceListItem price1 asString).
+	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: priceListItem) asString).
 	priceListItem sizeDescription2 notNil ifTrue: [ 
-		priceDescription nextPutAll: (' | ', priceListItem sizeDescription2, ' $ ', priceListItem price2 asString)].
+		priceDescription nextPutAll: (' | ', priceListItem sizeDescription2, ' $ ', (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory price2OfPriceListItem: priceListItem) asString)].
 	^ priceDescription contents
 	
 ]
@@ -96,33 +96,50 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 { #category : #rendering }
 TBSCustomerMenuView >> renderContentOn: html [
 
-	html break.
-	html form: [ 
 	html containerFluid: [ 
-		html row: [ 
-			html column mediumSize: 12; smallSize: 12; marginBottom: 1; with: [ self renderMenuImageHeaderOn: html ]].
-		html row: [ 
-			html column mediumSize: 2; smallSize: 12; with: [ self renderMenuCategoriesOn: html ].
-			html column mediumSize: 10; smallSize: 12; with: [ self renderMenuOn: html ].
+			html column mediumSize: 12; smallSize: 12; marginBottom: 1; with: [ self renderMenuImageHeaderOn: html ].
+		self renderMenuAccordionOn: html 
 			 ].
 	
-		 ] ]
+
 ]
 
 { #category : #rendering }
-TBSCustomerMenuView >> renderMenuCategoriesOn: html [
+TBSCustomerMenuView >> renderMenuAccordionOn: html [
 
-	html
-		listGroup: [ 
-			self categories do: [ :each | | item |
-				item := html listGroupLinkedItem.
-				self category = each ifTrue: [ item beActive ].
-				item
-					callback: [ self category: each];
-					with: each name.
+	| first |
+	
+	first := true.
+	html div
+		id: 'accordion';
+		with: [ 
+	self categories
+		doWithIndex: [ :eachCategory :index| 
+			html card: [ 
+				html cardHeader
+		id: 'heading' , index asString;
+		with: [ html heading
+				level: 5;
+				class: 'mb-0';
+				with: [ html formButton
+						beLink;
+						dataToggle: 'collapse';
+						dataTarget: '#collapse' , index asString;
+						attributeAt: 'aria-expanded' put: 'true';
+						attributeAt: 'aria-controls' put: 'collapse', index asString;
+						with: eachCategory name ] ].
+				html div 	
+					id: 'collapse', index asString;
+					class: 'collapse';
+					attributeAt: 'aria-labelledby' put: 'heading', index asString;
+					attributeAt: 'data-parent' put: '#accordion';
+					with: [ 
+						html cardBody: [ 
+							self renderMenuOn: html category: eachCategory
+							 ] ]
 				
-				 ]
-		 ]
+				
+				] ]]
 ]
 
 { #category : #rendering }
@@ -160,6 +177,14 @@ TBSCustomerMenuView >> renderMenuOn: html [
 ]
 
 { #category : #rendering }
+TBSCustomerMenuView >> renderMenuOn: html category: each [ 
+		
+		self category: each.
+		self renderMenuOn: html
+	
+]
+
+{ #category : #rendering }
 TBSCustomerMenuView >> renderProductCard: product on: html [
 	^ html card
 		style: 'width: 16.3rem;';
@@ -176,24 +201,20 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 						with: (self priceMenuDescriptionOf: product) ] ]
 ]
 
-{ #category : #rendering }
-TBSCustomerMenuView >> renderResenasBannerOn: html [ 
+{ #category : #hooks }
+TBSCustomerMenuView >> style [
 
-	html carousel 
-		id: 'example';
-		slide; 
-		style: 'width: 36rem;';
-		with:[ 
-		html carouselInner: [
-			html carouselItem active with: [ 
-				html cardImage resourceUrl: 'img/laTarzanDeCastelar.jpg'.
-				html text: 'Mamma Silvia'.
-				html anchor: 'https://antigourmet.com.ar/la-tarzan-de-castelar/' ].
-			html carouselItem with: [ 
-				html text: 'Cantina Palermo' ].					
-		].		
-		html carouselControlPreviousFor: 'example'.	
-		html carouselControlNextFor: 'example'. 	
-	].
-	html script: '$(".carousel").carousel()'
+	^ '#imageMenuLogo {
+			width: 100%;
+  			max-width: 600px;
+		}'
+]
+
+{ #category : #updating }
+TBSCustomerMenuView >> updateRoot: anHtmlRoot [
+
+    super updateRoot: anHtmlRoot.
+    anHtmlRoot meta
+        name: 'viewport';
+        content: 'width=device-width, initial-scale=1.0'
 ]

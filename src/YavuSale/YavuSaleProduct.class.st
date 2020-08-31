@@ -8,7 +8,8 @@ Class {
 		'validStartDate',
 		'validEndDate',
 		'imageName',
-		'subtitle'
+		'subtitle',
+		'isSpecialOffer'
 	],
 	#category : #'YavuSale-Entities'
 }
@@ -91,6 +92,18 @@ YavuSaleProduct >> descriptionImageName [
 ]
 
 { #category : #descriptions }
+YavuSaleProduct >> descriptionIsSpecialOffer [
+	
+	<magritteDescription>
+	^MABooleanDescription new
+		accessor: #isSpecialOffer;
+		label: 'Está en promo?';
+		priority: 150;
+		componentClass: TBSMagritteCheckboxComponent;
+		yourself
+]
+
+{ #category : #descriptions }
 YavuSaleProduct >> descriptionRecipe [
 	
 	<magritteDescription>
@@ -170,6 +183,25 @@ YavuSaleProduct >> imageName: anObject [
 ]
 
 { #category : #accessing }
+YavuSaleProduct >> isSpecialOffer [
+	isSpecialOffer ifNil: [ isSpecialOffer := false ].
+	^ isSpecialOffer 
+]
+
+{ #category : #accessing }
+YavuSaleProduct >> isSpecialOffer: anObject [
+	isSpecialOffer := anObject
+]
+
+{ #category : #'as yet unclassified' }
+YavuSaleProduct >> maDescriptionForReport [ 
+
+	^super maDescriptionForReport,
+			self descriptionIsSpecialOffer,
+			self descriptionValidEndDate 
+]
+
+{ #category : #accessing }
 YavuSaleProduct >> recipe [
 	^ recipe
 ]
@@ -188,6 +220,13 @@ YavuSaleProduct >> saleProductCategory [
 { #category : #accessing }
 YavuSaleProduct >> saleProductCategory: anObject [
 	saleProductCategory := anObject
+]
+
+{ #category : #accessing }
+YavuSaleProduct >> saleProductCategoryOrSpecialOfferCategory [
+	
+	self isSpecialOffer ifTrue: [ ^ self yavuSystem saleSubsystem specialOfferCategory ].
+	^ saleProductCategory
 ]
 
 { #category : #accessing }

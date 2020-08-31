@@ -7,7 +7,10 @@ Class {
 		'price1',
 		'sizeDescription2',
 		'price2',
-		'owner'
+		'owner',
+		'specialOfferPrice1',
+		'specialOfferPrice2',
+		'rappiPrice'
 	],
 	#category : #'YavuSale-DomainObjects'
 }
@@ -64,6 +67,17 @@ YavuPriceListItem >> descriptionProduct [
 ]
 
 { #category : #descriptions }
+YavuPriceListItem >> descriptionRappi [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #rappiPrice;
+        	label: 'Precio Rappi';
+        	priority: 160;
+        	yourself
+]
+
+{ #category : #descriptions }
 YavuPriceListItem >> descriptionSizeDescription1 [
 
 	<magritteDescription>
@@ -87,6 +101,29 @@ YavuPriceListItem >> descriptionSizeDescription2 [
       	yourself
 ]
 
+{ #category : #descriptions }
+YavuPriceListItem >> descriptionSpecialOfferPrice1 [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #specialOfferPrice1;
+			beRequired;
+        	label: 'Precio PROMO tamaño 1';
+        	priority: 125;
+        	yourself
+]
+
+{ #category : #descriptions }
+YavuPriceListItem >> descriptionSpecialOfferPrice2 [
+
+	<magritteDescription>
+	^ MANumberDescription new 
+        	accessor: #specialOfferPrice2;
+        	label: 'Precio PROMO tamaño 2';
+        	priority: 145;
+        	yourself
+]
+
 { #category : #initialization }
 YavuPriceListItem >> initializeOwner: aPriceList [
 
@@ -102,6 +139,12 @@ YavuPriceListItem >> mementoClass [
 { #category : #accessing }
 YavuPriceListItem >> owner [
 	^ owner
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> owner: aOwner [
+	
+	owner:= aOwner
 ]
 
 { #category : #accessing }
@@ -135,6 +178,16 @@ YavuPriceListItem >> product: anObject [
 ]
 
 { #category : #accessing }
+YavuPriceListItem >> rappiPrice [
+	^ rappiPrice
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> rappiPrice: anObject [
+	rappiPrice := anObject
+]
+
+{ #category : #accessing }
 YavuPriceListItem >> sizeDescription1 [
 	^ sizeDescription1
 ]
@@ -152,4 +205,24 @@ YavuPriceListItem >> sizeDescription2 [
 { #category : #accessing }
 YavuPriceListItem >> sizeDescription2: anObject [
 	sizeDescription2 := anObject
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> specialOfferPrice1 [
+	^ specialOfferPrice1
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> specialOfferPrice1: anObject [
+	specialOfferPrice1 := anObject
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> specialOfferPrice2 [
+	^ specialOfferPrice2
+]
+
+{ #category : #accessing }
+YavuPriceListItem >> specialOfferPrice2: anObject [
+	specialOfferPrice2 := anObject
 ]
