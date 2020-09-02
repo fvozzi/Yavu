@@ -217,5 +217,5 @@ TBSCustomerMenuView >> updateRoot: anHtmlRoot [
 	anHtmlRoot meta
         name: 'viewport';
         content: 'width=device-width, initial-scale=1.0'.
-	anHtmlRoot title: 'La esquina del Antigourmet'
+	anHtmlRoot title: 'La esquina del Antigourmet' 
 ]
