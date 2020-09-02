@@ -45,6 +45,12 @@ YavuProductionEnvironment class >> seasideApplicationName [
 	^ CurrentSystemClass seasideApplicationName
 ]
 
+{ #category : #'as yet unclassified' }
+YavuProductionEnvironment class >> serverPath [
+
+	^ 'app' 
+]
+
 { #category : #seaside }
 YavuProductionEnvironment class >> tbsLibrary [
 	

@@ -70,6 +70,7 @@ YavuEnvironment class >> registerAntimenuApp [
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
 		preferenceAt: #maximumRelativeAge put: 28800;
 		preferenceAt: #deploymentMode put: self deploymentMode;
+		preferenceAt: #serverPath put: self serverPath;
 		addLibrary: self jqLibrary;
 		addLibrary: self tbsLibrary;
 		addLibrary: self fontAwesomeLibrary
@@ -93,6 +94,7 @@ YavuEnvironment class >> registerYavuRestaurantApp [
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
 		preferenceAt: #maximumRelativeAge put: 28800;
 		preferenceAt: #deploymentMode put: true;
+		preferenceAt: #serverPath put: self serverPath;
 		addLibrary: self jqLibrary;
 		addLibrary: self tbsLibrary;
 		addLibrary: self fontAwesomeLibrary
@@ -125,6 +127,12 @@ YavuEnvironment class >> seasideApplicationName [
 YavuEnvironment class >> seasideApplicationRoot [
 
 	^ TBSYavuLogin 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment class >> serverPath [
+
+	^ self subclassResponsibility 
 ]
 
 { #category : #system }

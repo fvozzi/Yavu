@@ -15,3 +15,9 @@ YavuTestEnvironment class >> mongoDatabaseName [
 
  ^ 'yavuSystemTest'
 ]
+
+{ #category : #'as yet unclassified' }
+YavuTestEnvironment class >> serverPath [
+
+	^ '' 
+]

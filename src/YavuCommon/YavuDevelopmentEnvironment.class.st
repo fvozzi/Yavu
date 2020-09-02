@@ -28,6 +28,12 @@ YavuDevelopmentEnvironment class >> mongoDatabaseName [
  ^ 'yavuSystem'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuDevelopmentEnvironment class >> serverPath [
+
+	^ '' 
+]
+
 { #category : #seaside }
 YavuDevelopmentEnvironment class >> tbsLibrary [
 	
