@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuDevelopmentEnvironment class >> deploymentMode [
+
+	^ false
+]
+
 { #category : #seaside }
 YavuDevelopmentEnvironment class >> fontAwesomeLibrary [
 	

@@ -4,6 +4,12 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
+{ #category : #'as yet unclassified' }
+YavuProductionEnvironment class >> deploymentMode [
+
+	^ true
+]
+
 { #category : #seaside }
 YavuProductionEnvironment class >> fontAwesomeLibrary [
 	
@@ -24,7 +30,7 @@ YavuProductionEnvironment class >> mongoDatabaseName [
 
 { #category : #seaside }
 YavuProductionEnvironment class >> resourceBaseUrl [
-	^ 'http://lagoonbeer.com.ar:8081'
+	^ 'https://www.laesquinadelantigourmet.com.ar'
 ]
 
 { #category : #seaside }

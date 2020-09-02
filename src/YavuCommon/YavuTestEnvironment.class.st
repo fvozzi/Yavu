@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+YavuTestEnvironment class >> deploymentMode [
+
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 YavuTestEnvironment class >> mongoDatabaseName [
 
  ^ 'yavuSystemTest'
