@@ -23,6 +23,18 @@ YavuSaleSpecialOrderCategory class >> newSpecialOfferCategory [
 		yourself
 ]
 
+{ #category : #accessing }
+YavuSaleSpecialOrderCategory class >> subsystemClass [
+	"Hack to no show this class as available."
+	^ Smalltalk at: #YavuSubsystem
+]
+
+{ #category : #testing }
+YavuSaleSpecialOrderCategory >> isSpecialOffer [
+
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 YavuSaleSpecialOrderCategory >> price1OfPriceListItem: aPriceListItem [
 

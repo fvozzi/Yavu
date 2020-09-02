@@ -117,7 +117,7 @@ YavuEnvironment class >> restaurantApplicationMenu [
 { #category : #'as yet unclassified' }
 YavuEnvironment class >> restaurantApplicationMenuRoot [
 
-	^ TBSCustomerMenuView2 
+	^ TBSCustomerMenuView 
 ]
 
 { #category : #seaside }

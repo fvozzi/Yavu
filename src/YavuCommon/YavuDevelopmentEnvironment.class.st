@@ -25,7 +25,7 @@ YavuDevelopmentEnvironment class >> jqLibrary [
 { #category : #mongo }
 YavuDevelopmentEnvironment class >> mongoDatabaseName [
 
- ^ 'yavuSystem'
+ ^ CurrentSystemClass mongoDatabaseName
 ]
 
 { #category : #'as yet unclassified' }

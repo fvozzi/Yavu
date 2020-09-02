@@ -82,6 +82,12 @@ YavuSaleSubsystem >> priceListAt: aDate [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSaleSubsystem >> saleProducts [
+	
+	^ YavuSaleProduct all
+]
+
+{ #category : #'as yet unclassified' }
 YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [ 
 	
 	^ (self system storedSubsystem 

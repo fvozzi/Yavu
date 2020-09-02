@@ -37,6 +37,12 @@ YavuSaleCategory >> descriptionOrder [
       	yourself
 ]
 
+{ #category : #testing }
+YavuSaleCategory >> isSpecialOffer [
+
+	^ false
+]
+
 { #category : #accessing }
 YavuSaleCategory >> order [
 	order ifNil: [ order := 1 ].

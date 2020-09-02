@@ -37,6 +37,11 @@ TBSCustomerMenuView >> activeProductsByCategory: anObject [
 	activeProductsByCategory := anObject
 ]
 
+{ #category : #initialization }
+TBSCustomerMenuView >> activeSaleProducts [
+	^ self yavuSystem activeSaleProducts
+]
+
 { #category : #accessing }
 TBSCustomerMenuView >> categories [
 	^ categories
@@ -69,11 +74,13 @@ TBSCustomerMenuView >> currentPriceList: anObject [
 ]
 
 { #category : #initialization }
-TBSCustomerMenuView >> initialize [ 
-
+TBSCustomerMenuView >> initialize [
 	super initialize.
-	activeProductsByCategory := self yavuSystem activeSaleProducts asSortedCollection groupedBy: [ :each | each saleProductCategoryOrSpecialOfferCategory].
-	categories := activeProductsByCategory keys asSortedCollection: [:a :b | a order < b order].
+	activeProductsByCategory := self activeSaleProducts
+		asSortedCollection
+		groupedBy: [ :each | each saleProductCategoryOrSpecialOfferCategory ].
+	categories := activeProductsByCategory keys
+		asSortedCollection: [ :a :b | a order < b order ].
 	category := categories ifNotEmpty: [ :col | col first ].
 	currentPriceList := self yavuSystem currentPriceList
 ]
@@ -96,10 +103,11 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 { #category : #rendering }
 TBSCustomerMenuView >> renderContentOn: html [
 
+ 
 	html containerFluid: [ 
 			html column mediumSize: 12; smallSize: 12; marginBottom: 1; with: [ self renderMenuImageHeaderOn: html ].
 		self renderMenuAccordionOn: html 
-			 ].
+			 ]
 	
 
 ]
@@ -177,10 +185,23 @@ TBSCustomerMenuView >> renderMenuOn: html [
 ]
 
 { #category : #rendering }
-TBSCustomerMenuView >> renderMenuOn: html category: each [ 
+TBSCustomerMenuView >> renderMenuOn: html category: aCategory [ 
 		
-		self category: each.
-		self renderMenuOn: html
+		self category: aCategory.
+			html form: [ 
+		self renderMenuOn: html]
+	
+]
+
+{ #category : #rendering }
+TBSCustomerMenuView >> renderProductActivityButtons: product on: html [
+	
+	
+]
+
+{ #category : #rendering }
+TBSCustomerMenuView >> renderProductActivityButtonsOn: html [ 
+	
 	
 ]
 
@@ -198,7 +219,8 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 					html cardText: product description.
 					html cardSubtitle
 						level6;
-						with: (self priceMenuDescriptionOf: product) ] ]
+						with: (self priceMenuDescriptionOf: product).
+					self renderProductActivityButtons: product on: html] ]
 ]
 
 { #category : #hooks }
