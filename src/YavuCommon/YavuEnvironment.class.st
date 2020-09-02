@@ -15,6 +15,12 @@ YavuEnvironment class >> beCurrent [
 	Current := self
 ]
 
+{ #category : #seaside }
+YavuEnvironment class >> configureWAAdmin [
+
+	WAAdmin defaultDispatcher preferenceAt: #serverPath put: self serverPath
+]
+
 { #category : #system }
 YavuEnvironment class >> current [
 
@@ -63,14 +69,12 @@ YavuEnvironment class >> newSystem [
 
 { #category : #seaside }
 YavuEnvironment class >> registerAntimenuApp [
-	(WAAdmin
+	(WAAdmin 
 		register: self restaurantApplicationMenuRoot
 		asApplicationAt: self restaurantApplicationMenu)
 		preferenceAt: #sessionClass put: YavuGuestSession;
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
 		preferenceAt: #maximumRelativeAge put: 28800;
-		preferenceAt: #deploymentMode put: self deploymentMode;
-		preferenceAt: #serverPath put: self serverPath;
 		addLibrary: self jqLibrary;
 		addLibrary: self tbsLibrary;
 		addLibrary: self fontAwesomeLibrary
@@ -81,6 +85,7 @@ YavuEnvironment class >> registerSeasideApplication [
 	"Register the seaside app."
 
 	SBSHtmlCanvas selectAsDefault.
+	self configureWAAdmin.
 	self registerAntimenuApp.
 	self registerYavuRestaurantApp
 ]
@@ -93,8 +98,6 @@ YavuEnvironment class >> registerYavuRestaurantApp [
 		preferenceAt: #sessionClass put: YavuSession;
 		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
 		preferenceAt: #maximumRelativeAge put: 28800;
-		preferenceAt: #deploymentMode put: true;
-		preferenceAt: #serverPath put: self serverPath;
 		addLibrary: self jqLibrary;
 		addLibrary: self tbsLibrary;
 		addLibrary: self fontAwesomeLibrary

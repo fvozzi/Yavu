@@ -4,6 +4,13 @@ Class {
 	#category : #'YavuCommon-Environment'
 }
 
+{ #category : #seaside }
+YavuProductionEnvironment class >> configureWAAdmin [
+
+	super configureWAAdmin.
+	WAAdmin disableDevelopmentTools
+]
+
 { #category : #'as yet unclassified' }
 YavuProductionEnvironment class >> deploymentMode [
 
