@@ -174,6 +174,8 @@ YavuSaleProduct >> descriptionValidStartDate [
 
 { #category : #accessing }
 YavuSaleProduct >> imageName [
+	
+	imageName ifNil: [ ^ self noImageName ].
 	^ imageName
 ]
 
@@ -199,6 +201,12 @@ YavuSaleProduct >> maDescriptionForReport [
 	^super maDescriptionForReport,
 			self descriptionIsSpecialOffer,
 			self descriptionValidEndDate 
+]
+
+{ #category : #accessing }
+YavuSaleProduct >> noImageName [
+
+	 ^'antigourmet.jpg'
 ]
 
 { #category : #accessing }
