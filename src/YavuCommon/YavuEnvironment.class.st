@@ -68,6 +68,18 @@ YavuEnvironment class >> newSystem [
 ]
 
 { #category : #seaside }
+YavuEnvironment class >> pingApplicationName [
+	
+	^ 'ping' 
+]
+
+{ #category : #'as yet unclassified' }
+YavuEnvironment class >> pingApplicationRoot [
+
+	^ WAYavuPing  
+]
+
+{ #category : #seaside }
 YavuEnvironment class >> registerAntimenuApp [
 	(WAAdmin 
 		register: self restaurantApplicationMenuRoot
@@ -81,11 +93,19 @@ YavuEnvironment class >> registerAntimenuApp [
 ]
 
 { #category : #seaside }
+YavuEnvironment class >> registerPingApp [
+	^ WAAdmin
+		register: self pingApplicationRoot
+		asApplicationAt: self pingApplicationName
+]
+
+{ #category : #seaside }
 YavuEnvironment class >> registerSeasideApplication [
 	"Register the seaside app."
 
 	SBSHtmlCanvas selectAsDefault.
 	self configureWAAdmin.
+	self registerPingApp.
 	self registerAntimenuApp.
 	self registerYavuRestaurantApp
 ]
