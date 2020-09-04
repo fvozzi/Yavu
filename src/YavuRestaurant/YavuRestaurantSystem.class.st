@@ -16,6 +16,7 @@ YavuRestaurantSystem class >> systemMenuElements [
 	^ super systemMenuElements 
 		add: ((YavuSimpleMenuElement label: 'Menu' presenterClass: TBSCustomerMenuView subsystem: self) id: 3) ;
 		add: ((YavuSimpleMenuElement label: 'Menu Admin' presenterClass: TBSCustomerMenuAdminView subsystem: self) id: 4) ;
+		add: ((YavuSimpleMenuElement label: 'Imagenes' presenterClass: TBSMenuImageUploadForm subsystem: self) id: 5) ;
 		yourself
 ]
 

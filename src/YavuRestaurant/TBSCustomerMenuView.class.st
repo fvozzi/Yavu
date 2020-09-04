@@ -93,9 +93,18 @@ TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [
 	priceListItem := self currentPriceList priceListItemOf: aYavuSaleProduct.
 	priceListItem ifNil: [ ^ 'Precio?. Llamalo a Jorge!' ].
 	priceDescription := WriteStream on: String new.
-	priceDescription nextPutAll: (priceListItem sizeDescription1, ' $ ', (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: priceListItem) asString).
+	priceDescription 
+		nextPutAll: '$ ';
+		nextPutAll: (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: priceListItem) asString;
+		space;
+		nextPutAll: priceListItem sizeDescription1.
 	priceListItem sizeDescription2 notNil ifTrue: [ 
-		priceDescription nextPutAll: (' | ', priceListItem sizeDescription2, ' $ ', (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory price2OfPriceListItem: priceListItem) asString)].
+		priceDescription 
+			nextPutAll: ' | ';
+			nextPutAll: ' $ '; 
+			nextPutAll: (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory price2OfPriceListItem: priceListItem) asString;
+			space;
+			nextPutAll: priceListItem sizeDescription2 ].
 	^ priceDescription contents
 	
 ]
@@ -209,7 +218,7 @@ TBSCustomerMenuView >> renderProductActivityButtonsOn: html [
 TBSCustomerMenuView >> renderProductCard: product on: html [
 	^ html card
 		style: 'width: 16.3rem;';
-		with: [ html cardImage resourceUrl: 'img/baja/' , product imageName.
+		with: [ html cardImage resourceUrl: 'img/menu_img/' , product imageName.
 			html
 				cardBody: [ html cardTitle level5 with: product name.
 					html cardSubtitle
