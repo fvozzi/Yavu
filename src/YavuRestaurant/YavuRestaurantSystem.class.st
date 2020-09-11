@@ -54,10 +54,22 @@ YavuRestaurantSystem >> enableProduct: aSaleProduct [
 		addToSystem
 ]
 
+{ #category : #'api/queries' }
+YavuRestaurantSystem >> kilogramPresentationUnit [
+	
+	^ self presentationUnits detect: [ :each | each name = 'Kilogramo' ] ifNone: [ self kilogramPresentationUnitDefault ]
+]
+
 { #category : #'as yet unclassified' }
 YavuRestaurantSystem >> menuCategories [
 	
 	^ YavuSaleCategory all
+]
+
+{ #category : #'api/queries' }
+YavuRestaurantSystem >> presentationUnits [
+
+	^ self storedSubsystem instancesOf: YavuProductPresentationUnit 
 ]
 
 { #category : #'as yet unclassified' }

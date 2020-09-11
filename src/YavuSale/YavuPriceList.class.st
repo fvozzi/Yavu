@@ -75,3 +75,9 @@ YavuPriceList >> priceListItems [
 YavuPriceList >> priceListItems: anObject [
 	priceListItems := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+YavuPriceList >> priceListItemsOf: aProduct [ 
+	
+	^ self priceListItems select: [ :each | each product = aProduct ]
+]

@@ -88,23 +88,33 @@ TBSCustomerMenuView >> initialize [
 { #category : #'as yet unclassified' }
 TBSCustomerMenuView >> priceMenuDescriptionOf: aYavuSaleProduct [ 
 
-	| priceListItem priceDescription |
+	| priceListItems priceDescription |
 
-	priceListItem := self currentPriceList priceListItemOf: aYavuSaleProduct.
-	priceListItem ifNil: [ ^ 'Precio?. Llamalo a Jorge!' ].
+	priceListItems := self currentPriceList priceListItemsOf: aYavuSaleProduct.
+	priceListItems ifEmpty: [ ^ 'Precio?. Llamalo a Jorge!' ].
+	priceDescription := WriteStream on: String new.
+	priceListItems do: [ :priceListItem | 
+		priceDescription 
+			nextPutAll: '$ ';
+			nextPutAll: (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: priceListItem) asString;
+			space;
+			nextPutAll: priceListItem sizeDescription1;
+			nextPutAll: '<br>'].
+	^ priceDescription contents
+	
+]
+
+{ #category : #'as yet unclassified' }
+TBSCustomerMenuView >> priceMenuItemDescriptionOf: aPriceListItem [ 
+
+	| priceDescription |
+
 	priceDescription := WriteStream on: String new.
 	priceDescription 
-		nextPutAll: '$ ';
-		nextPutAll: (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: priceListItem) asString;
-		space;
-		nextPutAll: priceListItem sizeDescription1.
-	priceListItem sizeDescription2 notNil ifTrue: [ 
-		priceDescription 
-			nextPutAll: ' | ';
-			nextPutAll: ' $ '; 
-			nextPutAll: (aYavuSaleProduct saleProductCategoryOrSpecialOfferCategory price2OfPriceListItem: priceListItem) asString;
+			nextPutAll: '$ ';
+			nextPutAll: (aPriceListItem product saleProductCategoryOrSpecialOfferCategory  price1OfPriceListItem: aPriceListItem) asString;
 			space;
-			nextPutAll: priceListItem sizeDescription2 ].
+			nextPutAll: aPriceListItem sizeDescription1.
 	^ priceDescription contents
 	
 ]
@@ -216,6 +226,7 @@ TBSCustomerMenuView >> renderProductActivityButtonsOn: html [
 
 { #category : #rendering }
 TBSCustomerMenuView >> renderProductCard: product on: html [
+	| priceListItems |
 	^ html card
 		style: 'width: 16.3rem;';
 		with: [ html cardImage resourceUrl: 'img/menu_img/' , product imageName.
@@ -226,9 +237,11 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 						mutedText;
 						with: product subtitle.
 					html cardText: product description.
-					html cardSubtitle
-						level6;
-						with: (self priceMenuDescriptionOf: product).
+					priceListItems := self currentPriceList priceListItemsOf: product.
+					priceListItems do: [:eachItem | 
+						html cardSubtitle
+							level6;
+							with: (self priceMenuItemDescriptionOf: eachItem)].
 					self renderProductActivityButtons: product on: html] ]
 ]
 
