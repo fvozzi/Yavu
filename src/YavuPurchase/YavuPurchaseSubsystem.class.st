@@ -120,6 +120,11 @@ YavuPurchaseSubsystem >> dependencies [
 			(OrderedCollection
 				with:
 					(YavuObjectDependecyChecker on: YavuProduct referencesMethod: #brand));
+		at: YavuProductType
+			put:
+			(OrderedCollection
+				with:
+					(YavuObjectDependecyChecker on: YavuProduct referencesMethod: #productType));
 		at: YavuProduct
 			put:
 			(OrderedCollection

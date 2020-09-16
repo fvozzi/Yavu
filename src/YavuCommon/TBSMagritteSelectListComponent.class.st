@@ -19,6 +19,5 @@ TBSMagritteSelectListComponent >> renderEditorForUngroupedOn: html [
 		list: self options;
 		selected: self value;
 		callback: [ :value | self value: value ];
-		labels: [ :value | self labelForOption: value ];
-		onChange: 'submit()'
+		labels: [ :value | self labelForOption: value ]
 ]

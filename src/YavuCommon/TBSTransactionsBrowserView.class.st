@@ -96,6 +96,7 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 						list: self possibleInstancesClasses;
 						selected: self objectClass ;
 						callback: [ :oneObjectClass | self objectClass: oneObjectClass ];
+						onChange: 'submit()';
 						labels: [ :each | each label]
 						] ] mediumSize: 3.
 	html column: [ 
