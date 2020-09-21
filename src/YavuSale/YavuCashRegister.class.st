@@ -54,7 +54,7 @@ YavuCashRegister >> descriptionPrefix [
 { #category : #'as yet unclassified' }
 YavuCashRegister >> legalName [
 	
-	^ ''
+	^ 'Consumidor Final'
 ]
 
 { #category : #accessing }
