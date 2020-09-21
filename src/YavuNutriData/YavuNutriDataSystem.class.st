@@ -4,6 +4,14 @@ Class {
 	#category : #'YavuNutriData-Environment'
 }
 
+{ #category : #initialization }
+YavuNutriDataSystem class >> initializeSubsystemsForTesting [
+
+	self enabledSubsystemsClasses: (Array 
+											with: YavuTransientSubsystem 
+											with: YavuNutritionalSourcesSubsystem)
+]
+
 { #category : #'as yet unclassified' }
 YavuNutriDataSystem class >> systemName [
 	

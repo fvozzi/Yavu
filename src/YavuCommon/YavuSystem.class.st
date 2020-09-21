@@ -75,6 +75,10 @@ YavuSystem class >> homeViewClass [
 	 ^ Smalltalk at: #TBSYavuHomeView
 ]
 
+{ #category : #initialization }
+YavuSystem class >> initializeSubsystemsForDevelopment [
+]
+
 { #category : #configuration }
 YavuSystem class >> mainView [
 

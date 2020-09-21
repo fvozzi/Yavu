@@ -10,7 +10,7 @@ Class {
 { #category : #'as yet unclassified' }
 YavuNutriDataFunctionalTest >> setUp [
 
-	YavuEnvironment 
+	YavuTestEnvironment 
 		systemClass: (YavuNutriDataSystem 
 			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuNutritionalSourcesSubsystem ))
 	
@@ -19,7 +19,8 @@ YavuNutriDataFunctionalTest >> setUp [
 { #category : #'as yet unclassified' }
 YavuNutriDataFunctionalTest >> subsystem [
 	
-	^YavuEnvironment newSystem
+	 YavuTestEnvironment current systemClass: (YavuSystem enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuSecuritySubsystem )).
+	^YavuEnvironment current newSystem
 ]
 
 { #category : #accessing }
