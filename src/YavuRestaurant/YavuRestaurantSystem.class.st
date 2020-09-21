@@ -16,6 +16,12 @@ YavuRestaurantSystem class >> initializeSubsystemsForDevelopment [
 ]
 
 { #category : #initialization }
+YavuRestaurantSystem class >> initializeSubsystemsForProduction [
+
+	self initializeSubsystemsForDevelopment 
+]
+
+{ #category : #initialization }
 YavuRestaurantSystem class >> initializeSubsystemsForTesting [
 
 	self enabledSubsystemsClasses: (Array 
@@ -44,6 +50,12 @@ YavuRestaurantSystem class >> registerSeasideApplication [
 
 	super registerSeasideApplication.
 	self registerAntimenuApp 
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem class >> resourceBaseUrlForProduction [
+
+	^ 'https://laesquinadelantigourmet.com.ar'
 ]
 
 { #category : #seaside }

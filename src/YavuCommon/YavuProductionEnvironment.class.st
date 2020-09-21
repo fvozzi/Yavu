@@ -24,6 +24,12 @@ YavuProductionEnvironment class >> fontAwesomeLibrary [
 	^ FAWDeploymentLibrary
 ]
 
+{ #category : #system }
+YavuProductionEnvironment class >> initializeSubsystems [
+	
+		self systemClass initializeSubsystemsForProduction
+]
+
 { #category : #seaside }
 YavuProductionEnvironment class >> jqLibrary [
 	
@@ -38,7 +44,7 @@ YavuProductionEnvironment class >> mongoDatabaseName [
 
 { #category : #seaside }
 YavuProductionEnvironment class >> resourceBaseUrl [
-	^ 'https://www.laesquinadelantigourmet.com.ar'
+	^ self systemClass resourceBaseUrlForProduction
 ]
 
 { #category : #'as yet unclassified' }

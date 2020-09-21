@@ -19,6 +19,12 @@ YavuBeerStackSystem class >> initializeSubsystemsForDevelopment [
 ]
 
 { #category : #initialization }
+YavuBeerStackSystem class >> initializeSubsystemsForProduction [
+
+	self initializeSubsystemsForDevelopment 
+]
+
+{ #category : #initialization }
 YavuBeerStackSystem class >> initializeSubsystemsForTesting [
 
 	self enabledSubsystemsClasses: (Array 
@@ -27,6 +33,12 @@ YavuBeerStackSystem class >> initializeSubsystemsForTesting [
 											with: YavuPurchaseSubsystem
 											with: YavuSaleSubsystem 
 											with: YavuAccountingSubsystem)
+]
+
+{ #category : #'as yet unclassified' }
+YavuBeerStackSystem class >> resourceBaseUrlForProduction [
+
+	^ 'https://lagoonbeer.com.ar/yavu-lagoon/'
 ]
 
 { #category : #'as yet unclassified' }
