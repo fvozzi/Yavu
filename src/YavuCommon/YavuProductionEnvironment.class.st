@@ -41,18 +41,6 @@ YavuProductionEnvironment class >> resourceBaseUrl [
 	^ 'https://www.laesquinadelantigourmet.com.ar'
 ]
 
-{ #category : #seaside }
-YavuProductionEnvironment class >> restaurantApplicationMenu [
-
-	^ 'antimenu' 
-]
-
-{ #category : #seaside }
-YavuProductionEnvironment class >> seasideApplicationName [
-	
-	^ CurrentSystemClass seasideApplicationName
-]
-
 { #category : #'as yet unclassified' }
 YavuProductionEnvironment class >> serverPath [
 

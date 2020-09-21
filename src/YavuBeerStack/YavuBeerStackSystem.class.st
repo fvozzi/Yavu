@@ -7,6 +7,28 @@ Class {
 	#category : #'YavuBeerStack-Environment'
 }
 
+{ #category : #initialization }
+YavuBeerStackSystem class >> initializeSubsystemsForDevelopment [
+
+	self enabledSubsystemsClasses: (Array 
+											with: YavuMongoSubsystem 
+											with: YavuSecuritySubsystem
+											with: YavuPurchaseSubsystem
+											with: YavuSaleSubsystem 
+											with: YavuAccountingSubsystem)
+]
+
+{ #category : #initialization }
+YavuBeerStackSystem class >> initializeSubsystemsForTesting [
+
+	self enabledSubsystemsClasses: (Array 
+											with: YavuTransientSubsystem 
+											with: YavuSecuritySubsystem
+											with: YavuPurchaseSubsystem
+											with: YavuSaleSubsystem 
+											with: YavuAccountingSubsystem)
+]
+
 { #category : #'as yet unclassified' }
 YavuBeerStackSystem class >> systemName [
 	

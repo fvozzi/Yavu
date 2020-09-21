@@ -49,6 +49,12 @@ YavuEnvironment class >> fontAwesomeLibrary [
 	^ self subclassResponsibility 
 ]
 
+{ #category : #system }
+YavuEnvironment class >> initializeSubsystems [	
+
+	self subclassResponsibility 
+]
+
 { #category : #seaside }
 YavuEnvironment class >> jqLibrary [
 	
@@ -80,19 +86,6 @@ YavuEnvironment class >> pingApplicationRoot [
 ]
 
 { #category : #seaside }
-YavuEnvironment class >> registerAntimenuApp [
-	(WAAdmin 
-		register: self restaurantApplicationMenuRoot
-		asApplicationAt: self restaurantApplicationMenu)
-		preferenceAt: #sessionClass put: YavuGuestSession;
-		preferenceAt: #resourceBaseUrl put: self resourceBaseUrl;
-		preferenceAt: #maximumRelativeAge put: 28800;
-		addLibrary: self jqLibrary;
-		addLibrary: self tbsLibrary;
-		addLibrary: self fontAwesomeLibrary
-]
-
-{ #category : #seaside }
 YavuEnvironment class >> registerPingApp [
 	^ WAAdmin
 		register: self pingApplicationRoot
@@ -106,12 +99,11 @@ YavuEnvironment class >> registerSeasideApplication [
 	SBSHtmlCanvas selectAsDefault.
 	self configureWAAdmin.
 	self registerPingApp.
-	self registerAntimenuApp.
-	self registerYavuRestaurantApp
+	self systemClass registerSeasideApplication
 ]
 
 { #category : #seaside }
-YavuEnvironment class >> registerYavuRestaurantApp [
+YavuEnvironment class >> registerYavuApp [
 	^ (WAAdmin
 		register: self seasideApplicationRoot
 		asApplicationAt: self seasideApplicationName)
@@ -129,41 +121,32 @@ YavuEnvironment class >> resourceBaseUrl [
 ]
 
 { #category : #'as yet unclassified' }
-YavuEnvironment class >> restaurantApplicationMenu [
-
-	^ 'antimenu' 
-]
-
-{ #category : #'as yet unclassified' }
-YavuEnvironment class >> restaurantApplicationMenuRoot [
-
-	^ TBSCustomerMenuView 
-]
-
-{ #category : #seaside }
-YavuEnvironment class >> seasideApplicationName [
-	
-	^ 'yavu' 
-]
-
-{ #category : #'as yet unclassified' }
-YavuEnvironment class >> seasideApplicationRoot [
-
-	^ TBSYavuLogin 
-]
-
-{ #category : #'as yet unclassified' }
 YavuEnvironment class >> serverPath [
 
 	^ self subclassResponsibility 
 ]
 
 { #category : #system }
-YavuEnvironment class >> systemClass: aYavuSystem [
+YavuEnvironment class >> startOn: aYavuSystemClass [ 
+
+	self beCurrent.
+	self systemClass: aYavuSystemClass.
+	self registerSeasideApplication 
+]
+
+{ #category : #system }
+YavuEnvironment class >> systemClass [
+
+	^ CurrentSystemClass
+	
+]
+
+{ #category : #system }
+YavuEnvironment class >> systemClass: aYavuSystemClass [
 
 	CurrentSystem := nil.
-	^CurrentSystemClass := aYavuSystem
-	
+	CurrentSystemClass := aYavuSystemClass.
+	self initializeSubsystems	
 ]
 
 { #category : #seaside }

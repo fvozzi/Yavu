@@ -16,6 +16,15 @@ YavuDevelopmentEnvironment class >> fontAwesomeLibrary [
 	^ FAWDevelopmentLibrary
 ]
 
+{ #category : #system }
+YavuDevelopmentEnvironment class >> initializeSubsystems [
+
+	self systemClass initializeSubsystemsForDevelopment
+	
+
+										
+]
+
 { #category : #seaside }
 YavuDevelopmentEnvironment class >> jqLibrary [
 	

@@ -4,10 +4,58 @@ Class {
 	#category : #'YavuRestaurant-Environment'
 }
 
-{ #category : #'as yet unclassified' }
-YavuRestaurantSystem class >> fontAwesomeClass [
+{ #category : #initialization }
+YavuRestaurantSystem class >> initializeSubsystemsForDevelopment [
 
-	^ 'fa-beer'
+	self enabledSubsystemsClasses: (Array 
+											with: YavuMongoSubsystem 
+											with: YavuSecuritySubsystem
+											with: YavuPurchaseSubsystem
+											with: YavuSaleSubsystem 
+											with: YavuAccountingSubsystem)
+]
+
+{ #category : #initialization }
+YavuRestaurantSystem class >> initializeSubsystemsForTesting [
+
+	self enabledSubsystemsClasses: (Array 
+											with: YavuTransientSubsystem 
+											with: YavuSecuritySubsystem
+											with: YavuPurchaseSubsystem
+											with: YavuSaleSubsystem 
+											with: YavuAccountingSubsystem)
+]
+
+{ #category : #seaside }
+YavuRestaurantSystem class >> registerAntimenuApp [
+	(WAAdmin
+		register: self restaurantApplicationMenuRoot
+		asApplicationAt: self restaurantApplicationMenu)
+		preferenceAt: #sessionClass put: YavuGuestSession;
+		preferenceAt: #resourceBaseUrl put: YavuEnvironment current resourceBaseUrl;
+		preferenceAt: #maximumRelativeAge put: 28800;
+		addLibrary: YavuEnvironment current jqLibrary;
+		addLibrary: YavuEnvironment current tbsLibrary;
+		addLibrary: YavuEnvironment current fontAwesomeLibrary
+]
+
+{ #category : #seaside }
+YavuRestaurantSystem class >> registerSeasideApplication [
+
+	super registerSeasideApplication.
+	self registerAntimenuApp 
+]
+
+{ #category : #seaside }
+YavuRestaurantSystem class >> restaurantApplicationMenu [
+
+	^ 'antimenu' 
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem class >> restaurantApplicationMenuRoot [
+
+	^ TBSCustomerMenuView 
 ]
 
 { #category : #subsystemsProtocol }

@@ -63,6 +63,12 @@ YavuSystem class >> enabledSubsystemsClasses: aCollectionOfSubsystemsClasses [
 	EnabledSubsystemsClasses  := aCollectionOfSubsystemsClasses
 ]
 
+{ #category : #'as yet unclassified' }
+YavuSystem class >> fontAwesomeClass [
+
+	^ 'fa-beer'
+]
+
 { #category : #configuration }
 YavuSystem class >> homeViewClass [
 	
@@ -87,11 +93,34 @@ YavuSystem class >> mongoDatabaseName [
 		ifNotNil: [ companyName ]
 ]
 
+{ #category : #seaside }
+YavuSystem class >> registerSeasideApplication [
+
+	self registerYavuApp 
+]
+
+{ #category : #seaside }
+YavuSystem class >> registerYavuApp [
+	^ (WAAdmin
+		register: self seasideApplicationRoot
+		asApplicationAt: self seasideApplicationName)
+		preferenceAt: #sessionClass put: YavuSession;
+		preferenceAt: #resourceBaseUrl put: YavuEnvironment current resourceBaseUrl;
+		preferenceAt: #maximumRelativeAge put: 28800;
+		addLibrary: YavuEnvironment current jqLibrary;
+		addLibrary: YavuEnvironment current tbsLibrary;
+		addLibrary: YavuEnvironment current fontAwesomeLibrary
+]
+
 { #category : #configuration }
 YavuSystem class >> seasideApplicationName [
-	^ companyName
-		ifNil: [ YavuEnvironment seasideApplicationName ]
-		ifNotNil: [ companyName asLowercase]
+	^ companyName asLowercase
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem class >> seasideApplicationRoot [
+
+	^ TBSYavuLogin 
 ]
 
 { #category : #initialization }
