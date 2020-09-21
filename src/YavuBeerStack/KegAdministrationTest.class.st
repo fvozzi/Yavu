@@ -19,7 +19,7 @@ KegAdministrationTest >> newKegNummberOne [
 { #category : #adding }
 KegAdministrationTest >> setUp [
 
-	YavuEnvironment 
+	YavuTestEnvironment 
 		systemClass: (YavuBeerStackSystem 
 			enabledSubsystemsClasses: (Array with: YavuTransientSubsystem))
 ]

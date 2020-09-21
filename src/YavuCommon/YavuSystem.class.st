@@ -79,6 +79,12 @@ YavuSystem class >> homeViewClass [
 YavuSystem class >> initializeSubsystemsForDevelopment [
 ]
 
+{ #category : #initialization }
+YavuSystem class >> initializeSubsystemsForTesting [
+
+	self enabledSubsystemsClasses: (Array with: YavuTransientSubsystem with: YavuSecuritySubsystem)
+]
+
 { #category : #configuration }
 YavuSystem class >> mainView [
 
