@@ -91,9 +91,9 @@ TBSYavuObjectBrowserView >> renderContentOn: html [
 				card: [ html
 						cardBody: [ 
 							
-							html row: [html cardTitle level5 with: self browserCaption].
-							html row: [ self renderObjectClassSelection: html ] ].
-							html row: [self renderReportOn: html ]] ]
+							html cardTitle level5 with: self browserCaption.
+							self renderObjectClassSelection: html ] .
+							self renderReportOn: html ]]
 ]
 
 { #category : #subclassResponsability }
