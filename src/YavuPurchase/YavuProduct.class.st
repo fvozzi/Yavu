@@ -100,9 +100,9 @@ YavuProduct >> initialize [
 { #category : #'sin categoria' }
 YavuProduct >> name [ 
 
-	^ (self productType notNil & self brand notNil) 
+	^ (name isNil & self productType notNil & self brand notNil) 
 		ifTrue: [ self productType name, ' ', self brand name ]
-		ifFalse: [ '' ]
+		ifFalse: [ super name ]
 ]
 
 { #category : #accessing }
