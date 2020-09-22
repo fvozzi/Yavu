@@ -98,7 +98,7 @@ TBSYavuLogin >> succeedLogin: aSystem [
 TBSYavuLogin >> updateRoot: anHtmlRoot [
 
 	super updateRoot: anHtmlRoot.  
-	anHtmlRoot title: system companyName 
+	anHtmlRoot title: system companyName
 ]
 
 { #category : #accessing }
