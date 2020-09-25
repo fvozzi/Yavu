@@ -9,7 +9,8 @@ Class {
 		'address',
 		'phoneNumber',
 		'openingHours',
-		'accountingAccount'
+		'accountingAccount',
+		'isServiceProvider'
 	],
 	#category : #'YavuPurchase-Entities'
 }
@@ -134,6 +135,18 @@ YavuSupplier >> descriptionIsRetentionAgent [
 ]
 
 { #category : #descriptions }
+YavuSupplier >> descriptionIsServiceProvider [
+	
+	<magritteDescription>
+	^MABooleanDescription new
+		accessor: #isServiceProvider;
+		label: 'Es proveedor de servicios?';
+		priority: 180;
+		componentClass: TBSMagritteCheckboxComponent;
+		yourself
+]
+
+{ #category : #descriptions }
 YavuSupplier >> descriptionOpeningHours [
 
 	<magritteDescription>
@@ -203,6 +216,18 @@ YavuSupplier >> isRetentionAgent [
 { #category : #accessing }
 YavuSupplier >> isRetentionAgent: anObject [
 	isRetentionAgent := anObject
+]
+
+{ #category : #accessing }
+YavuSupplier >> isServiceProvider [
+	
+	isServiceProvider ifNil: [ isServiceProvider := false ].
+	^ isServiceProvider 
+]
+
+{ #category : #accessing }
+YavuSupplier >> isServiceProvider: anObject [
+	isServiceProvider := anObject
 ]
 
 { #category : #accessing }

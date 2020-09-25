@@ -61,6 +61,20 @@ YavuProduct >> descriptionBrand [
 ]
 
 { #category : #descriptions }
+YavuProduct >> descriptionName [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MAStringDescription new 
+		accessor: #name;
+		label: 'Nombre';
+		priority: 100;
+		requiredErrorMessage: 'Debe completar el nombre.';
+		componentClass: TBSMagritteTextInputComponent;
+		yourself
+]
+
+{ #category : #descriptions }
 YavuProduct >> descriptionProductType [
 	
 	<magritteDescription>

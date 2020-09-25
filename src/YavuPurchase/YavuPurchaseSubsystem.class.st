@@ -283,6 +283,12 @@ YavuPurchaseSubsystem >> removeSupplier: aSupplier [
 	self system storedSubsystem remove: aSupplier
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> servicesSuppliers [
+	
+	^ self suppliers select: [ :each | each isServiceProvider ]
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> suppliers [
 
