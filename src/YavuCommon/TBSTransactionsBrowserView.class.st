@@ -90,9 +90,12 @@ TBSTransactionsBrowserView >> possibleInstancesClasses [
 { #category : #subclassResponsability }
 TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 
+	html row: [  
 	html column: [ 
 		html row: 'Transacción:'.
 		html row: [html select
+						class: 'selectpicker';
+						attributeAt: 'data-live-search' put: 'true' ;
 						list: self possibleInstancesClasses;
 						selected: self objectClass ;
 						callback: [ :oneObjectClass | self objectClass: oneObjectClass ];
@@ -128,7 +131,7 @@ TBSTransactionsBrowserView >> renderObjectClassSelection: html [
 			html row: [ html formButton 
 				bePrimary;
 				callback: [ self search];
-				with: 'Buscar' ] ] mediumSize: 2
+				with: 'Buscar' ] ] mediumSize: 2]
 ]
 
 { #category : #'as yet unclassified' }

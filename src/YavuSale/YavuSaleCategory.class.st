@@ -2,7 +2,8 @@ Class {
 	#name : #YavuSaleCategory,
 	#superclass : #YavuEntity,
 	#instVars : [
-		'order'
+		'order',
+		'isVisible'
 	],
 	#category : #'YavuSale-Entities'
 }
@@ -25,6 +26,19 @@ YavuSaleCategory class >> subsystemClass [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSaleCategory >> descriptionIsVisible [
+
+	<magritteDescription>
+	^MABooleanDescription new 
+      accessor: #isVisible;
+      label: 'Visible?';
+      	priority: 150;
+		beRequired;
+		componentClass: TBSMagritteCheckboxComponent;
+      	yourself
+]
+
+{ #category : #'as yet unclassified' }
 YavuSaleCategory >> descriptionOrder [
 
 	<magritteDescription>
@@ -41,6 +55,17 @@ YavuSaleCategory >> descriptionOrder [
 YavuSaleCategory >> isSpecialOffer [
 
 	^ false
+]
+
+{ #category : #accessing }
+YavuSaleCategory >> isVisible [
+	isVisible ifNil: [ ^true ].
+	^ isVisible 
+]
+
+{ #category : #accessing }
+YavuSaleCategory >> isVisible: anObject [
+	isVisible := anObject
 ]
 
 { #category : #accessing }

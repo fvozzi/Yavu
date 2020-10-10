@@ -53,6 +53,12 @@ TBSCustomerMenuView >> categories: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+TBSCustomerMenuView >> categoriesToShow [
+
+	^ self categories select: [ :each | each isVisible ]
+]
+
+{ #category : #'as yet unclassified' }
 TBSCustomerMenuView >> category [
 	^ category
 ]
@@ -140,7 +146,7 @@ TBSCustomerMenuView >> renderMenuAccordionOn: html [
 	html div
 		id: 'accordion';
 		with: [ 
-	self categories
+	self categoriesToShow
 		doWithIndex: [ :eachCategory :index| 
 			html card: [ 
 				html cardHeader

@@ -11,6 +11,12 @@ TBSCustomerMenuAdminView >> activeSaleProducts [
 	^ self yavuSystem saleProducts
 ]
 
+{ #category : #'as yet unclassified' }
+TBSCustomerMenuAdminView >> categoriesToShow [
+
+	^ self categories
+]
+
 { #category : #rendering }
 TBSCustomerMenuAdminView >> renderProductActivityButtons: product on: html [
 
