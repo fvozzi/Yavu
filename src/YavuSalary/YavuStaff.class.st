@@ -68,9 +68,9 @@ YavuStaff >> descriptionAddress [
 
 	<magritteDescription>
 	^MAStringDescription new 
-		accessor: #postalCode ;
-		label: 'Código Postal';
-		priority: 140;
+		accessor: #address ;
+		label: 'Dirección';
+		priority: 150;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -79,11 +79,11 @@ YavuStaff >> descriptionAddress [
 YavuStaff >> descriptionBirthdate [
 
 	<magritteDescription>
-	^MAStringDescription new 
+	^MADateDescription new 
 		accessor: #birthdate ;
 		label: 'Fecha Nacimiento';
-		priority: 170;
-		componentClass: TBSMagritteTextInputComponent;
+		priority: 180;
+		componentClass: TBSMagritteDateInputComponent;
 		yourself
 ]
 
@@ -94,7 +94,7 @@ YavuStaff >> descriptionCuit [
 	^MAStringDescription new 
 		accessor: #cuit ;
 		label: 'CUIT';
-		priority: 160;
+		priority: 140;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -106,7 +106,7 @@ YavuStaff >> descriptionDni [
 	^MAStringDescription new 
 		accessor: #dni ;
 		label: 'DNI';
-		priority: 150;
+		priority: 130;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -118,7 +118,7 @@ YavuStaff >> descriptionJobRole [
 	^MASingleOptionDescription new
 		accessor: #jobRole;
 		label: 'Puesto';
-		priority: 170;
+		priority: 120;
 		options: self subsystem jobRoles;
 		beSorted;
 		beRequired;
@@ -133,7 +133,7 @@ YavuStaff >> descriptionLocality [
 	^MAStringDescription new 
 		accessor: #locality ;
 		label: 'Localidad';
-		priority: 150;
+		priority: 170;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -145,7 +145,7 @@ YavuStaff >> descriptionPhone [
 	^MAStringDescription new 
 		accessor: #phone;
 		label: 'Teléfono';
-		priority: 110;
+		priority: 145;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -157,7 +157,7 @@ YavuStaff >> descriptionPostalCode [
 	^MAStringDescription new 
 		accessor: #postalCode ;
 		label: 'Código Postal';
-		priority: 140;
+		priority: 160;
 		componentClass: TBSMagritteTextInputComponent;
 		yourself
 ]
@@ -171,7 +171,7 @@ YavuStaff >> descriptionWorkEndDate [
 		componentClass: TBSMagritteDateInputComponent;
         	accessor: #workEndDate;
         	label: 'Fecha desvinculación';
-        	priority: 170;
+        	priority: 190;
         	yourself
 ]
 
@@ -184,7 +184,7 @@ YavuStaff >> descriptionWorkStartDate [
 		componentClass: TBSMagritteDateInputComponent;
         	accessor: #workStartDate;
         	label: 'Fecha contratación';
-        	priority: 170;
+        	priority: 185;
         	yourself
 ]
 
