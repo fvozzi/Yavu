@@ -43,6 +43,14 @@ YavuPurchaseSubsystem >> accountingAccounts [
 	^ self system accountingSubsystem accountingAccounts
 ]
 
+{ #category : #accessing }
+YavuPurchaseSubsystem >> activeServicesContracts [
+	"Devuelvo todos los contratos de servicios pero porque Magritte me limita para pasarle el proveedor seleccionado y la fecha del pago."
+
+	^ self system storedSubsystem 
+		instancesOf: YavuServiceContract 
+]
+
 { #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 
