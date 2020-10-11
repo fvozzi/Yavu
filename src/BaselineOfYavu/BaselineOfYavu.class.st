@@ -32,6 +32,7 @@ BaselineOfYavu >> baseline: spec [
 			spec package: 'YavuRestaurant' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuSale' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuAccounting' with: [spec requires: 'YavuCommon'].
+			spec package: 'YavuSalary' with: [spec requires: 'YavuCommon'].
 			spec package: 'YavuInformes' with: [spec requires: #('YavuCommon' 'Seaside3' 'Magritte' 'Bootstrap4' 'FontAwesome')]
 			]
 		
