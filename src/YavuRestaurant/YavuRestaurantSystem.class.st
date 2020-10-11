@@ -12,7 +12,8 @@ YavuRestaurantSystem class >> initializeSubsystemsForDevelopment [
 											with: YavuSecuritySubsystem
 											with: YavuPurchaseSubsystem
 											with: YavuSaleSubsystem 
-											with: YavuAccountingSubsystem)
+											with: YavuAccountingSubsystem
+											with: YavuSalarySubsystem)
 ]
 
 { #category : #initialization }
@@ -29,7 +30,8 @@ YavuRestaurantSystem class >> initializeSubsystemsForTesting [
 											with: YavuSecuritySubsystem
 											with: YavuPurchaseSubsystem
 											with: YavuSaleSubsystem 
-											with: YavuAccountingSubsystem)
+											with: YavuAccountingSubsystem
+											with: YavuSalarySubsystem)
 ]
 
 { #category : #seaside }

@@ -137,6 +137,7 @@ YavuServiceContract >> expirationDay: anObject [
 YavuServiceContract >> initialize [ 
 
 	super initialize.
+	description := ''.
 	installments := 0.
 	expirationDay := 5
 ]
@@ -149,4 +150,13 @@ YavuServiceContract >> installments [
 { #category : #accessing }
 YavuServiceContract >> installments: anObject [
 	installments := anObject
+]
+
+{ #category : #printing }
+YavuServiceContract >> printOn: aStream [
+
+	aStream 
+		nextPutAll: self entity name; 
+		nextPutAll: ' - ';
+		nextPutAll: self description
 ]
