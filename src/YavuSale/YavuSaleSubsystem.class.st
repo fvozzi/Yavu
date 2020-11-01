@@ -78,7 +78,17 @@ YavuSaleSubsystem >> name [
 { #category : #'as yet unclassified' }
 YavuSaleSubsystem >> priceListAt: aDate [ 
 	
-	^ (self system storedSubsystem instancesOf: YavuPriceList) first
+	| currentPriceOfSaleProducts priceOfSaleProducts grouped |
+	
+	"Reemplazar por una query de vigentes"
+	priceOfSaleProducts := self system storedSubsystem instancesOfClass: YavuPriceOfSaleProduct  from: '08/01/2020' asDate to: aDate.
+	grouped := priceOfSaleProducts groupedBy: [ :each | each product name, each sizeDescription1 ].
+	currentPriceOfSaleProducts := grouped values collect: [:each |
+		each asSortedCollection reverse first 
+		  ].
+	^ YavuPriceList new 
+		date: aDate;
+		priceListItems: currentPriceOfSaleProducts
 ]
 
 { #category : #'as yet unclassified' }
