@@ -21,7 +21,7 @@ YavuMigration4 class >> runMigration [
 
 	| priceList |
 	
-	priceList :=  self yavuSystem saleSubsystem priceListAt: '08/01/2020' asDate. 
+	priceList :=  (self yavuSystem storedSubsystem instancesOf: YavuPriceList) first. 
 	priceList priceListItems  do: [ :each | | newPriceOfSaleProduct |
 		newPriceOfSaleProduct := YavuPriceOfSaleProduct entity: each product date: '10/01/2020' asDate.
 		newPriceOfSaleProduct
