@@ -109,6 +109,18 @@ YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 ]
 
 { #category : #'as yet unclassified' }
+YavuSaleSubsystem >> salesOfEntity: aYavuBusinessName vatDeclarationMonth: aDate [ 
+		
+	^ (self system storedSubsystem 
+		instancesOfClass: YavuSaleInvoice 
+		from: aDate beginOfMonth to: aDate endOfMonth
+		dateSelector: #vatDeclarationMonth ),
+		(self system storedSubsystem 
+		instancesOfClass: YavuZLock  
+		from: aDate beginOfMonth to: aDate endOfMonth )
+]
+
+{ #category : #'as yet unclassified' }
 YavuSaleSubsystem >> specialOfferCategory [
 
 	^ YavuSaleSpecialOrderCategory current

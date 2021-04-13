@@ -162,7 +162,7 @@ YavuAccountingSubsystem >> saleInvoiceDescriptionsForVatDeclaration [
 { #category : #afip }
 YavuAccountingSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 
-	^ self system saleSubsystem salesOfEntity: aYavuBusinessName month: aDate
+	^ self system saleSubsystem salesOfEntity: aYavuBusinessName vatDeclarationMonth: aDate
 ]
 
 { #category : #afip }

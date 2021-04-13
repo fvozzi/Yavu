@@ -7,7 +7,8 @@ Class {
 		'prefix',
 		'invoiceNumber',
 		'invoiceType',
-		'netPrice'
+		'netPrice',
+		'vatDeclarationMonth'
 	],
 	#category : #'YavuCommon-DomainObjects'
 }
@@ -127,6 +128,20 @@ YavuInvoice >> descriptionVat210 [
         	yourself
 ]
 
+{ #category : #descriptions }
+YavuInvoice >> descriptionVatDeclarationMonth [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MADateDescription new 
+		componentClass: MAMonthYearSelectorComponent ;
+        	accessor: #vatDeclarationMonth ;
+        	label: 'Fecha Declaración IVA';
+        	priority: 180;
+			beRequired;
+        	yourself
+]
+
 { #category : #configuration }
 YavuInvoice >> formattedInvoiceNumber [
 	
@@ -143,6 +158,7 @@ YavuInvoice >> formattedPrefix [
 YavuInvoice >> initialize [ 
 
 	super initialize.
+	vatDeclarationMonth := self date beginOfMonth.
 	netPrice := vat105 := vat210 := 0
 ]
 
@@ -229,4 +245,14 @@ YavuInvoice >> vat210 [
 YavuInvoice >> vat210: aNumber [
 	
 	vat210 := aNumber
+]
+
+{ #category : #accessing }
+YavuInvoice >> vatDeclarationMonth [
+	^ vatDeclarationMonth
+]
+
+{ #category : #accessing }
+YavuInvoice >> vatDeclarationMonth: anObject [
+	vatDeclarationMonth := anObject
 ]

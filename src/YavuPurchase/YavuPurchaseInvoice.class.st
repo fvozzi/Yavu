@@ -8,7 +8,6 @@ Class {
 		'vatPerception',
 		'iibbPerception',
 		'purchaseTransactions',
-		'vatDeclarationMonth',
 		'netPrice210',
 		'netPrice105'
 	],
@@ -200,20 +199,6 @@ YavuPurchaseInvoice >> descriptionPurchaseTransactions [
 ]
 
 { #category : #descriptions }
-YavuPurchaseInvoice >> descriptionVatDeclarationMonth [
-	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
-
-	<magritteDescription>
-	^MADateDescription new 
-		componentClass: MAMonthYearSelectorComponent ;
-        	accessor: #vatDeclarationMonth ;
-        	label: 'Fecha';
-        	priority: 180;
-			beRequired;
-        	yourself
-]
-
-{ #category : #descriptions }
 YavuPurchaseInvoice >> descriptionVatPerception [
 
 	<magritteDescription>
@@ -257,7 +242,6 @@ YavuPurchaseInvoice >> iibbPerception: anObject [
 YavuPurchaseInvoice >> initialize [ 
 
 	super initialize.
-	vatDeclarationMonth := self date beginOfMonth.
 	netPrice105 := netPrice210 := vatPerception := iibbPerception  := 0.
 	purchaseTransactions := OrderedCollection new
 ]
@@ -403,16 +387,6 @@ YavuPurchaseInvoice >> vatAlicuots [
 	self vat210 > 0 ifTrue: [ result add: 21. ].
 	self vat105 > 0 ifTrue: [ result add: 10.5 ].
 	^ result
-]
-
-{ #category : #accessing }
-YavuPurchaseInvoice >> vatDeclarationMonth [
-	^ vatDeclarationMonth
-]
-
-{ #category : #accessing }
-YavuPurchaseInvoice >> vatDeclarationMonth: anObject [
-	vatDeclarationMonth := anObject
 ]
 
 { #category : #accessing }
