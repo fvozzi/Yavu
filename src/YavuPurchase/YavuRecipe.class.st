@@ -5,9 +5,10 @@ Class {
 		'recipeIngredients',
 		'amountOfPortions',
 		'process',
-		'availableAsIngredient'
+		'availableAsIngredient',
+		'recipeProcessSteps'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }
@@ -89,7 +90,7 @@ YavuRecipe >> descriptionProcess [
 ]
 
 { #category : #descriptions }
-YavuRecipe >> descriptionPurchaseTransactionItems [
+YavuRecipe >> descriptionRecipeIngredients [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
@@ -105,11 +106,29 @@ YavuRecipe >> descriptionPurchaseTransactionItems [
 		yourself
 ]
 
+{ #category : #descriptions }
+YavuRecipe >> descriptionRecipeProcessSteps [
+	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
+
+	<magritteDescription>
+	^MAToManyRelationDescription new
+		accessor: #recipeProcessSteps;
+		classes: (OrderedCollection with: YavuRecipeProcessStep);
+		default: nil;
+		label: 'Pasos del proceso';
+		priority: 130;
+		beRequired;
+		componentClass: TBSMagritteOneToManyComponent;
+		canExport: false;
+		yourself
+]
+
 { #category : #'sin categoria' }
 YavuRecipe >> initialize [ 
 
 	availableAsIngredient := false.
-	recipeIngredients := OrderedCollection new
+	recipeIngredients := OrderedCollection new.
+	recipeProcessSteps := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -130,4 +149,15 @@ YavuRecipe >> recipeIngredients [
 { #category : #accessing }
 YavuRecipe >> recipeIngredients: anObject [
 	recipeIngredients := anObject
+]
+
+{ #category : #accessing }
+YavuRecipe >> recipeProcessSteps [
+	recipeProcessSteps ifNil: [ recipeProcessSteps := OrderedCollection new ].
+	^ recipeProcessSteps
+]
+
+{ #category : #accessing }
+YavuRecipe >> recipeProcessSteps: anObject [
+	recipeProcessSteps := anObject
 ]

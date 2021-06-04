@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'category'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }

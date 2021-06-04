@@ -129,3 +129,17 @@ YavuPurchaseSubsystemTest >> testQueryPurchaseInvoices [
 	self assert: query size = 1.
 	self assert: query first date = invoice date
 ]
+
+{ #category : #tests }
+YavuPurchaseSubsystemTest >> testRecipeCostCalculation [
+
+	| recipe tapasTransaction date |
+	
+	recipe := resources empanadasRecipe.
+	tapasTransaction := resources mauroTapasEmpanadaTransaction.
+   tapasTransaction entity addToSystem.
+	date := tapasTransaction date.
+	recipe addToSystem.
+	tapasTransaction addToSystem.
+	self assert: (self system purchaseSubsystem recipeCost: recipe at: date) equals: 2
+]

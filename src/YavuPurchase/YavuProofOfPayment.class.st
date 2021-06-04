@@ -5,7 +5,7 @@ Class {
 		'serviceContract',
 		'paymentAmount'
 	],
-	#category : #'YavuPurchase-DomainObjects'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'sin categoria' }

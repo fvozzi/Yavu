@@ -12,7 +12,7 @@ Class {
 		'accountingAccount',
 		'isServiceProvider'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }

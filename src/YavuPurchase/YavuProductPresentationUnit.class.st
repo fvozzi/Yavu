@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'kilograms'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }

@@ -6,7 +6,7 @@ Class {
 		'productType',
 		'vatPercentage'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }

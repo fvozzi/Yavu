@@ -201,6 +201,13 @@ YavuPurchaseSubsystem >> presentationUnits [
 	^ self system storedSubsystem instancesOf: YavuProductPresentationUnit 
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> productOfBrand: aYavuBrand type: aYavuProductType [ 
+	
+		^ self products detect: [ :one | one brand = aYavuBrand and: [ one productType = aYavuProductType  ] ] 
+			
+]
+
 { #category : #accessing }
 YavuPurchaseSubsystem >> productTypes [
 
@@ -235,7 +242,13 @@ YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [
 ]
 
 { #category : #'api/queries' }
-YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers from: startDate to: endDate [ 
+YavuPurchaseSubsystem >> purchaseTransactionsOfSupplier: aYavuSupplier [ 
+	
+	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseTransaction withEntity: aYavuSupplier
+]
+
+{ #category : #'api/queries' }
+YavuPurchaseSubsystem >> purchaseTransactionsOfSuppliers: aCollectionOfSuppliers from: startDate to: endDate [ 
 
 	^ self system storedSubsystem 
 		instancesOfClass: YavuPurchaseTransaction
@@ -244,10 +257,24 @@ YavuPurchaseSubsystem >> purchaseInvoicesOfSuppliers: aCollectionOfSuppliers fro
 		entities: aCollectionOfSuppliers
 ]
 
-{ #category : #'api/queries' }
-YavuPurchaseSubsystem >> purchaseTransactionsOfSupplier: aYavuSupplier [ 
+{ #category : #'tests-as yet unclassified' }
+YavuPurchaseSubsystem >> recipeCost: aYavuRecipe at: aDate [ 
 	
-	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseTransaction withEntity: aYavuSupplier
+	| purchases purchaseItems purchaseItemsByProduct |
+	
+	"Needs refactoring to use a currect query."
+	purchases := self purchaseTransactionsOfSuppliers: self suppliers from: '01/01/1900' asDate to: aDate. 
+	purchaseItems := purchases collectAll: [ :each | each purchaseTransactionItems].
+	purchaseItemsByProduct := purchaseItems classifiedBy: [ :each | each product ].
+	^ aYavuRecipe recipeIngredients inject: 0 into: [ :accum :each |  | item cost |
+		"Refactor to elimnate this if statemente"
+		(item := purchaseItemsByProduct at: each ingredient ifAbsent: [ ]) notNil ifTrue: [ 
+			cost := item unitPrice.
+			cost * (1 * each unit) / (1 * item presentationUnit) * each quantity 						
+			 ]
+		ifFalse: [ 0 ]
+		
+		 ] 
 ]
 
 { #category : #accessing }

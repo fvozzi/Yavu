@@ -39,6 +39,22 @@ YavuSystemTest >> setUp [
 ]
 
 { #category : #tests }
+YavuSystemTest >> testHuevoConversion [
+
+	self assert: 30 unity equals: 1 maple.
+	self assert: 1 cajonDe11Maple equals: 11 maple.
+	self assert: 1 cajonDe11Maple equals: 330 unity.
+	self assert: 1 cajonDe12Maple equals: 12 maple.
+	self assert: 1 cajonDe12Maple equals: 360 unity
+]
+
+{ #category : #tests }
+YavuSystemTest >> testKilogramoToGramoConversion [
+
+	self assert: 1 kilogram = 1000 gram
+]
+
+{ #category : #tests }
 YavuSystemTest >> testLoginUserNameAndPassword [
 
 	system addUser: self fvozziUser.

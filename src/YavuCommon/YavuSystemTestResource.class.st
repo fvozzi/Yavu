@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #resources }
+YavuSystemTestResource >> almacenCategory [
+
+	^ self system purchaseSubsystem categories 
+		detect: [ :one | one name = 'Almacen']
+		ifNone: [ YavuCategory name: 'Almacen' ]
+		
+		
+]
+
+{ #category : #resources }
 YavuSystemTestResource >> barraDamboLaPaulinaProduct [
 	
 	^ YavuProduct new 
@@ -31,6 +41,21 @@ YavuSystemTestResource >> damboProductType [
 	^ (YavuProductType name: 'Dambo')
 			category: self quesoCategory;
 			yourself 
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystemTestResource >> empanadasRecipe [
+	
+	^ YavuRecipe new
+		name: 'Empanadas de Carne';
+		amountOfPortions: 1;
+		recipeIngredients: (
+			OrderedCollection with: (
+			YavuRecipeIngredient new
+				ingredient: self tapaEmpanadaProduct;
+				unit: self system unityUnit;
+				quantity: 1
+				 ))
 ]
 
 { #category : #resources }
@@ -106,6 +131,36 @@ YavuSystemTestResource >> luisLatancioSupplier [
 			vatCondition: YavuMonotributo;
 			cuitNumber: '20172859209';
 			yourself
+]
+
+{ #category : #resources }
+YavuSystemTestResource >> mauroEmpanadasSupplier [
+
+	^ (YavuSupplier name: 'Mauro Empanadas')
+			businessName: 'Mauro Empanadas';
+			vatCondition: YavuMonotributo;
+			yourself
+]
+
+{ #category : #resources }
+YavuSystemTestResource >> mauroTapasEmpanadaTransaction [
+	
+	| purchaseTransaction |
+	
+	purchaseTransaction := YavuPurchaseTransaction  new
+										entity: self mauroEmpanadasSupplier;
+										date: '04/11/2020' asDate;
+										yourself.
+	purchaseTransaction	addPurchaseTransactionItem: (
+			YavuPurchaseTransactionItem new
+				owner: purchaseTransaction;
+				product: self tapaEmpanadaProduct;
+				quantity: 1;
+				unitPrice: 120;
+				presentationUnit: self system package60UnityUnit;
+				yourself
+				).
+	^ purchaseTransaction
 ]
 
 { #category : #resources }
@@ -247,10 +302,43 @@ YavuSystemTestResource >> setUp [
 	system := self newSubsystem.
 ]
 
+{ #category : #resources }
+YavuSystemTestResource >> sinMarcaBrand [
+	
+	^ self system purchaseSubsystem brands detect: [ :each | each name = 'Sin Marca' ]
+		ifNone: [ (YavuBrand name: 'Sin Marca')
+				addToSystem;
+				yourself ]
+]
+
 { #category : #accessing }
 YavuSystemTestResource >> system [ 
 
 	^ system
+]
+
+{ #category : #resources }
+YavuSystemTestResource >> tapaEmpanadaProduct [
+	
+	^[self system purchaseSubsystem productOfBrand: self sinMarcaBrand type: self tapaEmpanadaProductType]
+		on: NotFound do: [ :ex | 
+			YavuProduct new 
+				brand: self sinMarcaBrand;
+				productType: self tapaEmpanadaProductType;
+				vatPercentage: 21;
+				addToSystem;
+				yourself]
+]
+
+{ #category : #resources }
+YavuSystemTestResource >> tapaEmpanadaProductType [
+	
+	^ self system purchaseSubsystem productTypes detect: [ :one | one name = 'Tapa de Empanada' ]
+		ifNone: [ 
+	(YavuProductType name: 'Tapa de Empanada')
+			category: self almacenCategory;
+			addToSystem;
+			yourself  ]
 ]
 
 { #category : #resources }

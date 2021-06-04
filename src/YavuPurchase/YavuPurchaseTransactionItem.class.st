@@ -11,7 +11,7 @@ Class {
 		'presentationUnit',
 		'owner'
 	],
-	#category : #'YavuPurchase-DomainObjects'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #accessing }

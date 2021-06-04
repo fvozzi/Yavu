@@ -7,7 +7,7 @@ Class {
 		'quantity',
 		'owner'
 	],
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -57,8 +57,8 @@ YavuRecipeIngredient >> descriptionUnit [
 	<magritteDescription>
 	^MASingleOptionDescription new
 		accessor: #unit;
-		default: self subsystem kilogramPresentationUnit;
-		options: self subsystem presentationUnits;
+		default: self yavuSystem kilogramUnit;
+		options: self yavuSystem units;
 		label: 'Unidad';
 		priority: 120;
 		beRequired;

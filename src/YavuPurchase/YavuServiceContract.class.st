@@ -7,7 +7,7 @@ Class {
 		'installments',
 		'expirationDay'
 	],
-	#category : #'YavuPurchase-DomainObjects'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'sin categoria' }

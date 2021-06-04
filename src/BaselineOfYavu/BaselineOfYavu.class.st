@@ -10,6 +10,17 @@ Class {
 	#category : #BaselineOfYavu
 }
 
+{ #category : #dependencies }
+BaselineOfYavu >> acconcagua: spec [
+
+spec
+		baseline: 'Aconcagua'
+			with: [ spec
+				repository: 'github://ba-st/Aconcagua:release-candidate/source';
+				loads: #('Deployment') ];
+		import: 'Aconcagua'.
+]
+
 { #category : #baselines }
 BaselineOfYavu >> baseline: spec [
 	<baseline>
@@ -24,6 +35,7 @@ BaselineOfYavu >> baseline: spec [
 			self fontAwesome: spec.
 			self xmlParser: spec.
 			self neoCSV: spec.
+			self acconcagua: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
 			spec package: 'YavuNutriData' with: [spec requires: #('YavuCommon' 'XMLParser')].

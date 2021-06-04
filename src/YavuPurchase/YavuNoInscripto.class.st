@@ -1,7 +1,7 @@
 Class {
 	#name : #YavuNoInscripto,
 	#superclass : #YavuVatCondition,
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'as yet unclassified' }

@@ -8,7 +8,7 @@ Class {
 		'invoice',
 		'paymentType'
 	],
-	#category : #'YavuPurchase-DomainObjects'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'sin categoria' }

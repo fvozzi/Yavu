@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'subsystems',
-		'announcer'
+		'announcer',
+		'units'
 	],
 	#classVars : [
 		'EnabledSubsystemsClasses'
@@ -200,6 +201,12 @@ YavuSystem >> accountingSubsystem [
 	^ self subsystemAt: 'accountingSubsystem'
 ]
 
+{ #category : #initialization }
+YavuSystem >> addUnit: anUnit [
+
+	units at: anUnit name put: anUnit 
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> addUser: aSicUser [
 	^ self loginSubsystem addUser: aSicUser
@@ -240,6 +247,18 @@ YavuSystem >> announcer [
 	^ announcer ifNil: [ announcer := Announcer new ]
 ]
 
+{ #category : #units }
+YavuSystem >> cajonDe11MapleUnit [
+	
+	^ units at: 'cajonDe11Maple'
+]
+
+{ #category : #units }
+YavuSystem >> cajonDe12MapleUnit [
+	
+	^ units at: 'cajonDe12Maple'
+]
+
 { #category : #accessing }
 YavuSystem >> company [
 	
@@ -264,10 +283,103 @@ YavuSystem >> completeString: aString withZeros: anInteger [
 	^ formattedString 
 ]
 
+{ #category : #units }
+YavuSystem >> create1000UnitiesPackageUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 1000
+		nameForOne: 'paquete 1000 unidades'
+		nameForMany: 'paquetes 1000 unidates'
+		sign: 'paquete 1000u'
+]
+
+{ #category : #units }
+YavuSystem >> create196UnitiesPackageUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 196
+		nameForOne: 'paquete 196 unidades'
+		nameForMany: 'paquetes 196 unidates'
+		sign: 'paquete 196u'
+]
+
+{ #category : #units }
+YavuSystem >> create60UnityPackageUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 60
+		nameForOne: 'paquete 60 unidades'
+		nameForMany: 'paquetes 60 unidates'
+		sign: 'paquete 60u'
+]
+
+{ #category : #units }
+YavuSystem >> createCajonDe11MapleUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 330
+		nameForOne: 'cajon de 11 maples'
+		nameForMany: 'cajones de 11 maples'
+		sign: 'cajon 11 maples'
+]
+
+{ #category : #units }
+YavuSystem >> createCajonDe12MapleUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 360
+		nameForOne: 'cajon de 12 maples'
+		nameForMany: 'cajones de 12 maples'
+		sign: 'cajon 12 maples'
+]
+
+{ #category : #units }
+YavuSystem >> createGramUnit [
+
+	^BaseUnit named: 'gramo' sign: 'gr'
+]
+
+{ #category : #units }
+YavuSystem >> createKilogramUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self gramoUnit 
+		conversionFactor: 1000
+		named: 'kilogramo' 
+		sign: 'kg'
+]
+
+{ #category : #units }
+YavuSystem >> createMapleUnit [
+
+	^ProportionalDerivedUnit 
+		baseUnit: self unityUnit 
+		conversionFactor: 30
+		named: 'maple' 
+		sign: 'maple'
+]
+
+{ #category : #units }
+YavuSystem >> createUnityUnit [
+
+	^BaseUnit named: 'unidad' sign: 'un'
+]
+
 { #category : #initialization }
 YavuSystem >> enabledSubsystems [
 
 	^ subsystems
+]
+
+{ #category : #units }
+YavuSystem >> gramoUnit [
+	
+	^ units at: 'gramo'
 ]
 
 { #category : #'as yet unclassified' }
@@ -279,7 +391,10 @@ YavuSystem >> homeViewClass [
 { #category : #initialization }
 YavuSystem >> initialize [
 	super initialize.
-	self initializeSubsystems 
+	self 
+		initializeSubsystems;
+		initializeUnits
+	
 ]
 
 { #category : #initialization }
@@ -290,10 +405,33 @@ YavuSystem >> initializeSubsystems [
 		subsystems at: eachSubsystem subsystemTag put: (eachSubsystem on: self) ]
 ]
 
+{ #category : #initialization }
+YavuSystem >> initializeUnits [
+
+	units := Dictionary new.
+	self 
+		addUnit: self createGramUnit;
+		addUnit: self createKilogramUnit;
+		addUnit: self createUnityUnit;
+		addUnit: self create60UnityPackageUnit;
+		addUnit: self create196UnitiesPackageUnit;
+		addUnit: self create1000UnitiesPackageUnit;
+		addUnit: self createMapleUnit;
+		addUnit: self createCajonDe11MapleUnit;
+		addUnit: self createCajonDe12MapleUnit
+		
+]
+
 { #category : #'as yet unclassified' }
 YavuSystem >> instancesOf: aClass [ 
 	
 	^self storedSubsystem instancesOf: aClass
+]
+
+{ #category : #units }
+YavuSystem >> kilogramUnit [
+
+	^ units at: 'kilogramo'
 ]
 
 { #category : #'as yet unclassified' }
@@ -326,6 +464,12 @@ YavuSystem >> mainView [
 	^self class mainView
 ]
 
+{ #category : #units }
+YavuSystem >> mapleUnit [
+	
+	^ units at: 'maple'
+]
+
 { #category : #subsystemsProtocol }
 YavuSystem >> menuElements [
 	
@@ -343,6 +487,12 @@ YavuSystem >> migrationsToRun [
 { #category : #'as yet unclassified' }
 YavuSystem >> name [
 	self shouldBeImplemented.
+]
+
+{ #category : #units }
+YavuSystem >> package60UnityUnit [
+	
+	^ units at: 'paquete 60 unidades'
 ]
 
 { #category : #'as yet unclassified' }
@@ -413,6 +563,18 @@ YavuSystem >> systemName [
 YavuSystem >> toReviseStatus [
 	
 	^ Smalltalk at: #YavuToReviseWorkflowStatus 
+]
+
+{ #category : #units }
+YavuSystem >> units [
+	
+	^ units
+]
+
+{ #category : #units }
+YavuSystem >> unityUnit [
+	
+	^ units at: 'unidad'
 ]
 
 { #category : #subsystemsProtocol }

@@ -1,7 +1,7 @@
 Class {
 	#name : #YavuInvoiceType,
 	#superclass : #YavuObject,
-	#category : #'YavuPurchase-DomainObjects'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #'as yet unclassified' }

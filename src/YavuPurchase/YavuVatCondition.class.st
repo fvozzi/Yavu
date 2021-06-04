@@ -1,7 +1,7 @@
 Class {
 	#name : #YavuVatCondition,
 	#superclass : #YavuEntity,
-	#category : #'YavuPurchase-Entities'
+	#category : #'YavuPurchase-Model'
 }
 
 { #category : #testing }

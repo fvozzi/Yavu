@@ -35,6 +35,19 @@ YavuRestaurantSystem class >> initializeSubsystemsForTesting [
 ]
 
 { #category : #seaside }
+YavuRestaurantSystem class >> registerAntiRecipesApp [
+	(WAAdmin
+		register: self restaurantApplicationRecipesRoot
+		asApplicationAt: self restaurantApplicationRecipes)
+		preferenceAt: #sessionClass put: YavuGuestSession;
+		preferenceAt: #resourceBaseUrl put: YavuEnvironment current resourceBaseUrl;
+		preferenceAt: #maximumRelativeAge put: 28800;
+		addLibrary: YavuEnvironment current jqLibrary;
+		addLibrary: YavuEnvironment current tbsLibrary;
+		addLibrary: YavuEnvironment current fontAwesomeLibrary
+]
+
+{ #category : #seaside }
 YavuRestaurantSystem class >> registerAntimenuApp [
 	(WAAdmin
 		register: self restaurantApplicationMenuRoot
@@ -51,7 +64,9 @@ YavuRestaurantSystem class >> registerAntimenuApp [
 YavuRestaurantSystem class >> registerSeasideApplication [
 
 	super registerSeasideApplication.
-	self registerAntimenuApp 
+	self 
+		registerAntimenuApp;
+		registerAntiRecipesApp 
 ]
 
 { #category : #'as yet unclassified' }
@@ -62,6 +77,7 @@ YavuRestaurantSystem class >> resourceBaseUrlForProduction [
 
 { #category : #seaside }
 YavuRestaurantSystem class >> restaurantApplicationMenu [
+	"Devuelve el root para la url del menu."
 
 	^ 'antimenu' 
 ]
@@ -72,6 +88,19 @@ YavuRestaurantSystem class >> restaurantApplicationMenuRoot [
 	^ TBSCustomerMenuView 
 ]
 
+{ #category : #seaside }
+YavuRestaurantSystem class >> restaurantApplicationRecipes [
+	"Devuelve el root para la url del menu."
+
+	^ 'recetas' 
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem class >> restaurantApplicationRecipesRoot [
+
+	^ TBSRecipeBookView 
+]
+
 { #category : #subsystemsProtocol }
 YavuRestaurantSystem class >> systemMenuElements [
 
@@ -79,6 +108,7 @@ YavuRestaurantSystem class >> systemMenuElements [
 		add: ((YavuSimpleMenuElement label: 'Menu' presenterClass: TBSCustomerMenuView subsystem: self) id: 3) ;
 		add: ((YavuSimpleMenuElement label: 'Menu Admin' presenterClass: TBSCustomerMenuAdminView subsystem: self) id: 4) ;
 		add: ((YavuSimpleMenuElement label: 'Imagenes' presenterClass: TBSMenuImageUploadForm subsystem: self) id: 5) ;
+		add: ((YavuSimpleMenuElement label: 'Libro de Recetas' presenterClass: TBSRecipeBookView subsystem: self) id: 6) ;
 		yourself
 ]
 
