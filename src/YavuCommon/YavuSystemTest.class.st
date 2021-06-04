@@ -27,7 +27,7 @@ YavuSystemTest >> fvozziUser [
 YavuSystemTest >> newSystem [
 
 	YavuTestEnvironment beCurrent.
-   YavuEnvironment current systemClass: YavuSystem.
+   YavuEnvironment current systemClass: YavuRestaurantSystem.
    ^ YavuEnvironment current newSystem
 ]
 

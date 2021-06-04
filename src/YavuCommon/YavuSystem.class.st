@@ -250,13 +250,13 @@ YavuSystem >> announcer [
 { #category : #units }
 YavuSystem >> cajonDe11MapleUnit [
 	
-	^ units at: 'cajonDe11Maple'
+	^ units at: 'cajon de 11 maples'
 ]
 
 { #category : #units }
 YavuSystem >> cajonDe12MapleUnit [
 	
-	^ units at: 'cajonDe12Maple'
+	^ units at: 'cajon de 12 maples'
 ]
 
 { #category : #accessing }
