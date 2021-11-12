@@ -118,6 +118,11 @@ YavuAccountingSubsystem >> name [
 	 ^ 'Contabilidad'
 ]
 
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> priceLists [
+	^ self system priceLists
+]
+
 { #category : #afip }
 YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	

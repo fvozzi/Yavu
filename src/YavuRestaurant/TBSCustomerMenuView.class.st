@@ -5,7 +5,8 @@ Class {
 		'category',
 		'categories',
 		'activeProductsByCategory',
-		'currentPriceList'
+		'currentPriceOfSaleProducts',
+		'shop'
 	],
 	#category : #'YavuRestaurant-View'
 }
@@ -21,10 +22,10 @@ TBSCustomerMenuView class >> imagePlaceHolderSVG [
 	^'<svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://localhost:8081/img/tbsPremium.png" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>'
 ]
 
-{ #category : #'as yet unclassified' }
-TBSCustomerMenuView class >> on: aClass [ 
-	
-	^ self new
+{ #category : #'instance creation' }
+TBSCustomerMenuView class >> on: aYavuShop [
+
+	^ self new shop: aYavuShop 
 ]
 
 { #category : #accessing }
@@ -70,13 +71,13 @@ TBSCustomerMenuView >> category: aCategory [
 ]
 
 { #category : #accessing }
-TBSCustomerMenuView >> currentPriceList [
-	^ currentPriceList
+TBSCustomerMenuView >> currentPriceOfSaleProducts [
+	^ currentPriceOfSaleProducts
 ]
 
 { #category : #accessing }
-TBSCustomerMenuView >> currentPriceList: anObject [
-	currentPriceList := anObject
+TBSCustomerMenuView >> currentPriceOfSaleProducts: anObject [
+	currentPriceOfSaleProducts := anObject
 ]
 
 { #category : #initialization }
@@ -88,7 +89,21 @@ TBSCustomerMenuView >> initialize [
 	categories := activeProductsByCategory keys
 		asSortedCollection: [ :a :b | a order < b order ].
 	category := categories ifNotEmpty: [ :col | col first ].
-	currentPriceList := self yavuSystem currentPriceList
+]
+
+{ #category : #accessing }
+TBSCustomerMenuView >> onShopChanged [
+
+	| priceLists |
+
+	priceLists := self shop priceLists.
+	currentPriceOfSaleProducts := self yavuSystem currentPriceOfSaleProducts select: [ :each | priceLists includes: each priceList]
+]
+
+{ #category : #'as yet unclassified' }
+TBSCustomerMenuView >> priceListItemsOf: aYavuSaleProduct [ 
+
+	^ currentPriceOfSaleProducts select: [ :each | each product = aYavuSaleProduct  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -184,8 +199,8 @@ TBSCustomerMenuView >> renderMenuImageHeaderOn: html [
 		id: #imageMenuLogo;
 		with: [ 
 			image := 	html imageFluid.
-			image width: '100%'; resourceUrl: 'img/' , 'logoEsquina.png'.
-			image attributes at: 'max-width' put: '600px']
+			image resourceUrl: 'img/' , shop logoImageName.
+			image attributes at: 'max-width' put: '200px']
 ]
 
 { #category : #rendering }
@@ -243,7 +258,7 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 						mutedText;
 						with: product subtitle.
 					html cardText: product description.
-					priceListItems := self currentPriceList priceListItemsOf: product.
+					priceListItems := self priceListItemsOf: product.
 					priceListItems do: [:eachItem | 
 						html cardSubtitle
 							level6;
@@ -251,12 +266,31 @@ TBSCustomerMenuView >> renderProductCard: product on: html [
 					self renderProductActivityButtons: product on: html] ]
 ]
 
+{ #category : #rendering }
+TBSCustomerMenuView >> setLaEsquinaShop [
+
+	shop := self yavuSystem shopLaEsquina
+
+
+]
+
+{ #category : #accessing }
+TBSCustomerMenuView >> shop [
+	^ shop
+]
+
+{ #category : #accessing }
+TBSCustomerMenuView >> shop: anObject [
+	shop := anObject.
+	self onShopChanged
+]
+
 { #category : #hooks }
 TBSCustomerMenuView >> style [
 
-	^ '#imageMenuLogo {
+	^ '.imageMenuLogo {
 			width: 100%;
-  			max-width: 600px;
+  			max-width: 200px;
 		}'
 ]
 

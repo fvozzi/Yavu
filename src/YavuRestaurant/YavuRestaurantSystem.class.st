@@ -105,7 +105,7 @@ YavuRestaurantSystem class >> restaurantApplicationRecipesRoot [
 YavuRestaurantSystem class >> systemMenuElements [
 
 	^ super systemMenuElements 
-		add: ((YavuSimpleMenuElement label: 'Menu' presenterClass: TBSCustomerMenuView subsystem: self) id: 3) ;
+		add: ((YavuSimpleMenuElement label: 'Menu' presenterClass: TBSCustomerMenuShopSelectorView subsystem: self) id: 3) ;
 		add: ((YavuSimpleMenuElement label: 'Menu Admin' presenterClass: TBSCustomerMenuAdminView subsystem: self) id: 4) ;
 		add: ((YavuSimpleMenuElement label: 'Imagenes' presenterClass: TBSMenuImageUploadForm subsystem: self) id: 5) ;
 		add: ((YavuSimpleMenuElement label: 'Libro de Recetas' presenterClass: TBSRecipeBookView subsystem: self) id: 6) ;
@@ -128,6 +128,11 @@ YavuRestaurantSystem >> activeSaleProducts [
 YavuRestaurantSystem >> currentPriceList [
 	
 	^ self saleSubsystem priceListAt: Date today 
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> currentPriceOfSaleProducts [
+	^ self saleSubsystem priceOfSaleProductsAt: Date today 
 ]
 
 { #category : #'as yet unclassified' }
@@ -165,6 +170,11 @@ YavuRestaurantSystem >> presentationUnits [
 ]
 
 { #category : #'as yet unclassified' }
+YavuRestaurantSystem >> priceLists [
+	^ self storedSubsystem instancesOf: YavuPriceList
+]
+
+{ #category : #'as yet unclassified' }
 YavuRestaurantSystem >> saleProducts [
 	
 	^ self saleSubsystem saleProducts 
@@ -176,6 +186,21 @@ YavuRestaurantSystem >> setSpecialOfferOnProduct: aSaleProduct [
 	^ aSaleProduct 
 		isSpecialOffer:  true;
 		addToSystem
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> shopElClu [
+	^ self shops detect: [ :one | one name = 'El Clu del anti' ] ifNone: [ ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> shopLaEsquina [
+	^ self shops detect: [ :one | one name = 'La Esquina del Antigourmet' ] ifNone: [ ]
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> shops [
+	^ self storedSubsystem instancesOf: YavuShop
 ]
 
 { #category : #'as yet unclassified' }

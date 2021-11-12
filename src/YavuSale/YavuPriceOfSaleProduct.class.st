@@ -7,7 +7,8 @@ Class {
 		'owner',
 		'specialOfferPrice1',
 		'rappiPrice',
-		'unit'
+		'unit',
+		'priceList'
 	],
 	#category : #'YavuSale-DomainObjects'
 }
@@ -45,6 +46,20 @@ YavuPriceOfSaleProduct >> descriptionPrice1 [
         	label: 'Precio';
         	priority: 120;
         	yourself
+]
+
+{ #category : #descriptions }
+YavuPriceOfSaleProduct >> descriptionPriceList [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #priceList;
+		options: self yavuSystem priceLists;
+		label: 'Lista de Precio';
+		priority: 150;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
 ]
 
 { #category : #descriptions }
@@ -129,6 +144,16 @@ YavuPriceOfSaleProduct >> price1 [
 { #category : #accessing }
 YavuPriceOfSaleProduct >> price1: anObject [
 	price1 := anObject
+]
+
+{ #category : #accessing }
+YavuPriceOfSaleProduct >> priceList [
+	^ priceList
+]
+
+{ #category : #accessing }
+YavuPriceOfSaleProduct >> priceList: anObject [
+	priceList := anObject
 ]
 
 { #category : #accessing }
