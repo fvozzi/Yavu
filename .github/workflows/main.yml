@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        smalltalk: [ Pharo64-9.0, Pharo64-8.0]
+        smalltalk: [ Pharo64-8.0]
         experimental: [ false ]
     name: ${{ matrix.smalltalk }}
     steps:
