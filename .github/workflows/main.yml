@@ -65,12 +65,3 @@ jobs:
             /home/runner/.smalltalkCI/_builds/TravisCI.*
             ${{ github.workspace }}/img
             ${{ github.workspace }}/scripts
-      - name: copying files
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
-          source: yavu
-          target: ${{ secrets.TARGET}}
