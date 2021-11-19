@@ -58,7 +58,7 @@ jobs:
         if: steps.last_run_status.outputs.last_run_status != 'success'
         run: echo "::set-output name=last_run_status::${{ steps.test_run.outcome }}" > last_run_status
       - name: Storing Artifacts
-      - uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: yavu
           path: |
