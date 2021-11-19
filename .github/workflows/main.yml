@@ -57,6 +57,7 @@ jobs:
       - name: Save run status
         if: steps.last_run_status.outputs.last_run_status != 'success'
         run: echo "::set-output name=last_run_status::${{ steps.test_run.outcome }}" > last_run_status
+      - name: Storing Artifacts
       - uses: actions/upload-artifact@v2
         with:
           name: yavu
@@ -64,3 +65,12 @@ jobs:
             /home/runner/.smalltalkCI/_builds/TravisCI.*
             ${{ github.workspace }}/img
             ${{ github.workspace }}/scripts
+      - name: copying files
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: yavu
+          target: ${{ secrets.TARGET}}
