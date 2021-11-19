@@ -59,7 +59,11 @@ jobs:
         run: echo "::set-output name=last_run_status::${{ steps.test_run.outcome }}" > last_run_status
       - uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
+          name: YavuImage
           path: /home/runner/.smalltalkCI/_builds/TravisCI.*
+      - uses: actions/upload-artifact@v2
+        with:
+          name: YavuImgFiles
+          path: /home/fvozzi/Yavu/img/
       
      
