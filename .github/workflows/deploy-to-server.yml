@@ -1,0 +1,24 @@
+name: "Deploy to Server"
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: "Build deployment code for standalone"
+        env:
+          remote_host: ${{ secrets.HOST }}
+          remote_port: ${{ secrets.PORT }}
+          remote_user: ${{ secrets.USER }}
+          remote_key: ${{ secrets.KEY }}
+          local_dir: "yavu"
+          remote_dir: ${{ secrets.TARGET }}
+        run: |
+          mkdir ~/.ssh
+          echo "$remote_key" > ~/.ssh/id_github
+          chmod 600 ~/.ssh/id_github
+          rsync -avzr --delete -e "ssh -p ${remote_port} -i ~/.ssh/id_github -o StrictHostKeyChecking=no" ${local_dir} ${remote_user}@${remote_host}:${remote_dir}
+          rm ~/.ssh/id_github
