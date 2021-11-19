@@ -64,6 +64,6 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: YavuImgFiles
-          path: /home/fvozzi/Yavu/img/
+          path: ${{ github.workspace }}
       
      
