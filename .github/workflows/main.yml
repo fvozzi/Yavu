@@ -69,6 +69,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: yavu
+          path: ~/dist/
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -77,4 +78,4 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy with rsync
-        run: rsync -avz ~/yavu/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/builds/
+        run: rsync -avz ~/dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/root/builds/
