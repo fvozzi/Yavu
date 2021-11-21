@@ -63,8 +63,8 @@ jobs:
           mkdir deploy/src
           cp /home/runner/.smalltalkCI/_builds/TravisCI.image deploy/yavu.image
           cp /home/runner/.smalltalkCI/_builds/TravisCI.changes deploy/yavu.changes
-          cp  ${{ github.workspace }}/img deploy/img
-          cp  ${{ github.workspace }}/img deploy/src
+          cp -r ${{ github.workspace }}/img deploy/img
+          cp -r ${{ github.workspace }}/src deploy/src
       - name: Uploading artifacts
         uses: actions/upload-artifact@v2
         with:
