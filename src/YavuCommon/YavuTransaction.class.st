@@ -181,10 +181,10 @@ YavuTransaction >> descriptionEntity [
 	"Devuelve un objeto que describe la representación de la variable nombre del receptor."
 
 	<magritteDescription>
-	^MASingleOptionDescription new
+	^ MASingleOptionDescription new
 		accessor: #entity;
 		default: nil;
-		options: self class entityClass all;
+		options: self entities;
 		label: self class entityLabel;
 		priority: 10;
 		sorted: true;
@@ -192,6 +192,11 @@ YavuTransaction >> descriptionEntity [
 		beReadonly;
 		componentClass: TBSMagritteSelectListComponent;
 		yourself
+]
+
+{ #category : #descriptions }
+YavuTransaction >> entities [
+	^ self class entityClass all
 ]
 
 { #category : #'sin categoria' }

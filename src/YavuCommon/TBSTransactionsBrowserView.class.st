@@ -78,7 +78,7 @@ TBSTransactionsBrowserView >> onYavuSubsystemChanged [
 { #category : #'as yet unclassified' }
 TBSTransactionsBrowserView >> possibleEntities [
 
-	^ self objectClass entityClass all
+	^ self objectClass entityClass all asSortedCollection
 ]
 
 { #category : #subclassResponsability }

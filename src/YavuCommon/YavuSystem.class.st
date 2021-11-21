@@ -239,7 +239,7 @@ YavuSystem >> allowedRootMenuActions [
 { #category : #'as yet unclassified' }
 YavuSystem >> allowedTransactionsClassesOn: aClass [ 
 	
-	^ aClass transactionsClasses 
+	^ aClass transactionsClasses asSortedCollection: [ :a :b | a label <= b label  ] 
 ]
 
 { #category : #accessing }

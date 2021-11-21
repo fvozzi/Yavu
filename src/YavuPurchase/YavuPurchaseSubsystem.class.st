@@ -51,6 +51,12 @@ YavuPurchaseSubsystem >> activeServicesContracts [
 		instancesOf: YavuServiceContract 
 ]
 
+{ #category : #accessing }
+YavuPurchaseSubsystem >> activeSuppliers [
+
+	^ self suppliers reject: [ :each | each isInnactive notNil and: [each isInnactive]]
+]
+
 { #category : #crud }
 YavuPurchaseSubsystem >> addPurchaseInvoice: aPurchaseInvoice [ 
 

@@ -78,7 +78,7 @@ YavuPurchaseTransactionItem >> descriptionProduct [
 	^MASingleOptionDescription new
 		accessor: #product;
 		default: nil;
-		options: YavuProduct all;
+		options: self yavuSystem availableProducts;
 		label: YavuProduct label;
 		priority: 100;
 		beRequired;

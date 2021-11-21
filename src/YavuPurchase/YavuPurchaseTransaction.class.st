@@ -96,6 +96,11 @@ YavuPurchaseTransaction >> discriminateVat [
 	^ self entity vatCondition discriminateVat 
 ]
 
+{ #category : #descriptions }
+YavuPurchaseTransaction >> entities [
+	^ self subsystem  activeSuppliers 
+]
+
 { #category : #initialization }
 YavuPurchaseTransaction >> initialize [ 
 

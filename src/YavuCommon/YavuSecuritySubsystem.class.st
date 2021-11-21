@@ -76,7 +76,7 @@ YavuSecuritySubsystem >> allowedEntitiesClasses [
 { #category : #'as yet unclassified' }
 YavuSecuritySubsystem >> allowedEntitiesClassesOn: aClass [ 
 	
-	^ aClass entitiesClasses intersection: self loggedUser allowedEntitiesClasses 
+	^ (aClass entitiesClasses intersection: self loggedUser allowedEntitiesClasses ) asSortedCollection: [ :a :b | a label <= b label ] 
 ]
 
 { #category : #accessing }

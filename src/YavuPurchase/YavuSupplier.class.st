@@ -10,7 +10,8 @@ Class {
 		'phoneNumber',
 		'openingHours',
 		'accountingAccount',
-		'isServiceProvider'
+		'isServiceProvider',
+		'isInnactive'
 	],
 	#category : #'YavuPurchase-Model'
 }
@@ -127,9 +128,9 @@ YavuSupplier >> descriptionIsRetentionAgent [
 	
 	<magritteDescription>
 	^MABooleanDescription new
-		accessor: #isRetentionAgent;
-		label: 'Es Agente de Retención?';
-		priority: 130;
+		accessor: #isInnactive;
+		label: 'Está inactivo?';
+		priority: 200;
 		componentClass: TBSMagritteCheckboxComponent;
 		yourself
 ]
@@ -206,6 +207,16 @@ YavuSupplier >> descriptionVatCondition [
 YavuSupplier >> invoiceType [
 	
 	^ self vatCondition invoiceType
+]
+
+{ #category : #accessing }
+YavuSupplier >> isInnactive [
+	^ isInnactive
+]
+
+{ #category : #accessing }
+YavuSupplier >> isInnactive: anObject [
+	isInnactive := anObject
 ]
 
 { #category : #accessing }

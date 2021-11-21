@@ -13,7 +13,7 @@ TBSEntitiesBrowserView >> browserCaption [
 { #category : #accessing }
 TBSEntitiesBrowserView >> instances [ 
 
-	^ objectClass all
+	^ objectClass all asSortedCollection 
 ]
 
 { #category : #accessing }
