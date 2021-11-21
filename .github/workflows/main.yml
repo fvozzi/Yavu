@@ -59,12 +59,10 @@ jobs:
         run: echo "::set-output name=last_run_status::${{ steps.test_run.outcome }}" > last_run_status
       - run: |
           mkdir deploy
-          mkdir deploy/img
-          mkdir deploy/scripts
           cp /home/runner/.smalltalkCI/_builds/TravisCI.image deploy/yavu.image
           cp /home/runner/.smalltalkCI/_builds/TravisCI.changes deploy/yavu.changes
-          cp -r ${{ github.workspace }}/img deploy/img
-          cp -r ${{ github.workspace }}/scripts deploy/scripts
+          cp -r ${{ github.workspace }}/img deploy/
+          cp -r ${{ github.workspace }}/scripts deploy/
       - name: Uploading artifacts
         uses: actions/upload-artifact@v2
         with:
