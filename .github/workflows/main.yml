@@ -60,11 +60,11 @@ jobs:
       - run: |
           mkdir deploy
           mkdir deploy/img
-          mkdir deploy/src
+          mkdir deploy/scripts
           cp /home/runner/.smalltalkCI/_builds/TravisCI.image deploy/yavu.image
           cp /home/runner/.smalltalkCI/_builds/TravisCI.changes deploy/yavu.changes
           cp -r ${{ github.workspace }}/img deploy/img
-          cp -r ${{ github.workspace }}/src deploy/src
+          cp -r ${{ github.workspace }}/scripts deploy/scripts
       - name: Uploading artifacts
         uses: actions/upload-artifact@v2
         with:
