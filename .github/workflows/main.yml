@@ -58,18 +58,18 @@ jobs:
         if: steps.last_run_status.outputs.last_run_status != 'success'
         run: echo "::set-output name=last_run_status::${{ steps.test_run.outcome }}" > last_run_status
       - run: |
-          mkdir build
-          mkdir build/img
-          mkdirbuild/src
-          cp /home/runner/.smalltalkCI/_builds/TravisCI.image build/yavu.image
-          cp /home/runner/.smalltalkCI/_builds/TravisCI.changes build/yavu.change
-          cp  ${{ github.workspace }}/img build/img
-          cp  ${{ github.workspace }}/img build/src
+          mkdir deploy
+          mkdir deploy/img
+          mkdir deploy/src
+          cp /home/runner/.smalltalkCI/_builds/TravisCI.image deploy/yavu.image
+          cp /home/runner/.smalltalkCI/_builds/TravisCI.changes deploy/yavu.changes
+          cp  ${{ github.workspace }}/img deploy/img
+          cp  ${{ github.workspace }}/img deploy/src
       - name: Uploading artifacts
         uses: actions/upload-artifact@v2
         with:
           name: yavu
-          path: build/
+          path: deploy/
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
