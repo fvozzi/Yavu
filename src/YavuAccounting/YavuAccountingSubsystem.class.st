@@ -49,6 +49,15 @@ YavuAccountingSubsystem >> decimalFiscalAccuracy [
 	^ 2
 ]
 
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> expenseDate: aDate workShift: aYavuWorkShift [ 
+	
+	| purchaseTransactions |
+
+	purchaseTransactions := (self purchaseSubsystem purchaseTransactionsFrom: aDate to: aDate) select: [ :each | each workShift name = aYavuWorkShift name ].
+	^ purchaseTransactions inject: 0 into: [ :accum :each | accum + each total ]
+]
+
 { #category : #afip }
 YavuAccountingSubsystem >> generateComprasAlicuotasFileOn: aYavuVatDeclaration [
 	
@@ -144,6 +153,12 @@ YavuAccountingSubsystem >> purchaseInvoiceDescriptionsForVatDeclaration [
 	  yavuPurchaseInvoice descriptionTotal
 ]
 
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> purchaseSubsystem [
+	
+	^ self system purchaseSubsystem 
+]
+
 { #category : #afip }
 YavuAccountingSubsystem >> purchasesOfEntity: aYavuBusinessName month: aDate [
 
@@ -168,6 +183,19 @@ YavuAccountingSubsystem >> saleInvoiceDescriptionsForVatDeclaration [
 YavuAccountingSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 
 	^ self system saleSubsystem salesOfEntity: aYavuBusinessName vatDeclarationMonth: aDate
+]
+
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> startCashBalanceDate: aDate workShift: aYavuWorkShift [ 
+	
+	| cashBalances startCash |
+	
+	"No tengo consulta de vigente así que hago 3 días atrás para llegar al sábado desde el martes."
+	cashBalances := (YavuCashBalance instancesFrom: (aDate addDays: -3) to: (aDate addDays: -1)) select: [ :each | each workShift name = aYavuWorkShift name ].
+	startCash := 0.
+	cashBalances notEmpty ifTrue: [
+		startCash := cashBalances asSortedCollection reverse first endCashBalance  ].
+	^ startCash 
 ]
 
 { #category : #'as yet unclassified' }

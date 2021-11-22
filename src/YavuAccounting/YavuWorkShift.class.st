@@ -8,6 +8,12 @@ Class {
 	#category : #'YavuAccounting-Entities'
 }
 
+{ #category : #testing }
+YavuWorkShift class >> isVoyageRoot [ 
+
+	^ true
+]
+
 { #category : #'sin categoria' }
 YavuWorkShift class >> label [ 
 

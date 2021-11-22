@@ -247,6 +247,12 @@ YavuPurchaseSubsystem >> purchaseInvoicesOfSupplier: aYavuSupplier [
 	 ^ self system storedSubsystem instancesOfClass: YavuPurchaseInvoice withEntity: aYavuSupplier
 ]
 
+{ #category : #'as yet unclassified' }
+YavuPurchaseSubsystem >> purchaseTransactionsFrom: startDate to: endDate [ 
+	
+	^ YavuPurchaseTransaction instancesFrom: startDate to: endDate
+]
+
 { #category : #'api/queries' }
 YavuPurchaseSubsystem >> purchaseTransactionsOfSupplier: aYavuSupplier [ 
 	
