@@ -15,7 +15,8 @@ Class {
 		'email',
 		'password',
 		'fullName',
-		'phoneNumber'
+		'phoneNumber',
+		'shops'
 	],
 	#category : #'YavuCommon-Entities'
 }
@@ -131,6 +132,20 @@ YavuUser >> descriptionRol [
 ]
 
 { #category : #descriptions }
+YavuUser >> descriptionShop [
+	
+	<magritteDescription>
+	^MAMultipleOptionDescription new
+		accessor: #shops;
+		label: 'Locales';
+		priority: 220;
+		componentClass: TBSListCompositionComponent;
+		options: (self yavuSystem shops);
+		beSorted; 
+		yourself
+]
+
+{ #category : #descriptions }
 YavuUser >> descriptionTelefono [
 	"Devuelve un objeto que describe la representación de la variable nombre completo del receptor."
 
@@ -177,7 +192,8 @@ YavuUser >> initialize [
 	
 	super initialize.
 	password := String new.
-	roles := OrderedCollection new
+	roles := OrderedCollection new.
+	shops := OrderedCollection new
 ]
 
 { #category : #descriptions }
@@ -227,6 +243,16 @@ YavuUser >> roles [
 YavuUser >> roles: anObject [
 
 	roles := anObject
+]
+
+{ #category : #accessing }
+YavuUser >> shops [
+	^ shops
+]
+
+{ #category : #accessing }
+YavuUser >> shops: anObject [
+	shops := anObject
 ]
 
 { #category : #configuration }

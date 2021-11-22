@@ -6,7 +6,8 @@ Class {
 		'total',
 		'voucherNumber',
 		'invoice',
-		'paymentType'
+		'paymentType',
+		'shop'
 	],
 	#category : #'YavuPurchase-Model'
 }
@@ -75,6 +76,20 @@ YavuPurchaseTransaction >> descriptionPurchaseTransactionItems [
 		beRequired;
 		componentClass: TBSMagritteOneToManyComponent;
 		canExport: false;
+		yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransaction >> descriptionShop [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #shop;
+		options: self yavuSystem userShops;
+		label: 'Local';
+		priority: 160;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
 		yourself
 ]
 
@@ -165,6 +180,16 @@ YavuPurchaseTransaction >> purchaseTransactionItems: aCollection [
 
 	purchaseTransactionItems := aCollection.
 	self onInvoiceItemsChange
+]
+
+{ #category : #accessing }
+YavuPurchaseTransaction >> shop [
+	^ shop
+]
+
+{ #category : #accessing }
+YavuPurchaseTransaction >> shop: anObject [
+	shop := anObject
 ]
 
 { #category : #environment }

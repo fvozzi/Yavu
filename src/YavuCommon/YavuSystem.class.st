@@ -22,7 +22,14 @@ YavuSystem class >> administratorUser [
 		name: 'Administrador')
 			password: 'yavu09';
 			addRole: self superAdministratorRole;
+			shops: self allShops;
 			yourself
+]
+
+{ #category : #configuration }
+YavuSystem class >> allShops [
+
+	^ YavuEnvironment currentSystem instancesOf: YavuShop
 ]
 
 { #category : #configuration }
@@ -575,6 +582,12 @@ YavuSystem >> units [
 YavuSystem >> unityUnit [
 	
 	^ units at: 'unidad'
+]
+
+{ #category : #'as yet unclassified' }
+YavuSystem >> userShops [
+
+	^ self loggedUser shops
 ]
 
 { #category : #subsystemsProtocol }
