@@ -22,7 +22,6 @@ YavuSystem class >> administratorUser [
 		name: 'Administrador')
 			password: 'yavu09';
 			addRole: self superAdministratorRole;
-			shops: self allShops;
 			yourself
 ]
 
