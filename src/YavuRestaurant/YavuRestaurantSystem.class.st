@@ -216,3 +216,13 @@ YavuRestaurantSystem >> unsetSpecialOfferOnProduct: aSaleProduct [
 		isSpecialOffer:  false;
 		addToSystem
 ]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> workShiftOnCurrentTime [
+	^ self accountingSubsystem workShiftOn: Time current
+]
+
+{ #category : #'as yet unclassified' }
+YavuRestaurantSystem >> workShifts [
+	^ self accountingSubsystem workShits
+]

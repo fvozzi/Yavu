@@ -7,7 +7,8 @@ Class {
 		'voucherNumber',
 		'invoice',
 		'paymentType',
-		'shop'
+		'shop',
+		'workShift'
 	],
 	#category : #'YavuPurchase-Model'
 }
@@ -101,8 +102,23 @@ YavuPurchaseTransaction >> descriptionTotal [
         	accessor: #total;
 			beReadonly;
         	label: 'Total';
-        	priority: 160;
+        	priority: 140;
         	yourself
+]
+
+{ #category : #descriptions }
+YavuPurchaseTransaction >> descriptionWorkShit [
+
+	<magritteDescription>
+	^MASingleOptionDescription new
+		accessor: #workShift;
+		default: self yavuSystem workShiftOnCurrentTime;
+		options: self yavuSystem workShifts;
+		label: 'Turno';
+		priority: 170;
+		beRequired;
+		componentClass: TBSMagritteSelectListComponent;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -212,4 +228,14 @@ YavuPurchaseTransaction >> voucherNumber [
 YavuPurchaseTransaction >> voucherNumber: anInteger [ 
 	
 	voucherNumber := anInteger 
+]
+
+{ #category : #accessing }
+YavuPurchaseTransaction >> workShift [
+	^ workShift
+]
+
+{ #category : #accessing }
+YavuPurchaseTransaction >> workShift: anObject [
+	workShift := anObject
 ]

@@ -222,7 +222,8 @@ YavuTransaction >> equalTo: otraSituacionComercial [
 YavuTransaction >> initialize [ 
 
 	super initialize.
-	date := Date today
+	date := Date today.
+	ts:= DateAndTime now
 ]
 
 { #category : #'sin categoria' }
@@ -242,7 +243,7 @@ YavuTransaction >> maDescriptionForReport [
 
 { #category : #'as yet unclassified' }
 YavuTransaction >> ts [
-	 ts isNil ifTrue: [ ts:= DateAndTime now ].
+	
 	^ts
 ]
 

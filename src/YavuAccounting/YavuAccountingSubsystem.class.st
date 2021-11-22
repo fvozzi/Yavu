@@ -170,6 +170,18 @@ YavuAccountingSubsystem >> salesOfEntity: aYavuBusinessName month: aDate [
 	^ self system saleSubsystem salesOfEntity: aYavuBusinessName vatDeclarationMonth: aDate
 ]
 
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> workShiftOn: aTime [ 
+
+	^ self workShits detect: [ :one | aTime hour24 between: one startTime and: one endTime ] ifNone: [ ] 
+]
+
+{ #category : #'as yet unclassified' }
+YavuAccountingSubsystem >> workShits [
+
+	^ self system storedSubsystem instancesOf: YavuWorkShift
+]
+
 { #category : #afip }
 YavuAccountingSubsystem >> zipCitiFilesOf: aYavuVatDeclaration [ 
 	
