@@ -34,7 +34,7 @@ BaselineOfYavu >> baseline: spec [
 			self bootstrap: spec.
 			self fontAwesome: spec.
 			self xmlParser: spec.
-			self neoCSV: spec.
+			"self neoCSV: spec."
 			self acconcagua: spec.
 			"Packages"
 			spec package: 'YavuCommon'.
@@ -106,20 +106,7 @@ BaselineOfYavu >> seaside3: spec [
 
 	spec
 		baseline: 'Seaside3'
-		with: [ spec repository: 'github://SeasideSt/Seaside:v3.4.x/repository']
-		
-	
-]
-
-{ #category : #dependencies }
-BaselineOfYavu >> telePharoServer: spec [
-
-	spec
-		baseline: 'TelePharo'
-		with: [ spec 
-					repository: 'github://pharo-ide/TelePharo';
-					loads: 'Server'
-			]
+		with: [ spec repository: 'github://SeasideSt/Seaside:master/repository']
 		
 	
 ]
